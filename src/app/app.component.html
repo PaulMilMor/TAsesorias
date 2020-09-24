@@ -1,5 +1,10 @@
-<main>
-  <h1>Entrar a llamada</h1>
 
-  <button (click)="getSignature()">Entrar</button>
-</main>
+<div *ngIf="user; else verMenu">
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+  </div>
+  
+  
+  <ng-template #verMenu>
+    <app-menu></app-menu>
+  </ng-template>

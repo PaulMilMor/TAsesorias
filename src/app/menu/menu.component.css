@@ -1,0 +1,18 @@
+.barra{
+   
+    height: 1000px;
+        width: 1000px;
+        display: flex;
+        justify-content: left;
+     background-color: #e85f5c;
+
+      
+}
+
+.menu{
+    height: 1000px;
+        width: 1000px;
+        display: flex;
+        justify-content: right;
+  border-left: salmon;
+}

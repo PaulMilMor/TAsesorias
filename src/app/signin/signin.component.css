@@ -1,0 +1,11 @@
+.main-div{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+ margin-top: 10px;
+   
+  }
+  mat-form-field {
+    display: block;
+    width: 327px;
+  }

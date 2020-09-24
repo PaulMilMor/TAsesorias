@@ -1,0 +1,32 @@
+<!-- <div class="barra"></div>
+<div class="menu">
+    <app-login></app-login>
+</div> -->
+<mat-grid-list cols="2" rowHeight="1000px">
+    <mat-grid-tile class="barra"></mat-grid-tile>
+    <mat-grid-tile class="menu">
+        <div *ngIf="opcion==1">
+            <button mat-raised-button style="margin-right:5px" (click)="change(2)">
+                Ingresar
+            </button>
+            <button mat-raised-button color="warn"(click)="change(3)">
+                Registrarse
+            </button>
+        </div>
+        <div *ngIf="opcion==2">
+            <app-login></app-login>
+        </div>
+        <div *ngIf="opcion==3">
+            <mat-tab-group mat-align-tabs="center">
+
+                <mat-tab label="Registrarme como alumno">
+                    <app-signin tipoU="alumno"></app-signin>
+                </mat-tab>
+                <mat-tab label="Registrarme como instructor ">
+                    <app-signin tipoU="instructor"></app-signin>
+                </mat-tab>
+            </mat-tab-group>
+
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
