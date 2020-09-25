@@ -11,6 +11,8 @@ import { Usuario } from 'src/models/usuario';
 })
 export class HeaderComponent implements OnInit {
 usuario:Usuario
+instructor='instructor'
+alumno='alumno'
   isCollapsed:boolean = false;
   constructor(private auth:AngularFireAuth, private db:AngularFirestore) { }
 

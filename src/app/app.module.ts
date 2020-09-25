@@ -35,6 +35,7 @@ import { MenuComponent } from './menu/menu.component';
 import { ZoomComponent } from './zoom/zoom.component';
 import { MsgService } from 'src/services/msg.service';
 import { AppComponent } from './app.component';
+import { EdituserComponent } from './edituser/edituser.component';
 
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -45,7 +46,8 @@ import { AppComponent } from './app.component';
     LoginComponent,
     MenuComponent,
     SigninComponent,
-    ZoomComponent
+    ZoomComponent,
+    EdituserComponent
   ],
   imports: [
      BrowserModule,

@@ -1,0 +1,26 @@
+
+    <mat-card-content>
+        <form [formGroup]="formUsuario">
+         
+               <mat-form-field class="full-width">
+                  <mat-label>Email</mat-label>
+                  <input  type="email" matInput placeholder="Email" name="email" formControlName="correo">
+                  <mat-error *ngIf="formUsuario.controls['correo'].invalid" > 
+                     <span *ngIf="formUsuario.controls['correo'].errors.required">El correo es obligatorio</span>
+                     <span *ngIf="formUsuario.controls['correo'].errors.email">No es un correo Valido</span>
+                   </mat-error>
+               </mat-form-field>
+               <mat-form-field class="full-width">
+                  <mat-label>Contraseña</mat-label>
+                  <input type="password" matInput  placeholder="Password"  name="password"formControlName="contraseña">
+                  <mat-error *ngIf="formUsuario.controls['contraseña'].invalid" > 
+                     <span *ngIf="formUsuario.controls['contraseña'].errors.required">La contraseña es obligatoria</span>
+                     <span *ngIf="formUsuario.controls['contraseña'].errors.minlength">La contraseña debe tener al menos 8 caracteres</span>
+                  
+                   </mat-error>
+               </mat-form-field>
+               <input formControlName="img" (change)="addImg($event)" type="file" class="form-control-file">
+               <button mat-flat-button [disabled]="formUsuario.invalid" class="mt-5" style="margin-right: 5px;" (click)="editarUsuario()" color="warn">Editar</button>
+              
+        </form>
+      </mat-card-content>
