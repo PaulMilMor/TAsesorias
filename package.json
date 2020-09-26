@@ -1,7 +1,7 @@
 {
-  "name": "websdk-sample-angular",
+  "name": "TusAserorias",
   "version": "1.8.1",
-  "author": "Tommy Gaessler",
+  "author": "Lighthouse Software",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
