@@ -93,5 +93,10 @@ getUsuario(){
   })
 
 }
+probar(){
 
+
+console.log(this.db.collection('usuario', ref => ref.where('correo', '==', this.usuario.correo)))
+
+}
 }

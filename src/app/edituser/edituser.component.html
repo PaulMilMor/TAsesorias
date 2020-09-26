@@ -21,6 +21,8 @@
                </mat-form-field>
                <input formControlName="img" (change)="addImg($event)" type="file" class="form-control-file">
                <button mat-flat-button [disabled]="formUsuario.invalid" class="mt-5" style="margin-right: 5px;" (click)="editarUsuario()" color="warn">Editar</button>
-              
+              <button (click)="probar()">
+              prueba
+              </button>
         </form>
       </mat-card-content>
