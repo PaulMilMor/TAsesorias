@@ -1,8 +1,28 @@
-<main>
-    <h1>Entrar a llamada</h1>
-  
-    <button (click)="getSignature()">Entrar</button>
-</main>
-    
- 
-  
+<div class="main-div container">
+
+
+    <span *ngIf="usuario.tipoUsuario==alumno">
+        <form class="example-form" [formGroup]="formDatos">
+            <mat-form-field class="example-full-width" style="width: 250px;" >
+                <mat-label>Numero de llamada</mat-label>
+                <input matInput #message maxlength="11" placeholder="Numero" formControlName="numero">
+                <mat-hint align="start"><strong>Por favor introduzca el numero</strong> </mat-hint>
+                <mat-hint align="end">{{message.value.length}} / 11</mat-hint>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" style="width: 250px;" >
+                <mat-label>Inserte la contraseña</mat-label>
+                <input matInput #message2 maxlength="6" placeholder="Contraseña" formControlName="contraseña">
+                <mat-hint align="start"><strong>Por favor introduzca la contraseña</strong> </mat-hint>
+                <mat-hint align="end">{{message2.value.length}} / 6</mat-hint>
+            </mat-form-field>
+            <button (click)="getSignature()" [disabled]="formDatos.invalid">Entrar</button>
+
+        </form>
+    </span>
+
+    <span *ngIf="usuario.tipoUsuario==instructor">
+        <button><a style="text-decoration: none;" href="https://us04web.zoom.us/start/videomeeting "
+                target=”_blank”>Crear Reunion </a></button>
+    </span>
+
+</div>

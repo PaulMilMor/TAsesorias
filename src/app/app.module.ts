@@ -36,6 +36,7 @@ import { ZoomComponent } from './zoom/zoom.component';
 import { MsgService } from 'src/services/msg.service';
 import { AppComponent } from './app.component';
 import { EdituserComponent } from './edituser/edituser.component';
+import { UserService } from 'src/services/user.service';
 
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -79,7 +80,7 @@ import { EdituserComponent } from './edituser/edituser.component';
   providers: [
     AngularFireAuth,
     AngularFirestore,
-    MsgService,
+    MsgService,UserService
    
   ],
   bootstrap: [AppComponent]

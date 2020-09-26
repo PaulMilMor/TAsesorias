@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Usuario } from 'src/models/usuario';
 
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -17,24 +18,25 @@ alumno='alumno'
   constructor(private auth:AngularFireAuth, private db:AngularFirestore) { }
 
   ngOnInit(): void {
-this.getNombre()
+this.getUsuario()
+
   }
-getNombre(){
-  let txt:string=''
- this.db.collection('usuarios').get().subscribe((res)=>{
-res.docs.forEach((item)=>{
-    let u=item.data() as Usuario
-    if(u.id==this.auth.auth.currentUser.uid){
-       
-    this.usuario=u;
-    console.log(this.usuario)
-      }
-
-})
-
- })
-
-}
+  getUsuario(){
+    let txt:string=''
+   this.db.collection('usuarios').get().subscribe((res)=>{
+  res.docs.forEach((item)=>{
+      let u=item.data() as Usuario
+      if(u.id==this.auth.auth.currentUser.uid){
+         
+      this.usuario=u;
+      console.log(this.usuario)
+        }
+  
+  })
+  
+   })
+  
+  }
   cerrarSesion(){
  this.auth.auth.signOut();
   }

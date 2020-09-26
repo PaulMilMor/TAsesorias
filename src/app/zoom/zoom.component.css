@@ -20,4 +20,12 @@ main {
   button:hover {
     background-color: #2681F2;
   }
-  
+  mat-form-field{
+    display: block;
+  }.main-div{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+ margin-top: 10px;
+   
+  }

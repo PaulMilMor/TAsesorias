@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 
 import { RouterLink, Router } from '@angular/router';
 import { MsgService } from 'src/services/msg.service';
+import { AuthService } from 'src/services/auth.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   
   formLogin:FormGroup
 
-  constructor(private fb:FormBuilder,public auth: AngularFireAuth, private msg:MsgService) { }
+  constructor(private fb:FormBuilder,public auth: AngularFireAuth, private msg:MsgService, public authService: AuthService) { }
 
   ngOnInit(): void {
         this.formLogin=this.fb.group({

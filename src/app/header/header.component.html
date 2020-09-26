@@ -8,19 +8,22 @@
       <ul class="navbar-nav mr-auto">
       
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/zoom']"  *ngIf="usuario.tipoUsuario==instructor" routerLinkActive="router-link-active" >Comunicacion</a>
+          <a class="nav-link" [routerLink]="['/zoom']"  routerLinkActive="router-link-active" >Comunicacion</a>
         </li>
         <li class="nav-item">
           <a class="nav-link"   *ngIf="usuario.tipoUsuario==instructor"  [routerLink]="['/editar', usuario.id]"  routerLinkActive="router-link-active" >Editar Informacion</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" style="margin-left: 1200px;">{{usuario.nombre}}</a>
-        </li>
         
-            <li class="nav-item">
-             <button mat-flat-button (click)="cerrarSesion()">Salir</button>
-            </li>
       </ul>
-    
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <span class="spacer"></span>
+        <a class="nav-link" href="#" >{{usuario.nombre}}</a>
+      </li>
+      <span class="spacer"></span>
+          <li class="nav-item">
+           <button mat-flat-button style="float: right;" (click)="cerrarSesion()">Salir</button>
+          </li>
+    </ul>
     </div>
   </nav>
