@@ -1,20 +1,21 @@
 <nav class="navbar navbar-expand-lg navbar-dark  navbar-custom">
-    <a class="navbar-brand" href="#">Navbar</a>
+
+    <a class="navbar-brand" href="#" style="margin-left: 7px;" style="margin-top: 14px;" style="font-size: 30px;">TusAsesorias</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap" rel="stylesheet">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
       
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/zoom']" routerLinkActive="router-link-active" >Comunicacion</a>
+          <a class="nav-link" [routerLink]="['/zoom']" routerLinkActive="router-link-active" style="font-size: 17px;">Comunicacion</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">{{usuario.nombre}}</a>
         </li>
             <li class="nav-item">
-             <button mat-flat-button (click)="cerrarSesion()" style="margin-left: 1000px;">Salir</button>
+             <button mat-flat-button (click)="cerrarSesion()" style="margin-left: 804px;">Cerrar Sesión</button>
             </li>
       </ul>
     
