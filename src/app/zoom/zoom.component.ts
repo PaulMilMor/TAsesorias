@@ -93,7 +93,7 @@ this.meetingNumber=this.formDatos.value.numero
    this.db.collection('usuarios').get().subscribe((res)=>{
   res.docs.forEach((item)=>{
       let u=item.data() as Usuario
-      if(u.id==this.auth.auth.currentUser.uid){
+      if(u.uid==this.auth.auth.currentUser.uid){
          
       this.usuario=u;
       console.log(this.usuario)

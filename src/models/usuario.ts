@@ -8,5 +8,6 @@ export class Usuario{
     img:string;
     tipoUsuario:string;
     ref:DocumentReference
-    
+    uid:string
+
 }

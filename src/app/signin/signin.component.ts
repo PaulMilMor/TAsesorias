@@ -32,8 +32,8 @@ export class SigninComponent implements OnInit {
       contraseña: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
       img: [''],
       tipoUsuario: [''],
-
-      id: ['']
+ 
+      uid: ['']
     })
   }
   addImg(event) {
@@ -63,10 +63,10 @@ export class SigninComponent implements OnInit {
       this.auth.auth.createUserWithEmailAndPassword(this.formUsuario.value.correo, this.formUsuario.value.contraseña).then((data) => {
 
         console.log(data.user.uid)
-        this.formUsuario.value.id = data.user.uid
+        this.formUsuario.value.uid = data.user.uid
 
 
-        this.db.collection('usuarios').add(this.formUsuario.value).then((finish) => {
+        this.db.collection('usuarios').doc(data.user.uid).set(this.formUsuario.value).then((finish) => {
 
         }).catch(() => {
           this.msg.msgError('Error', 'Algo fallo :(')

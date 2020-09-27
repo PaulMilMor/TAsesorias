@@ -1,0 +1,20 @@
+<div >
+    <form [formGroup]="formCursos">
+        <mat-form-field appearance="fill" >
+        <mat-label>Categoria</mat-label>
+        <mat-select formControlName="categoria">
+          <mat-option value="option" *ngFor="let c of categorias" [value]="c.id" >{{c.nombre}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Tarifa</mat-label>
+      <input matInput formControlName="tarifa" type="number" >
+    </mat-form-field>
+    <br>
+    <button mat-raised-button (click)="agregar()">Agregar</button>
+    </form>
+ 
+      
+  </div>
+  

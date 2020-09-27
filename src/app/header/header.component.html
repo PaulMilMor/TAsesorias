@@ -3,15 +3,16 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap" rel="stylesheet">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
       
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/zoom']"  routerLinkActive="router-link-active" >Comunicacion</a>
         </li>
+       
         <li class="nav-item">
-          <a class="nav-link"   *ngIf="usuario.tipoUsuario==instructor"  [routerLink]="['/editar', usuario.id]"  routerLinkActive="router-link-active" >Editar Informacion</a>
+          <a class="nav-link"   *ngIf="usuario.tipoUsuario==instructor"  [routerLink]="['/editar', this.auth.auth.currentUser.uid]"  routerLinkActive="router-link-active" >Editar Informacion</a>
         </li>
         
       </ul>
@@ -22,7 +23,7 @@
       </li>
       <span class="spacer"></span>
           <li class="nav-item">
-           <button mat-flat-button style="float: right;" (click)="cerrarSesion()">Salir</button>
+           <button mat-flat-button style="float: right;" (click)="cerrarSesion()">Cerrar Sesion</button>
           </li>
     </ul>
     </div>

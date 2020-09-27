@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class AuthService {
 usuario:Usuario=new Usuario;
 formUsuario:FormGroup;
+isValid:boolean=false
   constructor(
     public afAuth: AngularFireAuth, private db: AngularFirestore, private msg: MsgService, private fb:FormBuilder
   ) { }
@@ -28,7 +29,8 @@ GoogleRegister(tipoU:string){
     correo: [''],
     img: [''],
     tipoUsuario: [''],
-    id: ['']
+    
+    uid: ['']
   })
   return this.AuthRegister(new auth.GoogleAuthProvider(), tipoU);
 }
@@ -42,6 +44,7 @@ AuthRegister(provider,tipoU){
     this.formUsuario.value.nombre=result.user.displayName;
     this.formUsuario.value.img=result.user.photoURL;
     this.formUsuario.value.correo=result.user.email;
+    
     console.log(this.usuario)
     this.db.collection('usuarios').add(this.formUsuario.value).then((finish) => {
 
@@ -58,7 +61,7 @@ AuthRegister(provider,tipoU){
   AuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
     .then((result) => {
-      
+      this.getUsuario() 
   
     
         console.log('You have been successfully logged in!')
@@ -66,5 +69,24 @@ AuthRegister(provider,tipoU){
         console.log(error)
     })
   }
-
+ getUsuario(){
+    let txt:string=''
+    
+   this.db.collection('usuarios').get().subscribe((res)=>{
+   
+  res.docs.forEach((item)=>{
+      let u=item.data() as Usuario
+      if(u.uid==this.afAuth.auth.currentUser.uid){
+       this.isValid=true
+        }else{
+          console.log("no existe");
+          
+        }
+  
+  })
+  
+   })
+  
+  }
+ 
 }
