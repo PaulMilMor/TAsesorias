@@ -2,7 +2,7 @@
 <div class="menu">
     <app-login></app-login>
 </div> -->
-<mat-grid-list cols="2" rowHeight="1000px">
+<mat-grid-list [cols]="breakpoint" rowHeight="2:0.5" (window:resize)="onResize($event)">
     <mat-grid-tile class="barra"></mat-grid-tile>
     <mat-grid-tile class="menu">
         <div *ngIf="opcion==1">

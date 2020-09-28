@@ -7,13 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 opcion:number=1
+breakpoint;
   constructor() { }
 
   ngOnInit(): void {
+    this.breakpoint = (window.innerWidth<=600) ? 1:2;
   }
 
   change(n:number){
    this.opcion=n
+  }
+
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth<=600) ? 1:2;
   }
   
 }
