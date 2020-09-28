@@ -2,8 +2,20 @@
 <div class="menu">
     <app-login></app-login>
 </div> -->
-<mat-grid-list [cols]="breakpoint" rowHeight="2:0.5" (window:resize)="onResize($event)">
-    <mat-grid-tile class="barra">Tus Asesorias</mat-grid-tile>
+
+
+
+<mat-grid-list [cols]="breakpoint" rowHeight="2:0.1" (window:resize)="onResize($event)">
+    <mat-grid-tile class="barra">
+        <div>
+            <div>Tus Asesorias</div>
+            <div>Tus Asesorias</div>
+            <div>Tus Asesorias</div>
+            <div>Tus Asesorias</div>
+            <div>Tus Asesorias</div>
+        </div>
+        
+    </mat-grid-tile>
     <mat-grid-tile class="menu">
         <!--div *ngIf="opcion==1">
             <button mat-raised-button style="margin-right:5px" (click)="change(2)">
@@ -22,6 +34,43 @@
         </div>
         
         <div *ngIf="opcion==3">
+            <div *ngIf="opcion==3">
+                ¿Ya tienes una cuenta? 
+                <a href="#" (click)="change(2)"> Inicia sesión.</a>
+            </div>
+            <div>
+                <mat-tab-group mat-align-tabs="center">
+
+                    <mat-tab label="Registrarme como alumno">
+                        <app-signin tipoU="alumno"></app-signin>
+                    </mat-tab>
+                    <mat-tab label="Registrarme como instructor ">
+                        <app-signin tipoU="instructor"></app-signin>
+                    </mat-tab>
+                </mat-tab-group>
+                
+            </div>
+            
+        </div>
+        
+        
+    </mat-grid-tile>
+</mat-grid-list>
+
+
+<!--div id="form_wrapper">
+    <div id="form_left">
+        Tus Asesorias
+    </div>
+    <div id="form_right">
+        <div *ngIf="opcion==2">
+            <app-login></app-login>
+            <span>
+                ¿No tienes una cuenta? 
+                <a href="#" (click)="change(3)"> Registrate.</a>
+            </span>
+        </div>
+        <!--div *ngIf="opcion==2">
             <mat-tab-group mat-align-tabs="center">
 
                 <mat-tab label="Registrarme como alumno">
@@ -39,7 +88,6 @@
                 ¿Ya tienes una cuenta? 
                 <a href="#" (click)="change(2)"> Inicia sesión.</a>
             </h5>
-        </div>
-        
-    </mat-grid-tile>
-</mat-grid-list>
+        </div-->
+    <!--/div>
+</div-->
