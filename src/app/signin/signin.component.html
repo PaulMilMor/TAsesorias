@@ -44,8 +44,12 @@
                    </mat-error>
                </mat-form-field>
                <input formControlName="img" (change)="addImg($event)" type="file" class="form-control-file">
-               <button mat-flat-button [disabled]="formUsuario.invalid" class="mt-5" style="margin-right: 5px;" (click)="addUsuario()" color="warn">Registrarse</button>
-               <button mat-flat-button  class="mt-5" (click)="authService.GoogleRegister(this.tipoU)" color="warn">Registrarse con google</button>
+               <div class="container">
+                  <button mat-flat-button [disabled]="formUsuario.invalid" class="button" style="margin-right: 5px;" (click)="addUsuario()" color="warn">Registrarse</button>
+                  <button mat-flat-button  class="button"  (click)="authService.GoogleRegister(this.tipoU)" color="warn">Registrarse con google</button>
+               </div>
+               <br> <br> <br><br> <br> <br>
+               
         </form>
       </mat-card-content>
 </div>

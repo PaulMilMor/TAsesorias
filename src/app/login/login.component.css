@@ -11,3 +11,20 @@ mat-form-field {
     background-color: #E4D6A7;
    
   }
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  padding: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.button {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%
+}

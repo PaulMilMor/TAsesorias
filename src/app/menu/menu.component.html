@@ -8,11 +8,15 @@
 <mat-grid-list [cols]="breakpoint" rowHeight="2:0.1" (window:resize)="onResize($event)">
     <mat-grid-tile class="barra">
         <div>
-            <div>Tus Asesorias</div>
-            <div>Tus Asesorias</div>
-            <div>Tus Asesorias</div>
-            <div>Tus Asesorias</div>
-            <div>Tus Asesorias</div>
+            
+            <div class="title">Tus Asesorias</div>
+            <br><br><br><br><br><br><br>
+            <div class="bullet">→ Toma cursos personalizados.</div>
+            <br><br>
+            <div class="bullet">→ Comparte tus conocimientos.</div>
+            <br><br>
+            <div class="bullet">→ Conectate con la comunidad</div>
+            <br><br><br><br><br><br><br><br><br>
         </div>
         
     </mat-grid-tile>
@@ -27,14 +31,15 @@
         </div-->
         <div *ngIf="opcion==2">
             <app-login></app-login>
-            <span>
+            <div class>
                 ¿No tienes una cuenta? 
                 <a href="#" (click)="change(3)"> Registrate.</a>
-            </span>
+                <br><br><br><br>
+            </div>
         </div>
         
         <div *ngIf="opcion==3">
-            <div *ngIf="opcion==3">
+            <div class>
                 ¿Ya tienes una cuenta? 
                 <a href="#" (click)="change(2)"> Inicia sesión.</a>
             </div>
@@ -50,7 +55,7 @@
                 </mat-tab-group>
                 
             </div>
-            
+            <br><br><br><br><br>
         </div>
         
         

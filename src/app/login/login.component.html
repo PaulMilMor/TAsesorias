@@ -55,8 +55,11 @@
             <mat-error *ngIf="formLogin.controls['contraseña'].errors.required && formLogin.dirty ">La contraseña es obligatoria</mat-error>
      
          </mat-form-field>
-     <button mat-flat-button (click)="ingresar()">ingresar</button>
-     <button mat-flat-button (click)="authService.GoogleAuth()">ingresar con Google</button>
-    </form>
+    <div class="container">
+        <button mat-flat-button (click)="ingresar()" class="button">ingresar</button>
+     <button mat-flat-button (click)="authService.GoogleAuth()" class="button">ingresar con Google</button>
+    
+    </div>
+     </form>
     
 </div> 
