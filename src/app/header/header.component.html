@@ -12,8 +12,9 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/zoom']" routerLinkActive="router-link-active" style="font-size: 17px;">Comunicacion</a>
         </li>
+       
         <li class="nav-item">
-          <a class="nav-link"   *ngIf="usuario.tipoUsuario==instructor"  [routerLink]="['/editar', usuario.id]"  routerLinkActive="router-link-active" >Editar Informacion</a>
+          <a class="nav-link"   *ngIf="usuario.tipoUsuario==instructor"  [routerLink]="['/editar', this.auth.auth.currentUser.uid]"  routerLinkActive="router-link-active" >Editar Informacion</a>
         </li>
             <li class="nav-item">
              <button mat-flat-button (click)="cerrarSesion()" style="margin-left: 804px;">Cerrar Sesión</button>
@@ -26,7 +27,7 @@
       </li>
       <span class="spacer"></span>
           <li class="nav-item">
-           <button mat-flat-button style="float: right;" (click)="cerrarSesion()">Salir</button>
+           <button mat-flat-button style="float: right;" (click)="cerrarSesion()">Cerrar Sesion</button>
           </li>
     </ul>
     </div>

@@ -26,7 +26,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
 import {MatTabsModule} from '@angular/material/tabs'
 import { HttpClientModule } from '@angular/common/http';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent, register} from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { SigninComponent } from './signin/signin.component';
 import {MatCardModule} from '@angular/material/card';
@@ -37,6 +37,8 @@ import { MsgService } from 'src/services/msg.service';
 import { AppComponent } from './app.component';
 import { EdituserComponent } from './edituser/edituser.component';
 import { UserService } from 'src/services/user.service';
+import { AddcourseComponent } from './addcourse/addcourse.component';
+// import { DialogUserComponent } from './dialog-user/dialog-user.component';
 
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -48,7 +50,9 @@ import { UserService } from 'src/services/user.service';
     MenuComponent,
     SigninComponent,
     ZoomComponent,
-    EdituserComponent
+    EdituserComponent,
+    AddcourseComponent,
+ register
   ],
   imports: [
      BrowserModule,
@@ -76,7 +80,12 @@ import { UserService } from 'src/services/user.service';
     HttpClientModule,
     MatTabsModule,
     MatCardModule,
-  ],
+
+  ], 
+   entryComponents: [
+    register
+  ], 
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [
     AngularFireAuth,
     AngularFirestore,
