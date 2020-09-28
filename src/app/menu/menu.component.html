@@ -3,19 +3,24 @@
     <app-login></app-login>
 </div> -->
 <mat-grid-list [cols]="breakpoint" rowHeight="2:0.5" (window:resize)="onResize($event)">
-    <mat-grid-tile class="barra"></mat-grid-tile>
+    <mat-grid-tile class="barra">Tus Asesorias</mat-grid-tile>
     <mat-grid-tile class="menu">
-        <div *ngIf="opcion==1">
+        <!--div *ngIf="opcion==1">
             <button mat-raised-button style="margin-right:5px" (click)="change(2)">
                 Ingresar
             </button>
             <button mat-raised-button color="warn"(click)="change(3)">
                 Registrarse
             </button>
-        </div>
+        </div-->
         <div *ngIf="opcion==2">
             <app-login></app-login>
+            <span>
+                ¿No tienes una cuenta? 
+                <a href="#" (click)="change(3)"> Registrate.</a>
+            </span>
         </div>
+        
         <div *ngIf="opcion==3">
             <mat-tab-group mat-align-tabs="center">
 
@@ -28,5 +33,13 @@
             </mat-tab-group>
 
         </div>
+        <div *ngIf="opcion==3">
+        <br>
+            <h5>
+                ¿Ya tienes una cuenta? 
+                <a href="#" (click)="change(2)"> Inicia sesión.</a>
+            </h5>
+        </div>
+        
     </mat-grid-tile>
 </mat-grid-list>

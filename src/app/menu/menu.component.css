@@ -16,4 +16,10 @@
         justify-content: right;
   border-left: salmon;
   background-color: #E4D6A7;
+  display: grid;
+        /* single column layout */
+        grid-template-columns: 1fr;
+        /* have some gap in between elements*/
+        grid-gap: 20px;
+        padding: 10% 5%;
 }

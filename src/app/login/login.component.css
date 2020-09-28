@@ -3,9 +3,9 @@ mat-form-field {
    width: 327px;
  }
 .main-div{
-    height: 1000px;
+    /*height: 1000px;
     width: 1000px;
-    display: flex;
+    */display: flex;
     justify-content: center;
     align-items: center;
     background-color: #E4D6A7;

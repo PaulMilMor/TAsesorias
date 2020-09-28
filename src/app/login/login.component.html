@@ -41,7 +41,7 @@
     <form [formGroup]="formLogin">
         <mat-form-field class="inputLogin">
            <mat-label>
-               Correo Electronico
+               Correo Electrónico
            </mat-label>
            <input type="email" matInput id="email"  aria-describedby="emailHelp" placeholder="Ingrese su correo electronico" formControlName="correo">
            <mat-error *ngIf="formLogin.controls['correo'].errors.email && formLogin.dirty "> El correo no es valido</mat-error>
@@ -58,4 +58,5 @@
      <button mat-flat-button (click)="ingresar()">ingresar</button>
      <button mat-flat-button (click)="authService.GoogleAuth()">ingresar con Google</button>
     </form>
+    
 </div> 
