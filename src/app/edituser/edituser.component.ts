@@ -56,7 +56,7 @@ normal:'normal'
            correo:this.formUsuario.value.correo
       })
     }).then(()=>{
-      this.msg.msgSuccess('Correo', 'Coreeo editado Satisfactoriamente')
+      this.msg.msgSuccess('Correo', 'Correo editado Satisfactoriamente')
     }).catch((err)=>{
 
       this.msg.msgError('Error',err)
@@ -65,9 +65,9 @@ normal:'normal'
   editarContra(){
     var user=this.auth.auth.currentUser;
 
-    user.updateEmail(this.formUsuario.value.contraseña).then(()=>{
+    user.updatePassword(this.formUsuario.value.contraseña).then(()=>{
       this.db.collection('usuarios').doc(user.uid).update({
-           contraseñ:this.formUsuario.value.contraseña
+           contraseña:this.formUsuario.value.contraseña
       })
     }).then(()=>{
       this.msg.msgSuccess('Contraseña', 'Contraseña cambiada Satisfactoriamente')
