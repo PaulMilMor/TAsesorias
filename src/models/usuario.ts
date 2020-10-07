@@ -9,5 +9,5 @@ export class Usuario{
     tipoUsuario:string;
     ref:DocumentReference
     uid:string
-
+    horario
 }
