@@ -16,9 +16,7 @@
         <li class="nav-item">
           <a class="nav-link"   *ngIf="usuario.tipoUsuario==instructor"  [routerLink]="['/editar', this.auth.auth.currentUser.uid]"  routerLinkActive="router-link-active" >Editar Informacion</a>
         </li>
-            <li class="nav-item">
-             <button mat-flat-button (click)="cerrarSesion()" style="margin-left: 804px;">Cerrar Sesión</button>
-            </li>
+            
       </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">

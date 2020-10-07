@@ -3,6 +3,7 @@ import { AngularFireAuth} from '@angular/fire/auth'
 import { User } from 'firebase';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Usuario } from 'src/models/usuario';
+import { Router, NavigationEnd } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,9 +15,14 @@ export class AppComponent implements OnInit {
   instructor='instructor'
   user:User
   usuario:Usuario
-constructor(private auth:AngularFireAuth, private db:AngularFirestore){
+  url: string
+constructor(private auth:AngularFireAuth, private db:AngularFirestore, private router:Router){
   this.auth.user.subscribe((user)=>{
     this.user=user;
+    this.url = this.router.url;
+    router.events.subscribe((val) => {
+      this.url = this.router.url;
+    });
   })
 }
 ngOnInit(): void {
