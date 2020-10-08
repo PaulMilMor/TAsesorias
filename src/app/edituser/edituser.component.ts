@@ -23,7 +23,7 @@ normal:'normal'
   constructor(private db: AngularFirestore, private fb: FormBuilder, private storage: AngularFireStorage, private msg: MsgService, private auth: AngularFireAuth, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.idUsuario = this.activeRoute.snapshot.params.idMaestro;
+    this.idUsuario = this.activeRoute.snapshot.params.idUsuario;
     this.getUsuario();
     this.formUsuario = this.fb.group({
       correo: ['', Validators.required],
@@ -56,7 +56,7 @@ normal:'normal'
            correo:this.formUsuario.value.correo
       })
     }).then(()=>{
-      this.msg.msgSuccess('Correo', 'Coreeo editado Satisfactoriamente')
+      this.msg.msgSuccess('Correo', 'Correo editado Satisfactoriamente')
     }).catch((err)=>{
 
       this.msg.msgError('Error',err)
@@ -65,9 +65,9 @@ normal:'normal'
   editarContra(){
     var user=this.auth.auth.currentUser;
 
-    user.updateEmail(this.formUsuario.value.contraseña).then(()=>{
+    user.updatePassword(this.formUsuario.value.contraseña).then(()=>{
       this.db.collection('usuarios').doc(user.uid).update({
-           contraseñ:this.formUsuario.value.contraseña
+           contraseña:this.formUsuario.value.contraseña
       })
     }).then(()=>{
       this.msg.msgSuccess('Contraseña', 'Contraseña cambiada Satisfactoriamente')
@@ -119,7 +119,7 @@ if(this.editContra){
 }
 getUsuario(){
  
-  this.db.collection('usuario').get().subscribe((res)=>{
+  this.db.collection('usuarios').get().subscribe((res)=>{
     res.docs.forEach((item)=>{
       let u= item.data() as Usuario;
       if(u.id==this.idUsuario){
@@ -137,7 +137,7 @@ getUsuario(){
 probar(){
 
 
-console.log(this.db.collection('usuario', ref => ref.where('correo', '==', this.usuario.correo)))
+console.log(this.db.collection('usuarios', ref => ref.where('correo', '==', this.usuario.correo)))
 
 }
 }

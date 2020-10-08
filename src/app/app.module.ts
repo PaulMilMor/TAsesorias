@@ -38,9 +38,14 @@ import { AppComponent } from './app.component';
 import { EdituserComponent } from './edituser/edituser.component';
 import { UserService } from 'src/services/user.service';
 import { AddcourseComponent } from './addcourse/addcourse.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 // import { DialogUserComponent } from './dialog-user/dialog-user.component';
-
+import { ScheduleModule,RecurrenceEditorModule, DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService } from '@syncfusion/ej2-angular-schedule';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTableModule} from '@angular/material/table';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendatComponent } from './calendat/calendat.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +57,9 @@ import { AddcourseComponent } from './addcourse/addcourse.component';
     ZoomComponent,
     EdituserComponent,
     AddcourseComponent,
- register
+ register,
+ ScheduleComponent,
+ CalendatComponent
   ],
   imports: [
      BrowserModule,
@@ -80,7 +87,9 @@ import { AddcourseComponent } from './addcourse/addcourse.component';
     HttpClientModule,
     MatTabsModule,
     MatCardModule,
-
+ScheduleModule,
+MatTableModule,
+CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ], 
    entryComponents: [
     register
@@ -89,7 +98,12 @@ import { AddcourseComponent } from './addcourse/addcourse.component';
   providers: [
     AngularFireAuth,
     AngularFirestore,
-    MsgService,UserService
+    MsgService,UserService,
+    DayService,
+   
+    WorkWeekService,
+    MonthAgendaService,
+    MonthService
    
   ],
   bootstrap: [AppComponent]
