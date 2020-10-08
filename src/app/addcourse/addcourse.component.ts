@@ -23,7 +23,7 @@ usuario:Usuario
     this.formCursos=this.fb.group({
       tarifa:['', Validators.required],
       categoria:['', Validators.required],
-      userid:['']
+    
     })
     this.getCategorias()
     this.getUsuario()
@@ -36,10 +36,9 @@ usuario:Usuario
    this.db.collection('usuarios').get().subscribe((res)=>{
   res.docs.forEach((item)=>{
       let u=item.data() as Usuario
-      if(u.id==this.auth.auth.currentUser.uid){
-         console.log(u.id)
-        this.formCursos.value.userid=u.id
-        console.log( this.formCursos.value.userid)
+      if(u.uid==this.auth.auth.currentUser.uid){
+         this.usuario=u;
+       
         }
   
   })
@@ -60,6 +59,7 @@ getCategorias(){
      })
 }
 agregar(){
+  this.formCursos.value.user=this.usuario;
   if(this.formCursos.value.tarifa<=2000){
     this.db.collection('cursos').add(this.formCursos.value).then(()=>{
       this.msg.msgSuccess('Guardado','Curso guardado completo')

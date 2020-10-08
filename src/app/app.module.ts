@@ -46,6 +46,9 @@ import {MatTableModule} from '@angular/material/table';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendatComponent } from './calendat/calendat.component';
+import { BuscadorComponent } from './buscador/buscador.component';
+import { BmaestroPipe } from './bmaestro.pipe';
+import { BcategoriaPipe } from './bcategoria.pipe';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,10 @@ import { CalendatComponent } from './calendat/calendat.component';
     AddcourseComponent,
  register,
  ScheduleComponent,
- CalendatComponent
+ CalendatComponent,
+ BuscadorComponent,
+ BmaestroPipe,
+ BcategoriaPipe
   ],
   imports: [
      BrowserModule,

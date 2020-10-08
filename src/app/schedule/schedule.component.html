@@ -3,76 +3,80 @@
    <!-- <ejs-schedule height='850px', width='1250px'> </ejs-schedule> -->
    <mat-grid-list cols="2" rowHeight="2:1">
     <mat-grid-tile>
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tabla mt-5"  > 
 
-        <ng-container matColumnDef="hora">
-            <th mat-header-cell *matHeaderCellDef> Hora </th>
-            <td mat-cell *matCellDef="let element"> {{element.hora}} </td>
-          </ng-container>
-    
-        <ng-container matColumnDef="lunes">
-          <th mat-header-cell *matHeaderCellDef> Lunes </th>
-          <td mat-cell *matCellDef="let element"> 
-            <button mat-flat-button (click)="changeLunes(element)"> 
-            <span *ngIf="!element.lunes">Añadir</span>
-            <span *ngIf="element.lunes">Quitar</span>
-          </button> 
-        </td>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tabla mt-5"  > 
+
+      <ng-container matColumnDef="hora">
+          <th mat-header-cell *matHeaderCellDef> Hora </th>
+          <td mat-cell *matCellDef="let element"> {{element.hora}} </td>
         </ng-container>
-      
+  
+      <ng-container matColumnDef="lunes">
+        <th mat-header-cell *matHeaderCellDef> Lunes </th>
+        <td mat-cell *matCellDef="let element"> 
+          <button mat-flat-button (click)="changeLunes(element)"> 
+          <span *ngIf="!element.lunes">Añadir</span>
+          <span *ngIf="element.lunes">Quitar</span>
+        </button> 
+      </td>
+      </ng-container>
     
-        <ng-container matColumnDef="martes">
-          <th mat-header-cell *matHeaderCellDef> Martes </th>
-          <td mat-cell *matCellDef="let element">  <button mat-flat-button (click)="changeMartes(element)"> 
-            <span *ngIf="!element.martes">Añadir</span>
-            <span *ngIf="element.martes">Quitar</span>
+  
+      <ng-container matColumnDef="martes">
+        <th mat-header-cell *matHeaderCellDef> Martes </th>
+        <td mat-cell *matCellDef="let element">  <button mat-flat-button (click)="changeMartes(element)"> 
+          <span *ngIf="!element.martes">Añadir</span>
+          <span *ngIf="element.martes">Quitar</span>
+        </button> </td>
+      </ng-container>
+    
+     
+      <ng-container matColumnDef="miercoles">
+        <th mat-header-cell *matHeaderCellDef > Miercoles </th>
+        <td mat-cell *matCellDef="let element"> <button mat-flat-button (click)="changeMiercoles(element)"> 
+          <span *ngIf="!element.miercoles">Añadir</span>
+          <span *ngIf="element.miercoles">Quitar</span>
+        </button> </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="jueves">
+        <th mat-header-cell *matHeaderCellDef> Jueves </th>
+        <td mat-cell *matCellDef="let element"> <button mat-flat-button (click)="changeJueves(element)"> 
+          <span *ngIf="!element.jueves">Añadir</span>
+          <span *ngIf="element.jueves">Quitar</span>
+        </button>  </td>
+      </ng-container>
+      <ng-container matColumnDef="viernes">
+          <th mat-header-cell *matHeaderCellDef> Viernes </th>
+          <td mat-cell *matCellDef="let element"> <button mat-flat-button (click)="changeViernes(element)"> 
+            <span *ngIf="!element.viernes">Añadir</span>
+            <span *ngIf="element.viernes">Quitar</span>
           </button> </td>
         </ng-container>
-      
-       
-        <ng-container matColumnDef="miercoles">
-          <th mat-header-cell *matHeaderCellDef > Miercoles </th>
-          <td mat-cell *matCellDef="let element"> <button mat-flat-button (click)="changeMiercoles(element)"> 
-            <span *ngIf="!element.miercoles">Añadir</span>
-            <span *ngIf="element.miercoles">Quitar</span>
-          </button> </td>
-        </ng-container>
-    
-        <ng-container matColumnDef="jueves">
-          <th mat-header-cell *matHeaderCellDef> Jueves </th>
-          <td mat-cell *matCellDef="let element"> <button mat-flat-button (click)="changeJueves(element)"> 
-            <span *ngIf="!element.jueves">Añadir</span>
-            <span *ngIf="element.jueves">Quitar</span>
+        <ng-container matColumnDef="sabado">
+          <th mat-header-cell *matHeaderCellDef> Sabado </th>
+          <td mat-cell *matCellDef="let element">  <button mat-flat-button (click)="changeSabado(element)"> 
+            <span *ngIf="!element.sabado">Añadir</span>
+            <span *ngIf="element.sabado">Quitar</span>
           </button>  </td>
         </ng-container>
-        <ng-container matColumnDef="viernes">
-            <th mat-header-cell *matHeaderCellDef> Viernes </th>
-            <td mat-cell *matCellDef="let element"> <button mat-flat-button (click)="changeViernes(element)"> 
-              <span *ngIf="!element.viernes">Añadir</span>
-              <span *ngIf="element.viernes">Quitar</span>
-            </button> </td>
-          </ng-container>
-          <ng-container matColumnDef="sabado">
-            <th mat-header-cell *matHeaderCellDef> Sabado </th>
-            <td mat-cell *matCellDef="let element">  <button mat-flat-button (click)="changeSabado(element)"> 
-              <span *ngIf="!element.sabado">Añadir</span>
-              <span *ngIf="element.sabado">Quitar</span>
-            </button>  </td>
-          </ng-container>
-          <ng-container matColumnDef="domingo">
-            <th mat-header-cell *matHeaderCellDef> Domingo </th>
-            <td mat-cell *matCellDef="let element"> <button mat-flat-button (click)="changeDomingo(element)"> 
-              <span *ngIf="!element.domingo">Añadir</span>
-              <span *ngIf="element.domingo">Quitar</span>
-            </button>  </td>
-          </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+        <ng-container matColumnDef="domingo">
+          <th mat-header-cell *matHeaderCellDef> Domingo </th>
+          <td mat-cell *matCellDef="let element"> <button mat-flat-button (click)="changeDomingo(element)"> 
+            <span *ngIf="!element.domingo">Añadir</span>
+            <span *ngIf="element.domingo">Quitar</span>
+          </button>  </td>
+        </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
     </mat-grid-tile>
     <mat-grid-tile>
-      <button mat-flat-button color="warn" (click)="save()" >Editar</button>
+      <button mat-flat-button color="warn" (click)="edit()" >Editar</button>
       <button mat-flat-button color="warn" (click)="save()" >Guardar Cambios</button>
     </mat-grid-tile>
 
   </mat-grid-list>
+
+    

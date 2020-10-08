@@ -1,0 +1,68 @@
+ <div class='container mt-5'>
+    <mat-form-field appearance="fill">
+        <mat-label>Buscar por</mat-label>
+        <mat-select [(value)]="selected">
+     
+          <mat-option value="maestro">Nombre de intructor</mat-option>
+          <mat-option value="categoria"> Categoria</mat-option>
+         
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="selected==maestro; else Categoria">
+        <h4>Maestro</h4>
+    
+        <form action="">
+            <div class="form-group">
+                <input   [(ngModel)]="filter" name="filter" class="form-control" type="text" placeholder="Busque un maestro" >
+            </div>
+        </form>
+        
+        <div class="row">
+            <div class="col-sm-3" *ngFor="let curso of cursos | bmaestro:filter">
+                <div class="card" >
+                    <img class="card-img-top imgMaestro" [src]="curso.user.img">
+                    <div class="card-body">
+                      
+                        <h5 class="card-title">{{curso.user.nombre}} </h5>
+                        <h5 class="card-title">{{curso.categoria.nombre}} </h5>
+                        <h5 class="card-title">{{curso.tarifa}} </h5>
+                        <button class="btn btn-primary" >
+                            Ver
+                        </button>
+                       
+                    </div>
+                </div>
+            </div>  
+            
+        </div>
+    </div>
+</div> 
+
+<ng-template #Categoria>
+    <h4>Categoria</h4>
+
+<form action="">
+    <div class="form-group">
+        <input   [(ngModel)]="filter" name="filter" class="form-control" type="text" placeholder="Busque una categoria" >
+    </div>
+</form>
+
+<div class="row">
+    <div class="col-sm-3" *ngFor="let curso of cursos | bcategoria:filter">
+        <div class="card" >
+            <img class="card-img-top imgMaestro" [src]="curso.user.img">
+            <div class="card-body">
+              
+                <h5 class="card-title">{{curso.user.nombre}} </h5>
+                <h5 class="card-title">{{curso.categoria.nombre}} </h5>
+                <h5 class="card-title">{{curso.tarifa}} </h5>
+                <button class="btn btn-primary" >
+                    Ver
+                </button>
+               
+            </div>
+        </div>
+    </div>  
+    
+</div>
+</ng-template>
