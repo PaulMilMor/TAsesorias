@@ -26,6 +26,7 @@ export class BuscadorComponent implements OnInit {
     this.db.collection('cursos').get().subscribe((res)=>{
       res.docs.forEach((item)=>{
         let c= item.data() as Curso;
+        c.id=item.id
         this.cursos.push(c);
          console.log(c.user.nombre)
        

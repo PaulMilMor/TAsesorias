@@ -26,7 +26,7 @@
                         <h5 class="card-title">{{curso.user.nombre}} </h5>
                         <h5 class="card-title">{{curso.categoria.nombre}} </h5>
                         <h5 class="card-title">{{curso.tarifa}} </h5>
-                        <button class="btn btn-primary" >
+                        <button class="btn btn-primary"  [routerLink]="['/agendar', curso.id ]" >
                             Ver
                         </button>
                        
@@ -56,7 +56,7 @@
                 <h5 class="card-title">{{curso.user.nombre}} </h5>
                 <h5 class="card-title">{{curso.categoria.nombre}} </h5>
                 <h5 class="card-title">{{curso.tarifa}} </h5>
-                <button class="btn btn-primary" >
+                <button class="btn btn-primary" [routerLink]="['/agendar', curso.id ]" >
                     Ver
                 </button>
                

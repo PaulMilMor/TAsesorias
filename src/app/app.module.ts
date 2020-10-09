@@ -49,6 +49,8 @@ import { CalendatComponent } from './calendat/calendat.component';
 import { BuscadorComponent } from './buscador/buscador.component';
 import { BmaestroPipe } from './bmaestro.pipe';
 import { BcategoriaPipe } from './bcategoria.pipe';
+import { StudentregisterComponent } from './studentregister/studentregister.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import { BcategoriaPipe } from './bcategoria.pipe';
  CalendatComponent,
  BuscadorComponent,
  BmaestroPipe,
- BcategoriaPipe
+ BcategoriaPipe,
+ StudentregisterComponent
   ],
   imports: [
      BrowserModule,
@@ -95,7 +98,8 @@ import { BcategoriaPipe } from './bcategoria.pipe';
     MatCardModule,
 ScheduleModule,
 MatTableModule,
-CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+NgbModule
   ], 
    entryComponents: [
     register
