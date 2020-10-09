@@ -9,4 +9,11 @@ mat-form-field {
  margin-top: 10px;
    
   }
+mat-card-content{
+margin-left: 15px;
 
+}
+
+mat-flat-button{
+  margin-left: 7px;
+}

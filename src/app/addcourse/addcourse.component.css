@@ -1,10 +1,12 @@
 .main-div{
     height: 100vh;
     display: flex;
-    justify-content: center;
- margin-top: 10px;
+    
+ margin-top: 1px;
 }
 mat-form-field {
-
-    width: 327px;
+margin-top: 270px;
+margin-right: 500px;
+align-items: center;
+    width: 330px;
   }

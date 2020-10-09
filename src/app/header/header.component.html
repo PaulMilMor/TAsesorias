@@ -12,9 +12,12 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/zoom']" routerLinkActive="router-link-active" style="font-size: 17px;">Comunicacion</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link"  *ngIf="usuario.tipoUsuario==instructor" [routerLink]="['/agregar-clase']" routerLinkActive="router-link-active" style="font-size: 17px;">Asesorias</a>
+        </li>
        
         <li class="nav-item">
-          <a class="nav-link"   *ngIf="usuario.tipoUsuario==instructor"  [routerLink]="['/editar', this.auth.auth.currentUser.uid]"  routerLinkActive="router-link-active" >Editar Informacion</a>
+          <a class="nav-link"   *ngIf="usuario.tipoUsuario==instructor" [routerLink]="['/editar', this.auth.auth.currentUser.uid]"  routerLinkActive="router-link-active" >Editar Informacion</a>
         </li>
            
       </ul>
