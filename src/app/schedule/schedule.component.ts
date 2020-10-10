@@ -45,9 +45,9 @@ var Default = [
 
 export class ScheduleComponent implements OnInit {
   displayedColumns: string[] = ['hora', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
+   visible=false;
 
-  dataSource=Default
-
+dataSource=Default
   
   constructor(private db: AngularFirestore,private auth: AngularFireAuth) { }
 
@@ -103,6 +103,33 @@ getData():Array<any>{
         if(u.horario!=undefined){
           hor= u.horario;
           console.log(hor)
+          this.dataSource= [
+            { hora: '0:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '1:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '2:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '3:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '4:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '5:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '6:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '7:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '8:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '9:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '10:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '11:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '12:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '13:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '14:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '15:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '16:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '17:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '18:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '19:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '20:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '21:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '22:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+            { hora: '23:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
+          
+          ];
           console.log("entro en horario")
         }else{
           hor= Default
@@ -116,5 +143,9 @@ getData():Array<any>{
   })
   console.log(hor)
   return hor
+}
+edit(){
+
+
 }
 }

@@ -64,7 +64,7 @@ export class SigninComponent implements OnInit {
 
         console.log(data.user.uid)
         this.formUsuario.value.uid = data.user.uid
-
+        this.formUsuario.value.nombre = this.formUsuario.value.nombre + " "+this.formUsuario.value.apellido
 
         this.db.collection('usuarios').doc(data.user.uid).set(this.formUsuario.value).then((finish) => {
 

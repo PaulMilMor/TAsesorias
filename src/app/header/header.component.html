@@ -15,7 +15,10 @@
         <li class="nav-item">
           <a [routerLinkActive]="['active']" class="nav-link"  *ngIf="usuario.tipoUsuario==instructor" [routerLink]="['/agregar-clase']" routerLinkActive="router-link-active" style="font-size: 17px;">Asesorias</a>
         </li>
-       
+            
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/buscador']" routerLinkActive="router-link-active" style="font-size: 17px;">Buscar</a>
+        </li>
         <li class="nav-item">
           <a [routerLinkActive]="['active']" class="nav-link"   *ngIf="usuario.tipoUsuario==instructor" [routerLink]="['/editar', this.auth.auth.currentUser.uid]"  routerLinkActive="router-link-active" >{{usuario.nombre}}</a>
         </li>

@@ -46,6 +46,11 @@ import {MatTableModule} from '@angular/material/table';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendatComponent } from './calendat/calendat.component';
+import { BuscadorComponent } from './buscador/buscador.component';
+import { BmaestroPipe } from './bmaestro.pipe';
+import { BcategoriaPipe } from './bcategoria.pipe';
+import { StudentregisterComponent } from './studentregister/studentregister.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -59,7 +64,11 @@ import { CalendatComponent } from './calendat/calendat.component';
     AddcourseComponent,
  register,
  ScheduleComponent,
- CalendatComponent
+ CalendatComponent,
+ BuscadorComponent,
+ BmaestroPipe,
+ BcategoriaPipe,
+ StudentregisterComponent
   ],
   imports: [
      BrowserModule,
@@ -89,7 +98,8 @@ import { CalendatComponent } from './calendat/calendat.component';
     MatCardModule,
 ScheduleModule,
 MatTableModule,
-CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+NgbModule
   ], 
    entryComponents: [
     register
