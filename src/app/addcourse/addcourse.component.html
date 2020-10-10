@@ -1,5 +1,8 @@
 <div >
     <form [formGroup]="formCursos">
+      <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
+      <h1>CREAR ASESORIA</h1>
+      <br>
         <mat-form-field appearance="fill" >
         <mat-label>Categoria</mat-label>
         <mat-select formControlName="categoria">
@@ -7,12 +10,12 @@
         </mat-select>
       </mat-form-field>
       <br>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" style="margin-top: 1px;">
       <mat-label>Tarifa</mat-label>
-      <input matInput formControlName="tarifa" type="number" >
+      <input matInput formControlName ="tarifa" type="number" >
     </mat-form-field>
     <br>
-    <button mat-raised-button (click)="agregar()">Agregar</button>
+    <button mat-raised-button (click)="agregar()" style="margin-left: 530px;">Agregar</button>
     </form>
  
       

@@ -1,8 +1,11 @@
 
 <div class="main-div">
-
+  
   <mat-card-content>
     <form [formGroup]="formUsuario">
+      <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
+      <h1>EDITAR INFORMACION</h1>
+      <br>
      <button mat-flat-button color="primary" (click)="editCorreo=!editCorreo">Editar Correo</button>
            <mat-form-field class="full-width" *ngIf="editCorreo">
               <mat-label>Email</mat-label>
@@ -12,7 +15,7 @@
                  <span *ngIf="formUsuario.controls['correo'].errors.email">No es un correo Valido</span>
                </mat-error>
            </mat-form-field>
-           <button mat-flat-button color="primary" (click)="editContra=!editContra" >Editar Contraseña</button>
+           <button mat-flat-button color="primary" (click)="editContra=!editContra" style="margin-left: 7px;">Editar Contraseña</button>
            <mat-form-field class="full-width" *ngIf="editContra">
          
               <mat-label>Contraseña</mat-label>
@@ -23,11 +26,10 @@
               
                </mat-error>
            </mat-form-field>
-           <button mat-flat-button color="primary" (click)="editImg=!editImg">Cambiar Imagen</button>
+           <button mat-flat-button color="primary" (click)="editImg=!editImg" style="margin-left: 7px;">Cambiar Imagen</button>
            <input formControlName="img" (change)="addImg($event)" type="file" class="form-control-file" *ngIf="editImg">
-           <button mat-flat-button  class="mt-5" style="margin-right: 5px;" (click)="editarUsuario()" color="warn">Editar</button>
+           <button mat-flat-button  class="mt-5" style="margin-right: 5px;" (click)="editarUsuario()" color="warn" style="margin-left: 7px;">Editar</button>
           
     </form>
   </mat-card-content>
-  <app-addcourse style="margin-left: 500px;"></app-addcourse>
 </div>
