@@ -28,3 +28,7 @@ mat-form-field {
   padding: 10px;
   width: 100%
 }
+
+span.icon {
+  background: url('/')
+}

@@ -32,7 +32,7 @@ export class SigninComponent implements OnInit {
       contraseña: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
       img: [''],
       tipoUsuario: [''],
- 
+
       uid: ['']
     })
   }
