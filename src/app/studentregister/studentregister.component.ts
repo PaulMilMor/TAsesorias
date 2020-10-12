@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./studentregister.component.css']
 })
 export class StudentregisterComponent implements OnInit {
-  currentRate = 3.5;
+  currentRate = 5;
   cursos:Curso[]=new Array<Curso>()
 curso:Curso;
   constructor(private db: AngularFirestore,private activeRoute: ActivatedRoute) { }
