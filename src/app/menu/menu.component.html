@@ -4,21 +4,21 @@
 </div> -->
 
 
-
+<link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap" rel="stylesheet">
 <mat-grid-list [cols]="breakpoint" rowHeight="2:0.1" (window:resize)="onResize($event)">
     <mat-grid-tile class="barra">
         <div>
-            
+
             <div class="title">Tus Asesorias</div>
             <br><br><br><br><br><br><br>
-            <div class="bullet">→ Toma cursos personalizados.</div>
+            <div class="bullet">→ Toma cursos personalizados</div>
             <br><br>
-            <div class="bullet">→ Comparte tus conocimientos.</div>
+            <div class="bullet">→ Comparte tus conocimientos</div>
             <br><br>
             <div class="bullet">→ Conectate con la comunidad</div>
             <br><br><br><br><br><br><br><br><br>
         </div>
-        
+
     </mat-grid-tile>
     <mat-grid-tile class="menu">
         <!--div *ngIf="opcion==1">
@@ -32,33 +32,33 @@
         <div *ngIf="opcion==2">
             <app-login></app-login>
             <div class>
-                ¿No tienes una cuenta? 
+                ¿No tienes una cuenta?
                 <a href="#" (click)="change(3)"> Registrate.</a>
                 <br><br><br><br>
             </div>
         </div>
-        
+
         <div *ngIf="opcion==3">
             <div class>
-                ¿Ya tienes una cuenta? 
+                ¿Ya tienes una cuenta?
                 <a href="#" (click)="change(2)"> Inicia sesión.</a>
             </div>
             <div>
                 <mat-tab-group mat-align-tabs="center">
 
                     <mat-tab label="Registrarme como alumno">
-                        <app-signin tipoU={{ number }}></app-signin>
+                        <app-signin tipoU="alumno"></app-signin>
                     </mat-tab>
                     <mat-tab label="Registrarme como instructor ">
                         <app-signin tipoU="instructor"></app-signin>
                     </mat-tab>
                 </mat-tab-group>
-                
+
             </div>
             <br><br><br><br><br>
         </div>
-        
-        
+
+
     </mat-grid-tile>
 </mat-grid-list>
 
@@ -94,5 +94,5 @@
                 <a href="#" (click)="change(2)"> Inicia sesión.</a>
             </h5>
         </div-->
-    <!--/div>
+<!--/div>
 </div-->

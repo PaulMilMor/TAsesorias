@@ -10,26 +10,25 @@
       <ul class="navbar-nav mr-auto">
       
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/zoom']" routerLinkActive="router-link-active" style="font-size: 17px;">Comunicacion</a>
+          <a [routerLinkActive]="['active']" class="nav-link" [routerLink]="['/zoom']" routerLinkActive="router-link-active" style="font-size: 17px;">Comunicacion</a>
+        </li>
+        <li class="nav-item">
+          <a [routerLinkActive]="['active']" class="nav-link"  *ngIf="usuario.tipoUsuario==instructor" [routerLink]="['/agregar-clase']" routerLinkActive="router-link-active" style="font-size: 17px;">Asesorias</a>
         </li>
             
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/buscador']" routerLinkActive="router-link-active" style="font-size: 17px;">Buscar</a>
+          <a [routerLinkActive]="['active']" class="nav-link" [routerLink]="['/buscador']" routerLinkActive="router-link-active" style="font-size: 17px;">Buscar</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"   *ngIf="usuario.tipoUsuario==instructor"  [routerLink]="['/editar', this.auth.auth.currentUser.uid]"  routerLinkActive="router-link-active" >Editar Informacion</a>
+          <a [routerLinkActive]="['active']" class="nav-link"   *ngIf="usuario.tipoUsuario==instructor" [routerLink]="['/editar', this.auth.auth.currentUser.uid]"  routerLinkActive="router-link-active" >{{usuario.nombre}}</a>
         </li>
            
       </ul>
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <span class="spacer"></span>
-        <a class="nav-link" href="#" >{{usuario.nombre}}</a>
-      </li>
       <span class="spacer"></span>
-          <li class="nav-item">
-           <button mat-flat-button style="float: right;" (click)="cerrarSesion()">Cerrar Sesion</button>
-          </li>
+      <li class="nav-item">
+        <button mat-flat-button style="float: right;" (click)="cerrarSesion()">Cerrar Sesion</button>
+      </li>
     </ul>
-    </div>
-  </nav>
+  </div>
+</nav>
