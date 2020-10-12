@@ -1,35 +1,28 @@
 
 <div class="main-div">
-  
-  <mat-card-content>
-    <form [formGroup]="formUsuario">
+    <form [formGroup]="formUsuario" class="text-center border border-light p-5" action="#!">
       <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
-      <h1>EDITAR INFORMACION</h1>
-      <br>
-     <button mat-flat-button color="primary" (click)="editCorreo=!editCorreo">Editar Correo</button>
-           <mat-form-field class="full-width" *ngIf="editCorreo">
-              <mat-label>Email</mat-label>
-              <input  type="email" matInput placeholder="Email" name="email" formControlName="correo">
-              <mat-error *ngIf="formUsuario.controls['correo'].invalid" > 
+    
+      <p class="h4 mb-4">EDITAR MIS DATOS</p>
+     
+              <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="E-mail" name="email" formControlName="correo">
               
-                 <span *ngIf="formUsuario.controls['correo'].errors.email">No es un correo Valido</span>
-               </mat-error>
-           </mat-form-field>
-           <button mat-flat-button color="primary" (click)="editContra=!editContra" style="margin-left: 7px;">Editar Contraseña</button>
-           <mat-form-field class="full-width" *ngIf="editContra">
-         
-              <mat-label>Contraseña</mat-label>
-              <input type="password" matInput  placeholder="Password"  name="password"formControlName="contraseña">
-              <mat-error *ngIf="formUsuario.controls['contraseña'].invalid" > 
-                
-                 <span *ngIf="formUsuario.controls['contraseña'].errors.minlength">La contraseña debe tener al menos 8 caracteres</span>
-              
-               </mat-error>
-           </mat-form-field>
-           <button mat-flat-button color="primary" (click)="editImg=!editImg" style="margin-left: 7px;">Cambiar Imagen</button>
-           <input formControlName="img" (change)="addImg($event)" type="file" class="form-control-file" *ngIf="editImg">
-           <button mat-flat-button  class="mt-5" style="margin-right: 5px;" (click)="editarUsuario()" color="warn" style="margin-left: 7px;">Editar</button>
           
+              <input type="password" id="defaultContactFormName" class="form-control mb-4" placeholder="Contraseña"name="password"formControlName="contraseña">
+              
+           
+           <button color="primary" (click)="editImg=!editImg" style=" background-color: rgb(77, 65, 61); margin-bottom: 21px; width: 50px; height: 40px;" class="btn btn-info btn-block" type="submit"><i class="material-icons">camera_enhance</i></button>
+           <input formControlName="img" (change)="addImg($event)" type="file" class="form-control-file" *ngIf="editImg">
+        
+      <!-- Default form contact -->
+  
+  <!-- descripcion -->
+  <div class="form-group">
+      <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Descripcion"></textarea>
+  </div>
+  
+  <!-- Send button -->
+  <button class="mt-5" (click)="editarUsuario()" class="btn btn-info btn-block" type="submit">GUARDAR CAMBIOS</button>
+
     </form>
-  </mat-card-content>
 </div>

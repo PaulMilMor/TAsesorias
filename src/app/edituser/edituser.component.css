@@ -1,6 +1,6 @@
-mat-form-field {
+form{
     display: block;
-    width: 327px;
+    width: 700px;
   }
   .main-div{
     height: 100vh;
@@ -9,16 +9,14 @@ mat-form-field {
  margin-top: 40px;
    
   }
-mat-card-content{
-  margin-left: 430px;
+form{
+  width: 400px;
+  margin-left: 470px;
 margin-top: 40px;
 
 }
 
-h1 {
-  font-size: 30px;
+p {
+  font-size: 24px;
   font-family: 'Reem Kufi', sans-serif;
-  margin-left: 87px;
-  margin-top: 7px;
- 
 }
