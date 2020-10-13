@@ -22,7 +22,9 @@
         <li class="nav-item">
           <a [routerLinkActive]="['active']" class="nav-link"   *ngIf="usuario.tipoUsuario==instructor" [routerLink]="['/editar', this.auth.auth.currentUser.uid]"  routerLinkActive="router-link-active" >{{usuario.nombre}}</a>
         </li>
-           
+        <li class="nav-item">
+          <a [routerLinkActive]="['active']" class="nav-link"   [routerLink]="['/calificar']" routerLinkActive="router-link-active" style="font-size: 17px;">Calificar</a>
+        </li>
       </ul>
     <ul class="navbar-nav ml-auto">
       <span class="spacer"></span>
@@ -31,4 +33,4 @@
       </li>
     </ul>
   </div>
-</nav>
+</nav> 

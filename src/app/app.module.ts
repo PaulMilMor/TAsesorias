@@ -51,6 +51,7 @@ import { BmaestroPipe } from './bmaestro.pipe';
 import { BcategoriaPipe } from './bcategoria.pipe';
 import { StudentregisterComponent } from './studentregister/studentregister.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CalificarComponent } from './calificar/calificar.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
  BuscadorComponent,
  BmaestroPipe,
  BcategoriaPipe,
- StudentregisterComponent
+ StudentregisterComponent,
+ CalificarComponent
   ],
   imports: [
      BrowserModule,

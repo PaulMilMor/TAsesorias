@@ -7,6 +7,7 @@ import { EdituserComponent } from './edituser/edituser.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { StudentregisterComponent } from './studentregister/studentregister.component';
 import { ZoomComponent } from './zoom/zoom.component';
+import { CalificarComponent } from './calificar/calificar.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:'agregar-clase', component:AddcourseComponent},
   {path:'horario',component:ScheduleComponent},
   {path:'buscador', component:BuscadorComponent},
-  {path:'agendar/:idCurso', component:StudentregisterComponent}
+  {path:'agendar/:idCurso', component:StudentregisterComponent},
+  {path:'calificar', component:CalificarComponent}
   
 ];
 

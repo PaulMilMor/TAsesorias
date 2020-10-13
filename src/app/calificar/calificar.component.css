@@ -4,9 +4,8 @@ main {
     text-align: center;
   }
   
-  button {
-    margin-top: 20px;
-    background-color: #2D8CFF;
+  .button {
+    background-color:#DD6031;
     color: #ffffff;
     text-decoration: none;
     padding-top: 10px;
@@ -16,17 +15,7 @@ main {
     display: inline-block;
     border-radius: 10px;
   }
-  
+
   button:hover {
-    background-color: #2681F2;
-  }
-  
-  mat-form-field{
-    display: block;
-  }.main-div{
-    height: 100vh;
-    display: flex;
-    justify-content: center;
- margin-top: 10px;
-   
+    background-color:  #ffffff;
   }
