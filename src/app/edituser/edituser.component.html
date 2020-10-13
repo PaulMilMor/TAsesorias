@@ -1,27 +1,28 @@
 
 <div class="main-div">
+  
     <form [formGroup]="formUsuario" class="text-center border border-light p-5" action="#!">
       <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
-    
+   
       <p class="h4 mb-4">EDITAR MIS DATOS</p>
-     
-              <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="E-mail" name="email" formControlName="correo">
+           
+              <input (click)="editCorreo=!editCorreo" type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="E-mail" name="email" formControlName="correo">
               
           
-              <input type="password" id="defaultContactFormName" class="form-control mb-4" placeholder="Contraseña"name="password"formControlName="contraseña">
+              <input (click)="editContra=!editContra" type="password" id="defaultContactFormName" class="form-control mb-4" placeholder="Contraseña"name="password"formControlName="contraseña">
               
            
            <button color="primary" (click)="editImg=!editImg" style=" background-color: rgb(77, 65, 61); margin-bottom: 21px; width: 50px; height: 40px;" class="btn btn-info btn-block" type="submit"><i class="material-icons">camera_enhance</i></button>
            <input formControlName="img" (change)="addImg($event)" type="file" class="form-control-file" *ngIf="editImg">
         
-      <!-- Default form contact -->
+   
   
-  <!-- descripcion -->
+ 
   <div class="form-group">
       <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Descripcion"></textarea>
   </div>
   
-  <!-- Send button -->
+  
   <button class="mt-5" (click)="editarUsuario()" class="btn btn-info btn-block" type="submit">GUARDAR CAMBIOS</button>
 
     </form>
