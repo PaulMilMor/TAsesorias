@@ -122,10 +122,11 @@ getUsuario(){
   this.db.collection('usuarios').get().subscribe((res)=>{
     res.docs.forEach((item)=>{
       let u= item.data() as Usuario;
-      if(u.id==this.idUsuario){
-        u.id=item.id;
+      if(u.uid==this.idUsuario){
+        u.uid=item.id;
         u.ref=item.ref;
         this.usuario=u;
+        console.log(this.usuario.img)
       }
      
      

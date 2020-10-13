@@ -49,8 +49,9 @@ import { CalendatComponent } from './calendat/calendat.component';
 import { BuscadorComponent } from './buscador/buscador.component';
 import { BmaestroPipe } from './bmaestro.pipe';
 import { BcategoriaPipe } from './bcategoria.pipe';
-import { StudentregisterComponent } from './studentregister/studentregister.component';
+import { dialogStudent, StudentregisterComponent } from './studentregister/studentregister.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
  BuscadorComponent,
  BmaestroPipe,
  BcategoriaPipe,
- StudentregisterComponent
+ StudentregisterComponent,
+ dialogStudent,
   ],
   imports: [
      BrowserModule,
@@ -99,10 +101,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 ScheduleModule,
 MatTableModule,
 CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+MatListModule,
+MatChipsModule,
 NgbModule
   ], 
    entryComponents: [
-    register
+    register,
+    dialogStudent
   ], 
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [

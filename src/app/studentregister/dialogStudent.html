@@ -1,0 +1,90 @@
+
+ 
+  <mat-grid-list cols="9" rowHeight="1:2">
+    <mat-grid-tile>
+
+      <mat-list>
+        <mat-list-item>Lunes</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let item of clunes"><button mat-stroked-button color="warn" (click)="prueba(item)">{{item}}</button></mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+    <mat-grid-tile>
+
+      <mat-list>
+        <mat-list-item>Martes</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let item of cmartes"><button mat-stroked-button color="warn" (click)="prueba(item)">{{item}}</button></mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+    <mat-grid-tile>
+
+      <mat-list>
+        <mat-list-item>Miercoles</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let item of cmiercoles"><button mat-stroked-button color="warn" (click)="prueba(item)">{{item}}</button></mat-list-item>
+       
+      </mat-list>
+    </mat-grid-tile>
+ 
+    <mat-grid-tile>
+
+      <mat-list>
+        <mat-list-item>Jueves</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let item of cjueves"><button mat-stroked-button color="warn" (click)="prueba(item)">{{item}}</button></mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+ 
+    <mat-grid-tile>
+
+      <mat-list>
+        <mat-list-item>Viernes</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let item of cviernes"><button mat-stroked-button color="warn" (click)="prueba(item)">{{item}}</button></mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+ 
+    <mat-grid-tile>
+
+      <mat-list>
+        <mat-list-item>Sabado</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let item of csabado"><button mat-stroked-button color="warn" (click)="prueba(item)">{{item}}</button></mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+ 
+    <mat-grid-tile>
+
+      <mat-list>
+        <mat-list-item>Domingo</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let item of cdomingo"><button mat-stroked-button color="warn" (click)="prueba(item)">{{item}}</button></mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+  <mat-grid-tile>
+    <h5 >Clases Faltanes <span class="badge badge-secondary">2</span></h5>
+  
+  </mat-grid-tile>
+  <mat-grid-tile>
+ 
+   <button mat-flat-button color="primary" (click)="save()">
+    Guardar
+  </button>
+  </mat-grid-tile>
+  </mat-grid-list>
+  
+<!-- 
+<div>
+  Lunes:
+  <mat-chip-list aria-label="Fish selection">
+    <mat-chip>One fish</mat-chip>
+    <mat-chip>Two fish</mat-chip>
+    <mat-chip color="primary" selected>Primary fish</mat-chip>
+    <mat-chip color="accent" selected>Accent fish</mat-chip>
+  </mat-chip-list>
+  
+</div>
+<div>
+  Martes:
+</div> -->
