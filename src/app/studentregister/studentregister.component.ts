@@ -4,6 +4,8 @@ import { Curso } from 'src/models/curso';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { dataBinding } from '@syncfusion/ej2-angular-schedule';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/auth';
 @Component({
   selector: 'app-studentregister',
   templateUrl: './studentregister.component.html',
@@ -13,11 +15,15 @@ export class StudentregisterComponent implements OnInit {
   currentRate = 5;
   cursos: Curso[] = new Array<Curso>()
   curso: Curso;
-  cantidadCursos:number
-  constructor(private db: AngularFirestore, private activeRoute: ActivatedRoute, public dialog: MatDialog) { }
+
+  formSesiones:FormGroup
+  constructor(private db: AngularFirestore, private activeRoute: ActivatedRoute, public dialog: MatDialog, private fb:FormBuilder) { }
 
   ngOnInit(): void {
     this.getCurso();
+    this.formSesiones=this.fb.group({
+      sesiones:['0']
+    })
   }
   getCurso() {
     var id = this.activeRoute.snapshot.params.idCurso;
@@ -34,11 +40,11 @@ export class StudentregisterComponent implements OnInit {
     })
   }
   openDialog(): void {
-    console.log(this.cantidadCursos)
+
     const dialogRef = this.dialog.open(dialogStudent, {
       width: '1000px',
       height:'500px',
-      data: { curso: this.curso,cc:this.cantidadCursos }
+      data: { curso: this.curso,sesiones:this.formSesiones.value.sesiones}
     });
   }
 }
@@ -55,20 +61,14 @@ export class dialogStudent implements OnInit {
   cviernes:Array<any>=new Array();
   csabado:Array<any>=new Array();
   cdomingo:Array<any>=new Array();
-  alunes:Array<any>=new Array();
-  amartes:Array<any>=new Array();
-  amiercoles:Array<any>=new Array();
-  ajueves:Array<any>=new Array();
-  aviernes:Array<any>=new Array();
-  asabado:Array<any>=new Array();
-  adomingo:Array<any>=new Array();
+
   asesorias:Array<any>=new Array();
   constructor(
     public dialogRef: MatDialogRef<dialogStudent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore,private auth: AngularFireAuth) { }
   ngOnInit(): void {
     this.getHorario()
-    console.log(this.data.cc)
+    
   }
   onNoClick(): void {
     this.dialogRef.close();
@@ -93,15 +93,50 @@ export class dialogStudent implements OnInit {
       })
     })
   }
-  prueba(hour){
-  this.asesorias.push({
-    fecha:'fecha',
-    hora:hour
-  })
 
+  prueba(hour,dia){
+    var fecha=new Date();
+    var d=new Date().getDay();
+    if(this.data.sesiones>0){
+
+      if(d<dia){
+        fecha.setDate(fecha.getDate()+(dia-d))
+        
+        this.asesorias.push({
+          fecha:fecha,
+          hora:hour
+        })
+
+      }
+      this.data.sesiones--;
+   
+    }
+   
+    
   }
+
   save(){
-    console.log(this.asesorias)
+if (this.data.sesiones==0){
+  var user=this.auth.auth.currentUser;
+  console.log(this.asesorias)
+  //para identificar la asesoria se le suma el id del usuario con la id  del curso
+   this.db.collection('asesorias').doc(user.uid+this.data.curso.id).set({
+
+     dias:this.asesorias
+   }).finally(()=>{
+     console.log("Guardado exitoso");
+     
+   }).catch((err)=>{
+     console.log(err);
+     
+   })
+  
+}else{
+  //Aqui se puede poner una alerta 
+  console.log("No se a selecionado todas las clases")
+ 
+}
+    
   }
   
 }

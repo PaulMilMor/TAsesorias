@@ -4,10 +4,10 @@
     <div class="w-100">
       <h1>INCRÍBETE</h1>
       <h3>Completa el siguiente formulario</h3>
-      <form action="">
+      <form action="" [formGroup]="formSesiones">
         <mat-form-field appearance="fill">
           <mat-label>Cantidad de sesiones</mat-label>
-          <input  [(ngModel)]="cantidadCursos" matInput type="number">
+          <input   matInput type="number" formControlName="sesiones" >
         </mat-form-field>
         <br>
         <button mat-flat-button color="accent" (click)="openDialog()">Seleccionar Seciones</button>
