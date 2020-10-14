@@ -14,7 +14,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatOptionModule } from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button'
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -68,7 +68,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
  BuscadorComponent,
  BmaestroPipe,
  BcategoriaPipe,
- StudentregisterComponent
+ StudentregisterComponent,
   ],
   imports: [
      BrowserModule,
@@ -102,7 +102,7 @@ CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
 NgbModule
   ], 
    entryComponents: [
-    register
+    register,
   ], 
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [

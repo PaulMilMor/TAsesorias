@@ -1,8 +1,42 @@
+<!--Rotating card-->
+<div class="col-md-4">
+  <link href="https://fonts.googleapis.com/css2?family=Saira:wght@200;300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+  <form class="text-center border border-light p-5" style="height: 550px; box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);" action="#!">
+  <mdb-flipping-card #cards>
+    <!--Front Side-->
+    <div class="face front tp-box_side tp-box_front">
+
+      <div class="avatar">
+        <img [src]="usuario.img" class="profile-img" style="border-radius: 50%; margin: 10px; max-height: 150; max-width: 150px; ">
+      </div>
+      <!--Content-->
+      <div class="card-body">
+        <h1 style="margin-bottom: 1px;">{{usuario.nombre}}</h1>
+        <br>
+        <!--Triggering button-->
+      </div>
+    </div>
+    <!--Back Side-->
+    <div class="back tp-box_side tp-box_back">
+
+      <!--DESCRIPCION-->
+      <h4>{{usuario.correo}}</h4>
+      <hr>
+    </div>
+    <button class="mt-5" style="background-color: rgb(238, 131, 43);" class="btn btn-info btn-block" (click)= "editProfile=!editProfile">EDITAR PERFIL</button>
+    <!--/.Back Side-->
+  </mdb-flipping-card>
+  </form>
+</div>
+<!--/.Rotating card-->
+
 
 <div class="main-div">
+  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
   
-    <form [formGroup]="formUsuario" class="text-center border border-light p-5" action="#!">
-      <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
+    <form style="margin-top:40px" *ngIf= "editProfile" [formGroup]="formUsuario" class="text-center border border-light p-5" action="#!">
+      
    
       <p class="h4 mb-4">EDITAR MIS DATOS</p>
            
