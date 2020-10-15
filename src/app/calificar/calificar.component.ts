@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calificar.component.css']
 })
 export class CalificarComponent implements OnInit {
-
+currentRate = 0;
   constructor() { }
 
   ngOnInit(): void {
+    
   }
-
+  
 }
+
