@@ -15,6 +15,7 @@ export class StudentregisterComponent implements OnInit {
   currentRate = 5;
   cursos: Curso[] = new Array<Curso>()
   curso: Curso;
+  breakpoint;
 
   formSesiones:FormGroup
   constructor(private db: AngularFirestore, private activeRoute: ActivatedRoute, public dialog: MatDialog, private fb:FormBuilder) { }
@@ -24,6 +25,8 @@ export class StudentregisterComponent implements OnInit {
     this.formSesiones=this.fb.group({
       sesiones:['0']
     })
+
+    this.breakpoint = (window.innerWidth<=900)?1:2;
   }
   getCurso() {
     var id = this.activeRoute.snapshot.params.idCurso;
@@ -47,6 +50,11 @@ export class StudentregisterComponent implements OnInit {
       data: { curso: this.curso,sesiones:this.formSesiones.value.sesiones}
     });
   }
+
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth<=900) ? 1:2;
+  }
+
 }
 @Component({
   selector: 'dialogStudent',
@@ -138,5 +146,7 @@ if (this.data.sesiones==0){
 }
     
   }
+
+  
   
 }
