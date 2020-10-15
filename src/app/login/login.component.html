@@ -39,21 +39,22 @@
 </div> -->
  <div class="containter  main-div">
     <form [formGroup]="formLogin">
-        <mat-form-field class="inputLogin">
-           <mat-label>
-               Correo Electrónico
-           </mat-label>
-           <input type="email" matInput id="email"  aria-describedby="emailHelp" placeholder="Ingrese su correo electronico" formControlName="correo">
-           <mat-error *ngIf="formLogin.controls['correo'].errors.email && formLogin.dirty "> El correo no es valido</mat-error>
-           <mat-error *ngIf="formLogin.controls['correo'].errors.required && formLogin.dirty "> El correo es obligatorio</mat-error>
-        </mat-form-field>
-        <mat-form-field class="inputLogin">
-            <mat-label>
-                Contraseña
-            </mat-label>
-            <input type="password" matInput id="pass"  aria-describedby="emailHelp" placeholder="Ingrese su contraseña" formControlName="contraseña">
-            <mat-error *ngIf="formLogin.controls['contraseña'].errors.required && formLogin.dirty ">La contraseña es obligatoria</mat-error>
-     
+        <mat-form-field class="full-width">
+            <mat-label>Correo Electrónico</mat-label>
+            <input type="email" matInput placeholder="Ingrese su correo electrónico" name="email" formControlName="correo">
+            <mat-error *ngIf="formLogin.controls['correo'].invalid">
+               <span *ngIf="formLogin.controls['correo'].errors.required && formLogin.dirty">El correo es obligatorio</span>
+               <span *ngIf="formLogin.controls['correo'].errors.email && formLogin.dirty">No es un correo válido</span>
+            </mat-error>
+         </mat-form-field>
+         <mat-form-field class="full-width">
+            <mat-label>Contraseña</mat-label>
+            <input type="password" matInput placeholder="Ingrese su contraseña" name="password" formControlName="contraseña">
+            <mat-error *ngIf="formLogin.controls['contraseña'].invalid">
+               <span *ngIf="formLogin.controls['contraseña'].errors.required && formLogin.dirty">La contraseña es obligatoria</span>
+               
+
+            </mat-error>
          </mat-form-field>
     <div class="container">
         <button mat-flat-button (click)="ingresar()" class="button">Ingresar</button>
