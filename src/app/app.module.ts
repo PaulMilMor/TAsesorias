@@ -52,6 +52,7 @@ import { BcategoriaPipe } from './bcategoria.pipe';
 import { dialogStudent, StudentregisterComponent } from './studentregister/studentregister.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatChipsModule} from '@angular/material/chips';
+import { CalificarComponent } from './calificar/calificar.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import {MatChipsModule} from '@angular/material/chips';
  BcategoriaPipe,
  StudentregisterComponent,
  dialogStudent,
+ CalificarComponent
   ],
   imports: [
      BrowserModule,

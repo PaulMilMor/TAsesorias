@@ -20,6 +20,7 @@ main {
   button:hover {
     background-color: #2681F2;
   }
+  
   mat-form-field{
     display: block;
   }.main-div{
