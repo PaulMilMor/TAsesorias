@@ -6,6 +6,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { dataBinding } from '@syncfusion/ej2-angular-schedule';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 @Component({
   selector: 'app-studentregister',
   templateUrl: './studentregister.component.html',
@@ -17,11 +20,13 @@ export class StudentregisterComponent implements OnInit {
   curso: Curso;
   breakpoint;
 
+ 
   formSesiones:FormGroup
-  constructor(private db: AngularFirestore, private activeRoute: ActivatedRoute, public dialog: MatDialog, private fb:FormBuilder) { }
+  constructor(private db: AngularFirestore, private activeRoute: ActivatedRoute, public dialog: MatDialog, private fb:FormBuilder, private http:HttpClient) { }
 
   ngOnInit(): void {
     this.getCurso();
+    
     this.formSesiones=this.fb.group({
       sesiones:['0']
     })
@@ -42,6 +47,9 @@ export class StudentregisterComponent implements OnInit {
       })
     })
   }
+
+ 
+ 
   openDialog(): void {
 
     const dialogRef = this.dialog.open(dialogStudent, {
@@ -55,6 +63,7 @@ export class StudentregisterComponent implements OnInit {
     this.breakpoint = (event.target.innerWidth<=900) ? 1:2;
   }
 
+  
 }
 @Component({
   selector: 'dialogStudent',
@@ -148,5 +157,7 @@ if (this.data.sesiones==0){
   }
 
   
+  pay(){
   
+  }
 }
