@@ -1,8 +1,9 @@
 <div >
-    <form [formGroup]="formCursos">
+  
+    <form [formGroup]="formCursos" style=" height: 445px; width: 400px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
       <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
-      <h1>CREAR ASESORIA</h1>
-      <br>
+      <h1 style="color: white;">CREAR</h1>
+      <h2>CREAR ASESORIA</h2>
         <mat-form-field appearance="fill" >
         <mat-label>Categoria</mat-label>
         <mat-select formControlName="categoria">
@@ -10,12 +11,13 @@
         </mat-select>
       </mat-form-field>
       <br>
-    <mat-form-field appearance="fill" style="margin-top: 1px;">
+    <mat-form-field appearance="fill" style="margin-top: 9px;">
       <mat-label>Tarifa</mat-label>
       <input matInput formControlName ="tarifa" type="number" >
     </mat-form-field>
+    <h4 style="margin-left: 41px; font-size: 13px;">*Tarifa máxima de $2000.00 MXN por hora</h4>
     <br>
-    <button mat-raised-button (click)="agregar()" style="margin-left: 530px;">Agregar</button>
+    <button mat-raised-button (click)="agregar()" style="font-size: 17px; margin-top: 1px; margin-left: 124px; width: 150px; background-color: rgb(211, 153, 81); color: white;">AGREGAR</button>
     </form>
  
       

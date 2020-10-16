@@ -5,19 +5,23 @@
  margin-top: 1px;
 }
 mat-form-field {
-margin-top: 50px;
-margin-left: 530px;
-    width: 330px;
+margin-top: 40px;
+margin-left: 40px;
+    width: 321px;
   }
 
 mat-raised-button {
   width: 60px;
 }
 
-h1 {
+h2 {
   font-size: 30px;
   font-family: 'Reem Kufi', sans-serif;
   text-align: center;
   margin-top: 39px;
- 
+}
+
+form{
+  margin-left: 500px;
+  margin-top: 50px;
 }

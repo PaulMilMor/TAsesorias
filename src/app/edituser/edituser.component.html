@@ -1,19 +1,21 @@
 <!--Rotating card-->
 <div class="col-md-4">
-  <link href="https://fonts.googleapis.com/css2?family=Saira:wght@200;300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
-  <form class="text-center border border-light p-5" style="height: 550px; box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);" action="#!">
+  <form class="text-center border border-light p-5" style="height: 470px; box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: rgb(243, 243, 243);" action="#!">
   <mdb-flipping-card #cards>
     <!--Front Side-->
     <div class="face front tp-box_side tp-box_front">
 
-      <div class="avatar">
-        <img [src]="usuario.img" class="profile-img" style="border-radius: 50%; margin: 10px; max-height: 150; max-width: 150px; ">
+      <div class="profile-img" style="margin-left: 67px;">
+        <img [src]="usuario.img" alt="unplash" >
       </div>
+
       <!--Content-->
       <div class="card-body">
         <h1 style="margin-bottom: 1px;">{{usuario.nombre}}</h1>
-        <br>
+        <h2 style="margin-bottom: 1px;">INSTRUCTOR</h2>
+        
         <!--Triggering button-->
       </div>
     </div>
