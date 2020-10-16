@@ -1,6 +1,6 @@
 
  
-  <mat-grid-list cols="9" rowHeight="1:2">
+  <mat-grid-list cols="8" rowHeight="1:2">
     <mat-grid-tile>
 
       <mat-list>
@@ -62,14 +62,22 @@
         <mat-list-item *ngFor="let item of cdomingo"><button mat-stroked-button color="warn" (click)="prueba(item,7)">{{item}}</button></mat-list-item>
       </mat-list>
     </mat-grid-tile>
-  <mat-grid-tile>
+  <!--mat-grid-tile>
     <h5 >Clases Faltanes <span class="badge badge-secondary">{{data.sesiones}}</span></h5>
   
-  </mat-grid-tile>
+  </mat-grid-tile-->
   <mat-grid-tile>
- 
-   <button mat-flat-button color="primary" (click)="save()">
-    Guardar
-  </button>
-  </mat-grid-tile>
+    <mat-list>
+      <mat-list-item>
+        <h5>Clases Faltanes <span class="badge badge-secondary">{{data.sesiones}}</span></h5>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-flat-button color="primary" (click)="save()">
+          Guardar
+        </button>
+        
+      </mat-list-item>
+    </mat-list>
+    
+   </mat-grid-tile>
   </mat-grid-list>

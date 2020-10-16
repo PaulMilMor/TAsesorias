@@ -9,3 +9,12 @@ mat-grid-tile {
     overflow: hidden;
     vertical-align: middle;
 }
+
+mat-list-item {
+    top:0;
+}
+
+mat-list {
+    position: absolute;
+    top:0;
+}
