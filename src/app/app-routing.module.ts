@@ -17,7 +17,7 @@ const routes: Routes = [
   {path:'horario',component:ScheduleComponent},
   {path:'buscador', component:BuscadorComponent},
   {path:'agendar/:idCurso', component:StudentregisterComponent},
-  {path:'calificar', component:CalificarComponent}
+  {path:'calificar/:idMaestro/:idAsesoria', component:CalificarComponent}
   
 ];
 
