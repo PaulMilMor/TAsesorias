@@ -6,6 +6,7 @@ import { MsgService } from 'src/services/msg.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Usuario } from 'src/models/usuario';
 import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-edituser',
   templateUrl: './edituser.component.html',
@@ -19,6 +20,7 @@ idUsuario:string
 editCorreo:boolean=false
 editContra:boolean=false
 editImg:boolean=false
+editProfile:boolean=false
 normal:'normal'
   constructor(private db: AngularFirestore, private fb: FormBuilder, private storage: AngularFireStorage, private msg: MsgService, private auth: AngularFireAuth, private activeRoute: ActivatedRoute) { }
 

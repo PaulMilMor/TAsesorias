@@ -3,6 +3,7 @@
     font-family: 'Marcellus SC', serif;
     box-shadow: 0 4px 2px -2px rgba(0,0,0,.25);
     border-radius: 0;
+    height: 59px;
 }
 
 *:before, *:after{
@@ -12,8 +13,10 @@
 .active{
     
     /*color:white;*/
+    
     background-color: #DD6031;
     font-weight: bold;
+    box-shadow: 0 4px 2px -2px rgba(255, 254, 254, 0.89);
 }
 
 .spacer {
