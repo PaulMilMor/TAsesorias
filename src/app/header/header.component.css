@@ -5,6 +5,10 @@
     border-radius: 0;
 }
 
+*:before, *:after{
+    content: normal !important;
+}
+
 .active{
     
     /*color:white;*/

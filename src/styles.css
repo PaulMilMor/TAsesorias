@@ -16,7 +16,8 @@ html, body {
   display: none;
 }
 
-html, body { height: 100%; }
+/*html, body { height: 100%; }*/
+
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .start {
@@ -25,4 +26,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin: 0 auto;
   font-size: 20px;
   text-align: justify;
+}
+
+html, body{
+  overflow: auto !important;
+  
 }

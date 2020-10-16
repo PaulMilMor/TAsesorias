@@ -28,16 +28,16 @@
             </mat-error>
          </mat-form-field>
          <mat-form-field class="full-width">
-            <mat-label>Email</mat-label>
-            <input type="email" matInput placeholder="Email" name="email" formControlName="correo">
+            <mat-label>Correo Electrónico</mat-label>
+            <input type="email" matInput placeholder="Ingrese su correo electrónico" name="email" formControlName="correo">
             <mat-error *ngIf="formUsuario.controls['correo'].invalid">
                <span *ngIf="formUsuario.controls['correo'].errors.required">El correo es obligatorio</span>
-               <span *ngIf="formUsuario.controls['correo'].errors.email">No es un correo Valido</span>
+               <span *ngIf="formUsuario.controls['correo'].errors.email">No es un correo válido</span>
             </mat-error>
          </mat-form-field>
          <mat-form-field class="full-width">
             <mat-label>Contraseña</mat-label>
-            <input type="password" matInput placeholder="Password" name="password" formControlName="contraseña">
+            <input type="password" matInput placeholder="Ingrese su contraseña" name="password" formControlName="contraseña">
             <mat-error *ngIf="formUsuario.controls['contraseña'].invalid">
                <span *ngIf="formUsuario.controls['contraseña'].errors.required">La contraseña es obligatoria</span>
                <span *ngIf="formUsuario.controls['contraseña'].errors.minlength">La contraseña debe tener al menos 8
