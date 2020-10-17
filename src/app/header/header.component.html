@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark  navbar-custom">
 
 
-    <a class="navbar-brand" href="#" style="margin-left: 7px;" style="margin-top: 21px;" style="font-size: 30px;" [routerLink]="['/horario']">TusAsesorias</a>
+    <a class="navbar-brand" href="#" style="margin-left: 7px;" style="margin-top: 21px;" style="font-size: 30px;">TusAsesorias</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -32,7 +32,8 @@
             <img [src]="usuario.img" alt="unplash" class="img-fluid rounded-circle" style="width: 41px; height: 41px; " ></a>
           
           <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-            <a class="dropdown-item waves-light" mdbWavesEffect [routerLinkActive]="['active']"  *ngIf="usuario.tipoUsuario==instructor" [routerLink]="['/editar', this.auth.auth.currentUser.uid]"  routerLinkActive="router-link-active"><i class="material-icons" style="font-family: 'Open Sans', sans-serif,;">person</i>Mi Perfil</a>
+            <a class="dropdown-item waves-light" mdbWavesEffect [routerLinkActive]="['active']"  *ngIf="usuario.tipoUsuario==instructor" [routerLink]="['/editar', this.auth.auth.currentUser.uid]"  routerLinkActive="router-link-active"><i class="material-icons">person</i>Mi Perfil</a>
+            <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/horario']" *ngIf="usuario.tipoUsuario==instructor"><i class="material-icons">event</i>Horario</a>
             <a class="dropdown-item waves-light" mdbWavesEffect (click)="cerrarSesion()"><i class="material-icons">exit_to_app</i>Cerrar Sesión</a>
           </div>
         </li>
