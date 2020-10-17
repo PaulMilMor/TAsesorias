@@ -10,8 +10,14 @@ mat-grid-tile {
     vertical-align: middle;
 }
 
-mat-list-item {
-    top:0;
+.active {
+    color: white;
+    background-color: #f44336;
+}
+
+.inactive {
+    color: #f44336;
+    background-color: white;
 }
 
 mat-list {

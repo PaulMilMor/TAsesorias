@@ -80,6 +80,7 @@ export class dialogStudent implements OnInit {
   cdomingo:Array<any>=new Array();
 
   asesorias:Array<any>=new Array();
+  toggle=true;
   constructor(
     public dialogRef: MatDialogRef<dialogStudent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore,private auth: AngularFireAuth) { }
@@ -87,6 +88,11 @@ export class dialogStudent implements OnInit {
     this.getHorario()
     
   }
+  
+  enableDisableRule() {
+    this.toggle = !this.toggle;
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
