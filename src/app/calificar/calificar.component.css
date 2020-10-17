@@ -14,7 +14,13 @@ main {
     padding-right: 40px;
     display: inline-block;
     border-radius: 10px;
+    outline:none;
+    border: 0;
   }
+  /*button.change {
+    outline: none;
+    
+  }*/
 
   button:hover {
     background-color:  #ffffff;
@@ -24,37 +30,11 @@ main {
     align-items: center;
     justify-content: center;
   }
-  .tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
+  button:active{
+    outline: none;
+    border: none;
   }
-  
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    top: 100%;
-    left: 50%;
-    margin-left: -60px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-    position: absolute;
-    z-index: 1;
+  button :focus{
+    outline-style: none; 
   }
-  
-  
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-    
-  }
-  [data-tooltip]:before {            
-    position : absolute;
-     content : attr(data-tooltip);
-     opacity : 0;
-}
-[data-tooltip]:hover:before {        
-  opacity : 1;
-}
+

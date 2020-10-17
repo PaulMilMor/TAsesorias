@@ -4,7 +4,8 @@
         <h1 align="center">¿Como ha sido tu experiencia en el curso?</h1>
         <br> <br>
         
-        <ngb-rating [(rate)]="currentRate" [max]=5 style="font-size: 3rem"></ngb-rating>
+            <ngb-rating [(rate)]="currentRate" [max]=5 style="font-size: 3rem ; outline:none"></ngb-rating>
+        
         <!--<p>Rate: {{currentRate}}</p>-->
         <div *ngIf="currentRate==1">Mala<br><br><h2>¿Por qué razones no te sientes satisfecho con el instructor? (Seleccionar max. tres).</h2> 
         </div>
@@ -21,68 +22,69 @@
         <!--<h3 align="center">Escoge un maximo de 3 adjetivos que ilustren de mejor forma la experiencia</h3>-->
         <br> <br>
         <div *ngIf="currentRate==1 || currentRate==2 || currentRate==3">
-        
-        <button><a class = "button" style="text-decoration: none;"
+      
+        <button style="outline:none"> <a class = "button" style="text-decoration: none;"
             target=”_blank”>Inasistencia </a></button>
-        <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+        <button  style="outline:none" ><a class = "button" style="text-decoration: none;" style="margin-left: 20px"
             target=”_blank”>Dificultades tecnicas</a></button>
-        <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+        <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
             target=”_blank”>No domina el tema</a></button>
-        <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+        <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
             target=”_blank”>No sabe enseñar</a></button>
-        <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+        <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
             target=”_blank”>Vocabulario incadecuado</a></button>
             <div><br>
-        <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+        <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
             target=”_blank”>Comportamiento inapropiado</a></button> 
-        <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+        <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
             target=”_blank”>Inquietud/Impaciencia</a></button>
-        <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+        <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
             target=”_blank”>Conteniedo falso</a></button>
-        <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+        <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
             target=”_blank”>Falta de expresión</a></button>
             </div>
         </div>
         <div *ngIf="currentRate==4">
-            <button><a class = "button" style="text-decoration: none;"
+            <button style="outline:none" ><a class = "button" style="text-decoration: none;"
                 target=”_blank”>Asisitencia </a></button>
-            <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+            <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
                 target=”_blank”>Calidad de video/audio</a></button>
-            <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+            <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
                 target=”_blank”>Dominio del contenido</a></button>
-            <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+            <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
                 target=”_blank”>Habilidad de la enseñanza</a></button>
-            <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+            <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
                 target=”_blank”>Empeño/Esfuerzo</a></button>
             <div><br>
-            <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+            <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
                 target=”_blank”>Índole de contenido</a></button>
-            <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+            <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
                 target=”_blank”>Expresión y Dicción</a></button>
             </div>
         </div>
         <div *ngIf="currentRate==5">
-            <button><a class = "button" style="text-decoration: none;"
+            <button style="outline:none" ><a class = "button" style="text-decoration: none;"
                 target=”_blank”>Asisitencia </a></button>
-            <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+            <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
                 target=”_blank”>Calidad de video/audio</a></button>
-            <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+            <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
                 target=”_blank”>Dominio del contenido</a></button>
-            <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+            <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
                 target=”_blank”>Habilidad de la enseñanza</a></button>
-            <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+            <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
                 target=”_blank”>Perseverancia</a></button>
                 <div><br>
-            <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+            <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
                 target=”_blank”>Tenacidad</a></button>
-            <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+            <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
                 target=”_blank”>Calidad de contenido</a></button>
-            <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+            <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
                 target=”_blank”>Expresión y Dicción</a></button>
-            <button><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
+            <button style="outline:none" ><a class = "button" style="text-decoration: none;"style="margin-left: 20px"
                 target=”_blank”>Conocimiento adquirido</a></button>
             </div>
         </div>
+   
     </div>
 
     
