@@ -40,13 +40,13 @@ AuthRegister(provider,tipoU){
   
   .then((result) => {
     this.formUsuario.value.tipoUsuario=tipoU
-    this.formUsuario.value.id=result.user.uid;
+    this.formUsuario.value.uid=result.user.uid;
     this.formUsuario.value.nombre=result.user.displayName;
     this.formUsuario.value.img=result.user.photoURL;
     this.formUsuario.value.correo=result.user.email;
     
     console.log(this.usuario)
-    this.db.collection('usuarios').add(this.formUsuario.value).then((finish) => {
+    this.db.collection('usuarios').doc(this.formUsuario.value.uid).set(this.formUsuario.value).then((finish) => {
 
     }).catch(() => {
       this.msg.msgError('Error', 'Algo fallo :(')
