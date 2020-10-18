@@ -321,6 +321,7 @@ export class dialogStudent implements OnInit {
           var date=new Date();
           var d = new Date().getDay();
           date.setDate(date.getDate()+(dia-d));
+          //date getdate y getmonth
           const listindex = this.asesorias.indexOf({fecha:date,hora:hora});
           console.log('index' + listindex);
           if(listindex !==-1 ){
@@ -332,6 +333,7 @@ export class dialogStudent implements OnInit {
     }
     for(let item of this.asesorias){
       console.log('item' + item.fecha + item.hora);
+      //for y q se detenga cuando sean iguales
       console.log(this.asesorias.indexOf({fecha:item.fecha,hora:item.hora}));
     }
   }
