@@ -147,6 +147,7 @@ export class dialogStudent implements OnInit {
     public dialogRef: MatDialogRef<dialogStudent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore,private auth: AngularFireAuth, private msg:MsgService, private router:Router) { }
   ngOnInit(): void {
+    const sesionesInicial=this.data.sesiones
     const precio=parseInt(this.data.curso.tarifa)*parseInt(this.data.sesiones)
     this.getHorario()
     this.setToggle();
@@ -154,7 +155,7 @@ export class dialogStudent implements OnInit {
       createOrder:(data, actions)=>{
         return actions.order.create({
           purchase_units:[{
-            description: this.data.sesiones+"Sesiones de"+this.data.curso.categoria+" Por "+this.data.curso.user.nombre,
+            description: sesionesInicial+" Sesiones de"+this.data.curso.categoria.nombre+" Por "+this.data.curso.user.nombre,
             amount   :{
               currency_code:'MXN',
               value:precio
