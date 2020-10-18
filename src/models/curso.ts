@@ -5,4 +5,5 @@ export class Curso{
    tarifa:number;
    user:Usuario
    id:string
+   evaluaciones:any
 }
