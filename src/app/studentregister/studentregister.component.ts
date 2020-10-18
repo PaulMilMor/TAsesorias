@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Curso } from 'src/models/curso';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { MsgService } from 'src/services/msg.service';
 import { forEachLeadingCommentRange } from 'typescript';
-
+declare var paypal;
 @Component({
   selector: 'app-studentregister',
   templateUrl: './studentregister.component.html',
@@ -140,12 +140,36 @@ export class dialogStudent implements OnInit {
   tsabado:Array<any>= new Array();
   tdomingo:Array<any>= new Array();
   toggle=true;
+ 
+  @ViewChild('paypal',{static:true}) paypalElement:ElementRef
+
   constructor(
     public dialogRef: MatDialogRef<dialogStudent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore,private auth: AngularFireAuth, private msg:MsgService, private router:Router) { }
   ngOnInit(): void {
+    const precio=parseInt(this.data.curso.tarifa)*parseInt(this.data.sesiones)
     this.getHorario()
     this.setToggle();
+    paypal.Buttons({
+      createOrder:(data, actions)=>{
+        return actions.order.create({
+          purchase_units:[{
+            description: this.data.sesiones+"Sesiones de"+this.data.curso.categoria+" Por "+this.data.curso.user.nombre,
+            amount   :{
+              currency_code:'MXN',
+              value:precio
+            }
+          }]
+        })
+      },onApprove:async (data,actions) => {
+          const order =await actions.order.capture()
+          console.log(order)
+          this.save()
+      }, 
+      onError:err=>{
+        this.msg.msgError('Error','Error al realizar el pago')
+      }
+    }).render(this.paypalElement.nativeElement);
   }
   
   enableDisableRule(dia,index) {
@@ -392,7 +416,7 @@ export class dialogStudent implements OnInit {
     var d = new Date().getDay();
     if (this.data.sesiones > 0) {
 
-      if (d < dia) {
+      if (d <= dia) {
         fecha.setDate(fecha.getDate() + (dia - d))
 
         this.asesorias.push({
@@ -417,7 +441,7 @@ if (this.data.sesiones==0){
    }).finally(()=>{
      console.log("Guardado exitoso");
      this.msg.msgSuccess('Registrado', 'Asesorías registradas exitosamente');
-     
+     this.router.navigate(['/'])
    }).catch((err)=>{
      console.log(err);
      this.msg.msgError('Error',err);
