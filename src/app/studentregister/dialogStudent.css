@@ -9,3 +9,18 @@ mat-grid-tile {
     overflow: hidden;
     vertical-align: middle;
 }
+
+.active {
+    color: white;
+    background-color: #f44336;
+}
+
+.inactive {
+    color: #f44336;
+    background-color: white;
+}
+
+mat-list {
+    position: absolute;
+    top:0;
+}
