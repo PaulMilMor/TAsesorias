@@ -1,10 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark  navbar-custom">
 
 
-    <a class="navbar-brand" href="#" style="margin-left: 7px;" style="margin-top: 21px;" style="font-size: 30px;" [routerLink]="['/horario']">TusAsesorias</a>
+    <a class="navbar-brand" href="#" style="margin-left: 7px;" style="margin-top: 21px;" style="font-size: 30px;">TusAsesorias</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap" rel="stylesheet">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
@@ -20,17 +21,30 @@
           <a [routerLinkActive]="['active']" class="nav-link" [routerLink]="['/buscador']" routerLinkActive="router-link-active" style="font-size: 17px;">Buscar</a>
         </li>
         <li class="nav-item">
-          <a [routerLinkActive]="['active']" class="nav-link"   *ngIf="usuario.tipoUsuario==instructor" [routerLink]="['/editar', this.auth.auth.currentUser.uid]"  routerLinkActive="router-link-active" >{{usuario.nombre}}</a>
-        </li>
-        <li class="nav-item">
           <a [routerLinkActive]="['active']" class="nav-link"   [routerLink]="['/calificar']" routerLinkActive="router-link-active" style="font-size: 17px;">Calificar</a>
         </li>
       </ul>
+      <ul class="navbar-nav ml-auto nav-flex-icons">
+  
+        <li class="nav-item avatar dropdown" dropdown>
+          <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+            
+            <img [src]="usuario.img" alt="unplash" class="img-fluid rounded-circle" style="width: 41px; height: 41px; " ></a>
+          
+          <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item waves-light" mdbWavesEffect [routerLinkActive]="['active']"  *ngIf="usuario.tipoUsuario==instructor" [routerLink]="['/editar', this.auth.auth.currentUser.uid]"  routerLinkActive="router-link-active"><i class="material-icons">person</i>Mi Perfil</a>
+            <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/horario']" *ngIf="usuario.tipoUsuario==instructor"><i class="material-icons">event</i>Horario</a>
+            <a class="dropdown-item waves-light" mdbWavesEffect (click)="cerrarSesion()"><i class="material-icons">exit_to_app</i>Cerrar Sesión</a>
+          </div>
+        </li>
+      </ul>
+      <!--
     <ul class="navbar-nav ml-auto">
       <span class="spacer"></span>
       <li class="nav-item">
         <button mat-flat-button style="float: right;" (click)="cerrarSesion()">Cerrar Sesion</button>
       </li>
     </ul>
+    -->
   </div>
 </nav> 
