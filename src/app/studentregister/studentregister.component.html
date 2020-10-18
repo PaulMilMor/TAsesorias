@@ -8,7 +8,7 @@
         <form action="" [formGroup]="formSesiones">
           <mat-form-field appearance="fill" class="button">
             <mat-label>Cantidad de sesiones</mat-label>
-            <input   matInput type="number" min="0"  oninput="validity.valid||(value='0');" formControlName="sesiones" >
+            <input   matInput type="number" min="1" max="5" oninput="validity.valid||(value='1');" formControlName="sesiones" >
           </mat-form-field>
           <br>
           <button mat-flat-button color="accent" (click)="openDialog()" class="button">Seleccionar Sesiones</button>
