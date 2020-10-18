@@ -9,6 +9,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { MsgService } from 'src/services/msg.service';
+import { forEachLeadingCommentRange } from 'typescript';
+
 @Component({
   selector: 'app-studentregister',
   templateUrl: './studentregister.component.html',
@@ -48,7 +51,30 @@ export class StudentregisterComponent implements OnInit {
     })
   }
 
- 
+ /* getSesionesDisponibles() {
+    let sum = 0;
+    console.log("entro al método");
+    this.db.collection('horario').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        let h = item.data();
+        
+        h.id = item.id
+        if (h.id == this.data.curso.user.uid) {
+
+         sum=sum+h.lunes.length;
+         sum=sum+h.martes.length;
+         sum=sum+h.miercoles.length;
+         sum=sum+h.jueves.length;
+         sum=sum+h.viernes.length;
+         sum=sum+h.sabado.length;
+         sum=sum+h.domingo.length;
+      
+        }
+      })
+    })
+    console.log('sum' + sum);
+    return sum;
+  }*/
  
   openDialog(): void {
 
@@ -80,17 +106,234 @@ export class dialogStudent implements OnInit {
   cdomingo:Array<any>=new Array();
 
   asesorias:Array<any>=new Array();
+
+  tlunes:Array<any>= new Array();
+  tmartes:Array<any>= new Array();
+  tmiercoles:Array<any>= new Array();
+  tjueves:Array<any>= new Array();
+  tviernes:Array<any>= new Array();
+  tsabado:Array<any>= new Array();
+  tdomingo:Array<any>= new Array();
   toggle=true;
   constructor(
     public dialogRef: MatDialogRef<dialogStudent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore,private auth: AngularFireAuth) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore,private auth: AngularFireAuth, private msg:MsgService) { }
   ngOnInit(): void {
     this.getHorario()
-    
+    this.setToggle();
   }
   
-  enableDisableRule() {
-    this.toggle = !this.toggle;
+  enableDisableRule(dia,index) {
+    //this.toggle = !this.toggle;
+    switch(dia){
+      case 'lunes': {
+        this.tlunes[index] = !this.tlunes[index]; 
+        break;
+      }
+      case 'martes': {
+        this.tmartes[index] = !this.tmartes[index]; 
+        break;
+      }
+      case 'miercoles':{
+        this.tmiercoles[index] = !this.tmiercoles[index]; 
+        break;
+      }
+      case 'jueves':{
+        this.tjueves[index] = !this.tjueves[index];
+        break;
+      }
+      case 'viernes':{
+        this.tviernes[index] = !this.tviernes[index];
+        break;
+      }
+      case 'sabado':{
+        this.tsabado[index] = !this.tsabado[index];
+        break;
+      }
+      case 'domingo':{
+        this.tdomingo[index] = !this.tdomingo[index];
+        break;
+      }
+      
+   }
+    
+  }
+
+  setToggle(){
+    for(let item of this.clunes){
+      this.tlunes.push(true);
+    }
+    for(let item of this.cmartes){
+      this.tmartes.push(true);
+    }
+    for(let item of this.cmiercoles){
+      this.tmiercoles.push(true);
+    }
+    for(let item of this.cjueves){
+      this.tjueves.push(true);
+    }
+    for(let item of this.cviernes){
+      this.tviernes.push(true);
+    }
+    for(let item of this.csabado){
+      this.tsabado.push(true);
+    }
+    for(let item of this.cdomingo){
+      this.tdomingo.push(true);
+    }
+  }
+
+  horaClick(hora,dia,nombre,index){
+    switch(nombre){
+      case 'lunes':{
+        if(!this.tlunes[index]){
+          if(this.data.sesiones<=0){
+            this.msg.msgError('Error','Ya te has inscrito a todas tus sesiones seleccionadas');
+          }
+          else{
+            this.prueba(hora,dia);
+            this.enableDisableRule(nombre,index);
+          }
+        }
+        else{
+          this.data.sesiones++;
+          this.enableDisableRule(nombre,index);
+          const listindex = this.asesorias.indexOf({dia,hora});
+          if(listindex !==-1 ){
+            this.asesorias.splice(listindex,1);
+          }
+        }
+        break;
+      }
+      case 'martes':{
+        if(!this.tmartes[index]){
+          if(this.data.sesiones<=0){
+            this.msg.msgError('Error','Ya te has inscrito a todas tus sesiones seleccionadas');
+          }
+          else{
+            this.prueba(hora,dia);
+            this.enableDisableRule(nombre,index);
+          }
+        }
+        else{
+          this.data.sesiones++;
+          this.enableDisableRule(nombre,index);
+          const listindex = this.asesorias.indexOf({dia,hora});
+          if(listindex !==-1 ){
+            this.asesorias.splice(listindex,1);
+          }
+        }
+        break;
+      }
+      case 'miercoles':{
+        if(!this.tmiercoles[index]){
+          if(this.data.sesiones<=0){
+            this.msg.msgError('Error','Ya te has inscrito a todas tus sesiones seleccionadas');
+          }
+          else{
+            this.prueba(hora,dia);
+            this.enableDisableRule(nombre,index);
+          }
+        }
+        else{
+          this.data.sesiones++;
+          this.enableDisableRule(nombre,index);
+          const listindex = this.asesorias.indexOf({dia,hora});
+          if(listindex !==-1 ){
+            this.asesorias.splice(listindex,1);
+          }
+        }
+        break;
+      }
+      case 'jueves':{
+        if(!this.tjueves[index]){
+          if(this.data.sesiones<=0){
+            this.msg.msgError('Error','Ya te has inscrito a todas tus sesiones seleccionadas');
+          }
+          else{
+            this.prueba(hora,dia);
+            this.enableDisableRule(nombre,index);
+          }
+        }
+        else{
+          this.data.sesiones++;
+          this.enableDisableRule(nombre,index);
+          const listindex = this.asesorias.indexOf({dia,hora});
+          if(listindex !==-1 ){
+            this.asesorias.splice(listindex,1);
+          }
+        }
+        break;
+      }
+      case 'viernes':{
+        if(!this.tviernes[index]){
+          if(this.data.sesiones<=0){
+            this.msg.msgError('Error','Ya te has inscrito a todas tus sesiones seleccionadas');
+          }
+          else{
+            this.prueba(hora,dia);
+            this.enableDisableRule(nombre,index);
+          }
+        }
+        else{
+          this.data.sesiones++;
+          this.enableDisableRule(nombre,index);
+          const listindex = this.asesorias.indexOf({dia,hora});
+          if(listindex !==-1 ){
+            this.asesorias.splice(listindex,1);
+          }
+        }
+        break;
+      }
+      case 'sabado':{
+        if(!this.tsabado[index]){
+          if(this.data.sesiones<=0){
+            this.msg.msgError('Error','Ya te has inscrito a todas tus sesiones seleccionadas');
+          }
+          else{
+            this.prueba(hora,dia);
+            this.enableDisableRule(nombre,index);
+          }
+        }
+        else{
+          this.data.sesiones++;
+          this.enableDisableRule(nombre,index);
+          const listindex = this.asesorias.indexOf({dia,hora});
+          if(listindex !==-1 ){
+            this.asesorias.splice(listindex,1);
+          }
+        }
+        break;
+      }
+      case 'domingo':{
+        if(!this.tdomingo[index]){
+          if(this.data.sesiones<=0){
+            this.msg.msgError('Error','Ya te has inscrito a todas tus sesiones seleccionadas');
+          }
+          else{
+            this.prueba(hora,dia);
+            this.enableDisableRule(nombre,index);
+          }
+        }
+        else{
+          this.data.sesiones++;
+          this.enableDisableRule(nombre,index);
+          var date=new Date();
+          var d = new Date().getDay();
+          date.setDate(date.getDate()+(dia-d));
+          const listindex = this.asesorias.indexOf({fecha:date,hora:hora});
+          console.log('index' + listindex);
+          if(listindex !==-1 ){
+            this.asesorias.splice(listindex,1);
+          }
+        }
+        break;
+      }
+    }
+    for(let item of this.asesorias){
+      console.log('item' + item.fecha + item.hora);
+      console.log(this.asesorias.indexOf({fecha:item.fecha,hora:item.hora}));
+    }
   }
 
   onNoClick(): void {
@@ -148,15 +391,17 @@ if (this.data.sesiones==0){
      dias:this.asesorias
    }).finally(()=>{
      console.log("Guardado exitoso");
+     this.msg.msgSuccess('Registrado', 'Asesorías registradas exitosamente');
      
    }).catch((err)=>{
      console.log(err);
+     this.msg.msgError('Error',err);
      
    })
   
 }else{
   //Aqui se puede poner una alerta 
-  console.log("No se a selecionado todas las clases")
+  console.log("No se han selecionado todas las clases")
  
 }
     
