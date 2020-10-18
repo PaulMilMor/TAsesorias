@@ -15,8 +15,8 @@ ZoomMtg.prepareJssdk();
   styleUrls: ['./zoom.component.css']
 })
 export class ZoomComponent implements OnInit {
-  idMaestro=''
-  idAsesoria=''
+  idMaestro = ''
+  idAsesoria = ''
   usuario: Usuario
   isVisible_I: boolean = false;
   isVisible_A: boolean = false
@@ -38,9 +38,9 @@ export class ZoomComponent implements OnInit {
   ngOnInit() {
     this.getUsuario()
     this.getAsesoriasI();
-     this.getAsesoriasA();
-    console.log("id Maestro"+this.idMaestro);
-    console.log("id Asesoria"+this.idAsesoria)
+    this.getAsesoriasA();
+    console.log("id Maestro" + this.idMaestro);
+    console.log("id Asesoria" + this.idAsesoria)
     this.formDatos = this.fb.group({
       numero: ['', Validators.compose([Validators.minLength(11), Validators.required])],
       contraseña: ['', Validators.compose([Validators.minLength(6), Validators.required])]
@@ -58,7 +58,7 @@ export class ZoomComponent implements OnInit {
       apiSecret: this.apiSecret,
       role: this.role,
       success: (res) => {
-     
+
         console.log(this.signature)
 
       }
@@ -83,21 +83,21 @@ export class ZoomComponent implements OnInit {
           apiKey: this.apiKey,
           userEmail: this.userEmail,
           passWord: this.passWord,
-          leaveUrl:"http://localhost:4200/calificar/"+this.idMaestro+"/"+this.idAsesoria,
+          leaveUrl: "http://localhost:4200/calificar/" + this.idMaestro + "/" + this.idAsesoria,
           success: (success) => {
-            
-        
+
+
             console.log(success)
           },
           error: (error) => {
-         
+
             console.log(error)
           }
         })
 
       },
       error: (error) => {
-    
+
         console.log(error)
       }
     })
@@ -126,8 +126,8 @@ export class ZoomComponent implements OnInit {
 
         var uid = this.auth.auth.currentUser.uid;
         var Auid = item.id.split('@', 1)
-         this.idAsesoria= item.id
- console.log("id asesoria"+ item.id)
+        this.idAsesoria = item.id
+        console.log("id asesoria" + item.id)
         if (uid == Auid.toString()) {
 
           item.data().dias.forEach(element => {
@@ -162,9 +162,9 @@ export class ZoomComponent implements OnInit {
           res2.docs.forEach((item2) => {
 
             if (item2.id == cid[1]) {
-           
+
               Uid = item2.data().user.uid;
-              this.idMaestro=Uid
+              this.idMaestro = Uid
               if (uid == Uid) {
                 console.log("Entra aqui")
                 item.data().dias.forEach(element => {
@@ -191,8 +191,8 @@ export class ZoomComponent implements OnInit {
     })
 
   }
-getIDMaestro():string{
-return 'c'
-}
+  getIDMaestro(): string {
+    return 'c'
+  }
 
 }
