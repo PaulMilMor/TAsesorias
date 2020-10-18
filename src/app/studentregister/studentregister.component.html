@@ -25,7 +25,7 @@
         <h5>{{curso.user.nombre}} </h5>
         <!-- <h5 >{{curso.categoria.nombre}} </h5> -->
         <h5>{{curso.tarifa | currency}} </h5>
-        <ngb-rating [(rate)]="currentRate" [readonly]="true" [max]=5 style="font-size: 3rem"></ngb-rating>
+        <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5 style="font-size: 3rem"></ngb-rating>
         <h4>Logros</h4>
         <!-- <button mat-raised-button color="primary" class="button select" (click)="pagar()">Siguiente</button> -->
       </div>

@@ -45,6 +45,28 @@ export class StudentregisterComponent implements OnInit {
         if (c.id == id) {
           this.curso = c;
           console.log("si lo es")
+          this.db.collection('evaluaciones').get().subscribe((res2)=>{
+            var e=new Array<any>();
+            var E:any=0
+            res2.docs.forEach((item2)=>{
+            
+               if(item2.id.split('@')[1]==c.id){
+                 e.push(item2.data().calificacion)
+               
+                 E=E+item2.data().calificacion
+                 //c.evaluaciones.push(item2.data().calificacion)
+                
+                 
+               }
+            })
+            console.log("AFAF "+E);
+            console.log("DAFAf" + e.length);
+            
+            
+            c.evaluaciones=E/e.length;
+            this.curso=c;
+         
+          })
         }
 
       })
