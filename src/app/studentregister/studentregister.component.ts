@@ -579,19 +579,19 @@ export class dialogStudent implements OnInit {
 
   }
 
-  getWeek(){
+  getWeek() {
     let today = new Date();
     let todayDate = today.getDate();
     let todayMonth = today.getMonth();
     let todayYear = today.getFullYear();
     let weekend = new Date();
-    weekend.setDate(todayDate+6);
+    weekend.setDate(todayDate + 6);
     let weekendDate = weekend.getDate();
     let weekendMonth = weekend.getMonth();
     let weekendYear = weekend.getFullYear();
 
-    return ("Semana del " + todayDate + "/" + (todayMonth+1) + "/" + todayYear + " al " +
-                            weekendDate + "/" + (weekendMonth+1) + "/" + weekendYear);
+    return ("Semana del " + todayDate + "/" + (todayMonth + 1) + "/" + todayYear + " al " +
+      weekendDate + "/" + (weekendMonth + 1) + "/" + weekendYear);
   }
 
 
