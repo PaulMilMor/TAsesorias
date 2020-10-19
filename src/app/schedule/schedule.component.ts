@@ -57,7 +57,7 @@ export class ScheduleComponent implements OnInit {
 
   dataSource = Default
 
-  constructor(private db: AngularFirestore, private auth: AngularFireAuth) { }
+  constructor(private db: AngularFirestore, private msg: MsgService, private auth: AngularFireAuth) { }
 
   ngOnInit(): void {
     Default = this.getData()
@@ -133,17 +133,20 @@ export class ScheduleComponent implements OnInit {
     this.db.collection('horario').doc(u.uid).set({
 
       lunes: this.clunes,
-      martes:this.cmartes,
-      miercoles:this.cmiercoles,
-      jueves:this.cjueves,
-      viernes:this.cviernes,
-      sabado:this.csabado,
-      domingo:this.cdomingo
+      martes: this.cmartes,
+      miercoles: this.cmiercoles,
+      jueves: this.cjueves,
+      viernes: this.cviernes,
+      sabado: this.csabado,
+      domingo: this.cdomingo
     }).then(() => {
       //horario:this.dataSource
+      this.msg.msgSuccess('Registrado', 'Horario registrado exitosamente');
+
 
     }).catch((error) => {
       console.log(error)
+      this.msg.msgError('Error', error);
     })
   }
   getData(): Array<any> {
