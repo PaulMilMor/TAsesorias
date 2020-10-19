@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   
   formLogin:FormGroup
 
-  constructor(private fb:FormBuilder,public auth: AngularFireAuth, private msg:MsgService, public authService: AuthService) { }
+  constructor(private fb:FormBuilder,public auth: AngularFireAuth, private msg:MsgService, public authService: AuthService, private router:Router) { }
 
   ngOnInit(): void {
         this.formLogin=this.fb.group({
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
    ingresar(){
       this.auth.auth.signInWithEmailAndPassword(this.formLogin.value.correo, this.formLogin.value.contraseña).then((usuario)=>{
             this.msg.msgSuccess('Exito','Bienvenido de nuevo')
-
+        
       }).catch((error)=>{
          switch(error.code){
             case 'auth/user-not-found': {

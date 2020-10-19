@@ -11,6 +11,11 @@
             <input matInput type="number" min="1" max="5" oninput="validity.valid||(value='1');"
               formControlName="sesiones">
           </mat-form-field>
+          
+  <!-- <mat-form-field class="example-full-width">
+    <mat-label>Comentarios</mat-label>
+    <textarea matInput placeholder=""></textarea>
+  </mat-form-field> -->
           <br>
           <button mat-flat-button color="accent" (click)="openDialog()" class="button">Seleccionar Sesiones</button>
         </form>

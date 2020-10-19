@@ -167,6 +167,7 @@ export class dialogStudent implements OnInit {
         const order = await actions.order.capture()
         console.log(order)
         this.save()
+        this.router.navigate(['/'])
       },
       onError: err => {
         this.msg.msgError('Error', 'Error al realizar el pago')

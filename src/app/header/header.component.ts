@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   alumno = 'alumno'
   isValid: boolean = false
   isCollapsed: boolean = false;
-  constructor(private auth: AngularFireAuth, private db: AngularFirestore, private authService: AuthService, private msg: MsgService, public dialog: MatDialog) { }
+  constructor(private auth: AngularFireAuth, private db: AngularFirestore, private authService: AuthService, private msg: MsgService, public dialog: MatDialog, private router:Router) { }
   openDialog(): void {
     const dialogRef = this.dialog.open(register, {
       width: '250px',
@@ -42,6 +42,8 @@ export class HeaderComponent implements OnInit {
 
   }
   cerrarSesion() {
+
+
     this.auth.auth.signOut();
   }
   getUsuario() {
@@ -121,7 +123,8 @@ export class register {
     this.db.collection('usuarios').add(this.formUsuarioNuevo.value).then((finish) => {
       this.msg.msgSuccess('Guardado', 'Elemento Guardado correctamente')
       this.dialogRef.close()
-      this.router.navigate(['/zoom']);
+      this.router.navigate(['/'])
+
     }).catch(() => {
       this.msg.msgError('Error', 'Algo fallo :(')
     })
