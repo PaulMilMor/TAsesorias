@@ -13,7 +13,7 @@
     
         <form action="">
             <div class="form-group">
-                <input   [(ngModel)]="filter" name="filter" class="form-control" type="text" placeholder="Busque un maestro" >
+                <input   [(ngModel)]="filter" name="filter" class="form-control" type="text" placeholder="Busque un maestro" style="width: 400px;">
             </div>
         </form>
         
@@ -23,7 +23,7 @@
                     <img class="card-img-top imgMaestro" [src]="curso.user.img">
                     <div class="card-body">
                       
-                        <h5 class="card-title">{{curso.user.nombre}} </h5>
+                        <h5 class="card-title" style="font-size: 21px;">{{curso.user.nombre}} </h5>
                         <h5 class="card-title">{{curso.categoria.nombre}} </h5>
                         <h5 class="card-title">{{curso.tarifa}} </h5>
                         <button class="btn btn-primary"  [routerLink]="['/agendar', curso.id ]" >
@@ -43,7 +43,7 @@
 
 <form action="">
     <div class="form-group">
-        <input   [(ngModel)]="filter" name="filter" class="form-control" type="text" placeholder="Busque una categoria" >
+        <input   [(ngModel)]="filter" name="filter" class="form-control" type="text" placeholder="Busque una categoria" style="width: 400px;">
     </div>
 </form>
 
@@ -53,7 +53,7 @@
             <img class="card-img-top imgMaestro" [src]="curso.user.img">
             <div class="card-body">
               
-                <h5 class="card-title">{{curso.user.nombre}} </h5>
+                <h5 class="card-title" style="font-size: 21px;">{{curso.user.nombre}} </h5>
                 <h5 class="card-title">{{curso.categoria.nombre}} </h5>
                 <h5 class="card-title">{{curso.tarifa}} </h5>
                 <button class="btn btn-primary" [routerLink]="['/agendar', curso.id ]" >
