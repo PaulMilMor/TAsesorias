@@ -31,64 +31,64 @@
         <br> <br>
         <div *ngIf="currentRate==1 || currentRate==2 || currentRate==3">
 
-            <button style="outline:none"> <a class="button" style="text-decoration: none;" target=”_blank”>Inasistencia
+            <button (click)="saveAdjetivo('Inasistencia')" style="outline:none"> <a class="button" style="text-decoration: none;" target=”_blank”>Inasistencia
                 </a></button>
-            <button style="outline:none ; margin-left: 20px"><a class="button" style="text-decoration: none;"
+            <button (click)="saveAdjetivo('Dificultades técnicas')" style="outline:none ; margin-left: 20px"><a class="button" style="text-decoration: none;"
                     target=”_blank”>Dificultades técnicas</a></button>
-            <button style="outline:none ; margin-left: 20px"><a class="button" style="text-decoration: none;"
+            <button  (click)="saveAdjetivo('No domina el tema')" style="outline:none ; margin-left: 20px"><a class="button" style="text-decoration: none;"
                     target=”_blank”>No domina el tema</a></button>
-            <button style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
+            <button  (click)="saveAdjetivo('No sabe enseñar')" style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
                     target=”_blank”>No sabe enseñar</a></button>
-            <button style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
+            <button (click)="saveAdjetivo('Vocabulario incadecuado')"  style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
                     target=”_blank”>Vocabulario incadecuado</a></button>
             <div><br>
-                <button style="outline:none ; margin-left: 20px"><a class="button" style="text-decoration: none;"
+                <button  (click)="saveAdjetivo('Comportamiento inapropiado')" style="outline:none ; margin-left: 20px"><a class="button" style="text-decoration: none;"
                         target=”_blank”>Comportamiento inapropiado</a></button>
-                <button style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
+                <button  (click)="saveAdjetivo('Inquietud/Impaciencia')" style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
                         target=”_blank”>Inquietud/Impaciencia</a></button>
-                <button style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
+                <button  (click)="saveAdjetivo('Contenido falso')" style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
                         target=”_blank”>Contenido falso</a></button>
-                <button style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
+                <button (click)="saveAdjetivo('Falta de expresión')" style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
                         target=”_blank”>Falta de expresión</a></button>
             </div>
         </div>
         <div *ngIf="currentRate==4">
-            <button style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
+            <button (click)="saveAdjetivo('Asistencia')" style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
                     target=”_blank”>Asistencia </a></button>
-            <button style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
+            <button  (click)="saveAdjetivo('Calidad de video/audio')" style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
                     target=”_blank”>Calidad de video/audio</a></button>
-            <button style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
+            <button (click)="saveAdjetivo('Dominio del contenido')" style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
                     target=”_blank”>Dominio del contenido</a></button>
-            <button style="outline:none ;margin-left: 20px"><a class="button" style="text-decoration: none;"
+            <button  (click)="saveAdjetivo('Habilidad de la enseñanza')" style="outline:none ;margin-left: 20px"><a class="button" style="text-decoration: none;"
                     target=”_blank”>Habilidad de la enseñanza</a></button>
             <div><br>
-                <button style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
+                <button (click)="saveAdjetivo('Empeño/Esfuerzo')"  style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
                         target=”_blank”>Empeño/Esfuerzo</a></button>
-                <button style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
+                <button (click)="saveAdjetivo('Índole de contenido')" style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
                         target=”_blank”>Índole de contenido</a></button>
-                <button style="outline:none ;margin-left: 20px"><a class="button" style="text-decoration: none;"
+                <button  (click)="saveAdjetivo('Expresión y Dicción')" style="outline:none ;margin-left: 20px"><a class="button" style="text-decoration: none;"
                         target=”_blank”>Expresión y Dicción</a></button>
             </div>
         </div>
         <div *ngIf="currentRate==5">
-            <button style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
+            <button (click)="saveAdjetivo('Asistencia')" style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
                     target=”_blank”>Asistencia </a></button>
-            <button style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
+            <button  (click)="saveAdjetivo('Calidad de video/audio')" style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
                     target=”_blank”>Calidad de video/audio</a></button>
-            <button style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
+            <button (click)="saveAdjetivo('Dominio del contenido')" style="outline:none; margin-left: 20px"><a class="button" style="text-decoration: none;"
                     target=”_blank”>Dominio del contenido</a></button>
-            <button style="outline:none;margin-left: 20px"><a class="button" style="text-decoration: none;"
+            <button (click)="saveAdjetivo('Habilidad de la enseñanza')" style="outline:none;margin-left: 20px"><a class="button" style="text-decoration: none;"
                     target=”_blank”>Habilidad de la enseñanza</a></button>
-            <button style="outline:none;margin-left: 20px"><a class="button" style="text-decoration: none;"
+            <button (click)="saveAdjetivo('Perseverancia')" style="outline:none;margin-left: 20px"><a class="button" style="text-decoration: none;"
                     target=”_blank”>Perseverancia</a></button>
             <div><br>
-                <button style="outline:none;margin-left: 20px"><a class="button" style="text-decoration: none;"
+                <button (click)="saveAdjetivo('Tenacidad')" style="outline:none;margin-left: 20px"><a class="button" style="text-decoration: none;"
                         target=”_blank”>Tenacidad</a></button>
-                <button style="outline:none;margin-left: 20px"><a class="button" style="text-decoration: none;"
+                <button  (click)="saveAdjetivo('Calidad de contenido')" style="outline:none;margin-left: 20px"><a class="button" style="text-decoration: none;"
                         target=”_blank”>Calidad de contenido</a></button>
-                <button style="outline:none;margin-left: 20px"><a class="button" style="text-decoration: none;"
+                <button (click)="saveAdjetivo('Expresión y Dicción')" style="outline:none;margin-left: 20px"><a class="button" style="text-decoration: none;"
                         target=”_blank”>Expresión y Dicción</a></button>
-                <button style="outline:none;margin-left: 20px"><a class="button" style="text-decoration: none;"
+                <button (click)="saveAdjetivo('Conocimiento adquirido')" style="outline:none;margin-left: 20px"><a class="button" style="text-decoration: none;"
                         target=”_blank”>Conocimiento adquirido</a></button>
             </div>
         </div>
