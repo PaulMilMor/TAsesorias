@@ -54,6 +54,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatChipsModule} from '@angular/material/chips';
 import { CalificarComponent } from './calificar/calificar.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +73,8 @@ import { CalificarComponent } from './calificar/calificar.component';
  BcategoriaPipe,
  StudentregisterComponent,
  dialogStudent,
- CalificarComponent
+ CalificarComponent,
+ 
   ],
   imports: [
      BrowserModule,
