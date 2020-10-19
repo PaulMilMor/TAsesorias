@@ -419,7 +419,9 @@ export class dialogStudent implements OnInit {
 
       if (d <= dia) {
         fecha.setDate(fecha.getDate() + (dia - d))
-
+        console.log(d)
+        console.log(dia)
+          console.log(fecha)
         this.asesorias.push({
           fecha: fecha,
           hora: hour
@@ -436,7 +438,7 @@ if (this.data.sesiones==0){
   var user=this.auth.auth.currentUser;
   console.log(this.asesorias)
   //para identificar la asesoria se le suma el id del usuario con la id  del curso
-   this.db.collection('asesorias').doc(user.uid+this.data.curso.id).set({
+   this.db.collection('asesorias').doc(user.uid+'@'+this.data.curso.id).set({
 
      dias:this.asesorias
    }).finally(()=>{

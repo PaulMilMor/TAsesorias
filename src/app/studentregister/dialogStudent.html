@@ -110,7 +110,7 @@
         <mat-list-item *ngFor="let item of cdomingo;let i=index">
           <button 
             mat-stroked-button color="warn" 
-            (click)="horaClick(item,7,'domingo',i)"
+            (click)="horaClick(item,0,'domingo',i)"
             [ngClass]="{'active' : this.tdomingo[i], 'inactive' : !this.tdomingo[i]}"
             >
             {{item}}
