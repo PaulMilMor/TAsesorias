@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Curso } from 'src/models/curso';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { MsgService } from 'src/services/msg.service';
 import { forEachLeadingCommentRange } from 'typescript';
-
+declare var paypal;
 @Component({
   selector: 'app-studentregister',
   templateUrl: './studentregister.component.html',
@@ -45,6 +45,28 @@ export class StudentregisterComponent implements OnInit {
         if (c.id == id) {
           this.curso = c;
           console.log("si lo es")
+          this.db.collection('evaluaciones').get().subscribe((res2) => {
+            var e = new Array<any>();
+            var E: any = 0
+            res2.docs.forEach((item2) => {
+
+              if (item2.id.split('@')[1] == c.id) {
+                e.push(item2.data().calificacion)
+
+                E = E + item2.data().calificacion
+                //c.evaluaciones.push(item2.data().calificacion)
+
+
+              }
+            })
+            console.log("AFAF " + E);
+            console.log("DAFAf" + e.length);
+
+
+            c.evaluaciones = E / e.length;
+            this.curso = c;
+
+          })
         }
 
       })
@@ -117,13 +139,38 @@ export class dialogStudent implements OnInit {
   tviernes: Array<any> = new Array();
   tsabado: Array<any> = new Array();
   tdomingo: Array<any> = new Array();
-  toggle = true;
+
+
+  @ViewChild('paypal', { static: true }) paypalElement: ElementRef
+
   constructor(
     public dialogRef: MatDialogRef<dialogStudent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private auth: AngularFireAuth, private msg: MsgService, private router: Router) { }
   ngOnInit(): void {
+    const sesionesInicial = this.data.sesiones
+    const precio = parseInt(this.data.curso.tarifa) * parseInt(this.data.sesiones)
     this.getHorario()
     this.setToggle();
+    paypal.Buttons({
+      createOrder: (data, actions) => {
+        return actions.order.create({
+          purchase_units: [{
+            description: sesionesInicial + " Sesiones de" + this.data.curso.categoria.nombre + " Por " + this.data.curso.user.nombre,
+            amount: {
+              currency_code: 'MXN',
+              value: precio
+            }
+          }]
+        })
+      }, onApprove: async (data, actions) => {
+        const order = await actions.order.capture()
+        console.log(order)
+        this.save()
+      },
+      onError: err => {
+        this.msg.msgError('Error', 'Error al realizar el pago')
+      }
+    }).render(this.paypalElement.nativeElement);
   }
 
   enableDisableRule(dia, index) {
@@ -491,7 +538,7 @@ export class dialogStudent implements OnInit {
     var d = new Date().getDay();
     if (this.data.sesiones > 0) {
 
-      if (d < dia) {
+      if (d <= dia) {
         fecha.setDate(fecha.getDate() + (dia - d))
 
         this.asesorias.push({
@@ -516,7 +563,7 @@ export class dialogStudent implements OnInit {
       }).finally(() => {
         console.log("Guardado exitoso");
         this.msg.msgSuccess('Registrado', 'Asesorías registradas exitosamente');
-
+        this.router.navigate(['/'])
       }).catch((err) => {
         console.log(err);
         this.msg.msgError('Error', err);

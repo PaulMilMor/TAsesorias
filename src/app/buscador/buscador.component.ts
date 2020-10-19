@@ -15,6 +15,7 @@ export class BuscadorComponent implements OnInit {
   maestro='maestro';
   categoria='categoria';
   cursos:Curso[]=new Array<Curso>()
+  currentRate = 5;
 
   constructor(private db: AngularFirestore, private fb: FormBuilder) { }
 
@@ -23,12 +24,35 @@ export class BuscadorComponent implements OnInit {
     this.getCursos()
   }
   getCursos(){
+  
     this.db.collection('cursos').get().subscribe((res)=>{
       res.docs.forEach((item)=>{
         let c= item.data() as Curso;
         c.id=item.id
-        this.cursos.push(c);
-         console.log(c.user.nombre)
+        this.db.collection('evaluaciones').get().subscribe((res2)=>{
+          var e=new Array<any>();
+          var E:any=0
+          res2.docs.forEach((item2)=>{
+          
+             if(item2.id.split('@')[1]==c.id){
+               e.push(item2.data().calificacion)
+             
+               E=E+item2.data().calificacion
+               //c.evaluaciones.push(item2.data().calificacion)
+              
+               
+             }
+          })
+          console.log("AFAF "+E);
+          console.log("DAFAf" + e.length);
+          
+          
+          c.evaluaciones=E/e.length;
+          this.cursos.push(c);
+       
+        })
+        
+        console.log(this.cursos)
        
       })
     })

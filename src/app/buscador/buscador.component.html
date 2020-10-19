@@ -26,6 +26,7 @@
                         <h5 class="card-title">{{curso.user.nombre}} </h5>
                         <h5 class="card-title">{{curso.categoria.nombre}} </h5>
                         <h5 class="card-title">{{curso.tarifa}} </h5>
+                           <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem"></ngb-rating>
                         <button class="btn btn-primary"  [routerLink]="['/agendar', curso.id ]" >
                             Ver
                         </button>
