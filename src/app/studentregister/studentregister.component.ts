@@ -389,7 +389,7 @@ if (this.data.sesiones==0){
   var user=this.auth.auth.currentUser;
   console.log(this.asesorias)
   //para identificar la asesoria se le suma el id del usuario con la id  del curso
-   this.db.collection('asesorias').doc(user.uid+this.data.curso.id).set({
+   this.db.collection('asesorias').doc(user.uid +'@'+this.data.curso.id).set({
 
      dias:this.asesorias
    }).finally(()=>{
