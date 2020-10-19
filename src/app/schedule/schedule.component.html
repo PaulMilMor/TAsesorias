@@ -1,8 +1,8 @@
 <!-- <ejs-schedule height='850px', width='1250px'> </ejs-schedule> -->
-<mat-grid-list cols="2" rowHeight="2:1" style="width: 2300px;" class="text-center">
+<mat-grid-list cols="2" rowHeight="2:1" style="width: 1930px; height: 1px; margin-top: 1px;" class="text-center">
   <mat-grid-tile>
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tabla mt-5">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tabla mt-5" style="margin-left: 350px;">
 
       <ng-container matColumnDef="hora">
         <th mat-header-cell *matHeaderCellDef> Hora </th>
@@ -71,9 +71,7 @@
 
   </mat-grid-tile>
 </mat-grid-list>
-<br><br>
+<br><br><br><br><br><br><br>
 <div>
-  <button class="mt-5" class="btn btn-secondary" (click)="edit()" style="width: 100px; margin-left: 24px; margin-bottom: 11px;">Editar</button>
-  
-  <button mat-flat-button class="mt-5" class="btn btn-info btn-block" (click)="save()" style="width: 197px; margin-left: 24px;">Guardar Cambios</button>
+  <button mat-flat-button class="mt-5" class="btn btn-info btn-block" (click)="save()" style="width: 197px;  margin-left: 750px; margin-top: 24px;">Guardar Cambios</button>
 </div>
