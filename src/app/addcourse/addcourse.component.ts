@@ -15,6 +15,7 @@ import { Categoria } from 'src/models/categoria';
 export class AddcourseComponent implements OnInit {
   categoria: Categoria
   categorias: Array<Categoria> = new Array()
+  categoriasUsadas: Array<Categoria> = new Array()
   formCursos: FormGroup
   usuario: Usuario
   constructor(private db: AngularFirestore, private fb: FormBuilder, private storage: AngularFireStorage, private msg: MsgService, private auth: AngularFireAuth, private activeRoute: ActivatedRoute) { }
@@ -25,6 +26,7 @@ export class AddcourseComponent implements OnInit {
       categoria: ['', Validators.required],
 
     })
+    this.getMyCategorias()
     this.getCategorias()
     this.getUsuario()
 
@@ -54,6 +56,11 @@ export class AddcourseComponent implements OnInit {
         let c = item.data() as Categoria
         c.id = item.id;
         this.categorias.push(c)
+        for (let iten of this.categoriasUsadas) {
+          if (c.nombre == iten.nombre) {
+            this.categorias.pop();
+          }
+        }
       })
 
     })
@@ -69,4 +76,21 @@ export class AddcourseComponent implements OnInit {
 
     }
   }
+
+  getMyCategorias() {
+    this.db.collection('cursos').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        let h = item.data();
+
+        //h.uid = item.uid
+        if (h.user.uid == this.usuario.uid) {
+          this.categoriasUsadas.push(h.categoria);
+
+          console.log("cat usada " + h.categoria.nombre);
+        }
+      })
+    })
+  }
+
+
 }
