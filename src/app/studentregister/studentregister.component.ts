@@ -139,7 +139,7 @@ export class dialogStudent implements OnInit {
   tviernes: Array<any> = new Array();
   tsabado: Array<any> = new Array();
   tdomingo: Array<any> = new Array();
-
+  titulo: String;
 
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef
 
@@ -151,6 +151,7 @@ export class dialogStudent implements OnInit {
     const precio = parseInt(this.data.curso.tarifa) * parseInt(this.data.sesiones)
     this.getHorario()
     this.setToggle();
+    this.titulo = this.getWeek();
     paypal.Buttons({
       createOrder: (data, actions) => {
         return actions.order.create({
@@ -576,6 +577,21 @@ export class dialogStudent implements OnInit {
 
     }
 
+  }
+
+  getWeek(){
+    let today = new Date();
+    let todayDate = today.getDate();
+    let todayMonth = today.getMonth();
+    let todayYear = today.getFullYear();
+    let weekend = new Date();
+    weekend.setDate(todayDate+6);
+    let weekendDate = weekend.getDate();
+    let weekendMonth = weekend.getMonth();
+    let weekendYear = weekend.getFullYear();
+
+    return ("Semana del " + todayDate + "/" + (todayMonth+1) + "/" + todayYear + " al " +
+                            weekendDate + "/" + (weekendMonth+1) + "/" + weekendYear);
   }
 
 
