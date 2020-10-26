@@ -1,68 +1,35 @@
-<!-- <div class="container" class="main-div">
 
-    <div class="text-center">
-        <img  src="assets/logo.png" alt="">
-        <h3>Bienvenido, por favor ingrese sus datos</h3>
-    </div>
-  
-    <form [formGroup]="formularioLogin">
-        <mat-form-field  class="full-width-input" style="margin-right:5px">
-            <mat-label>Correo Electronico</mat-label>
-            <input   type="email" matInput id="email" formControlName="email" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico">
-            <mat-error *ngIf="formularioLogin.controls['email'].invalid " >
-              <span *ngIf="formularioLogin.controls['email'].errors.required">  Correo es requerido</span>
-                <span *ngIf="formularioLogin.controls['email'].errors.email">Correo no es Valido</span>
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field class="full-width-input">
-            <mat-label for="password">Contraseña</mat-label>
-            <input matInput type="password" (keyUp.enter)="ingresar()"  id="password" formControlName="password" placeholder="Ingrese su contraseña">
-            <mat-error *ngIf="formularioLogin.controls['password'].invalid " >
-                <span *ngIf="formularioLogin.controls['password'].errors.required">La contraseña es requerida</span> 
-            </mat-error>
-        </mat-form-field>
-
-        <button type="submit" mat-flat-button color="accent" (click)="ingresar()" [disabled]="!formularioLogin.valid"  class="btn btn-primary">Ingresar</button>
-    </form>
-<button mat-flat-button color="accent" (click)="openDialog()">Registrarse</button>
-    <div *ngIf="!datosCorrectos" class="alert alert-warning mt-2" role="alert">
-        {{textoError}}
-      </div>
-
- 
-      <ngx-spinner bdOpacity = 0.9  bdColor = "#333"   size = "medium"
-            color = "#fff"
-            type = "square-spin"
-            [fullScreen] = "true"  >
-            <p style="color: white" > Ingresando al sistema... </p>
-        </ngx-spinner>
-</div> -->
- <div class="containter  main-div">
+<div class="containter  main-div">
     <form [formGroup]="formLogin">
         <mat-form-field class="full-width">
             <mat-label>Correo Electrónico</mat-label>
-            <input type="email" matInput placeholder="Ingrese su correo electrónico" name="email" formControlName="correo">
+            <input type="email" matInput placeholder="Ingrese su correo electrónico" name="email"
+                formControlName="correo">
             <mat-error *ngIf="formLogin.controls['correo'].invalid">
-               <span *ngIf="formLogin.controls['correo'].errors.required && formLogin.dirty">El correo es obligatorio</span>
-               <span *ngIf="formLogin.controls['correo'].errors.email && formLogin.dirty">No es un correo válido</span>
+                <span *ngIf="formLogin.controls['correo'].errors.required && formLogin.dirty">El correo es
+                    obligatorio</span>
+                <span *ngIf="formLogin.controls['correo'].errors.email && formLogin.dirty">No es un correo válido</span>
             </mat-error>
-         </mat-form-field>
-         <mat-form-field class="full-width">
+        </mat-form-field>
+        <mat-form-field class="full-width">
             <mat-label>Contraseña</mat-label>
-            <input type="password" matInput placeholder="Ingrese su contraseña" name="password" formControlName="contraseña">
+            <input type="password" matInput placeholder="Ingrese su contraseña" name="password"
+                formControlName="contraseña">
             <mat-error *ngIf="formLogin.controls['contraseña'].invalid">
-               <span *ngIf="formLogin.controls['contraseña'].errors.required && formLogin.dirty">La contraseña es obligatoria</span>
-               
+                <span *ngIf="formLogin.controls['contraseña'].errors.required && formLogin.dirty">La contraseña es
+                    obligatoria</span>
+
 
             </mat-error>
-         </mat-form-field>
-    <div class="container">
-        <button mat-flat-button (click)="ingresar()" class="button" style="font-size: 17px;">Iniciar Sesión</button>
-     <button mat-flat-button (click)="authService.GoogleAuth()" class="button" style="font-size: 17px;"><img src="https://img.icons8.com/color/23/000000/google-logo.png"/>
+        </mat-form-field>
+        <div class="container">
+            <button mat-flat-button (click)="logIn()" class="button" style="font-size: 17px;">Iniciar Sesión</button>
+            <button mat-flat-button (click)="authService.GoogleAuth()" class="button" style="font-size: 17px;"><img
+                    src="https://img.icons8.com/color/23/000000/google-logo.png" />
                 Ingresar con Google
-        </button>
-    
-    </div>
-     </form>
-    
-</div> 
+            </button>
+
+        </div>
+    </form>
+
+</div>

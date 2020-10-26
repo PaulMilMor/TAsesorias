@@ -21,9 +21,10 @@ export class BuscadorComponent implements OnInit {
 
   ngOnInit(): void {
     this.cursos.length=0;
-    this.getCursos()
+    this.getCourses()
   }
-  getCursos(){
+  ///Obtiene todos los cursos con su promedio de evaluacion
+  getCourses(){
   
     this.db.collection('cursos').get().subscribe((res)=>{
       res.docs.forEach((item)=>{
@@ -33,27 +34,16 @@ export class BuscadorComponent implements OnInit {
           var e=new Array<any>();
           var E:any=0
           res2.docs.forEach((item2)=>{
-          
+
              if(item2.id.split('@')[1]==c.id){
                e.push(item2.data().calificacion)
-             
                E=E+item2.data().calificacion
-               //c.evaluaciones.push(item2.data().calificacion)
-              
-               
              }
           })
-          console.log("AFAF "+E);
-          console.log("DAFAf" + e.length);
-          
-          
           c.evaluaciones=E/e.length;
           this.cursos.push(c);
-       
+      
         })
-        
-        console.log(this.cursos)
-       
       })
     })
   }

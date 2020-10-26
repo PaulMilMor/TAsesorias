@@ -13,29 +13,29 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./edituser.component.css']
 })
 export class EdituserComponent implements OnInit {
-formUsuario:FormGroup
-urlImg:string
-usuario:Usuario
-idUsuario:string
-editCorreo:boolean=false
-editContra:boolean=false
-editImg:boolean=false
-editProfile:boolean=false
-normal:'normal'
+  formUsuario: FormGroup
+  urlImg: string
+  usuario: Usuario
+  idUsuario: string
+  editCorreo: boolean = false
+  editContra: boolean = false
+  editImg: boolean = false
+  editProfile: boolean = false
+  normal: 'normal'
   constructor(private db: AngularFirestore, private fb: FormBuilder, private storage: AngularFireStorage, private msg: MsgService, private auth: AngularFireAuth, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.idUsuario = this.activeRoute.snapshot.params.idUsuario;
-    this.getUsuario();
+    this.getUser();
     this.formUsuario = this.fb.group({
       correo: ['', Validators.required],
-      contraseña: ['',  Validators.minLength(8)],
+      contraseña: ['', Validators.minLength(8)],
       img: ['']
     })
- 
-  }
-  addImg(event) {
 
+  }
+  //Añade Imagen a Firestore
+  addImg(event) {
     if (event.target.files.length > 0) {
       let name = new Date().getTime().toString()
       let file = event.target.files[0]
@@ -45,102 +45,83 @@ normal:'normal'
       const task = ref.put(file)
       task.then((obj) => {
         ref.getDownloadURL().subscribe((url) => {
-        this.usuario.img = url;
+          this.usuario.img = url;
         })
       })
     }
   }
-  editarCorreo(){
-    var user=this.auth.auth.currentUser;
+  //Actualiza el email tanto de Autenticacioon como de la base de datos
+  editEmail() {
+    var user = this.auth.auth.currentUser;
 
-    user.updateEmail(this.formUsuario.value.correo).then(()=>{
+    user.updateEmail(this.formUsuario.value.correo).then(() => {
       this.db.collection('usuarios').doc(user.uid).update({
-           correo:this.formUsuario.value.correo
+        correo: this.formUsuario.value.correo
       })
-    }).then(()=>{
+    }).then(() => {
       this.msg.msgSuccess('Correo', 'Correo editado Satisfactoriamente')
-    }).catch((err)=>{
+    }).catch((err) => {
 
-      this.msg.msgError('Error',err)
+      this.msg.msgError('Error', err)
     })
   }
-  editarContra(){
-    var user=this.auth.auth.currentUser;
+  //Actualiza la contraseeña tanto de Autenticacioon como de la base de datos
+  editPass() {
+    var user = this.auth.auth.currentUser;
 
-    user.updatePassword(this.formUsuario.value.contraseña).then(()=>{
+    user.updatePassword(this.formUsuario.value.contraseña).then(() => {
       this.db.collection('usuarios').doc(user.uid).update({
-           contraseña:this.formUsuario.value.contraseña
+        contraseña: this.formUsuario.value.contraseña
       })
-    }).then(()=>{
+    }).then(() => {
       this.msg.msgSuccess('Contraseña', 'Contraseña cambiada Satisfactoriamente')
-    }).catch((err)=>{
+    }).catch((err) => {
 
-      this.msg.msgError('Error',err)
+      this.msg.msgError('Error', err)
     })
   }
-  editarImg(){
-    var user=this.auth.auth.currentUser;
+ //Actualiza la imagen  de la base de datos
+  editImgs() {
+    var user = this.auth.auth.currentUser;
 
-      this.db.collection('usuarios').doc(user.uid).update({
-           img:this.usuario.img
-      
-    }).then(()=>{
-this.msg.msgSuccess('Imagen', 'Imagen cambiada Satisfactoriamente')
-    }).catch((err)=>{
+    this.db.collection('usuarios').doc(user.uid).update({
+      img: this.usuario.img
 
-      this.msg.msgError('Error',err)
+    }).then(() => {
+      this.msg.msgSuccess('Imagen', 'Imagen cambiada Satisfactoriamente')
+    }).catch((err) => {
+
+      this.msg.msgError('Error', err)
     })
   }
-  editarUsuario() {
+  //Se encarga de ver que cambio se van a realizar y llama a los metodos correspondientes
+  editUser() {
+    if (this.editImg) {
+      this.editImgs()
+    }
+    if (this.editCorreo) {
 
-if(this.editImg){
-  this.editarImg()
-}
-if(this.editCorreo){
+      this.editEmail()
+    }
+    if (this.editContra) {
 
-  this.editarCorreo()
-}
-if(this.editContra){
-
-  this.editarContra()
-}
-    //Este sector del codigo es para cambiar los datos aparte de correo y contraseña
-// this.db.collection('usuarios').doc().update({
-
-// }).then(()=>{
-//  this.msg.msgSuccess('Exito', 'Cambios realizado Correctamente')
-// this.db.collection('usuarios').doc(user.uid).update({
-//   img:this.usuario.img
-
-//  }).then(()=>{
-//    this.msg.msgSuccess('Exito','Datos Guardados Correctamente')
-//  }).catch((err)=>{
-//    this.msg.msgError('Error',err)
-//  })
-// })
-}
-getUsuario(){
- 
-  this.db.collection('usuarios').get().subscribe((res)=>{
-    res.docs.forEach((item)=>{
-      let u= item.data() as Usuario;
-      if(u.uid==this.idUsuario){
-        u.uid=item.id;
-        u.ref=item.ref;
-        this.usuario=u;
-        console.log(this.usuario.img)
-      }
-     
-     
-   
+      this.editPass()
+    }
+  }
+  //Obtiene el usuario
+  getUser() {
+    this.db.collection('usuarios').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        let u = item.data() as Usuario;
+        if (u.uid == this.idUsuario) {
+          u.uid = item.id;
+          u.ref = item.ref;
+          this.usuario = u;
+          console.log(this.usuario.img)
+        }
+      })
     })
-  })
 
-}
-probar(){
+  }
 
-
-console.log(this.db.collection('usuarios', ref => ref.where('correo', '==', this.usuario.correo)))
-
-}
 }

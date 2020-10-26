@@ -3,14 +3,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Curso } from 'src/models/curso';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { dataBinding } from '@syncfusion/ej2-angular-schedule';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { MsgService } from 'src/services/msg.service';
-import { forEachLeadingCommentRange } from 'typescript';
+
 declare var paypal;
 @Component({
   selector: 'app-studentregister',
@@ -36,6 +33,7 @@ export class StudentregisterComponent implements OnInit {
 
     this.breakpoint = (window.innerWidth <= 900) ? 1 : 2;
   }
+  //Obtiene los datos del curso solicitado
   getCurso() {
     var id = this.activeRoute.snapshot.params.idCurso;
     this.db.collection('cursos').get().subscribe((res) => {
@@ -59,9 +57,6 @@ export class StudentregisterComponent implements OnInit {
 
               }
             })
-            console.log("AFAF " + E);
-            console.log("DAFAf" + e.length);
-
 
             c.evaluaciones = E / e.length;
             this.curso = c;
@@ -105,6 +100,7 @@ export class StudentregisterComponent implements OnInit {
     const dialogRef = this.dialog.open(dialogStudent, {
       width: '1000px',
       height: '500px',
+      //Para en enviar informacion a un dialogo se usa la variable data (teniendo en cuenta que existe una llamada asi tambien en el dialogo)
       data: { curso: this.curso, sesiones: this.formSesiones.value.sesiones }
     });
   }
@@ -112,8 +108,7 @@ export class StudentregisterComponent implements OnInit {
   onResize(event) {
     this.breakpoint = (event.target.innerWidth <= 900) ? 1 : 2;
   }
-  pagar() {
-  }
+ 
 
 }
 @Component({
@@ -152,10 +147,12 @@ export class dialogStudent implements OnInit {
     this.getHorario()
     this.setToggle();
     this.titulo = this.getWeek();
+    //Llama al boton de la api de paypal 
     paypal.Buttons({
       createOrder: (data, actions) => {
         return actions.order.create({
           purchase_units: [{
+            //se designan los datos que se van a registrar enb la transaccion
             description: sesionesInicial + " Sesiones de" + this.data.curso.categoria.nombre + " Por " + this.data.curso.user.nombre,
             amount: {
               currency_code: 'MXN',
@@ -167,14 +164,14 @@ export class dialogStudent implements OnInit {
         const order = await actions.order.capture()
         console.log(order)
         this.save()
-        this.router.navigate(['/'])
+ 
       },
       onError: err => {
         this.msg.msgError('Error', 'Error al realizar el pago')
       }
     }).render(this.paypalElement.nativeElement);
   }
-
+//Activa -desactivda el boton
   enableDisableRule(dia, index) {
     //this.toggle = !this.toggle;
     switch (dia) {
@@ -234,7 +231,7 @@ export class dialogStudent implements OnInit {
       this.tdomingo.push(true);
     }
   }
-
+//Realiza la operacion para llamar los metodos para agregar las horas y desactividar el boton correspondiente 
   horaClick(hora, dia, nombre, index) {
     switch (nombre) {
       case 'lunes': {
@@ -514,6 +511,7 @@ export class dialogStudent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  //Obtiene las horas de clase del maestro del curso
   getHorario() {
     this.db.collection('horario').get().subscribe((res) => {
       res.docs.forEach((item) => {
@@ -534,17 +532,13 @@ export class dialogStudent implements OnInit {
       })
     })
   }
-
+//agrega las hora que tu solicitas la asesoria
   prueba(hour, dia) {
     var fecha = new Date();
     var d = new Date().getDay();
     if (this.data.sesiones > 0) {
-
       if (d <= dia) {
         fecha.setDate(fecha.getDate() + (dia - d))
-        console.log(d)
-        console.log(dia)
-          console.log(fecha)
         this.asesorias.push({
           fecha: fecha,
           hora: hour
@@ -552,10 +546,9 @@ export class dialogStudent implements OnInit {
 
       }
       this.data.sesiones--;
-
     }
   }
-
+//registra la sesiones que solicita el estudiante
   save(){
 if (this.data.sesiones==0){
   var user=this.auth.auth.currentUser;
@@ -581,7 +574,7 @@ if (this.data.sesiones==0){
 }
     
   }
-
+//Muestra la semana correspondiente
   getWeek() {
     let today = new Date();
     let todayDate = today.getDate();

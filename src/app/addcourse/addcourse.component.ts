@@ -26,31 +26,25 @@ export class AddcourseComponent implements OnInit {
       categoria: ['', Validators.required],
 
     })
-    this.getMyCategorias()
-    this.getCategorias()
-    this.getUsuario()
-
-    console.log(this.usuario.id)
+    this.getMyCategories()
+    this.getCategories()
+    this.getUser()
   }
 
-  getUsuario() {
-
+  //Obtiene el usuario 
+  getUser() {
     this.db.collection('usuarios').get().subscribe((res) => {
       res.docs.forEach((item) => {
         let u = item.data() as Usuario
         if (u.uid == this.auth.auth.currentUser.uid) {
           this.usuario = u;
-
         }
-
       })
-
     })
-
   }
-  getCategorias() {
 
-
+//Obtiene el total de categorias suprimiendo las que ya tiene curso
+  getCategories() {
     this.db.collection('categorias').get().subscribe((res) => {
       res.docs.forEach((item) => {
         let c = item.data() as Categoria
@@ -65,7 +59,8 @@ export class AddcourseComponent implements OnInit {
 
     })
   }
-  agregar() {
+  //Agrega el curso en la base de datos
+ setCourse() {
     this.formCursos.value.user = this.usuario;
     if (this.formCursos.value.tarifa <= 2000) {
       this.db.collection('cursos').add(this.formCursos.value).then(() => {
@@ -76,16 +71,13 @@ export class AddcourseComponent implements OnInit {
 
     }
   }
-
-  getMyCategorias() {
+//Obtiene las categorias en las que el Intructor tiene curso
+  getMyCategories() {
     this.db.collection('cursos').get().subscribe((res) => {
       res.docs.forEach((item) => {
         let h = item.data();
-
-        //h.uid = item.uid
         if (h.user.uid == this.usuario.uid) {
           this.categoriasUsadas.push(h.categoria);
-
           console.log("cat usada " + h.categoria.nombre);
         }
       })

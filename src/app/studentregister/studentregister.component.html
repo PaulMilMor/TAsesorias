@@ -11,11 +11,6 @@
             <input matInput type="number" min="1" max="5" oninput="validity.valid||(value='1');"
               formControlName="sesiones">
           </mat-form-field>
-          
-  <!-- <mat-form-field class="example-full-width">
-    <mat-label>Comentarios</mat-label>
-    <textarea matInput placeholder=""></textarea>
-  </mat-form-field> -->
           <br>
           <button mat-flat-button color="accent" (click)="openDialog()" class="button">Seleccionar Sesiones</button>
         </form>
@@ -32,7 +27,7 @@
         <!-- <h5 >{{curso.categoria.nombre}} </h5> -->
         <h5>{{curso.tarifa | currency}} </h5>
         <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5 style="font-size: 3rem"></ngb-rating>
-        <h4>Logros</h4>
+        <!-- <h4>Logros</h4> -->
         <!-- <button mat-raised-button color="primary" class="button select" (click)="pagar()">Siguiente</button> -->
       </div>
 

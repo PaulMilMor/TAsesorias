@@ -1,6 +1,6 @@
 <div class="main-div container">
     <!-- Crear if para que solo te deje si tienes clase -->
-
+<!-- Parte visivle para el alumno -->
     <span *ngIf="usuario.tipoUsuario=='alumno'">
         <span *ngIf="isVisible_A">
 
@@ -29,7 +29,7 @@
 
 
 
-
+<!-- Parte visible para el instructor -->
     <div class="text-center">
         <span *ngIf="usuario.tipoUsuario=='instructor'">
             <span *ngIf="isVisible_I">

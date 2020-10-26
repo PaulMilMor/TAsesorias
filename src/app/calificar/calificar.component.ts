@@ -9,13 +9,13 @@ import { MsgService } from 'src/services/msg.service';
 })
 export class CalificarComponent implements OnInit {
 currentRate = 0;
-
 adjetivos:Array<string>=new Array();
   constructor(private db:AngularFirestore,private activedroute: ActivatedRoute, private msg:MsgService) { }
  
   ngOnInit(): void {
     
   }
+  //Guarda datos de la evaluacion con la id de asesoria(ida)
    saveEvaluacion(){
      var idM= this.activedroute.snapshot.params.idMaestro
      var idA=this.activedroute.snapshot.params.idAsesoria;
@@ -34,7 +34,8 @@ adjetivos:Array<string>=new Array();
 
        
      })
-   }  
+   } 
+   //añade a arreglo con cada uno de los adjetivos 
    saveAdjetivo(value){
      if(this.adjetivos.length<3){
      this.adjetivos.push(value);

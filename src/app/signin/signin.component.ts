@@ -37,7 +37,6 @@ export class SigninComponent implements OnInit {
     })
   }
   addImg(event) {
-
     if (event.target.files.length > 0) {
       let name = new Date().getTime().toString()
       let file = event.target.files[0]
@@ -52,22 +51,14 @@ export class SigninComponent implements OnInit {
       })
     }
   }
-  addUsuario() {
-
+  addUser() {
     this.formUsuario.value.tipoUsuario = this.tipoU;
-
     if (this.urlImg != undefined) {
-
-
       this.formUsuario.value.img = this.urlImg;
       this.auth.auth.createUserWithEmailAndPassword(this.formUsuario.value.correo, this.formUsuario.value.contraseña).then((data) => {
-
-        console.log(data.user.uid)
         this.formUsuario.value.uid = data.user.uid
-        this.formUsuario.value.nombre = this.formUsuario.value.nombre + " "+this.formUsuario.value.apellido
-
+        this.formUsuario.value.nombre = this.formUsuario.value.nombre + " " + this.formUsuario.value.apellido
         this.db.collection('usuarios').doc(data.user.uid).set(this.formUsuario.value).then((finish) => {
-
         }).catch(() => {
           this.msg.msgError('Error', 'Algo fallo :(')
         })

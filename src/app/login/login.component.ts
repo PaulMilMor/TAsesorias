@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
            contraseña:['', Validators.required]
         })  
   }
-   ingresar(){
+   logIn(){
       this.auth.auth.signInWithEmailAndPassword(this.formLogin.value.correo, this.formLogin.value.contraseña).then((usuario)=>{
             this.msg.msgSuccess('Exito','Bienvenido de nuevo')
         

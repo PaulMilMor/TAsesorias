@@ -1,69 +1,73 @@
- <div class='container mt-5'>
+<div class='container mt-5'>
     <mat-form-field appearance="fill">
         <mat-label>Buscar por</mat-label>
         <mat-select [(value)]="selected">
-     
-          <mat-option value="maestro">Nombre de intructor</mat-option>
-          <mat-option value="categoria"> Categoria</mat-option>
-         
+
+            <mat-option value="maestro">Nombre de intructor</mat-option>
+            <mat-option value="categoria"> Categoria</mat-option>
+
         </mat-select>
-      </mat-form-field>
-      <div *ngIf="selected==maestro; else Categoria">
+    </mat-form-field>
+    <!-- Segmento para realizar buscquda por maestro -->
+    <div *ngIf="selected==maestro; else Categoria">
         <h4>Maestro</h4>
-    
+
         <form action="">
             <div class="form-group">
-                <input   [(ngModel)]="filter" name="filter" class="form-control" type="text" placeholder="Busque un maestro" style="width: 400px;">
+                <input [(ngModel)]="filter" name="filter" class="form-control" type="text"
+                    placeholder="Busque un maestro" style="width: 400px;">
             </div>
         </form>
-        
+
         <div class="row">
             <div class="col-sm-3" *ngFor="let curso of cursos | bmaestro:filter">
-                <div class="card" >
+                <div class="card">
                     <img class="card-img-top imgMaestro" [src]="curso.user.img">
                     <div class="card-body">
-                      
+
                         <h5 class="card-title" style="font-size: 21px;">{{curso.user.nombre}} </h5>
                         <h5 class="card-title">{{curso.categoria.nombre}} </h5>
-                        <h5 class="card-title">{{curso.tarifa}} </h5>
-                           <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem"></ngb-rating>
-                        <button class="btn btn-primary"  [routerLink]="['/agendar', curso.id ]" >
+                        <h5 class="card-title">{{curso.tarifa | currency}} </h5>
+                        <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem">
+                        </ngb-rating>
+                        <button class="btn btn-primary" [routerLink]="['/agendar', curso.id ]">
                             Ver
                         </button>
-                       
+
                     </div>
                 </div>
-            </div>  
-            
+            </div>
+
         </div>
     </div>
-</div> 
-
+</div>
+<!-- segmento ppara reallizar busqueda por categoria -->
 <ng-template #Categoria>
     <h4>Categoria</h4>
 
-<form action="">
-    <div class="form-group">
-        <input   [(ngModel)]="filter" name="filter" class="form-control" type="text" placeholder="Busque una categoria" style="width: 400px;">
-    </div>
-</form>
+    <form action="">
+        <div class="form-group">
+            <input [(ngModel)]="filter" name="filter" class="form-control" type="text"
+                placeholder="Busque una categoria" style="width: 400px;">
+        </div>
+    </form>
 
-<div class="row">
-    <div class="col-sm-3" *ngFor="let curso of cursos | bcategoria:filter">
-        <div class="card" >
-            <img class="card-img-top imgMaestro" [src]="curso.user.img">
-            <div class="card-body">
-              
-                <h5 class="card-title" style="font-size: 21px;">{{curso.user.nombre}} </h5>
-                <h5 class="card-title">{{curso.categoria.nombre}} </h5>
-                <h5 class="card-title">{{curso.tarifa}} </h5>
-                <button class="btn btn-primary" [routerLink]="['/agendar', curso.id ]" >
-                    Ver
-                </button>
-               
+    <div class="row">
+        <div class="col-sm-3" *ngFor="let curso of cursos | bcategoria:filter">
+            <div class="card">
+                <img class="card-img-top imgMaestro" [src]="curso.user.img">
+                <div class="card-body">
+
+                    <h5 class="card-title" style="font-size: 21px;">{{curso.user.nombre}} </h5>
+                    <h5 class="card-title">{{curso.categoria.nombre}} </h5>
+                    <h5 class="card-title">{{curso.tarifa}} </h5>
+                    <button class="btn btn-primary" [routerLink]="['/agendar', curso.id ]">
+                        Ver
+                    </button>
+
+                </div>
             </div>
         </div>
-    </div>  
-    
-</div>
+
+    </div>
 </ng-template>

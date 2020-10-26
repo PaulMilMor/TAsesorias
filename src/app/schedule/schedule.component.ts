@@ -62,6 +62,7 @@ export class ScheduleComponent implements OnInit {
   ngOnInit(): void {
     Default = this.getData()
   }
+  //todos los change son para designar si el instructor va a dar en a esa hora
   changeLunes(valor) {
     if (!valor.lunes) {
       this.clunes.push(valor.hora)
@@ -149,6 +150,7 @@ export class ScheduleComponent implements OnInit {
       this.msg.msgError('Error', error);
     })
   }
+  //a reparar esto, deberia traer la informacion de las asesorias pero llegan en desorden
   getData(): Array<any> {
     var user = this.auth.auth.currentUser;
 
@@ -170,7 +172,7 @@ export class ScheduleComponent implements OnInit {
               console.log(dato)
 
             });
-            console.log("deberia ser esto :c")
+
             console.log(data)
           } else {
             data = Default
@@ -185,8 +187,5 @@ export class ScheduleComponent implements OnInit {
 
     return data
   }
-  edit() {
-
-
-  }
+  
 }
