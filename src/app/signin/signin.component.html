@@ -29,7 +29,8 @@
          </mat-form-field>
          <mat-form-field class="full-width">
             <mat-label>Correo Electrónico</mat-label>
-            <input type="email" matInput placeholder="Ingrese su correo electrónico" name="email" formControlName="correo">
+            <input type="email" matInput placeholder="Ingrese su correo electrónico" name="email"
+               formControlName="correo">
             <mat-error *ngIf="formUsuario.controls['correo'].invalid">
                <span *ngIf="formUsuario.controls['correo'].errors.required">El correo es obligatorio</span>
                <span *ngIf="formUsuario.controls['correo'].errors.email">No es un correo válido</span>
@@ -37,7 +38,8 @@
          </mat-form-field>
          <mat-form-field class="full-width">
             <mat-label>Contraseña</mat-label>
-            <input type="password" matInput placeholder="Ingrese su contraseña" name="password" formControlName="contraseña">
+            <input type="password" matInput placeholder="Ingrese su contraseña" name="password"
+               formControlName="contraseña">
             <mat-error *ngIf="formUsuario.controls['contraseña'].invalid">
                <span *ngIf="formUsuario.controls['contraseña'].errors.required">La contraseña es obligatoria</span>
                <span *ngIf="formUsuario.controls['contraseña'].errors.minlength">La contraseña debe tener al menos 8
@@ -49,8 +51,9 @@
          <div class="container">
             <button mat-flat-button [disabled]="formUsuario.invalid" class="button" style="margin-right: 5px;"
                (click)="addUser()" color="warn" style="font-size: 17px;">Registrarse</button>
-            <button mat-flat-button class="button" (click)="authService.GoogleRegister(this.tipoU)"
-               color="white" style="font-size: 17px;"><img src="https://img.icons8.com/color/22/000000/google-logo.png"/> Registrarse con Google</button>
+            <button mat-flat-button class="button" (click)="authService.GoogleRegister(this.tipoU)" color="white"
+               style="font-size: 17px;"><img src="https://img.icons8.com/color/22/000000/google-logo.png" /> Registrarse
+               con Google</button>
          </div>
          <br> <br> <br><br> <br> <br>
 
