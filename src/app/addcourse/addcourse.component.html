@@ -10,6 +10,12 @@
         <mat-option value="option" *ngFor="let c of categorias" [value]="c">{{c.nombre}}</mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Nivel Académico</mat-label>
+      <mat-select formControlName="nivel">
+        <mat-option value="option" *ngFor="let n of niveles" [value]="n">{{n.nombre}}</mat-option>
+      </mat-select>
+    </mat-form-field>
     <br>
     <mat-form-field appearance="fill" style="margin-top: 9px;">
       <mat-label>Tarifa</mat-label>

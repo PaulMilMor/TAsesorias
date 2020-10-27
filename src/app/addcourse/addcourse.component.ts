@@ -7,6 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Usuario } from 'src/models/usuario';
 import { ActivatedRoute } from '@angular/router';
 import { Categoria } from 'src/models/categoria';
+import { Nivel } from 'src/models/nivel';
 @Component({
   selector: 'app-addcourse',
   templateUrl: './addcourse.component.html',
@@ -16,6 +17,8 @@ export class AddcourseComponent implements OnInit {
   categoria: Categoria
   categorias: Array<Categoria> = new Array()
   categoriasUsadas: Array<Categoria> = new Array()
+  nivel: Nivel
+  niveles: Array<Nivel> = new Array()
   formCursos: FormGroup
   usuario: Usuario
   constructor(private db: AngularFirestore, private fb: FormBuilder, private storage: AngularFireStorage, private msg: MsgService, private auth: AngularFireAuth, private activeRoute: ActivatedRoute) { }
@@ -24,11 +27,13 @@ export class AddcourseComponent implements OnInit {
     this.formCursos = this.fb.group({
       tarifa: ['', Validators.required],
       categoria: ['', Validators.required],
+      nivel: ['', Validators.required],
 
     })
     this.getMyCategories()
     this.getCategories()
     this.getUser()
+    this.getNiveles()
   }
 
   //Obtiene el usuario 
@@ -59,6 +64,18 @@ export class AddcourseComponent implements OnInit {
 
     })
   }
+
+//Obtiene los niveles academicos 
+  getNiveles() {
+    this.db.collection('niveles').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        let n = item.data() as Nivel
+        n.id = item.id;
+        this.niveles.push(n);
+      })
+    })
+  }
+
   //Agrega el curso en la base de datos
  setCourse() {
     this.formCursos.value.user = this.usuario;
@@ -71,7 +88,7 @@ export class AddcourseComponent implements OnInit {
 
     }
   }
-//Obtiene las categorias en las que el Intructor tiene curso
+//Obtiene las categorias en las que el Instructor tiene curso
   getMyCategories() {
     this.db.collection('cursos').get().subscribe((res) => {
       res.docs.forEach((item) => {
