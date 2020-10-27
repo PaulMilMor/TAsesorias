@@ -1,0 +1,55 @@
+<mat-grid-list cols="7">
+  <mat-grid-tile colspan="2">
+    <div class="profile-img" style="margin-left: 67px;">
+      <img [src]="usuario.img">
+      <br>
+    </div>
+
+    <button mat-raised-button color="accent">Reportar</button>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="5">
+
+
+
+
+
+
+
+    <h1>{{usuario.nombre}}</h1>
+    <h3> <br><br>Informacion de instructor </h3>
+
+  </mat-grid-tile>
+  <mat-grid-tile colspan="2"></mat-grid-tile>
+  <mat-grid-tile colspan="5" rowspan="4">
+    <mat-list role="list">
+
+      <span *ngFor="let c of cursos">
+        <mat-list-item role="listitem">
+          <mat-card class="card-course">
+            <mat-grid-list cols="5">
+              <mat-grid-tile colspan="4">
+                {{c.categoria.nombre}} <br>
+              {{c.tarifa}} <br> <br> <br> <br>
+                <ngb-rating [(rate)]="c.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem"> <br> <br>
+                </ngb-rating>
+
+
+                <mat-chip-list aria-label="Etiquetas">
+
+                  <mat-chip>Etiqueta</mat-chip>
+             
+                </mat-chip-list>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="1">
+                <button mat-flat-button color="primary"  [routerLink]="['/agendar', c.id ]">Agendar</button>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </mat-card>
+          <br>
+        </mat-list-item>
+        <br>   <br>   <br>   <br>   <br>   <br>   <br>   <br>   <br>
+      </span>
+
+    </mat-list>
+  </mat-grid-tile>
+</mat-grid-list>
