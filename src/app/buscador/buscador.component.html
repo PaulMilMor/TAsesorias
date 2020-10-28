@@ -31,8 +31,11 @@
                         <h5 class="card-title">{{curso.tarifa | currency}} </h5>
                         <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem">
                         </ngb-rating>
+                        <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
+                            Ver Perfil
+                        </button>
                         <button class="btn btn-primary" [routerLink]="['/agendar', curso.id ]">
-                            Ver
+                            Ver Curso
                         </button>
 
                     </div>

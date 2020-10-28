@@ -44,6 +44,7 @@ import { dialogStudent, StudentregisterComponent } from './studentregister/stude
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatChipsModule } from '@angular/material/chips';
 import { CalificarComponent } from './calificar/calificar.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { CalificarComponent } from './calificar/calificar.component';
     StudentregisterComponent,
     dialogStudent,
     CalificarComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
