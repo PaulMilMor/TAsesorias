@@ -1,3 +1,4 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div>
 
   <form [formGroup]="formCursos" style=" height: 445px; width: 400px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
@@ -15,6 +16,22 @@
       <mat-select formControlName="nivel">
         <mat-option value="option" *ngFor="let n of niveles" [value]="n">{{n.nombre}}</mat-option>
       </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-chip-list #chipList aria-label="Etiquetas">
+        <mat-chip *ngFor="let tag of etiquetas"
+                  [selectable]="true"
+                  [removable]="true"
+                  (removed)=removeTag(tag)>
+          {{tag}}
+          <mat-icon matChipRemove *ngIf="true">x</mat-icon>
+        </mat-chip>
+        <input placeholder="Máximo 5 etiquetas separadas por coma"
+               [matChipInputFor]="chipList"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="true"
+               (matChipInputTokenEnd)="addTag($event)">
+      </mat-chip-list>
     </mat-form-field>
     <br>
     <mat-form-field appearance="fill" style="margin-top: 9px;">

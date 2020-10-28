@@ -45,6 +45,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatChipsModule } from '@angular/material/chips';
 import { CalificarComponent } from './calificar/calificar.component';
 import { ProfileComponent } from './profile/profile.component';
+import { MatIconModule } from '@angular/material/icon'; 
 
 
 @NgModule({
@@ -96,7 +97,8 @@ import { ProfileComponent } from './profile/profile.component';
     MatTableModule,
     MatListModule,
     MatChipsModule,
-    NgbModule
+    NgbModule,
+    MatIconModule
   ],
   entryComponents: [
     register,

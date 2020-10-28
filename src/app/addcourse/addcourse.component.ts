@@ -8,6 +8,8 @@ import { Usuario } from 'src/models/usuario';
 import { ActivatedRoute } from '@angular/router';
 import { Categoria } from 'src/models/categoria';
 import { Nivel } from 'src/models/nivel';
+import { COMMA} from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
 @Component({
   selector: 'app-addcourse',
   templateUrl: './addcourse.component.html',
@@ -21,6 +23,8 @@ export class AddcourseComponent implements OnInit {
   niveles: Array<Nivel> = new Array()
   formCursos: FormGroup
   usuario: Usuario
+  readonly separatorKeysCodes: number[] = [COMMA];
+  etiquetas: String[] = [];
   constructor(private db: AngularFirestore, private fb: FormBuilder, private storage: AngularFireStorage, private msg: MsgService, private auth: AngularFireAuth, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -101,5 +105,36 @@ export class AddcourseComponent implements OnInit {
     })
   }
 
+  //añade etiquetas a la lista
+  addTag(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    //Añade la etiqueta
+    if(this.etiquetas.length>=5){
+      this.msg.msgError('Límite de Etiquetas','Solamente se pueden ingresar 5 etiquetas por curso');
+    }
+    else{
+      if((value||'').trim()) {
+        this.etiquetas.push(value.trim());
+      }
+  
+      //Reinicia el input
+      if(input){
+        input.value='';
+      }
+    }
+    
+
+  }
+
+  //Remueve etiquetas de la ista
+  removeTag(tag: String): void {
+    const index = this.etiquetas.indexOf(tag);
+    
+    if(index>=0){
+      this.etiquetas.splice(index,1);
+    }
+  }
 
 }
