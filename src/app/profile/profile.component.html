@@ -4,8 +4,8 @@
       <img [src]="usuario.img">
       <br>
     </div>
-
-    <button mat-raised-button color="accent">Reportar</button>
+    <!-- <button mat-raised-button color="accent" (click)="openDialog()">Reportar</button> -->
+    <button mat-raised-button color="accent" (click)="exitsReport()">Reportar</button>
   </mat-grid-tile>
   <mat-grid-tile colspan="5">
 
@@ -28,7 +28,7 @@
           <mat-card class="card-course">
             <mat-grid-list cols="5">
               <mat-grid-tile colspan="4">
-                {{c.categoria.nombre}} <br>
+                <mat-card-title>         {{c.categoria.nombre}} <br><br><br><br><br></mat-card-title><br>
               {{c.tarifa}} <br> <br> <br> <br>
                 <ngb-rating [(rate)]="c.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem"> <br> <br>
                 </ngb-rating>
