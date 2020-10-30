@@ -25,6 +25,7 @@ export class AddcourseComponent implements OnInit {
   usuario: Usuario
   readonly separatorKeysCodes: number[] = [COMMA];
   etiquetas: String[] = [];
+  disabled: boolean;
   constructor(private db: AngularFirestore, private fb: FormBuilder, private storage: AngularFireStorage, private msg: MsgService, private auth: AngularFireAuth, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -77,6 +78,8 @@ export class AddcourseComponent implements OnInit {
         n.id = item.id;
         this.niveles.push(n);
       })
+      this.niveles.sort((a,b)=>(a.orden >b.orden)? 1:-1)
+
     })
   }
 
@@ -85,7 +88,7 @@ export class AddcourseComponent implements OnInit {
     this.formCursos.value.user = this.usuario;
     if (this.formCursos.value.tarifa <= 2000) {
       this.db.collection('cursos').add(this.formCursos.value).then(() => {
-        this.msg.msgSuccess('Guardado', 'Curso guardado completo')
+        this.msg.msgSuccess('Guardado', 'Curso guardado correctamente')
       })
     } else {
       this.msg.msgError('Error', 'la tarifa maxima es 2000')
@@ -111,19 +114,20 @@ export class AddcourseComponent implements OnInit {
     const value = event.value;
 
     //Añade la etiqueta
-    if(this.etiquetas.length>=5){
-      this.msg.msgError('Límite de Etiquetas','Solamente se pueden ingresar 5 etiquetas por curso');
-    }
-    else{
+      
       if((value||'').trim()) {
         this.etiquetas.push(value.trim());
       }
   
-      //Reinicia el input
+    //Reinicia el input
       if(input){
-        input.value='';
+        input.value='';  
       }
-    }
+
+      if(this.etiquetas.length>=5){
+        this.disabled = true;
+        this.msg.msgSuccess('Límite de etiquetas', 'Ya has insertado cinco etiquetas, si quieres insertar otra debes remover alguna antes.')
+      }
     
 
   }
@@ -134,6 +138,9 @@ export class AddcourseComponent implements OnInit {
     
     if(index>=0){
       this.etiquetas.splice(index,1);
+    }
+    if(this.etiquetas.length<5){
+      this.disabled=false;
     }
   }
 

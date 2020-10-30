@@ -1,3 +1,5 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 .main-div{
     height: 100vh;
     display: flex;
@@ -10,8 +12,9 @@ margin-left: 40px;
     width: 321px;
   }
 
-mat-raised-button {
+.mat-raised-button {
   width: 60px;
+  margin-bottom: 30px !important;
 }
 
 h2 {
@@ -24,4 +27,6 @@ h2 {
 form{
   margin-left: 500px;
   margin-top: 50px;
+  height: auto !important;
+  margin-bottom: 50px !important;
 }

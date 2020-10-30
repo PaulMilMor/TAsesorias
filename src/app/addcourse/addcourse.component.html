@@ -1,4 +1,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet">
 <div>
 
   <form [formGroup]="formCursos" style=" height: 445px; width: 400px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
@@ -18,19 +20,22 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="fill">
+      <mat-label>Etiquetas</mat-label>
       <mat-chip-list #chipList aria-label="Etiquetas">
         <mat-chip *ngFor="let tag of etiquetas"
                   [selectable]="true"
                   [removable]="true"
                   (removed)=removeTag(tag)>
           {{tag}}
-          <mat-icon matChipRemove *ngIf="true">x</mat-icon>
+          <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
         </mat-chip>
-        <input placeholder="Máximo 5 etiquetas separadas por coma"
+        <input [placeholder]="disabled ? 'No puedes añadir más etiquetas': 'Nueva etiqueta'"
                [matChipInputFor]="chipList"
                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                [matChipInputAddOnBlur]="true"
-               (matChipInputTokenEnd)="addTag($event)">
+               (matChipInputTokenEnd)="addTag($event)"
+               [attr.disabled]="disabled ? '': null"
+               autocomplete="off">
       </mat-chip-list>
     </mat-form-field>
     <br>
