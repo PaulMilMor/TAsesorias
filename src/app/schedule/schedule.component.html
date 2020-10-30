@@ -1,77 +1,160 @@
-<!-- <ejs-schedule height='850px', width='1250px'> </ejs-schedule> -->
-<mat-grid-list cols="2" rowHeight="2:1" style="width: 1930px; height: 1px; margin-top: 1px;" class="text-center">
-  <mat-grid-tile>
+<div style="overflow: scroll;">
+  <mat-grid-list cols="11" rowHeight="1:7">
+    <mat-grid-tile> </mat-grid-tile>
+    <mat-grid-tile> </mat-grid-tile>
+    <mat-grid-tile>
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tabla mt-5" style="margin-left: 350px;">
+      <mat-list>
+        <mat-list-item>Lunes</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let item of horas; let i = index">
+          <span *ngIf="checkLunes(item)">
+            <button mat-raised-button color="warn" (click)="clunes.pop(item)">
+              {{item}}
+            </button>
+          </span>
+          <span *ngIf="!checkLunes(item)">
+            <button mat-stroked-button color="warn" (click)="clunes.push(item)">
+              {{item}}
+            </button>
+          </span>
 
-      <ng-container matColumnDef="hora">
-        <th mat-header-cell *matHeaderCellDef> Hora </th>
-        <td mat-cell *matCellDef="let element"> {{element.hora}} </td>
-      </ng-container>
+        </mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+    <mat-grid-tile>
 
-      <ng-container matColumnDef="lunes">
-        <th mat-header-cell *matHeaderCellDef> Lunes </th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-flat-button (click)="changeLunes(element)">
-            <span *ngIf="!element.lunes">Añadir</span>
-            <span *ngIf="element.lunes">Quitar</span>
-          </button>
-        </td>
-      </ng-container>
+      <mat-list>
+        <mat-list-item>Martes</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let item of horas;let i=index">
+          <span *ngIf="checkMartes(item)">
+            <button mat-raised-button color="warn" (click)="cmartes.pop(item)">
+              {{item}}
+            </button>
+          </span>
+          <span *ngIf="!checkMartes(item)">
+            <button mat-stroked-button color="warn" (click)="cmartes.push(item)">
+              {{item}}
+            </button>
+          </span>
+        </mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+    <mat-grid-tile>
+
+      <mat-list>
+        <mat-list-item>Miercoles</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let item of horas; let i = index">
+          <span *ngIf="checkMiercoles(item)">
+            <button mat-raised-button color="warn" (click)="cmiercoles.pop(item)">
+              {{item}}
+            </button>
+          </span>
+          <span *ngIf="!checkMiercoles(item)">
+            <button mat-stroked-button color="warn" (click)="cmiercoles.push(item)">
+              {{item}}
+            </button>
+          </span>
+        </mat-list-item>
+
+      </mat-list>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+
+      <mat-list>
+        <mat-list-item>Jueves</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let item of horas; let i = index">
+          <span *ngIf="checkJueves(item)">
+            <button mat-raised-button color="warn" (click)="cjueves.pop(item)">
+              {{item}}
+            </button>
+          </span>
+          <span *ngIf="!checkJueves(item)">
+            <button mat-stroked-button color="warn" (click)="cjueves.push(item)">
+              {{item}}
+            </button>
+          </span>
+        </mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+
+      <mat-list>
+        <mat-list-item>Viernes</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let item of horas; let i = index">
+          <span *ngIf="checkViernes(item)">
+            <button mat-raised-button color="warn" (click)="cviernes.pop(item)">
+              {{item}}
+            </button>
+          </span>
+          <span *ngIf="!checkViernes(item)">
+            <button mat-stroked-button color="warn" (click)="cviernes.push(item)">
+              {{item}}
+            </button>
+          </span>
+        </mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+
+      <mat-list>
+        <mat-list-item>Sábado</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let item of horas; let i = index">
+          <span *ngIf="checkSabado(item)">
+            <button mat-raised-button color="warn" (click)="csabado.pop(item)">
+              {{item}}
+            </button>
+          </span>
+          <span *ngIf="!checkSabado(item)">
+            <button mat-stroked-button color="warn" (click)="csabado.push(item)">
+              {{item}}
+            </button>
+          </span>
+        </mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+
+      <mat-list>
+        <mat-list-item>Domingo</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let item of horas; let i = index">
+          <span *ngIf="checkDomingo(item)">
+            <button mat-raised-button color="warn" (click)="cdomingo.pop(item)">
+              {{item}}
+            </button>
+          </span>
+          <span *ngIf="!checkDomingo(item)">
+            <button mat-stroked-button color="warn" (click)="cdomingo.push(item)">
+              {{item}}
+            </button>
+          </span>
+        </mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+    <mat-grid-tile>
 
 
-      <ng-container matColumnDef="martes">
-        <th mat-header-cell *matHeaderCellDef> Martes </th>
-        <td mat-cell *matCellDef="let element"> <button mat-flat-button (click)="changeMartes(element)">
-            <span *ngIf="!element.martes">Añadir</span>
-            <span *ngIf="element.martes">Quitar</span>
-          </button> </td>
-      </ng-container>
+    </mat-grid-tile>
+    <mat-grid-tile>
 
 
-      <ng-container matColumnDef="miercoles">
-        <th mat-header-cell *matHeaderCellDef> Miercoles </th>
-        <td mat-cell *matCellDef="let element"> <button mat-flat-button (click)="changeMiercoles(element)">
-            <span *ngIf="!element.miercoles">Añadir</span>
-            <span *ngIf="element.miercoles">Quitar</span>
-          </button> </td>
-      </ng-container>
+    </mat-grid-tile>
+    <mat-grid-tile>
 
-      <ng-container matColumnDef="jueves">
-        <th mat-header-cell *matHeaderCellDef> Jueves </th>
-        <td mat-cell *matCellDef="let element"> <button mat-flat-button (click)="changeJueves(element)">
-            <span *ngIf="!element.jueves">Añadir</span>
-            <span *ngIf="element.jueves">Quitar</span>
-          </button> </td>
-      </ng-container>
-      <ng-container matColumnDef="viernes">
-        <th mat-header-cell *matHeaderCellDef> Viernes </th>
-        <td mat-cell *matCellDef="let element"> <button mat-flat-button (click)="changeViernes(element)">
-            <span *ngIf="!element.viernes">Añadir</span>
-            <span *ngIf="element.viernes">Quitar</span>
-          </button> </td>
-      </ng-container>
-      <ng-container matColumnDef="sabado">
-        <th mat-header-cell *matHeaderCellDef> Sabado </th>
-        <td mat-cell *matCellDef="let element"> <button mat-flat-button (click)="changeSabado(element)">
-            <span *ngIf="!element.sabado">Añadir</span>
-            <span *ngIf="element.sabado">Quitar</span>
-          </button> </td>
-      </ng-container>
-      <ng-container matColumnDef="domingo">
-        <th mat-header-cell *matHeaderCellDef> Domingo </th>
-        <td mat-cell *matCellDef="let element"> <button mat-flat-button (click)="changeDomingo(element)">
-            <span *ngIf="!element.domingo">Añadir</span>
-            <span *ngIf="element.domingo">Quitar</span>
-          </button> </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
 
-  </mat-grid-tile>
-</mat-grid-list>
-<br><br><br><br><br><br><br>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
 <div>
   <button mat-flat-button class="mt-5" class="btn btn-info btn-block" (click)="save()"
     style="width: 197px;  margin-left: 750px; margin-top: 24px;">Guardar Cambios</button>
