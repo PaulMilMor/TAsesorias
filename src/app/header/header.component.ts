@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   usuario: Usuario
   instructor = 'instructor'
   alumno = 'alumno'
+  administrador = 'administrador'
   isValid: boolean = false
   isCollapsed: boolean = false;
   constructor(private auth: AngularFireAuth, private db: AngularFirestore, private authService: AuthService, private msg: MsgService, public dialog: MatDialog) { }

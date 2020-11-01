@@ -53,6 +53,7 @@ import { dialogStudent, StudentregisterComponent } from './studentregister/stude
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatChipsModule} from '@angular/material/chips';
 import { CalificarComponent } from './calificar/calificar.component';
+import { CertificacionesComponent } from './certificaciones/certificaciones.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { CalificarComponent } from './calificar/calificar.component';
  BcategoriaPipe,
  StudentregisterComponent,
  dialogStudent,
- CalificarComponent
+ CalificarComponent,
+ CertificacionesComponent
   ],
   imports: [
      BrowserModule,
