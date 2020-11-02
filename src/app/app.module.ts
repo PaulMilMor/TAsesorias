@@ -54,6 +54,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatChipsModule} from '@angular/material/chips';
 import { CalificarComponent } from './calificar/calificar.component';
 import { CertificacionesComponent } from './certificaciones/certificaciones.component';
+import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { CertificacionesComponent } from './certificaciones/certificaciones.comp
  StudentregisterComponent,
  dialogStudent,
  CalificarComponent,
- CertificacionesComponent
+ CertificacionesComponent,
+ CertificacionesinstructorComponent
   ],
   imports: [
      BrowserModule,
