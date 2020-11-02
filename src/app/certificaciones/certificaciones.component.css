@@ -1,5 +1,6 @@
-main {
+.main-div{
     width: 70%;
     margin: auto;
     text-align: center;
+  align-items: center;
   }
