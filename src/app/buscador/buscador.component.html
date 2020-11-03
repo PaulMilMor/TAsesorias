@@ -1,25 +1,71 @@
- <div class='container mt-5'>
-    <mat-form-field appearance="fill">
-        <mat-label>Buscar por</mat-label>
-        <mat-select [(value)]="selected">
-     
-          <mat-option value="maestro">Nombre de intructor</mat-option>
-          <mat-option value="categoria"> Categoria</mat-option>
-         
-        </mat-select>
-      </mat-form-field>
-      <div *ngIf="selected==maestro; else Categoria">
-        <h4>Maestro</h4>
-    
-        <form action="">
-            <div class="form-group">
-                <input   [(ngModel)]="filter" name="filter" class="form-control" type="text" placeholder="Busque un maestro" style="width: 400px;">
-            </div>
-        </form>
+<div>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap" rel="stylesheet">
+    <h1><i class="material-icons">find_in_page</i>BUSCAR ASESORÍA</h1>
+      
+ </div>
+    <div class= "searcher" style="text-align: center;">
+
+        <input  [(ngModel)]="filter" name="filter" class="form-control" type="text" placeholder= " Escribe nombre de instructor o etiqueta" style="width: 500px;">
+ 
+        <button mat-flat-button class="mt-5" class="btn btn-info btn-block" style="width: 187px; text-align: center; height: 6vh;" (click)= "filtrarCategoria=!filtrarCategoria"><i class="material-icons" style="font-size: 130%;" >filter_alt</i> Filtrar categorías</button>
+
+    </div>      
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <div class="custom-control custom-checkbox" style="text-align: center;" *ngIf= "filtrarCategoria">
+        <div class="custom-checkbox" style="display: inline-block;">
+            <input type="checkbox" class="custom-control-input" id="catTodas" (change)="isDisabled=!isDisabled">
+            <label for="catTodas" class="custom-control-label">Todas</label>
+        </div>
         
-        <div class="row">
-            <div class="col-sm-3" *ngFor="let curso of cursos | bmaestro:filter">
-                <div class="card" >
+        <div class="custom-checkbox">
+        <input [disabled]="isDisabled" type="checkbox" class="custom-control-input" id="catIdiomas" >
+        <label for="catIdiomas" class="custom-control-label">Idiomas</label>
+        </div>
+        <div class="custom-checkbox">
+        <input [disabled]="isDisabled" type="checkbox" class="custom-control-input" id="catExactas" >
+        <label for="catExactas" class="custom-control-label">Ciencias Exactas</label>
+        </div>
+        <div class="custom-checkbox">
+        <input [disabled]="isDisabled" type="checkbox" class="custom-control-input" id="catInformatica" >
+        <label for="catInformatica" class="custom-control-label">Informática</label>
+        </div>    
+        <div class="custom-checkbox">
+        <input [disabled]="isDisabled" type="checkbox" class="custom-control-input" id="catSociales">
+        <label for="catSociales" class="custom-control-label">Ciencias Sociales</label>
+        </div>
+        <div class="custom-checkbox">
+        <input [disabled]="isDisabled" type="checkbox" class="custom-control-input" id="catNaturales">
+        <label for="catNaturales" class="custom-control-label">Ciencias Naturales</label>
+        </div>    
+        <br>
+        <br>
+        <div class="custom-checkbox2">
+        <input [disabled]="isDisabled" type="checkbox" class="custom-control-input" id="catHogar">
+        <label for="catHogar" class="custom-control-label">Cosas del Hogar</label>
+        </div>
+        <div class="custom-checkbox2">
+        <input [disabled]="isDisabled" type="checkbox" class="custom-control-input" id="catElectro">
+        <label for="catElectro" class="custom-control-label">Electrónica y Mecánica</label>
+        </div>
+        <div class="custom-checkbox2">
+        <input [disabled]="isDisabled" type="checkbox" class="custom-control-input" id="catArte">
+        <label for="catArte" class="custom-control-label">Arte</label>
+        </div>
+        <div class="custom-checkbox2">
+        <input [disabled]="isDisabled" type="checkbox" class="custom-control-input" id="catManual">
+        <label for="catManual" class="custom-control-label">Manualidades</label>
+        </div>
+</div>
+
+
+ <div class='container mt-5'> 
+      <div>
+                
+        
+        <div class="row" >
+            <div class="col-sm-3" *ngFor="let curso of cursos | bmaestro:filter" style="padding-top: 3%;">
+                <div class="card">
                     <img class="card-img-top imgMaestro" [src]="curso.user.img">
                     <div class="card-body">
                       
@@ -40,7 +86,6 @@
 </div> 
 
 <ng-template #Categoria>
-    <h4>Categoria</h4>
 
 <form action="">
     <div class="form-group">

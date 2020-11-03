@@ -82,6 +82,7 @@ import { CalificarComponent } from './calificar/calificar.component';
     ReactiveFormsModule,
   
     FormsModule,
+    
     AngularFireStorageModule,
     ProgressbarModule.forRoot(),
     BsDropdownModule.forRoot(),
