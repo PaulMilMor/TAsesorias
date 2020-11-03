@@ -55,6 +55,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { CalificarComponent } from './calificar/calificar.component';
 import { CertificacionesComponent } from './certificaciones/certificaciones.component';
 import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
+//import { dialogNewcertificacion,CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,8 @@ import { CertificacionesinstructorComponent } from './certificacionesinstructor/
  CalificarComponent,
  CertificacionesComponent,
  CertificacionesinstructorComponent
+ //dialogNewcertificacion
+
   ],
   imports: [
      BrowserModule,
@@ -114,6 +117,8 @@ NgbModule
    entryComponents: [
     register,
     dialogStudent
+    //dialogNewcertificacion
+
   ], 
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [

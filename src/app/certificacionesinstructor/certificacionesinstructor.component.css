@@ -21,3 +21,7 @@
     border: 0;
     line-height: 70px
   }
+  .select {
+    right: 0;
+    position: absolute;
+}
