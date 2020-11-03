@@ -82,6 +82,7 @@ import { CertificacionesinstructorComponent } from './certificacionesinstructor/
     ReactiveFormsModule,
 
     FormsModule,
+    
     AngularFireStorageModule,
     ProgressbarModule.forRoot(),
     BsDropdownModule.forRoot(),

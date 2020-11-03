@@ -3,6 +3,11 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Usuario } from 'src/models/usuario';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Curso } from 'src/models/curso';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { inputs } from '@syncfusion/ej2-angular-schedule/src/schedule/schedule.component';
+import { createModifiersFromModifierFlags } from 'typescript';
+import { FormControl } from '@angular/forms';
+
 @Component({
   selector: 'app-buscador',
   templateUrl: './buscador.component.html',
@@ -16,6 +21,9 @@ export class BuscadorComponent implements OnInit {
   categoria='categoria';
   cursos:Curso[]=new Array<Curso>()
   currentRate = 5;
+  filtrarCategoria:boolean=false
+  allSelected:boolean=false
+  isDisabled : boolean;
 
   constructor(private db: AngularFirestore, private fb: FormBuilder) { }
 
