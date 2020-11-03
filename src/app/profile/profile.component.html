@@ -32,11 +32,11 @@
               {{c.tarifa}} <br> <br> <br> <br>
                 <ngb-rating [(rate)]="c.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem"> <br> <br>
                 </ngb-rating>
-
+                <h3>{{c.nivel.nombre}}</h3>
 
                 <mat-chip-list aria-label="Etiquetas">
 
-                  <mat-chip>Etiqueta</mat-chip>
+                  <mat-chip *ngFor="let etiqueta of c.etiquetas">{{etiqueta}}</mat-chip>
              
                 </mat-chip-list>
               </mat-grid-tile>
