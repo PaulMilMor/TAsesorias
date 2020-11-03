@@ -9,6 +9,8 @@ import { StudentregisterComponent } from './studentregister/studentregister.comp
 import { ZoomComponent } from './zoom/zoom.component';
 import { CalificarComponent } from './calificar/calificar.component';
 import { ProfileComponent } from './profile/profile.component';
+import { CertificacionesComponent } from './certificaciones/certificaciones.component';
+import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 
 
 const routes: Routes = [
@@ -19,7 +21,10 @@ const routes: Routes = [
   {path:'buscador', component:BuscadorComponent},
   {path:'agendar/:idCurso', component:StudentregisterComponent},
   {path:'calificar/:idMaestro/:idAsesoria', component:CalificarComponent},
-  {path:'perfil/:idMaestro',component:ProfileComponent}
+  {path:'perfil/:idMaestro',component:ProfileComponent},
+  {path:'certificaciones', component:CertificacionesComponent},
+  {path:'certificacionesinstructor', component:CertificacionesinstructorComponent}
+
   
 ];
 

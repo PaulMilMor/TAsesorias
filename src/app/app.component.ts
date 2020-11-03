@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   title = 'TusAsesorias';
   alumno='alumno';
   instructor='instructor'
+  administrador = 'administrador'
   user:User
   usuario:Usuario
   url: string

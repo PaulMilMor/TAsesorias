@@ -47,6 +47,9 @@ import { CalificarComponent } from './calificar/calificar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MatIconModule } from '@angular/material/icon'; 
 
+import { CertificacionesComponent } from './certificaciones/certificaciones.component';
+import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
+//import { dialogNewcertificacion,CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +70,9 @@ import { MatIconModule } from '@angular/material/icon';
     dialogStudent,
     CalificarComponent,
     ProfileComponent,
+ CertificacionesinstructorComponent
+ //dialogNewcertificacion
+
   ],
   imports: [
     BrowserModule,
@@ -103,8 +109,10 @@ import { MatIconModule } from '@angular/material/icon';
   entryComponents: [
     register,
     dialogStudent
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    //dialogNewcertificacion
+
+  ], 
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [
     AngularFireAuth,
     AngularFirestore,
