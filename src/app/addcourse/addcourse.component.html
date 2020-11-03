@@ -21,11 +21,12 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Etiquetas</mat-label>
-      <mat-chip-list #chipList aria-label="Etiquetas">
+      <mat-chip-list #chipList aria-label="Etiquetas"
+                     formArrayName="etiquetas">
         <mat-chip *ngFor="let tag of etiquetas"
                   [selectable]="true"
                   [removable]="true"
-                  (removed)=removeTag(tag)>
+                  (removed)="removeTag(tag, formCursos)">
           {{tag}}
           <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
         </mat-chip>
@@ -33,10 +34,11 @@
                [matChipInputFor]="chipList"
                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                [matChipInputAddOnBlur]="true"
-               (matChipInputTokenEnd)="addTag($event)"
+               (matChipInputTokenEnd)="addTag($event, formCursos)"
                [attr.disabled]="disabled ? '': null"
                autocomplete="off">
       </mat-chip-list>
+      <mat-error>Introduce al menos 1 etiqueta.</mat-error>
     </mat-form-field>
     <br>
     <mat-form-field appearance="fill" style="margin-top: 9px;">
@@ -45,7 +47,7 @@
     </mat-form-field>
     <h4 style="margin-left: 41px; font-size: 13px;">*Tarifa máxima de $2000.00 MXN por hora</h4>
     <br>
-    <button mat-raised-button (click)="setCourse()"
+    <button mat-raised-button [disabled]="formCursos.invalid" (click)="setCourse()"
       style="font-size: 17px; margin-top: 1px; margin-left: 127px; width: 150px; background-color: rgb(211, 153, 81); color: white;">PUBLICAR</button>
   </form>
 

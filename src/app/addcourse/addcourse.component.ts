@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MsgService } from 'src/services/msg.service';
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Categoria } from 'src/models/categoria';
 import { Nivel } from 'src/models/nivel';
 import { COMMA} from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 @Component({
   selector: 'app-addcourse',
   templateUrl: './addcourse.component.html',
@@ -26,19 +26,37 @@ export class AddcourseComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [COMMA];
   etiquetas: String[] = [];
   disabled: boolean;
+  @ViewChild('chipList') chipList: MatChipList;
   constructor(private db: AngularFirestore, private fb: FormBuilder, private storage: AngularFireStorage, private msg: MsgService, private auth: AngularFireAuth, private activeRoute: ActivatedRoute) { }
-
+  
   ngOnInit(): void {
     this.formCursos = this.fb.group({
       tarifa: ['', Validators.required],
       categoria: ['', Validators.required],
       nivel: ['', Validators.required],
-
+      etiquetas: this.fb.array(this.etiquetas,this.validateArrayNotEmpty)
     })
+
+    this.formCursos.get('etiquetas').statusChanges.subscribe(
+      status => this.chipList.errorState = status === 'INVALID'
+    );
     this.getMyCategories()
     this.getCategories()
     this.getUser()
     this.getNiveles()
+  }
+  //Este método es para obtener el nombre del formcontrol, necesario para validar
+  initName(name: string): FormControl {
+    return this.fb.control(name);
+  }
+  //método para validar que matchiplist no esté vacio
+  validateArrayNotEmpty(c: FormControl) {
+    if(c.value && c.value.length === 0) {
+      return {
+        validateArrayNotEmpty: { valid: false }
+      };
+    }
+    return null;
   }
 
   //Obtiene el usuario 
@@ -109,14 +127,16 @@ export class AddcourseComponent implements OnInit {
   }
 
   //añade etiquetas a la lista
-  addTag(event: MatChipInputEvent): void {
+  addTag(event: MatChipInputEvent, form: FormGroup): void {
     const input = event.input;
     const value = event.value;
-
+     
     //Añade la etiqueta
       
       if((value||'').trim()) {
         this.etiquetas.push(value.trim());
+        const control = <FormArray>form.get('etiquetas');
+        control.push(this.initName(value.trim()));
       }
   
     //Reinicia el input
@@ -133,11 +153,12 @@ export class AddcourseComponent implements OnInit {
   }
 
   //Remueve etiquetas de la ista
-  removeTag(tag: String): void {
+  removeTag(tag: String, form): void {
     const index = this.etiquetas.indexOf(tag);
     
     if(index>=0){
       this.etiquetas.splice(index,1);
+      form.get('etiquetas').removeAt(index);
     }
     if(this.etiquetas.length<5){
       this.disabled=false;
