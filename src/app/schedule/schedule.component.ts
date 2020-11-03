@@ -1,38 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-// import { DayService, WeekService, WorkWeekService, MonthService, AgendaService } from '@syncfusion/ej2-angular-schedule';
+
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MsgService } from 'src/services/msg.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Usuario } from 'src/models/usuario';
 
 
-var Default = [
-  { hora: '0:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '1:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '2:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '3:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '4:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '5:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '6:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '7:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '8:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '9:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '10:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '11:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '12:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '13:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '14:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '15:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '16:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '17:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '18:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '19:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '20:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '21:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '22:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '23:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-  { hora: '24:00', lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false },
-];
+
 
 @Component({
   // providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService],
@@ -46,88 +19,27 @@ var Default = [
 export class ScheduleComponent implements OnInit {
   displayedColumns: string[] = ['hora', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
   visible = false;
-  clunes: any[] = new Array();
-  cmartes: any[] = new Array();
-  cmiercoles: any[] = new Array();
-  cjueves: any[] = new Array();
-  cviernes: any[] = new Array();
-  csabado: any[] = new Array();
-  cdomingo: any[] = new Array();
+  clunes: Array<any> = new Array();
+  cmartes: Array<any> = new Array();
+  cmiercoles: Array<any> = new Array();
+  cjueves: Array<any> = new Array();
+  cviernes: Array<any> = new Array();
+  csabado: Array<any> = new Array();
+  cdomingo: Array<any> = new Array();
+  horas = ['0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
 
-
-  dataSource = Default
 
   constructor(private db: AngularFirestore, private msg: MsgService, private auth: AngularFireAuth) { }
 
   ngOnInit(): void {
-    Default = this.getData()
+    this.getData()
+
+
+
+
   }
   //todos los change son para designar si el instructor va a dar en a esa hora
-  changeLunes(valor) {
-    if (!valor.lunes) {
-      this.clunes.push(valor.hora)
 
-    } else {
-      this.clunes.splice(this.clunes.indexOf(valor.hora), 1)
-    }
-    valor.lunes = !valor.lunes
-  }
-  changeMartes(valor) {
-    if (!valor.martes) {
-      this.cmartes.push(valor.hora)
-
-    } else {
-      this.cmartes.splice(this.cmartes.indexOf(valor.hora), 1)
-    }
-    valor.martes = !valor.martes
-  }
-  changeMiercoles(valor) {
-
-    if (!valor.miercoles) {
-      this.cmiercoles.push(valor.hora)
-
-    } else {
-      this.cmiercoles.splice(this.cmiercoles.indexOf(valor.hora), 1)
-    }
-    valor.miercoles = !valor.miercoles
-  }
-  changeJueves(valor) {
-
-    if (!valor.jueves) {
-      this.cjueves.push(valor.hora)
-
-    } else {
-      this.cjueves.splice(this.cjueves.indexOf(valor.hora), 1)
-    }
-    valor.jueves = !valor.jueves
-  }
-  changeViernes(valor) {
-    if (!valor.viernes) {
-      this.cviernes.push(valor.hora)
-
-    } else {
-      this.cviernes.splice(this.cviernes.indexOf(valor.hora), 1)
-    }
-    valor.viernes = !valor.viernes
-  }
-  changeSabado(valor) {
-    if (!valor.sabado) {
-      this.csabado.push(valor.hora)
-
-    } else {
-      this.csabado.splice(this.csabado.indexOf(valor.hora), 1)
-    }
-    valor.sabado = !valor.sabado
-  }
-  changeDomingo(valor) {
-    if (!valor.domingo) {
-      this.cdomingo.push(valor.hora)
-
-    } else {
-      this.cdomingo.splice(this.cdomingo.indexOf(valor.hora), 1)
-    }
-    valor.domingo = !valor.domingo
-  }
   save() {
     var u = this.auth.auth.currentUser;
 
@@ -151,41 +63,135 @@ export class ScheduleComponent implements OnInit {
     })
   }
   //a reparar esto, deberia traer la informacion de las asesorias pero llegan en desorden
-  getData(): Array<any> {
-    var user = this.auth.auth.currentUser;
-
-    var hor: any
-    var data: any;
-    this.db.collection('usuarios').get().subscribe((res) => {
-      console.log("entro en data")
+  getData() {
+    this.db.collection('horario').get().subscribe((res) => {
       res.docs.forEach((item) => {
-        let u = item.data() as Usuario;
-        if (u.uid == user.uid) {
-          console.log("entro en id")
-          u.id = item.id;
-          u.ref = item.ref;
-          if (u.horario != undefined) {
-            hor = u.horario;
-            console.log("entro en horario")
-            hor.forEach((element) => {
-              var dato = { hora: element.hora, lunes: element.lunes, martes: element.martes, miercoles: element.miercoles, jueves: element.jueves, viernes: element.viernes, sabado: element.sabado, domingo: element.domingo }
-              console.log(dato)
+        let h = item.data();
 
-            });
+        h.id = item.id
+        if (h.id == this.auth.auth.currentUser.uid) {
 
-            console.log(data)
-          } else {
-            data = Default
+          this.clunes = h.lunes;
 
-          }
+          this.cmartes = h.martes;
+          this.cmiercoles = h.miercoles;
+          this.cjueves = h.jueves;
+          this.cviernes = h.viernes;
+          this.csabado = h.sabado;
+          this.cdomingo = h.domingo;
+
         }
-
-
-
       })
     })
 
-    return data
   }
-  
+
+  //registra la sesiones que solicita el estudiante
+
+  //Muestra la semana correspondiente
+  getWeek() {
+    let today = new Date();
+    let todayDate = today.getDate();
+    let todayMonth = today.getMonth();
+    let todayYear = today.getFullYear();
+    let weekend = new Date();
+    weekend.setDate(todayDate + 6);
+    let weekendDate = weekend.getDate();
+    let weekendMonth = weekend.getMonth();
+    let weekendYear = weekend.getFullYear();
+
+    return ("Semana del " + todayDate + "/" + (todayMonth + 1) + "/" + todayYear + " al " +
+      weekendDate + "/" + (weekendMonth + 1) + "/" + weekendYear);
+  }
+  checkLunes(hour): boolean {
+
+    var exits = false
+    this.clunes.forEach(h => {
+
+      if (h == hour) {
+        console.log('exite');
+        exits = true
+      }
+
+    })
+    return exits
+  }
+  checkMartes(hour): boolean {
+
+    var exits = false
+    this.cmartes.forEach(h => {
+
+      if (h == hour) {
+        console.log('exite');
+        exits = true
+      }
+
+    })
+    return exits
+  }
+  checkMiercoles(hour): boolean {
+
+    var exits = false
+    this.cmiercoles.forEach(h => {
+
+      if (h == hour) {
+        console.log('exite');
+        exits = true
+      }
+
+    })
+    return exits
+  }
+  checkJueves(hour): boolean {
+
+    var exits = false
+    this.cjueves.forEach(h => {
+
+      if (h == hour) {
+        console.log('exite');
+        exits = true
+      }
+
+    })
+    return exits
+  } 
+  checkViernes(hour): boolean {
+
+    var exits = false
+    this.cviernes.forEach(h => {
+
+      if (h == hour) {
+        console.log('exite');
+        exits = true
+      }
+
+    })
+    return exits
+  }
+  checkSabado(hour): boolean {
+
+    var exits = false
+    this.csabado.forEach(h => {
+
+      if (h == hour) {
+        console.log('exite');
+        exits = true
+      }
+
+    })
+    return exits
+  }
+  checkDomingo(hour): boolean {
+
+    var exits = false
+    this.cdomingo.forEach(h => {
+
+      if (h == hour) {
+        console.log('exite');
+        exits = true
+      }
+
+    })
+    return exits
+  }
 }

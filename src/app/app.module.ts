@@ -44,8 +44,8 @@ import { dialogStudent, StudentregisterComponent } from './studentregister/stude
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatChipsModule } from '@angular/material/chips';
 import { CalificarComponent } from './calificar/calificar.component';
-import { ProfileComponent } from './profile/profile.component';
-import { MatIconModule } from '@angular/material/icon'; 
+import { MatIconModule } from '@angular/material/icon';
+import { ProfileComponent, reportProfile } from './profile/profile.component';
 
 import { CertificacionesComponent } from './certificaciones/certificaciones.component';
 import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
@@ -70,9 +70,8 @@ import { CertificacionesinstructorComponent } from './certificacionesinstructor/
     dialogStudent,
     CalificarComponent,
     ProfileComponent,
- CertificacionesinstructorComponent
- //dialogNewcertificacion
-
+    CertificacionesinstructorComponent,
+    reportProfile
   ],
   imports: [
     BrowserModule,
@@ -82,7 +81,7 @@ import { CertificacionesinstructorComponent } from './certificacionesinstructor/
     ReactiveFormsModule,
 
     FormsModule,
-    
+
     AngularFireStorageModule,
     ProgressbarModule.forRoot(),
     BsDropdownModule.forRoot(),
@@ -109,11 +108,10 @@ import { CertificacionesinstructorComponent } from './certificacionesinstructor/
   ],
   entryComponents: [
     register,
-    dialogStudent
-    //dialogNewcertificacion
-
-  ], 
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+    dialogStudent,
+    reportProfile,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     AngularFireAuth,
     AngularFirestore,
