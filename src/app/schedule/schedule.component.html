@@ -1,13 +1,15 @@
-<div style="overflow: scroll;">
-  <mat-grid-list cols="11" rowHeight="1:7">
-    <mat-grid-tile> </mat-grid-tile>
-    <mat-grid-tile> </mat-grid-tile>
+
+<div class="register">
+  <button mat-flat-button class="mt-5" class="btn btn-info btn-block" (click)="save()"
+  style="width: 197px;  ">Guardar Cambios</button>
+  <mat-grid-list cols="7" rowHeight="1:9" >
+
     <mat-grid-tile>
 
-      <mat-list>
+      <mat-list >
         <mat-list-item>Lunes</mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item *ngFor="let item of horas; let i = index">
+        <mat-list-item *ngFor="let item of horas; let i = index" >
           <span *ngIf="checkLunes(item)">
             <button mat-raised-button color="warn" (click)="clunes.pop(item)">
               {{item}}
@@ -18,7 +20,6 @@
               {{item}}
             </button>
           </span>
-
         </mat-list-item>
       </mat-list>
     </mat-grid-tile>
@@ -141,21 +142,8 @@
         </mat-list-item>
       </mat-list>
     </mat-grid-tile>
-    <mat-grid-tile>
 
-
-    </mat-grid-tile>
-    <mat-grid-tile>
-
-
-    </mat-grid-tile>
-    <mat-grid-tile>
-
-
-    </mat-grid-tile>
   </mat-grid-list>
+
 </div>
-<div>
-  <button mat-flat-button class="mt-5" class="btn btn-info btn-block" (click)="save()"
-    style="width: 197px;  margin-left: 750px; margin-top: 24px;">Guardar Cambios</button>
-</div>
+
