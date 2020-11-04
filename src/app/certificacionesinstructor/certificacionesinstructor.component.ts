@@ -26,7 +26,7 @@ export class CertificacionesinstructorComponent implements OnInit {
   openDialog(): void {
 
     const dialogRef = this.dialog.open(dialogNewcertificacion, {
-      width: '800px',
+      width: '600px',
       height: '400px',
     });
   }
@@ -75,4 +75,9 @@ export class dialogNewcertificacion implements OnInit {
       })
     })
   }
+   cambiar(){
+    var pdrs = document.getElementById('file-upload').localName;
+    document.getElementById('info').innerHTML = pdrs;
 }
+}
+

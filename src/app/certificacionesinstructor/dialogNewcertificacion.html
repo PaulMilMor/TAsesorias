@@ -1,7 +1,6 @@
 <div class="main-div">
     <ul class="list-group list-group-flush align-items-center">
-    <br>
-    
+    <h2>Enviar nueva certificación</h2>
     <mat-form-field appearance="fill">
         <mat-label>Categoria</mat-label>
         <mat-select formControlName="categoria">
@@ -9,12 +8,17 @@
         </mat-select>
     </mat-form-field>
     <br>
-    <textarea name="comentarios" rows="5" cols="40">Escribe aquí tus comentarios</textarea>    
+    <textarea name="comentarios" rows="5" cols="40" placeholder="Escribe aquí tus comentarios"></textarea>    
     <br>
 
-    <button class="btn btn-danger"style="width:300px; height:50px;">Añadir PDF</button>
-
-    <br>
+    <!--<button class="btn btn-danger"style="width:300px; height:50px;">Añadir PDF</button>-->
+    <!--<input formControlName="img" (change)="addImg($event)" type="file" class="form-control-file">-->
+    <label for="file-upload" class="subir">
+        <i class="fas fa-cloud-upload-alt"></i> Añadir PDF
+    </label>
+    <input id="file-upload" onchange='cambiar()' type="file" style='display: none;'/>
+    <div id="info"></div>
+    
     <button class="btn btn-primary"style="width:300px; height:50px;">Enviar</button>
 
     </ul>
