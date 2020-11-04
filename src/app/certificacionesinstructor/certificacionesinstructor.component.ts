@@ -8,10 +8,12 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   styleUrls: ['./certificacionesinstructor.component.css']
 })
 export class CertificacionesinstructorComponent implements OnInit {
-
+breakpoint
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 6;
   }
   openDialog(): void {
 
@@ -20,7 +22,9 @@ export class CertificacionesinstructorComponent implements OnInit {
       height: '300px',
     });
   }
-
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 6;
+  }
 }
 @Component({
   selector: 'dialogNewcertificacion',
