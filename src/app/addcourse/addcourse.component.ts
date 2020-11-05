@@ -40,9 +40,9 @@ export class AddcourseComponent implements OnInit {
     this.formCursos.get('etiquetas').statusChanges.subscribe(
       status => this.chipList.errorState = status === 'INVALID'
     );
+    this.getUser()
     this.getMyCategories()
     this.getCategories()
-    this.getUser()
     this.getNiveles()
   }
   //Este método es para obtener el nombre del formcontrol, necesario para validar
