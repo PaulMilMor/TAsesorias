@@ -27,7 +27,7 @@ export class CertificacionesinstructorComponent implements OnInit {
 
     const dialogRef = this.dialog.open(dialogNewcertificacion, {
       width: '600px',
-      height: '400px',
+      height: '500px',
     });
   }
 }
@@ -46,9 +46,10 @@ export class dialogNewcertificacion implements OnInit {
 
   ngOnInit(): void {
     categoria: ['', Validators.required]
-    this.getMyCategories()
-    this.getCategories()
+
     this.getUser()
+    this.getCategories()
+    this.getMyCategories()
 
   }
   

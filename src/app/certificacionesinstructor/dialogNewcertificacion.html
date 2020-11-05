@@ -1,15 +1,15 @@
 <div class="main-div">
     <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap" rel="stylesheet">
     <ul class="list-group list-group-flush align-items-center">
-    <h2>Enviar nueva certificación</h2>
+    <p>Enviar nueva certificación</p>
     <mat-form-field appearance="fill">
         <mat-label>Categoria</mat-label>
         <mat-select formControlName="categoria">
-          <mat-option value="option" *ngFor="let c of categorias" [value]="c">{{c.nombre}}</mat-option>
+          <mat-option value="option" *ngFor="let c of categoriasUsadas" [value]="c">{{c.nombre}}</mat-option>
         </mat-select>
     </mat-form-field>
     <br>
-    <textarea name="comentarios" rows="5" cols="40" placeholder="Escribe aquí tus comentarios"></textarea>    
+    <textarea name="comentarios" rows="7" cols="28" placeholder="Escribe aquí tus comentarios"></textarea>    
     <br>
 
     <!--<button class="btn btn-danger"style="width:300px; height:50px;">Añadir PDF</button>-->
