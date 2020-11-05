@@ -42,12 +42,25 @@ export class dialogNewcertificacion implements OnInit {
   categoriasUsadas: Array<Categoria> = new Array()
   usuario: Usuario
   constructor(public dialogRef: MatDialogRef<dialogNewcertificacion>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private msg: MsgService, private router: Router, private fb: FormBuilder) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private msg: MsgService, private auth: AngularFireAuth,private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     categoria: ['', Validators.required]
     this.getMyCategories()
     this.getCategories()
+    this.getUser()
+
+  }
+  
+  getUser() {
+    this.db.collection('usuarios').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        let u = item.data() as Usuario
+        if (u.uid == this.auth.auth.currentUser.uid) {
+          this.usuario = u;
+        }
+      })
+    })
   }
   getCategories() {
     this.db.collection('categorias').get().subscribe((res) => {
