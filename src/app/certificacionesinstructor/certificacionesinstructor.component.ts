@@ -1,10 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { MsgService } from 'src/services/msg.service';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { MsgService } from 'src/services/msg.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Categoria } from 'src/models/categoria';
+import { Usuario } from 'src/models/usuario';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { Certificacion } from 'src/models/certificacion';
 @Component({
   selector: 'app-certificacionesinstructor',
@@ -20,11 +23,12 @@ export class CertificacionesinstructorComponent implements OnInit {
     this.getCertificados()
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 6;
   }
+
   openDialog(): void {
 
     const dialogRef = this.dialog.open(dialogNewcertificacion, {
-      width: '800px',
-      height: '300px',
+      width: '600px',
+      height: '500px',
     });
   }
   onResize(event) {
@@ -37,7 +41,7 @@ export class CertificacionesinstructorComponent implements OnInit {
         c.id = item.id
         if (c.userid == this.auth.auth.currentUser.uid) {
           this.certificaciones.push(c)
-          
+
         }
       })
     })
@@ -49,11 +53,21 @@ export class CertificacionesinstructorComponent implements OnInit {
   styleUrls: ['./dialogNewcertificacion.css'],
 })
 export class dialogNewcertificacion implements OnInit {
+  /**/
+  categoria: Categoria
+  categorias: Array<Categoria> = new Array()
+  categoriasUsadas: Array<Categoria> = new Array()
+  usuario: Usuario
   formCertificacion: FormGroup
   constructor(public dialogRef: MatDialogRef<dialogNewcertificacion>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private fb: FormBuilder, private storage: AngularFireStorage, private msg: MsgService, private auth: AngularFireAuth) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private msg: MsgService, private storage: AngularFireStorage, private auth: AngularFireAuth, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    categoria: ['', Validators.required]
+
+    this.getUser()
+    this.getCategories()
+    this.getMyCategories()
     this.formCertificacion = this.fb.group({
       descripcion: [''],
       categoria: [''],
@@ -61,6 +75,10 @@ export class dialogNewcertificacion implements OnInit {
       userid: [''],
       status: ['']
     })
+
+
+    /** */
+
   }
   addDoc(event) {
     if (event.target.files.length > 0) {
@@ -87,5 +105,48 @@ export class dialogNewcertificacion implements OnInit {
       console.log(err);
 
     })
+    /**/
+  }
+
+  getUser() {
+    this.db.collection('usuarios').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        let u = item.data() as Usuario
+        if (u.uid == this.auth.auth.currentUser.uid) {
+          this.usuario = u;
+        }
+      })
+    })
+  }
+  getCategories() {
+    this.db.collection('categorias').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        let c = item.data() as Categoria
+        c.id = item.id;
+        this.categorias.push(c)
+        for (let iten of this.categoriasUsadas) {
+          if (c.nombre == iten.nombre) {
+            this.categorias.pop();
+          }
+        }
+      })
+
+    })
+  }
+  getMyCategories() {
+    this.db.collection('cursos').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        let h = item.data();
+        if (h.user.uid == this.usuario.uid) {
+          this.categoriasUsadas.push(h.categoria);
+          console.log("cat usada " + h.categoria.nombre);
+        }
+      })
+    })
+  }
+  cambiar() {
+    var pdrs = document.getElementById('file-upload').localName;
+    document.getElementById('info').innerHTML = pdrs;
   }
 }
+

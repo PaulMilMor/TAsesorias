@@ -26,28 +26,59 @@
       <span *ngFor="let c of cursos">
         <mat-list-item role="listitem">
           <mat-card class="card-course">
-            <mat-grid-list cols="5">
+            <mat-card-title> {{c.categoria.nombre}} </mat-card-title><br>
+              <mat-list-item>
+                <strong>Tarifa por
+                  hora:</strong>
+                ${{c.tarifa}}
+  
+              </mat-list-item>
+              <mat-list-item>
+                <ngb-rating [(rate)]="c.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem">
+                </ngb-rating>
+  
+              </mat-list-item>
+              <mat-list-item>
+                <h3><strong>Nivel académico: </strong>{{c.nivel.nombre}}</h3>
+  
+              </mat-list-item>
+              <mat-list-item>
+                <mat-chip-list aria-label="Etiquetas">
+                  <strong>Etiquetas: </strong>
+                  <mat-chip *ngFor="let etiqueta of c.etiquetas">{{etiqueta}}</mat-chip>
+  
+                </mat-chip-list>
+                <button mat-flat-button color="primary" [routerLink]="['/agendar', c.id ]">Agendar <mat-icon>add
+                </mat-icon></button>
+              </mat-list-item>
+  
+  
+            
+
+            <!--mat-grid-list cols="5">
               <mat-grid-tile colspan="4">
-                <mat-card-title>         {{c.categoria.nombre}} <br><br><br><br><br></mat-card-title><br>
-              {{c.tarifa}} <br> <br> <br> <br>
+                <mat-card-title> {{c.categoria.nombre}} <br><br><br><br><br></mat-card-title><br><strong>Tarifa por
+                  hora:</strong>
+                ${{c.tarifa}} <br> <br> <br> <br>
                 <ngb-rating [(rate)]="c.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem"> <br> <br>
                 </ngb-rating>
-
+                <h3><strong>Nivel académico: </strong>{{c.nivel.nombre}}</h3>
 
                 <mat-chip-list aria-label="Etiquetas">
+                  <strong>Etiquetas: </strong>
+                  <mat-chip *ngFor="let etiqueta of c.etiquetas">{{etiqueta}}</mat-chip>
 
-                  <mat-chip>Etiqueta</mat-chip>
-             
                 </mat-chip-list>
               </mat-grid-tile>
               <mat-grid-tile colspan="1">
-                <button mat-flat-button color="primary"  [routerLink]="['/agendar', c.id ]">Agendar</button>
+                <button mat-flat-button color="primary" [routerLink]="['/agendar', c.id ]">Agendar <mat-icon>add
+                  </mat-icon></button>
               </mat-grid-tile>
-            </mat-grid-list>
+            </mat-grid-list-->
           </mat-card>
           <br>
         </mat-list-item>
-        <br>   <br>   <br>   <br>   <br>   <br>   <br>   <br>   <br>
+        <br> <br> <br> <br> <br> <br> <br> <br> <br>
       </span>
 
     </mat-list>

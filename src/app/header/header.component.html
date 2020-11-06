@@ -20,11 +20,15 @@
         <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario==instructor"
           [routerLink]="['/agregar-clase']" routerLinkActive="router-link-active" style="font-size: 17px;">Asesorias</a>
       </li>
-
+      <li class="nav-item">
+        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario==administrador"
+          [routerLink]="['/certificaciones']" routerLinkActive="router-link-active"
+          style="font-size: 17px;">Certificaciones</a>
+      </li>
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">
       <li class="nav-item">
-        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario==alumno"
+        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario==alumno || usuario.tipoUsuario==administrador"
           [routerLink]="['/buscador']" routerLinkActive="router-link-active"
           style="font-size: 14px; padding-top: 61%;"><i class="material-icons">search</i></a>
       </li>
