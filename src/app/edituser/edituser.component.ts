@@ -22,10 +22,11 @@ export class EdituserComponent implements OnInit {
   editImg: boolean = false
   editProfile: boolean = false
   normal: 'normal'
+  tipoCorreo:string
   constructor(private db: AngularFirestore, private fb: FormBuilder, private storage: AngularFireStorage, private msg: MsgService, private auth: AngularFireAuth, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.idUsuario = this.activeRoute.snapshot.params.idUsuario;
+    this.idUsuario = this.auth.auth.currentUser.uid
     this.getUser();
     this.formUsuario = this.fb.group({
       correo: ['', Validators.required],
@@ -118,6 +119,9 @@ export class EdituserComponent implements OnInit {
           u.ref = item.ref;
           this.usuario = u;
           console.log(this.usuario.img)
+          this.tipoCorreo=u.correo.split('@')[1]
+          console.log(this.tipoCorreo);
+          
         }
       })
     })

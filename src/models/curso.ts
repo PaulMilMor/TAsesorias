@@ -7,4 +7,6 @@ export class Curso{
    user:Usuario
    id:string
    evaluaciones:any
+   nivel:any
+   etiquetas:any
 }
