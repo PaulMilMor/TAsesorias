@@ -30,13 +30,16 @@ export class ScheduleComponent implements OnInit {
 
 
   constructor(private db: AngularFirestore, private msg: MsgService, private auth: AngularFireAuth) { }
-
+breakpoint
   ngOnInit(): void {
     this.getData()
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 6;
 
 
 
-
+  }
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 6;
   }
   //todos los change son para designar si el instructor va a dar en a esa hora
 

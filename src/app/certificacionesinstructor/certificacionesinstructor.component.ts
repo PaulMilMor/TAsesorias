@@ -7,20 +7,21 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from 'src/models/categoria';
 import { Usuario } from 'src/models/usuario';
-
-
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Certificacion } from 'src/models/certificacion';
 @Component({
   selector: 'app-certificacionesinstructor',
   templateUrl: './certificacionesinstructor.component.html',
   styleUrls: ['./certificacionesinstructor.component.css']
 })
 export class CertificacionesinstructorComponent implements OnInit {
-
-
-  constructor(public dialog: MatDialog) { }
+  breakpoint
+  certificaciones: Array<Certificacion> = new Array();
+  constructor(public dialog: MatDialog, private db: AngularFirestore, private auth: AngularFireAuth) { }
 
   ngOnInit(): void {
-
+    this.getCertificados()
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 6;
   }
 
   openDialog(): void {
@@ -30,6 +31,21 @@ export class CertificacionesinstructorComponent implements OnInit {
       height: '500px',
     });
   }
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 6;
+  }
+  getCertificados() {
+    this.db.collection('certificados').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        let c = item.data() as Certificacion;
+        c.id = item.id
+        if (c.userid == this.auth.auth.currentUser.uid) {
+          this.certificaciones.push(c)
+
+        }
+      })
+    })
+  }
 }
 @Component({
   selector: 'dialogNewcertificacion',
@@ -37,12 +53,14 @@ export class CertificacionesinstructorComponent implements OnInit {
   styleUrls: ['./dialogNewcertificacion.css'],
 })
 export class dialogNewcertificacion implements OnInit {
+  /**/
   categoria: Categoria
   categorias: Array<Categoria> = new Array()
   categoriasUsadas: Array<Categoria> = new Array()
   usuario: Usuario
+  formCertificacion: FormGroup
   constructor(public dialogRef: MatDialogRef<dialogNewcertificacion>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private msg: MsgService, private auth: AngularFireAuth,private router: Router, private fb: FormBuilder) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private msg: MsgService, private storage: AngularFireStorage, private auth: AngularFireAuth, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     categoria: ['', Validators.required]
@@ -50,9 +68,46 @@ export class dialogNewcertificacion implements OnInit {
     this.getUser()
     this.getCategories()
     this.getMyCategories()
+    this.formCertificacion = this.fb.group({
+      descripcion: [''],
+      categoria: [''],
+      docref: ['', Validators.required],
+      userid: [''],
+      status: ['']
+    })
+
+
+    /** */
 
   }
-  
+  addDoc(event) {
+    if (event.target.files.length > 0) {
+      let name = new Date().getTime().toString()
+      let file = event.target.files[0]
+      let type = file.name.toString().substring(file.name.toString().lastIndexOf('.'))
+      let imgpath = 'certificaciones/' + name + type;
+      const ref = this.storage.ref(imgpath);
+      const task = ref.put(file)
+      task.then((obj) => {
+        ref.getDownloadURL().subscribe((url) => {
+          this.formCertificacion.value.docref = url;
+        })
+      })
+    }
+  }
+  save() {
+    this.formCertificacion.value.status = "pendiente"
+    this.formCertificacion.value.userid = this.auth.auth.currentUser.uid
+    this.db.collection('certificados').add(this.formCertificacion.value).finally(() => {
+      this.msg.msgSuccess('Exito', 'Certificado agregado correctamente')
+    }).catch((err) => {
+
+      console.log(err);
+
+    })
+    /**/
+  }
+
   getUser() {
     this.db.collection('usuarios').get().subscribe((res) => {
       res.docs.forEach((item) => {
@@ -89,9 +144,9 @@ export class dialogNewcertificacion implements OnInit {
       })
     })
   }
-   cambiar(){
+  cambiar() {
     var pdrs = document.getElementById('file-upload').localName;
     document.getElementById('info').innerHTML = pdrs;
-}
+  }
 }
 

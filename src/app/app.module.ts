@@ -49,7 +49,8 @@ import { ProfileComponent, reportProfile } from './profile/profile.component';
 
 import { CertificacionesComponent } from './certificaciones/certificaciones.component';
 //import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
-import {CertificacionesinstructorComponent,dialogNewcertificacion } from './certificacionesinstructor/certificacionesinstructor.component';
+import { CertificacionesinstructorComponent, dialogNewcertificacion } from './certificacionesinstructor/certificacionesinstructor.component';
+//import { dialogNewcertificacion,CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 
 @NgModule({
   declarations: [
@@ -110,8 +111,8 @@ import {CertificacionesinstructorComponent,dialogNewcertificacion } from './cert
   entryComponents: [
     register,
     dialogStudent,
-    reportProfile,
-    dialogNewcertificacion,
+    reportProfile, 
+    dialogNewcertificacion
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

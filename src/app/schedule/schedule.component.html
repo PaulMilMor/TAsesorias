@@ -2,7 +2,7 @@
 <div class="register">
   <button mat-flat-button class="mt-5" class="btn btn-info btn-block" (click)="save()"
   style="width: 197px;  ">Guardar Cambios</button>
-  <mat-grid-list cols="7" rowHeight="1:9" >
+  <mat-grid-list cols="7" rowHeight="1:9"  (window:resize)="onResize($event)">
 
     <mat-grid-tile>
 
