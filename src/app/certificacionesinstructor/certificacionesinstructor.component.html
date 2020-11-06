@@ -1,56 +1,36 @@
-<!-- <div class="main-div">
-    <ul class="list-group list-group-flush align-items-center">
-    <br>
-    <button style="outline:none;"><a class="button" style="text-decoration: none;" 
-        target=”_blank”>Enviar nueva certificación</a></button>
-    <br>
-    <button style="outline:none;"><a class="button" style="text-decoration: none;" 
-        target=”_blank”>Certificaciones enviadas/pendientes</a></button>
-    <br>
-    <button style="outline:none;"><a class="button" style="text-decoration: none; "
-        target=”_blank”>Certificación aceptada/negada</a></button>
-
-    </ul>
-</div> -->
 <div (window:resize)="onResize($event)">
-<div class="main-div container">
-       <button mat-flat-button color="warn">Enviar nueva certificacion</button>
-       
-       <div class="lista mt-3">
-        <table class="table dark">
-            <thead>
-              <tr>
-             
-                <th scope="col">Certificacion</th>
-                <th scope="col">Estatus</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-            
-                <td>Especialidad en java</td>
-                <td> <div style="color:green ;"><b> Aceptado </b> </div> </td>
-                <td><button mat-flat-button color="primary">Archivo</button>
-                  <button mat-flat-button color="accent" style="margin-left: 5px;"> Info</button></td>
-              </tr>
-              <tr>
-                
-                <td>Especialidad en python</td>
-                <td> <div style="color: red ;"><b> Negado </b> </div> </td>
-                <td><button mat-flat-button color="primary">Archivo</button>
-                  <button mat-flat-button color="accent" style="margin-left: 5px;">Info</button></td>
-              </tr>
-              <tr>
-               
-                <td>Introduccion al derecho 3</td>
-                <td><div style="color:gray ;"><b> Pendiente </b> </div></td>
-                <td><button mat-flat-button color="primary">Archivo</button></td>
-              </tr>
-              
-            </tbody>
-          </table> 
+  <div class="main-div container">
+    <button mat-flat-button color="warn" (click)="openDialog()">Enviar nueva certificacion</button>
+
+    <div class="lista mt-3">
+      <table class="table dark">
+        <thead>
+          <tr>
+
+            <th scope="col">Certificacion</th>
+            <th scope="col">Estatus</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of certificaciones">
+
+            <td>{{item.descripcion}}</td>
+            <td>
+              <div ><b> {{item.status}}</b> </div>
+            </td>
+            <td><button mat-flat-button color="primary"> <a style="text-decoration: none; color: white;"
+              [href]="item.docref " target=”_blank”>Archivo</a></button>
+              <span *ngIf="item.status!='pendiente'">
+                <button mat-flat-button color="accent" style="margin-left: 5px;"> Info</button>
+              </span>
+            </td>
+          </tr>
+          
+          
+        </tbody>
+      </table>
     </div>
-    </div>
-  
+  </div>
+
 </div>

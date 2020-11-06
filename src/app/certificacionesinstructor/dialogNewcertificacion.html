@@ -1,0 +1,9 @@
+
+
+<form action="" [formGroup]="formCertificacion">
+
+        <input type="text" formControlName="descripcion">
+        <input type="text" formControlName="categoria">
+        <input  (change)="addDoc($event)" type="file" class="form-control-file">
+    <button mat-flat-button color="warn" (click)="save()">Enviar</button>
+    </form>

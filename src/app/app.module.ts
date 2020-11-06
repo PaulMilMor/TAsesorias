@@ -48,7 +48,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProfileComponent, reportProfile } from './profile/profile.component';
 
 import { CertificacionesComponent } from './certificaciones/certificaciones.component';
-import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
+import { CertificacionesinstructorComponent,dialogNewcertificacion } from './certificacionesinstructor/certificacionesinstructor.component';
 //import { dialogNewcertificacion,CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 
 @NgModule({
@@ -71,7 +71,8 @@ import { CertificacionesinstructorComponent } from './certificacionesinstructor/
     CalificarComponent,
     ProfileComponent,
     CertificacionesinstructorComponent,
-    reportProfile
+    reportProfile,
+    dialogNewcertificacion
   ],
   imports: [
     BrowserModule,
@@ -109,7 +110,7 @@ import { CertificacionesinstructorComponent } from './certificacionesinstructor/
   entryComponents: [
     register,
     dialogStudent,
-    reportProfile,
+    reportProfile,dialogNewcertificacion
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
