@@ -21,17 +21,19 @@ export class EdituserComponent implements OnInit {
   editContra: boolean = false
   editImg: boolean = false
   editProfile: boolean = false
+  editBiog: boolean = true
   normal: 'normal'
-  tipoCorreo:string
+  tipoCorreo: string
   constructor(private db: AngularFirestore, private fb: FormBuilder, private storage: AngularFireStorage, private msg: MsgService, private auth: AngularFireAuth, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.idUsuario = this.auth.auth.currentUser.uid
     this.getUser();
     this.formUsuario = this.fb.group({
-      correo: ['', Validators.required],
+      correo: ['', Validators.email],
       contraseña: ['', Validators.minLength(8)],
-      img: ['']
+      img: [''],
+      bio: ['']
     })
 
   }
@@ -81,7 +83,7 @@ export class EdituserComponent implements OnInit {
       this.msg.msgError('Error', err)
     })
   }
- //Actualiza la imagen  de la base de datos
+  //Actualiza la imagen  de la base de datos
   editImgs() {
     var user = this.auth.auth.currentUser;
 
@@ -94,6 +96,21 @@ export class EdituserComponent implements OnInit {
 
       this.msg.msgError('Error', err)
     })
+  }
+  //Actualiza Bio
+  editBio() {
+    var user = this.auth.auth.currentUser.uid
+    this.db.collection('usuarios').doc(user).update({
+      bio: this.formUsuario.value.bio
+    }
+    ).then(() => {
+      this.msg.msgSuccess('Exito', 'Biografia actualizada correctamente')
+    }).catch((err) => {
+      console.log(err);
+
+
+    })
+
   }
   //Se encarga de ver que cambio se van a realizar y llama a los metodos correspondientes
   editUser() {
@@ -108,6 +125,9 @@ export class EdituserComponent implements OnInit {
 
       this.editPass()
     }
+    if (this.editBiog) {
+      this.editBio()
+    }
   }
   //Obtiene el usuario
   getUser() {
@@ -119,9 +139,10 @@ export class EdituserComponent implements OnInit {
           u.ref = item.ref;
           this.usuario = u;
           console.log(this.usuario.img)
-          this.tipoCorreo=u.correo.split('@')[1]
+          this.tipoCorreo = u.correo.split('@')[1]
           console.log(this.tipoCorreo);
-          
+
+          this.formUsuario.get('bio').setValue(this.usuario.bio)
         }
       })
     })

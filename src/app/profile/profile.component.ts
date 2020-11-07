@@ -38,8 +38,10 @@ export class ProfileComponent implements OnInit {
       width: '500px',
       height: '250px',
       //Para en enviar informacion a un dialogo se usa la variable data (teniendo en cuenta que existe una llamada asi tambien en el dialogo)
-      data: { maestro: this.ar.snapshot.params.idMaestro,
-      alumno:this.auth.auth.currentUser.uid }
+      data: {
+        maestro: this.ar.snapshot.params.idMaestro,
+        alumno: this.auth.auth.currentUser.uid
+      }
     });
 
   }
@@ -75,29 +77,38 @@ export class ProfileComponent implements OnInit {
 
 })
 export class reportProfile implements OnInit {
-  formReporte: FormGroup
-
+  formReporte: FormGroup;
+  allreports: Array<any> = new Array();
 
   constructor(
     public dialogRef: MatDialogRef<reportProfile>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private msg: MsgService, private router: Router, private fb: FormBuilder, private ar: ActivatedRoute, private auth:AngularFireAuth) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private msg: MsgService, private router: Router, private fb: FormBuilder, private ar: ActivatedRoute, private auth: AngularFireAuth) { }
   ngOnInit(): void {
-    this.exitsReport()
     this.formReporte = this.fb.group({
-      maestro: [''],
+      maestro: [' ' ],
       alumno: [''],
       reporte: ['', Validators.required]
 
     })
+
+    this.exitsReport()
 
 
   }
 
 
   saveReport() {
-    this.formReporte.value.maestro=this.data.maestro
-    this.formReporte.value.alumno=this.data.alumno
+    console.log(this.allreports);
+    console.log(1);
+
+
+    this.formReporte.value.maestro = this.data.maestro
+    this.formReporte.value.alumno = this.data.alumno
+
+
     this.db.collection('reportes').add(this.formReporte.value).finally(() => {
+      console.log('entra aqui');
+
       this.msg.msgSuccess('Exito', 'Reporte creado correctamente')
       this.dialogRef.close();
     }).catch((err) => {
@@ -112,32 +123,35 @@ export class reportProfile implements OnInit {
   }
 
 
-  exitsReport(){
-    var reports:Array<any>=new Array()
-     this.db.collection('reportes').get().subscribe((res)=>{
-  
-       
-     res.docs.forEach((item)=>{
-   
-       if(item.data().maestro==this.data.maestro && item.data().alumno==this.data.alumno){
-        reports.push(item.data())
-        console.log('eee')
-        console.log(reports.length);
-         
-   
-   if(reports.length>0){
-this.msg.msgError('Reporte','Ya has reportado a este maestro')
-    this.dialogRef.close();
-    console.log('exite');
-    
-   }else{
+  exitsReport() {
+    var reports: Array<any> = new Array()
+    this.db.collection('reportes').get().subscribe((res) => {
 
-   }
-       }
-     })
-   
-   }) 
-   console.log(reports.length);
-   
-   }
+
+      res.docs.forEach((item) => {
+
+        if (item.data().maestro == this.data.maestro && item.data().alumno == this.data.alumno) {
+          reports.push(item.data())
+          console.log('eee')
+          console.log(reports.length);
+
+
+          if (reports.length > 0) {
+            this.msg.msgError('Reporte', 'Ya has reportado a este maestro')
+            this.dialogRef.close();
+            console.log('exite');
+
+          } else {
+
+          }
+        }
+      })
+
+    })
+    console.log(reports.length);
+
+  }
+  ban() {
+
+  }
 }
