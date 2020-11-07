@@ -65,7 +65,7 @@
         
         <div class="row" >
             <div class="col-sm-3" *ngFor="let curso of cursos | bmaestro:filter" style="padding-top: 3%;">
-                <div class="card">
+                <div class="card" *ngIf="curso.user.ban!=true">
                     <img class="card-img-top imgMaestro" [src]="curso.user.img">
                     <div class="card-body">
 

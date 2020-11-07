@@ -17,7 +17,7 @@ import { newArray } from '@angular/compiler/src/util';
 export class ProfileComponent implements OnInit {
   currentRate = 5
   cursos: Array<Curso> = new Array();
-
+ 
   usuario: Usuario
   constructor(private ar: ActivatedRoute, public dialog: MatDialog, private msg: MsgService, private db: AngularFirestore, private auth: AngularFireAuth) { }
 
@@ -78,14 +78,14 @@ export class ProfileComponent implements OnInit {
 })
 export class reportProfile implements OnInit {
   formReporte: FormGroup;
-  allreports: Array<any> = new Array();
+  allreports:Array<any>=new Array();
 
   constructor(
     public dialogRef: MatDialogRef<reportProfile>,
     @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private msg: MsgService, private router: Router, private fb: FormBuilder, private ar: ActivatedRoute, private auth: AngularFireAuth) { }
   ngOnInit(): void {
     this.formReporte = this.fb.group({
-      maestro: [' ' ],
+      maestro: [''],
       alumno: [''],
       reporte: ['', Validators.required]
 
@@ -98,9 +98,6 @@ export class reportProfile implements OnInit {
 
 
   saveReport() {
-    console.log(this.allreports);
-    console.log(1);
-
 
     this.formReporte.value.maestro = this.data.maestro
     this.formReporte.value.alumno = this.data.alumno
@@ -108,8 +105,15 @@ export class reportProfile implements OnInit {
 
     this.db.collection('reportes').add(this.formReporte.value).finally(() => {
       console.log('entra aqui');
+      
+if(this.allreports.length==4){
+  this.db.collection('usuarios').doc(this.data.maestro).update({
+    ban:true
+  })
 
+}
       this.msg.msgSuccess('Exito', 'Reporte creado correctamente')
+   
       this.dialogRef.close();
     }).catch((err) => {
       console.log(err)
@@ -126,10 +130,10 @@ export class reportProfile implements OnInit {
   exitsReport() {
     var reports: Array<any> = new Array()
     this.db.collection('reportes').get().subscribe((res) => {
-
+  
 
       res.docs.forEach((item) => {
-
+        if(item.data().maestro == this.data.maestro) return this.allreports.push(item);
         if (item.data().maestro == this.data.maestro && item.data().alumno == this.data.alumno) {
           reports.push(item.data())
           console.log('eee')
@@ -149,9 +153,6 @@ export class reportProfile implements OnInit {
 
     })
     console.log(reports.length);
-
-  }
-  ban() {
 
   }
 }
