@@ -4,16 +4,17 @@
         <p align="center" style="font-size: 32px;  font-family: 'Marcellus SC',serif;">Certificaciones enviadas</p>
         <br>
         <div class="row" >
-            <div class="col-auto">
+            <div class="col-auto"*ngFor="let c of certificaciones">
                 
-                <div class="card" style="width: 60rem; border-radius: 10px; border:1px solid orangered; height:150px">
+                <div class="card" style="width: 60rem; border-radius: 10px; border:1px solid orangered; height:150px" >
+                
                     <div class="card-block">
-                        <div class="row" >
+                        <div class="row">
                             <div class="col">
                                     <ul class="list-group list-group-flush align-items-start">
                                         <br>
-                                        <p class="card-title" style="font-size: 21px; margin-left: 20px">Nombre del instructor </p>
-                                        <h5 class="card-title" style="margin-left: 20px">Categoria</h5>
+                                        <p class="card-title" style="font-size: 21px; margin-left: 20px">{{c.status}} </p>
+                                        <h5 class="card-title" style="margin-left: 20px">{{c.categoria}}</h5>
                                         <h5 class="card-title" style="margin-left: 20px">Mensaje </h5>
                                         <!--<button class="btn btn-danger"style="width:150px;">Ver PDF</button>-->
                                     </ul>
@@ -35,9 +36,9 @@
                             </div>
                         </div>
                 </div>
-                <br><br>
+                
             </div>  
-            
+            <br><br>
         </div>
         
 <div class="main-div"></div>
