@@ -10,4 +10,5 @@ export class Usuario{
     ref:DocumentReference
     uid:string
     horario
+    bio:string
 }

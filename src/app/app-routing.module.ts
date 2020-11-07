@@ -15,7 +15,7 @@ import { CertificacionesinstructorComponent } from './certificacionesinstructor/
 
 const routes: Routes = [
   {path:'zoom',component:ZoomComponent},
-  {path:'editar/:idUsuario', component:EdituserComponent },
+  {path:'editar', component:EdituserComponent },
   {path:'agregar-clase', component:AddcourseComponent},
   {path:'horario',component:ScheduleComponent},
   {path:'buscador', component:BuscadorComponent},

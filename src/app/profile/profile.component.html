@@ -4,11 +4,8 @@
       <img [src]="usuario.img">
       <br>
     </div>
-    <!-- <button mat-raised-button color="accent" (click)="openDialog()">Reportar</button> -->
-    <br>
-    <button mat-raised-button color="accent" (click)="exitsReport()">
-      <mat-icon>flag</mat-icon> Reportar
-    </button>
+    <button mat-raised-button color="accent" (click)="openDialog()">Reportar</button> 
+    <!-- <button mat-raised-button color="accent" (click)="exitsReport()">Reportar</button> -->
   </mat-grid-tile>
   <mat-grid-tile colspan="5">
 
@@ -19,7 +16,7 @@
 
 
     <h1>{{usuario.nombre}}</h1>
-    <h3> <br><br>Informacion de instructor </h3>
+    <h3> <br><br>{{usuario.bio}} </h3>
 
   </mat-grid-tile>
   <mat-grid-tile colspan="2"></mat-grid-tile>
@@ -34,7 +31,7 @@
               <mat-list-item>
                 <strong>Tarifa por
                   hora:</strong>
-                ${{c.tarifa}}
+                {{c.tarifa |currency}}
   
               </mat-list-item>
               <mat-list-item>

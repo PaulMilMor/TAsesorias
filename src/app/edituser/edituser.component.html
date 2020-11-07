@@ -16,7 +16,7 @@
         <!--Content-->
         <div class="card-body">
           <h1 style="margin-bottom: 1px;">{{usuario.nombre}}</h1>
-          <h2 style="margin-bottom: 1px;">INSTRUCTOR</h2>
+          <h2 style="margin-bottom: 1px;">{{usuario.tipoUsuario}}</h2>
 
           <!--Triggering button-->
         </div>
@@ -26,6 +26,7 @@
 
         <!--DESCRIPCION-->
         <h4>{{usuario.correo}}</h4>
+       
         <hr>
       </div>
       <button class="mt-5" style="background-color: rgb(238, 131, 43); margin-top: 25px;" class="btn btn-info btn-block"
@@ -47,11 +48,12 @@
     <p class="h4 mb-4">EDITAR MIS DATOS</p>
 
     <input (click)="editCorreo=!editCorreo" type="email" id="defaultContactFormEmail" class="form-control mb-4"
-      placeholder="E-mail" name="email" formControlName="correo">
+      placeholder="E-mail" name="email" formControlName="correo"  *ngIf="tipoCorreo!='gmail.com'">
 
 
-    <input (click)="editContra=!editContra" type="password" id="defaultContactFormName" class="form-control mb-4"
+    <input (click)="editContra=!editContra" type="password" id="defaultContactFormName"   *ngIf="tipoCorreo!='gmail.com'"class="form-control mb-4"
       placeholder="Contraseña" name="password" formControlName="contraseña">
+   
 
 
     <button color="primary" (click)="editImg=!editImg"
@@ -63,8 +65,10 @@
 
 
     <div class="form-group">
-      <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3"
-        placeholder="Descripcion"></textarea>
+      <textarea class="form-control rounded-0" formControlName="bio"  id="exampleFormControlTextarea2" rows="3"  *ngIf="usuario.tipoUsuario=='instructor'"
+        placeholder="Biografia">
+
+      </textarea>
     </div>
 
 

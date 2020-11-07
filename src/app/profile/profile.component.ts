@@ -17,7 +17,7 @@ import { newArray } from '@angular/compiler/src/util';
 export class ProfileComponent implements OnInit {
   currentRate = 5
   cursos: Array<Curso> = new Array();
-
+ 
   usuario: Usuario
   constructor(private ar: ActivatedRoute, public dialog: MatDialog, private msg: MsgService, private db: AngularFirestore, private auth: AngularFireAuth) { }
 
@@ -38,38 +38,14 @@ export class ProfileComponent implements OnInit {
       width: '500px',
       height: '250px',
       //Para en enviar informacion a un dialogo se usa la variable data (teniendo en cuenta que existe una llamada asi tambien en el dialogo)
-      data: { maestro: this.ar.snapshot.params.idMaestro,
-      alumno:this.auth.auth.currentUser.uid }
+      data: {
+        maestro: this.ar.snapshot.params.idMaestro,
+        alumno: this.auth.auth.currentUser.uid
+      }
     });
 
   }
-exitsReport(){
- var reports:Array<any>=new Array()
-  this.db.collection('reportes').get().subscribe((res)=>{
-    
-  res.docs.forEach((item)=>{
-    
-    if(item.data().maestro==this.ar.snapshot.params.idMaestro && item.data().alumno==this.auth.auth.currentUser.uid){
-     reports.push(item.data())
-     console.log('eee')
-     console.log(reports.length);
-      
 
-if(reports.length>0){
-
-  this.msg.msgWarning('Reporte','Ya has reportado a este maestro')
- 
-}else{
-  console.log("aqui");
-  this.openDialog()
-}
-    }
-  })
-
-}) 
-console.log(reports.length);
-
-}
   getCourses() {
     this.db.collection('cursos').get().subscribe((res) => {
       res.docs.forEach((item) => {
@@ -101,12 +77,12 @@ console.log(reports.length);
 
 })
 export class reportProfile implements OnInit {
-  formReporte: FormGroup
-
+  formReporte: FormGroup;
+  allreports:Array<any>=new Array();
 
   constructor(
     public dialogRef: MatDialogRef<reportProfile>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private msg: MsgService, private router: Router, private fb: FormBuilder) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private msg: MsgService, private router: Router, private fb: FormBuilder, private ar: ActivatedRoute, private auth: AngularFireAuth) { }
   ngOnInit(): void {
     this.formReporte = this.fb.group({
       maestro: [''],
@@ -115,15 +91,29 @@ export class reportProfile implements OnInit {
 
     })
 
+    this.exitsReport()
+
 
   }
 
 
   saveReport() {
-    this.formReporte.value.maestro=this.data.maestro
-    this.formReporte.value.alumno=this.data.alumno
+
+    this.formReporte.value.maestro = this.data.maestro
+    this.formReporte.value.alumno = this.data.alumno
+
+
     this.db.collection('reportes').add(this.formReporte.value).finally(() => {
+      console.log('entra aqui');
+      
+if(this.allreports.length==4){
+  this.db.collection('usuarios').doc(this.data.maestro).update({
+    ban:true
+  })
+
+}
       this.msg.msgSuccess('Exito', 'Reporte creado correctamente')
+   
       this.dialogRef.close();
     }).catch((err) => {
       console.log(err)
@@ -137,5 +127,32 @@ export class reportProfile implements OnInit {
   }
 
 
+  exitsReport() {
+    var reports: Array<any> = new Array()
+    this.db.collection('reportes').get().subscribe((res) => {
+  
 
+      res.docs.forEach((item) => {
+        if(item.data().maestro == this.data.maestro) return this.allreports.push(item);
+        if (item.data().maestro == this.data.maestro && item.data().alumno == this.data.alumno) {
+          reports.push(item.data())
+          console.log('eee')
+          console.log(reports.length);
+
+
+          if (reports.length > 0) {
+            this.msg.msgError('Reporte', 'Ya has reportado a este maestro')
+            this.dialogRef.close();
+            console.log('exite');
+
+          } else {
+
+          }
+        }
+      })
+
+    })
+    console.log(reports.length);
+
+  }
 }
