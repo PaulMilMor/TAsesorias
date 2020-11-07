@@ -11,7 +11,7 @@
         <button mat-flat-button class="mt-5" class="btn btn-info btn-block" style="width: 187px; text-align: center; height: 6vh;" (click)= "filtrarCategoria=!filtrarCategoria"><i class="material-icons" style="font-size: 130%;" >filter_alt</i> Filtrar categorías</button>
 
     </div>      
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    
     <div class="custom-control custom-checkbox" style="text-align: center;" *ngIf= "filtrarCategoria">
         <div class="custom-checkbox" style="display: inline-block;">
             <input type="checkbox" class="custom-control-input" id="catTodas" (change)="isDisabled=!isDisabled">
@@ -57,6 +57,18 @@
         <label for="catManual" class="custom-control-label">Manualidades</label>
         </div>
 </div>
+<!--
+<div>
+    <select [(ngModel)]='CategoriaSelected' (ngModelChange)='onCategoriaSelected($event)'>
+        <option *ngFor='let curso of Cursos' [value]="curso.id">
+            {{curso.categoria}}
+        </option>
+        </select>
+</div>
+-->
+<div *ngFor='let categoria of categorias' >
+   <input type="checkbox" name="{{categoria.nombre}}" [(ngModel)]="categoria.checked" value="categoria.nombre" (change)="getCategoriesId($event,categoria.nombre)" > {{categoria.nombre}}
+</div>
 
 
  <div class='container mt-5'> 
@@ -100,7 +112,7 @@
     </form>
 
     <div class="row">
-        <div class="col-sm-3" *ngFor="let curso of cursos | bcategoria:filter">
+        <div class="col-sm-3" *ngFor="let curso of cursos | bcategoria:filtrar">
             <div class="card">
                 <img class="card-img-top imgMaestro" [src]="curso.user.img">
                 <div class="card-body">
