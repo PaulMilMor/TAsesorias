@@ -30,3 +30,9 @@ form{
   height: auto !important;
   margin-bottom: 50px !important;
 }
+
+.validated {
+  background-color: #17a2b8; 
+  color: white;
+}
+

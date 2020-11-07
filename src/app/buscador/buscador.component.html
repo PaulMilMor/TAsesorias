@@ -67,22 +67,27 @@
             <div class="col-sm-3" *ngFor="let curso of cursos | bmaestro:filter" style="padding-top: 3%;">
                 <div class="card">
                     <img class="card-img-top imgMaestro" [src]="curso.user.img">
-                    <div class="card-body">
-
-                        <h5 class="card-title" style="font-size: 21px;">{{curso.user.nombre}} </h5>
+                    <mat-card class="card-body">
+                        <mat-card-content>
+                            <h5 class="card-title" style="font-size: 21px;">{{curso.user.nombre}} </h5>
                         <h5 class="card-title">{{curso.categoria.nombre}} </h5>
                         <!--h5 class="card-title">{{curso.nivel.nombre}}</h5-->
                         <h5 class="card-title">{{curso.tarifa | currency}} </h5>
                         <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem">
                         </ngb-rating>
-                        <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
-                            Ver Perfil
-                        </button>
-                        <button class="btn btn-primary" [routerLink]="['/agendar', curso.id ]">
-                            Ver Curso
-                        </button>
-
-                    </div>
+                        
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
+                                Ver Perfil
+                            </button>
+                            <button class="btn btn-primary" [routerLink]="['/agendar', curso.id ]">
+                                Ver Curso
+                            </button>
+    
+                        </mat-card-actions>
+                        
+                    </mat-card>
                 </div>
             </div>
 

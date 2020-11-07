@@ -9,7 +9,8 @@
 
  .card-course{
     width:900px;
-    height: 800px;
+    min-height: auto;
+    /*height: 800px;*/
     /*margin: 5px;*/
  /*display: flex;
   flex-direction: column;
@@ -17,7 +18,7 @@
   top: 15px;
   left: 15px;
   right: 15px;
-  bottom: 15px;*/
+  bottom: 15px;/**/
  }   
 
 
@@ -26,3 +27,13 @@
    height: 100%;
    
  }
+ .list{
+    height:100% !important;
+ }
+
+ .container{
+    height:auto;
+    margin:15px;
+ }
+
+ 
