@@ -101,6 +101,7 @@ export class dialogNewcertificacion implements OnInit {
     this.formCertificacion.value.user = this.usuario
     this.db.collection('certificados').add(this.formCertificacion.value).finally(() => {
       this.msg.msgSuccess('Exito', 'Certificado agregado correctamente')
+      window.location.reload();
     }).catch((err) => {
 
       console.log(err);
