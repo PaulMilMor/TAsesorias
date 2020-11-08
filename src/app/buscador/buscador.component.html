@@ -77,10 +77,12 @@
                         <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
                             Ver Perfil
                         </button>
-                        <button class="btn btn-primary" [routerLink]="['/agendar', curso.id ]">
-                            Ver Curso
-                        </button>
-
+                        <span *ngIf="usuario.tipoUsuario==alumno">
+                            
+                            <button class="btn btn-primary" [routerLink]="['/agendar', curso.id ]">
+                                Ver Curso
+                            </button>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -110,10 +112,11 @@
                     <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
                         Ver Perfil
                     </button>
-                    <button class="btn btn-primary" [routerLink]="['/agendar', curso.id ]">
+                    <span *ngIf="usuario.tipoUsuario==alumno">
+                    <button class="btn btn-primary"  [routerLink]="['/agendar', curso.id ]">
                         Ver Curso
                     </button>
-
+                    </span>
                 </div>
             </div>
         </div>

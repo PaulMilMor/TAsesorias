@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Usuario } from 'src/models/usuario';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Curso } from 'src/models/curso';
+import { AngularFireAuth } from '@angular/fire/auth';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { inputs } from '@syncfusion/ej2-angular-schedule/src/schedule/schedule.component';
 import { createModifiersFromModifierFlags } from 'typescript';
@@ -19,17 +20,24 @@ export class BuscadorComponent implements OnInit {
   selected = 'maestro';
   maestro='maestro';
   categoria='categoria';
+  instructor = 'instructor'
+  alumno = 'alumno'
+  administrador = 'administrador'
+  
   cursos:Curso[]=new Array<Curso>()
   currentRate = 5;
   filtrarCategoria:boolean=false
   allSelected:boolean=false
   isDisabled : boolean;
-
-  constructor(private db: AngularFirestore, private fb: FormBuilder) { }
+  usuario: Usuario
+  isValid: boolean = false
+  isCollapsed: boolean = false;
+  constructor(private db: AngularFirestore, private fb: FormBuilder,private auth: AngularFireAuth) { }
 
   ngOnInit(): void {
     this.cursos.length=0;
     this.getCourses()
+    this.getUser()
   }
   ///Obtiene todos los cursos con su promedio de evaluacion
   getCourses(){
@@ -52,6 +60,20 @@ export class BuscadorComponent implements OnInit {
           this.cursos.push(c);
       
         })
+      })
+    })
+  }
+  getUser() {
+    this.db.collection('usuarios').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        let u = item.data() as Usuario
+        if (u.uid == this.auth.auth.currentUser.uid) {
+          this.usuario = u;
+          this.isValid = true
+          console.log(this.isValid)
+        } else {
+          console.log("no existe");
+        }
       })
     })
   }
