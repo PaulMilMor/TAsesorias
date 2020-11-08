@@ -45,6 +45,7 @@ export class CertificacionesComponent implements OnInit {
       })
     })
   }
+ 
   getCertificaciones(){
   
     this.db.collection('certificados').get().subscribe((res)=>{
@@ -53,9 +54,12 @@ export class CertificacionesComponent implements OnInit {
         //let u = item.data() as Usuario;
         //u.id = item.id
         c.id=item.id
-        this.certificaciones.push(c)
-        console.log(c)
-
+        if (c.status=="pendiente"){
+          this.certificaciones.push(c)
+          console.log(c)
+  
+        }
+       
         /*if(c.userid==this.usuario.uid){
           this.usuario.nombre
           //this.certificaciones.push(u.nombre);
@@ -66,6 +70,16 @@ export class CertificacionesComponent implements OnInit {
       })
     })
     
+  }
+  updateStatus(id,s){
+    console.log(id);
+    
+  this.db.collection('certificados').doc(id).update({
+    status:s
+  }).then(()=>{
+    window.location.reload();
+  })
+  // window.location.reload();
   }
   /*
   getCertificaciones(){

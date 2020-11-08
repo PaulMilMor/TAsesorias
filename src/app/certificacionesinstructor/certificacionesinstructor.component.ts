@@ -39,7 +39,7 @@ export class CertificacionesinstructorComponent implements OnInit {
       res.docs.forEach((item) => {
         let c = item.data() as Certificacion;
         c.id = item.id
-        if (c.userid == this.auth.auth.currentUser.uid) {
+        if (c.user.uid == this.auth.auth.currentUser.uid) {
           this.certificaciones.push(c)
 
         }
@@ -59,11 +59,12 @@ export class dialogNewcertificacion implements OnInit {
   categoriasUsadas: Array<Categoria> = new Array()
   usuario: Usuario
   formCertificacion: FormGroup
+
   constructor(public dialogRef: MatDialogRef<dialogNewcertificacion>,
     @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private msg: MsgService, private storage: AngularFireStorage, private auth: AngularFireAuth, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    categoria: ['', Validators.required]
+   
 
     this.getUser()
     this.getCategories()
@@ -72,7 +73,7 @@ export class dialogNewcertificacion implements OnInit {
       descripcion: [''],
       categoria: [''],
       docref: ['', Validators.required],
-      userid: [''],
+      user: [''],
       status: ['']
     })
 
@@ -97,7 +98,7 @@ export class dialogNewcertificacion implements OnInit {
   }
   save() {
     this.formCertificacion.value.status = "pendiente"
-    this.formCertificacion.value.userid = this.auth.auth.currentUser.uid
+    this.formCertificacion.value.user = this.usuario
     this.db.collection('certificados').add(this.formCertificacion.value).finally(() => {
       this.msg.msgSuccess('Exito', 'Certificado agregado correctamente')
     }).catch((err) => {
@@ -133,6 +134,7 @@ export class dialogNewcertificacion implements OnInit {
 
     })
   }
+ 
   getMyCategories() {
     this.db.collection('cursos').get().subscribe((res) => {
       res.docs.forEach((item) => {
