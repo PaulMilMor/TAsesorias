@@ -46,6 +46,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { CalificarComponent } from './calificar/calificar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ProfileComponent, reportProfile } from './profile/profile.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 import { CertificacionesComponent } from './certificaciones/certificaciones.component';
@@ -74,7 +75,8 @@ import { CertificacionesinstructorComponent, dialogNewcertificacion } from './ce
     ProfileComponent,
     CertificacionesinstructorComponent,
     dialogNewcertificacion,
-    reportProfile
+    reportProfile,
+    CertificacionesComponent
   ],
   imports: [
     BrowserModule,
@@ -107,7 +109,8 @@ import { CertificacionesinstructorComponent, dialogNewcertificacion } from './ce
     MatListModule,
     MatChipsModule,
     NgbModule,
-    MatIconModule
+    MatIconModule,
+    FlexLayoutModule
   ],
   entryComponents: [
     register,

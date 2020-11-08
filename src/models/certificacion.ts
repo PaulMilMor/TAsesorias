@@ -3,7 +3,8 @@ export class Certificacion{
     descripcion:string;
     categoria:any;
     docref:string;
-    userid:string
+    userid:string;
+    status:string;
 
     
 }
