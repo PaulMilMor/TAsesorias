@@ -37,6 +37,8 @@ adjetivos:Array<string>=new Array();
    } 
    //añade a arreglo con cada uno de los adjetivos 
    saveAdjetivo(value){
+      // document.getElementById("myBtn").disabled = true;
+    //(this).toggleClass('active');
      if(this.adjetivos.length<3){
      this.adjetivos.push(value);
           //Falta poner que se desactive el boton(o que cambie) xd

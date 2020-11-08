@@ -16,6 +16,7 @@
         <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario==alumno" [routerLink]="['/zoom']"
           routerLinkActive="router-link-active" style="font-size: 17px;">Comunicacion</a>
       </li>
+
       <li class="nav-item">
         <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario==instructor"
           [routerLink]="['/agregar-clase']" routerLinkActive="router-link-active" style="font-size: 17px;">Asesorias</a>

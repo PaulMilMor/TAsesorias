@@ -4,7 +4,7 @@
                 <h1 align="center">¿Como ha sido tu experiencia en el curso?</h1>
                 <br> <br>
 
-                <ngb-rating [(rate)]="currentRate" [max]=5 style="font-size: 3rem ; outline:none"></ngb-rating>
+                <ngb-rating [(rate)]="currentRate" [max]=5 style="font-size: 3rem ; outline:none" ></ngb-rating>
 
                 <!--<p>Rate: {{currentRate}}</p>-->
                 <div *ngIf="currentRate==1">Mala<br><br>
@@ -35,7 +35,7 @@
                 <div *ngIf="currentRate==1 || currentRate==2 || currentRate==3">
 
                         <button (click)="saveAdjetivo('Inasistencia')" style="outline:none"> <a class="button"
-                                        style="text-decoration: none;" target=”_blank”>Inasistencia
+                                        style="text-decoration: none;" target=”_blank” >Inasistencia
                                 </a></button>
                         <button (click)="saveAdjetivo('Dificultades técnicas')"
                                 style="outline:none ; margin-left: 20px"><a class="button"
@@ -133,7 +133,10 @@
                 </div>
 
         </div>
-        <button mat-raised-button color="warn" (click)="saveEvaluacion()">Guardar</button>
+        <br><br><br>
+        <div align="right" *ngIf="currentRate!=0">
+                <button mat-raised-button color="warn" (click)="saveEvaluacion()" style="width: 150px;">Guardar</button>
+        </div>
 
 
         <div class="main-div container"></div>

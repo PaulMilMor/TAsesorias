@@ -1,41 +1,45 @@
 <div class="main-div">
     <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap" rel="stylesheet">
     
-        <p align="center" style="font-size: 32px;">Certificaciones enviadas</p>
+        <p align="center" style="font-size: 32px;  font-family: 'Marcellus SC',serif;">Certificaciones enviadas</p>
         <br>
+        
         <div class="row" >
-            <div class="col-auto">
+            <div class="col-auto"*ngFor="let c of certificaciones">
                 
-                <div class="card" >
+                <div class="card" style="width: 60rem; border-radius: 10px; border:1px solid orangered; height:150px" >
+                
                     <div class="card-block">
-                        <div class="row" >
+                        <div class="row">
                             <div class="col">
                                     <ul class="list-group list-group-flush align-items-start">
-                                        <p class="card-title" style="font-size: 21px;">Nombre del instructor </p>
-                                        <h5 class="card-title">Categoria</h5>
-                                        <h5 class="card-title">Mensaje </h5>
+                                        <br>
+                                        <p class="card-title" style="font-size: 21px; margin-left: 20px">{{c.status}} </p>
+                                        <h5 class="card-title" style="margin-left: 20px">{{c.categoria}}</h5>
+                                        <h5 class="card-title" style="margin-left: 20px">Mensaje </h5>
                                         <!--<button class="btn btn-danger"style="width:150px;">Ver PDF</button>-->
                                     </ul>
                                 </div>
                                 <ul class="list-group list-group-flush align-items-end">
                                     <div class="col">
-                                        <button class="btn btn-danger"style="width:150px; height:85px; margin-top: 5px; margin-botton: 5px">Ver PDF</button>
+                                        <button class="btn btn-danger"style="width:150px; height:85px; margin-top: 25px; margin-botton: 5px">Ver PDF</button>
                                     </div>
                                 </ul>
 
                                 <div class="col"> 
                                         <ul class="list-group list-group-flush align-items-start">
-                                            <button class="btn btn-primary "style="width:150px;">Verificar</button>
+                                            <button class="btn btn-primary "style="width:150px; margin-top: 20px; ">Verificar</button>
                                             <br>
-                                            <button class="btn btn-danger"style="width:150px;">Denegar</button>    
+                                            <button class="btn btn-danger"style="width:150px; padding-botton: 20px;">Denegar</button>    
                                         </ul>
                                 </div>
 
                             </div>
                         </div>
                 </div>
+                
             </div>  
-            
+            <br><br>
         </div>
         
 <div class="main-div"></div>
