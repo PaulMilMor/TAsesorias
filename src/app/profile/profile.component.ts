@@ -78,12 +78,14 @@ export class ProfileComponent implements OnInit {
 })
 export class reportProfile implements OnInit {
   formReporte: FormGroup;
+  formReportes:FormGroup
   allreports:Array<any>=new Array();
 
   constructor(
     public dialogRef: MatDialogRef<reportProfile>,
     @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private msg: MsgService, private router: Router, private fb: FormBuilder, private ar: ActivatedRoute, private auth: AngularFireAuth) { }
   ngOnInit(): void {
+    this.exitsReport()
     this.formReporte = this.fb.group({
       maestro: [''],
       alumno: [''],
@@ -91,7 +93,6 @@ export class reportProfile implements OnInit {
 
     })
 
-    this.exitsReport()
 
 
   }
@@ -99,18 +100,42 @@ export class reportProfile implements OnInit {
 
   saveReport() {
 
-    this.formReporte.value.maestro = this.data.maestro
-    this.formReporte.value.alumno = this.data.alumno
+     this.formReporte.value.maestro = this.data.maestro
+     this.formReporte.value.alumno = this.data.alumno
+
 
 
     this.db.collection('reportes').add(this.formReporte.value).finally(() => {
       console.log('entra aqui');
       
-if(this.allreports.length==4){
+if(this.allreports.length>=4){
+  console.log("entro al ban");
+  
   this.db.collection('usuarios').doc(this.data.maestro).update({
     ban:true
+    
+  }).then(()=>{
+    console.log("baneado 1");
+    
   })
-
+  this.db.collection('cursos').get().subscribe((res)=>{
+    console.log(2);
+    
+    res.forEach((item)=>{
+      let c=item.data() as Curso
+      c.id=item.id
+      if(c.user.uid==this.data.maestro){
+        console.log("deberia");
+        
+        this.db.collection('cursos').doc(c.id).update({
+            ban:true
+        }).then(()=>{
+          console.log("baneado 2");
+          
+        })
+      }
+    })
+  })
 }
       this.msg.msgSuccess('Exito', 'Reporte creado correctamente')
    
@@ -133,7 +158,10 @@ if(this.allreports.length==4){
   
 
       res.docs.forEach((item) => {
-        if(item.data().maestro == this.data.maestro) return this.allreports.push(item);
+        if(item.data().maestro == this.data.maestro) {
+          this.allreports.push(item);
+
+        }
         if (item.data().maestro == this.data.maestro && item.data().alumno == this.data.alumno) {
           reports.push(item.data())
           console.log('eee')

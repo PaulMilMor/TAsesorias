@@ -71,8 +71,10 @@ console.log(e);
           this.checkedItems.forEach((checked)=>{
             if(curso.categoria.nombre==checked){
               console.log(2);
-              
-              this.cursosChecked.push(curso);
+              if(curso.ban!=true){
+                this.cursosChecked.push(curso);
+              }
+            
              }
 
           })
@@ -122,8 +124,12 @@ this.allSelected=!this.allSelected
              }
           })
           c.evaluaciones=E/e.length;
-          this.cursos.push(c);
-          this.cursosChecked.push(c)
+          if (c.ban!=true){
+            this.cursos.push(c);
+            this.cursosChecked.push(c)
+
+          }
+         
         })
       })
     })

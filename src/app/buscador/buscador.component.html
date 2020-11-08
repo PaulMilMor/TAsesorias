@@ -76,7 +76,7 @@
         
         <div class="row" >
             <div class="col-sm-3" *ngFor="let curso of cursosChecked| bmaestro:filter" style="padding-top: 3%;">
-                <div class="card" *ngIf="curso.user.ban!=true">
+                <div class="card"  >
                     <img class="card-img-top imgMaestro" [src]="curso.user.img">
                     <mat-card class="card-body">
                         <mat-card-content>

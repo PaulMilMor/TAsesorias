@@ -9,4 +9,5 @@ export class Curso{
    evaluaciones:any
    nivel:any
    etiquetas:any
+   ban:boolean
 }
