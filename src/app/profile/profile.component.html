@@ -4,7 +4,7 @@
       <img [src]="usuario.img">
       <br>
     </div>
-    <button mat-raised-button color="accent" (click)="openDialog()">Reportar</button> 
+    <button mat-raised-button color="accent" (click)="openDialog()"><mat-icon>flag</mat-icon>Reportar</button> 
     <!-- <button mat-raised-button color="accent" (click)="exitsReport()">Reportar</button> -->
   </mat-grid-tile>
   <mat-grid-tile colspan="5">
@@ -90,3 +90,23 @@
     </mat-list>
   </mat-grid-tile>
 </mat-grid-list>
+
+
+<div class="container"
+     fxLayout
+     fxLayout.s = "column"
+     fxLayoutAlign="Center"
+     fxLayoutGap="10px">
+  <div fxFlex="30%">
+    <div class="profile-img" style="margin-left: 67px;">
+      <img [src]="usuario.img">
+      <br>
+    </div>
+    <button style="display:block;width:75%; margin-top:10px; margin-left:auto; margin-right:auto;"mat-raised-button color="accent" (click)="openDialog()"><mat-icon>flag</mat-icon>Reportar</button> 
+  </div>
+  <div fxFlex>
+    <h1>{{usuario.nombre}}</h1>
+    <h3> <br><br>{{usuario.bio}} </h3>
+  </div>
+</div>
+
