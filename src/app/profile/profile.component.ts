@@ -17,20 +17,42 @@ import { newArray } from '@angular/compiler/src/util';
 export class ProfileComponent implements OnInit {
   currentRate = 5
   cursos: Array<Curso> = new Array();
- 
+  
+  instructor = 'instructor'
+  alumno = 'alumno'
+  administrador = 'administrador'
   usuario: Usuario
-  constructor(private ar: ActivatedRoute, public dialog: MatDialog, private msg: MsgService, private db: AngularFirestore, private auth: AngularFireAuth) { }
+  usuarios: Usuario
+  isValid: boolean = false
+  isCollapsed: boolean = false;
+  constructor(private ar: ActivatedRoute, public dialog: MatDialog, private msg: MsgService, private db: AngularFirestore, private auth: AngularFireAuth,private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    
     this.getUser()
+    this.getUsers()
     this.getCourses()
     console.log(this.cursos);
-
+    //this.getUsers()
   }
   getUser() {
     this.db.collection('usuarios').doc(this.ar.snapshot.params.idMaestro).get().forEach((res) => {
       this.usuario = res.data() as Usuario
       console.log(this.usuario)
+    })
+  }
+  getUsers() {
+    this.db.collection('usuarios').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        let u = item.data() as Usuario
+        if (u.uid == this.auth.auth.currentUser.uid) {
+          this.usuarios = u;
+          this.isValid = true
+          console.log(this.isValid)
+        } else {
+          console.log("no existe");
+        }
+      })
     })
   }
   openDialog(): void {
@@ -70,6 +92,7 @@ export class ProfileComponent implements OnInit {
       })
     })
   }
+
 }
 @Component({
   selector: 'reportProfile',

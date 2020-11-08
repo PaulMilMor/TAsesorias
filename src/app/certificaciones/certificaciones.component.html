@@ -3,7 +3,6 @@
     
         <p align="center" style="font-size: 32px;  font-family: 'Marcellus SC',serif;">Certificaciones enviadas</p>
         <br>
-        
         <div class="row" >
             <div class="col-auto"*ngFor="let c of certificaciones">
                 
@@ -14,9 +13,10 @@
                             <div class="col">
                                     <ul class="list-group list-group-flush align-items-start">
                                         <br>
+                                        <!--<span *ngFor="let u of usuarios">-->
                                         <p class="card-title" style="font-size: 21px; margin-left: 20px">{{c.status}} </p>
                                         <h5 class="card-title" style="margin-left: 20px">{{c.categoria}}</h5>
-                                        <h5 class="card-title" style="margin-left: 20px">Mensaje </h5>
+                                        <h5 class="card-title" style="margin-left: 20px">{{c.descripcion}} </h5>
                                         <!--<button class="btn btn-danger"style="width:150px;">Ver PDF</button>-->
                                     </ul>
                                 </div>
@@ -37,9 +37,10 @@
                             </div>
                         </div>
                 </div>
-                
+            
+                <br><br>
             </div>  
-            <br><br>
+            
         </div>
         
 <div class="main-div"></div>

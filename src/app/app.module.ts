@@ -74,7 +74,8 @@ import { CertificacionesinstructorComponent, dialogNewcertificacion } from './ce
     ProfileComponent,
     CertificacionesinstructorComponent,
     dialogNewcertificacion,
-    reportProfile
+    reportProfile,
+    CertificacionesComponent
   ],
   imports: [
     BrowserModule,
