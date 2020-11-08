@@ -4,15 +4,10 @@
       <img [src]="usuario.img">
       <br>
     </div>
-    <button mat-raised-button color="accent" (click)="openDialog()">Reportar</button> 
+    <button mat-raised-button color="accent"*ngIf="usuarios.tipoUsuario==alumno" (click)="openDialog()">Reportar</button> 
     <!-- <button mat-raised-button color="accent" (click)="exitsReport()">Reportar</button> -->
   </mat-grid-tile>
   <mat-grid-tile colspan="5">
-
-
-
-
-
 
 
     <h1>{{usuario.nombre}}</h1>
@@ -53,7 +48,8 @@
               </mat-list-item>
             </mat-card-content>
             <mat-card-actions align="end">
-              <button mat-flat-button color="primary" [routerLink]="['/agendar', c.id ]">Agendar <mat-icon>add
+              
+              <button  mat-flat-button color="primary" *ngIf="usuarios.tipoUsuario==alumno" [routerLink]="['/agendar', c.id ]">Agendar <mat-icon>add
               </mat-icon></button>
             </mat-card-actions>
               
