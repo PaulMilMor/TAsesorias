@@ -1,6 +1,6 @@
-<div class="container" fxLayout fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="10px"
+<div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column"fxLayoutAlign="center" fxLayoutGap="10px"
   style="margin-top: 20px;">
-  <div fxFlex="30%">
+  <div fxFlex="30%" fxFlex.sm fxFlex.xs>
     <div class="profile-img" style="margin-left: auto; margin-right:auto;">
       <img [src]="usuario.img">
       <br>
@@ -16,8 +16,8 @@
   </div>
 </div>
 
-<div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px">
-  <div fxFlex="30%">
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="10px">
+  <div fxFlex="30%" fxFlex.sm fxFlex.xs>
     <h2><Strong>Certificaciones.</Strong></h2>
     <div *ngIf="this.certificados.length>0">
       <div *ngFor="let c of certificados">
@@ -48,9 +48,9 @@
               </h3>
               </mat-list-item>
               <mat-list-item>
-                <h3><strong>Valoración: </strong></h3>
+                <h3><strong>Valoración: </strong>
                 <ngb-rating [(rate)]="c.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem">
-                </ngb-rating>
+                </ngb-rating></h3>
 
               </mat-list-item>
               <mat-list-item>

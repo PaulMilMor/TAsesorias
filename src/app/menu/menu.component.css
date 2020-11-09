@@ -1,9 +1,9 @@
 .barra{
    
-    height: 1000px;
+   /* height: 1000px;
         width: 1000px;
         display: flex;
-        justify-content: left;
+        justify-content: left;*/
      background-color: #e85f5c;
 
       
@@ -12,26 +12,44 @@
    
 }*/
 .menu{
-    height: 1000px;
+    /*height: 1000px;
     width: 1000px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between;*/
     border-left: salmon;
     background-color: #dcf3f8;
-    margin: 0 auto;
+    /*margin: 0 auto;
     padding: 10px 0;
-    align-items: flex-start; 
+    align-items: flex-start; */
 }
 
 .title{
     color: white;
-    font-size: 64px;
+    font-size: 60px;
     font-weight: bold;
     font-family: 'Marcellus SC', serif;
+    margin:auto; 
+    display:block;
+    margin-top: 20%;
+    margin-bottom: 20%;
+    margin: auto;
+    height:auto;
+    text-align: center;
 }
 
 .bullet {
     color: white;
-    font-size: 32px;
+    font-size: 24px;
+    margin:auto;
+    display:block;
+    margin: auto;
+    margin-top: 15%;
+    margin-bottom:15%;
+    height:auto;
+}
+
+.container{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
