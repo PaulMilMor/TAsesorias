@@ -46,7 +46,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { CalificarComponent } from './calificar/calificar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ProfileComponent, reportProfile } from './profile/profile.component';
-
+import {MatBadgeModule} from '@angular/material/badge';
 
 import { CertificacionesComponent } from './certificaciones/certificaciones.component';
 //import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
@@ -108,7 +108,8 @@ import { CertificacionesinstructorComponent, dialogNewcertificacion } from './ce
     MatListModule,
     MatChipsModule,
     NgbModule,
-    MatIconModule
+    MatIconModule,
+    MatBadgeModule
   ],
   entryComponents: [
     register,
