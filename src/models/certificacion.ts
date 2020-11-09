@@ -1,10 +1,11 @@
+import { Usuario } from './usuario';
+
 export class Certificacion{
     id:string;
     descripcion:string;
     categoria:any;
     docref:string;
-    userid:string;
-    status:string;
-
+    user:Usuario
+    status:string
     
 }

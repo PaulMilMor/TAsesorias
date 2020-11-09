@@ -26,6 +26,7 @@ export class BuscadorComponent implements OnInit {
   administrador = 'administrador'
   
   cursos:Curso[]=new Array<Curso>()
+  cursosChecked:Curso[]=new Array<Curso>()
   categorias: Categoria[] = new Array<Categoria>()
   currentRate = 5;
   filtrarCategoria:boolean=false
@@ -44,9 +45,11 @@ export class BuscadorComponent implements OnInit {
     this.getCategories()
     this.checkedItems =  new Array<string>();
     this.getUser()
+   
   }
 
   getCategoriesId(e:any, nombre:string) {
+console.log(e);
 
     if(e.target.checked) {
       console.log(nombre + ' Checked');
@@ -57,13 +60,39 @@ export class BuscadorComponent implements OnInit {
       this.checkedItems =this.checkedItems.filter(m=>m!=nombre);
     }
     console.log(this.checkedItems)
-
+     this.getCursosMatched()
+     console.log(this.cursosChecked);
+     
   }
 
-  // getCursosMatched(){
+   getCursosMatched(){
+     this.cursosChecked.length=0
+   this.cursos.forEach((curso)=>{
+          this.checkedItems.forEach((checked)=>{
+            if(curso.categoria.nombre==checked){
+              console.log(2);
+              if(curso.ban!=true){
+                this.cursosChecked.push(curso);
+              }
+            
+             }
 
-  // }
+          })
+   })
+  }
+getAll(){
+  if(!this.allSelected){
+    this.cursos.forEach((item)=>{
+      this.cursosChecked.push(item)
+    })
 
+  }else{
+    this.getCursosMatched()
+  }
+this.allSelected=!this.allSelected
+
+  
+}
   getCategories() {
     this.db.collection('categorias').get().subscribe((res) => {
       res.docs.forEach((item) => {
@@ -95,12 +124,18 @@ export class BuscadorComponent implements OnInit {
              }
           })
           c.evaluaciones=E/e.length;
-          this.cursos.push(c);
-      
+          if (c.ban!=true){
+            this.cursos.push(c);
+            this.cursosChecked.push(c)
+
+          }
+         
         })
       })
     })
+
   }
+  
   getUser() {
     this.db.collection('usuarios').get().subscribe((res) => {
       res.docs.forEach((item) => {

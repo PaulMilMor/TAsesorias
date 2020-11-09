@@ -7,6 +7,7 @@ import { MsgService } from 'src/services/msg.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RouterLink, Router } from '@angular/router';
+import { Certificacion } from 'src/models/certificacion';
 
 @Component({
   selector: 'app-header',
@@ -15,11 +16,9 @@ import { RouterLink, Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   usuario: Usuario
-  instructor = 'instructor'
-  alumno = 'alumno'
-  administrador = 'administrador'
   isValid: boolean = false
   isCollapsed: boolean = false;
+  certificaciones:Certificacion[]=new Array<Certificacion>()
   constructor(public auth: AngularFireAuth, private db: AngularFirestore, private authService: AuthService, private msg: MsgService, public dialog: MatDialog, private router: Router) { }
 
   //Abre el dialogo para designar si eres alumno o instructor
@@ -37,9 +36,35 @@ export class HeaderComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getUser()
-
+   
+       this.getCertificaciones()
+     
   }
-
+  getCertificaciones(){
+  
+    this.db.collection('certificados').get().subscribe((res)=>{
+      res.docs.forEach((item)=>{
+        let c= item.data() as Certificacion;
+        //let u = item.data() as Usuario;
+        //u.id = item.id
+        c.id=item.id
+        if (c.status=="pendiente"){
+          this.certificaciones.push(c)
+          console.log(c)
+  
+        }
+       
+        /*if(c.userid==this.usuario.uid){
+          this.usuario.nombre
+          //this.certificaciones.push(u.nombre);
+          console.log(this.usuario.nombre)
+          this.certificaciones.push(c)
+          console.log(c)
+        }*/
+      })
+    })
+    
+  }
   logOut() {
     this.auth.auth.signOut();
   }

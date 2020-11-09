@@ -13,23 +13,23 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item">
-        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario==alumno" [routerLink]="['/zoom']"
+        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='alumno'" [routerLink]="['/zoom']"
           routerLinkActive="router-link-active" style="font-size: 17px;">Comunicacion</a>
       </li>
 
       <li class="nav-item">
-        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario==instructor"
+        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='instructor'"
           [routerLink]="['/agregar-clase']" routerLinkActive="router-link-active" style="font-size: 17px;">Asesorias</a>
       </li>
       <li class="nav-item">
-        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario==administrador"
+        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='administrador'"
           [routerLink]="['/certificaciones']" routerLinkActive="router-link-active"
-          style="font-size: 17px;">Certificaciones</a>
+          style="font-size: 17px; "><span  [matBadge]="certificaciones.length" matBadgeOverlap="false" matBadgeColor="accent" >Certificaciones</span> </a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">
       <li class="nav-item">
-        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario==alumno || usuario.tipoUsuario==administrador"
+        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='alumno' || usuario.tipoUsuario=='administrador'"
           [routerLink]="['/buscador']" routerLinkActive="router-link-active"
           style="font-size: 14px; padding-top: 61%;"><i class="material-icons">search</i></a>
       </li>
@@ -41,10 +41,10 @@
 
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
           <a class="dropdown-item waves-light" mdbWavesEffect [routerLinkActive]="['active']"
-             [routerLink]="['/editar']"
+             [routerLink]="['/editar']" *ngIf="usuario.tipoUsuario=='alumno' || usuario.tipoUsuario=='instructor'"
             routerLinkActive="router-link-active"><i class="material-icons">person</i>Mi Perfil</a>
           <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/horario']"
-            *ngIf="usuario.tipoUsuario==instructor"><i class="material-icons">event</i>Horario</a>
+            *ngIf="usuario.tipoUsuario=='instructor'"><i class="material-icons">event</i>Horario</a>
           <a class="dropdown-item waves-light" mdbWavesEffect (click)="logOut()"><i
               class="material-icons">exit_to_app</i>Cerrar Sesión</a>
         </div>

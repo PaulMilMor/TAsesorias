@@ -47,7 +47,7 @@ import { CalificarComponent } from './calificar/calificar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ProfileComponent, reportProfile } from './profile/profile.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { CertificacionesComponent } from './certificaciones/certificaciones.component';
 //import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
@@ -110,12 +110,13 @@ import { CertificacionesinstructorComponent, dialogNewcertificacion } from './ce
     MatChipsModule,
     NgbModule,
     MatIconModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatBadgeModule
   ],
   entryComponents: [
     register,
     dialogStudent,
-    reportProfile, 
+    reportProfile,
     dialogNewcertificacion
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

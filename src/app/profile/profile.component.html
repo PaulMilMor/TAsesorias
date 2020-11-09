@@ -1,18 +1,14 @@
-
-
-
-<div class="container"
-     fxLayout
-     fxLayout.sm = "column"
-     fxLayoutAlign="center"
-     fxLayoutGap="10px"
-     style="margin-top: 20px;">
+<div class="container" fxLayout fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="10px"
+  style="margin-top: 20px;">
   <div fxFlex="30%">
     <div class="profile-img" style="margin-left: auto; margin-right:auto;">
       <img [src]="usuario.img">
       <br>
     </div>
-    <button class="reportbtn" mat-raised-button color="accent" (click)="openDialog()"><mat-icon>flag</mat-icon>Reportar</button> 
+    <button class="reportbtn" mat-raised-button color="accent" *ngIf="usuarios.tipoUsuario==alumno"
+      (click)="openDialog()">
+      <mat-icon>flag</mat-icon>Reportar
+    </button>
   </div>
   <div fxFlex>
     <h1><strong>{{usuario.nombre}}</strong></h1>
@@ -20,19 +16,15 @@
   </div>
 </div>
 
-<div class="container"
-     fxLayout
-     fxLayout.xs="column"
-     fxLayoutAlign="center"
-     fxLayoutGap="10px">
+<div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px">
   <div fxFlex="30%">
 
   </div>
   <div fxFlex>
-    
+
     <mat-list role="list" class="list">
 
-      <div *ngFor="let c of cursos" class ="container" style="width:100%">
+      <div *ngFor="let c of cursos" class="container" style="width:100%">
         <mat-list-item role="listitem" class="list" style="width:100%">
           <mat-card class="card-course" style="width:100%">
             <mat-card-title> {{c.categoria.nombre}} </mat-card-title><br>
@@ -41,34 +33,36 @@
                 <strong>Tarifa por
                   hora:</strong>
                 {{c.tarifa |currency}}
-  
+
               </mat-list-item>
               <mat-list-item>
                 <ngb-rating [(rate)]="c.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem">
                 </ngb-rating>
-  
+
               </mat-list-item>
               <mat-list-item>
-                <h3><strong>Nivel académico: </strong>{{c.nivel.nombre}}</h3>
-  
+                <h3><strong>Nivel académico: </strong>{{c.nivel.nombre}}</h3> 
+
               </mat-list-item>
               <mat-list-item>
                 <mat-chip-list aria-label="Etiquetas">
                   <strong>Etiquetas: </strong>
                   <mat-chip *ngFor="let etiqueta of c.etiquetas">{{etiqueta}}</mat-chip>
-  
+
                 </mat-chip-list>
-                
+
               </mat-list-item>
             </mat-card-content>
             <mat-card-actions align="end">
-              <button mat-flat-button color="primary" [routerLink]="['/agendar', c.id ]">Agendar <mat-icon>add
-              </mat-icon></button>
+
+              <button mat-flat-button color="primary" *ngIf="usuarios.tipoUsuario==alumno"
+                [routerLink]="['/agendar', c.id ]">Agendar <mat-icon>add
+                </mat-icon></button>
             </mat-card-actions>
-              
-  
-  
-            
+
+
+
+
 
             <!--mat-grid-list cols="5">
               <mat-grid-tile colspan="4">
@@ -93,10 +87,9 @@
           </mat-card>
           <br>
         </mat-list-item>
-        
+
       </div>
 
     </mat-list>
   </div>
 </div>
-
