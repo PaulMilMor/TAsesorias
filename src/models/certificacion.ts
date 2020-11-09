@@ -7,5 +7,5 @@ export class Certificacion{
     docref:string;
     user:Usuario
     status:string
-    
+    feedback:string
 }

@@ -17,12 +17,14 @@
 
             <td>{{item.descripcion}}</td>
             <td>
-              <div ><b> {{item.status}}</b> </div>
+              <div *ngIf="item.status=='aprobado'"> <i class="material-icons">check</i></div>
+              <div *ngIf="item.status=='denegado'"> <i class="material-icons">close</i></div>
+              <div *ngIf="item.status=='pendiente'"> <i class="material-icons">more_horiz</i></div>
             </td>
             <td><button mat-flat-button color="primary"> <a style="text-decoration: none; color: white;"
               [href]="item.docref " target=”_blank”>Archivo</a></button>
               <span *ngIf="item.status!='pendiente'">
-                <button mat-flat-button color="accent" style="margin-left: 5px;"> Info</button>
+                <button mat-flat-button color="accent" style="margin-left: 5px;" (click)="openFeedb(item.feedback)"> Info</button>
               </span>
             </td>
           </tr>

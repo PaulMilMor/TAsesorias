@@ -4,9 +4,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Usuario } from 'src/models/usuario';
 import { AuthService } from 'src/services/auth.service';
 import { MsgService } from 'src/services/msg.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder,  } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { RouterLink, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { Certificacion } from 'src/models/certificacion';
 
 @Component({

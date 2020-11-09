@@ -49,9 +49,9 @@ import { ProfileComponent, reportProfile } from './profile/profile.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBadgeModule } from '@angular/material/badge';
 
-import { CertificacionesComponent } from './certificaciones/certificaciones.component';
+import { CertificacionesComponent, feedback } from './certificaciones/certificaciones.component';
 //import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
-import { CertificacionesinstructorComponent, dialogNewcertificacion } from './certificacionesinstructor/certificacionesinstructor.component';
+import { CertificacionesinstructorComponent, dialogNewcertificacion, feedbackInstructor } from './certificacionesinstructor/certificacionesinstructor.component';
 //import { dialogNewcertificacion,CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 
 @NgModule({
@@ -76,7 +76,9 @@ import { CertificacionesinstructorComponent, dialogNewcertificacion } from './ce
     CertificacionesinstructorComponent,
     dialogNewcertificacion,
     reportProfile,
-    CertificacionesComponent
+    CertificacionesComponent,
+    feedback,
+    feedbackInstructor
   ],
   imports: [
     BrowserModule,
@@ -117,7 +119,8 @@ import { CertificacionesinstructorComponent, dialogNewcertificacion } from './ce
     register,
     dialogStudent,
     reportProfile,
-    dialogNewcertificacion
+    dialogNewcertificacion, feedback,
+    feedbackInstructor
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

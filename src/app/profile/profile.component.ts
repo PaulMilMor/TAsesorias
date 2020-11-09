@@ -7,8 +7,6 @@ import { MsgService } from 'src/services/msg.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { report } from 'process';
-import { newArray } from '@angular/compiler/src/util';
 import { Certificacion } from 'src/models/certificacion';
 @Component({
   selector: 'app-profile',
@@ -26,10 +24,10 @@ export class ProfileComponent implements OnInit {
   usuarios: Usuario
   isValid: boolean = false
   isCollapsed: boolean = false;
-  constructor(private ar: ActivatedRoute, public dialog: MatDialog, private msg: MsgService, private db: AngularFirestore, private auth: AngularFireAuth,private fb: FormBuilder) { }
+  constructor(private ar: ActivatedRoute, public dialog: MatDialog, private msg: MsgService, private db: AngularFirestore, private auth: AngularFireAuth, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    
+
     this.getUser()
     this.getUsers()
     this.getCourses()
@@ -75,7 +73,7 @@ export class ProfileComponent implements OnInit {
       res.docs.forEach((item) => {
         var certificado = item.data() as Certificacion
         console.log(certificado);
-        if (certificado.user.uid == this.ar.snapshot.params.idMaestro && certificado.status=="aprobado") {
+        if (certificado.user.uid == this.ar.snapshot.params.idMaestro && certificado.status == "aprobado") {
           certificado.id = item.id
           this.certificados.push(certificado);
         }
@@ -107,9 +105,9 @@ export class ProfileComponent implements OnInit {
       })
     })
   }
-  validateCurso(c: Curso){
-    for(let certificado of this.certificados){
-      if(c.categoria.nombre==certificado.categoria.nombre){
+  validateCurso(c: Curso) {
+    for (let certificado of this.certificados) {
+      if (c.categoria.nombre == certificado.categoria.nombre) {
         return true;
       }
     }
@@ -124,8 +122,8 @@ export class ProfileComponent implements OnInit {
 })
 export class reportProfile implements OnInit {
   formReporte: FormGroup;
-  formReportes:FormGroup
-  allreports:Array<any>=new Array();
+  formReportes: FormGroup
+  allreports: Array<any> = new Array();
 
   constructor(
     public dialogRef: MatDialogRef<reportProfile>,
@@ -146,45 +144,45 @@ export class reportProfile implements OnInit {
 
   saveReport() {
 
-     this.formReporte.value.maestro = this.data.maestro
-     this.formReporte.value.alumno = this.data.alumno
+    this.formReporte.value.maestro = this.data.maestro
+    this.formReporte.value.alumno = this.data.alumno
 
 
 
     this.db.collection('reportes').add(this.formReporte.value).finally(() => {
       console.log('entra aqui');
-      
-if(this.allreports.length>=4){
-  console.log("entro al ban");
-  
-  this.db.collection('usuarios').doc(this.data.maestro).update({
-    ban:true
-    
-  }).then(()=>{
-    console.log("baneado 1");
-    
-  })
-  this.db.collection('cursos').get().subscribe((res)=>{
-    console.log(2);
-    
-    res.forEach((item)=>{
-      let c=item.data() as Curso
-      c.id=item.id
-      if(c.user.uid==this.data.maestro){
-        console.log("deberia");
-        
-        this.db.collection('cursos').doc(c.id).update({
-            ban:true
-        }).then(()=>{
-          console.log("baneado 2");
-          
+
+      if (this.allreports.length >= 4) {
+        console.log("entro al ban");
+
+        this.db.collection('usuarios').doc(this.data.maestro).update({
+          ban: true
+
+        }).then(() => {
+          console.log("baneado 1");
+
+        })
+        this.db.collection('cursos').get().subscribe((res) => {
+          console.log(2);
+
+          res.forEach((item) => {
+            let c = item.data() as Curso
+            c.id = item.id
+            if (c.user.uid == this.data.maestro) {
+              console.log("deberia");
+
+              this.db.collection('cursos').doc(c.id).update({
+                ban: true
+              }).then(() => {
+                console.log("baneado 2");
+
+              })
+            }
+          })
         })
       }
-    })
-  })
-}
       this.msg.msgSuccess('Exito', 'Reporte creado correctamente')
-   
+
       this.dialogRef.close();
     }).catch((err) => {
       console.log(err)
@@ -201,10 +199,10 @@ if(this.allreports.length>=4){
   exitsReport() {
     var reports: Array<any> = new Array()
     this.db.collection('reportes').get().subscribe((res) => {
-  
+
 
       res.docs.forEach((item) => {
-        if(item.data().maestro == this.data.maestro) {
+        if (item.data().maestro == this.data.maestro) {
           this.allreports.push(item);
 
         }
