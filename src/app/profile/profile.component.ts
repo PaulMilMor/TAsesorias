@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { report } from 'process';
 import { newArray } from '@angular/compiler/src/util';
+import { Certificacion } from 'src/models/certificacion';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -17,7 +18,7 @@ import { newArray } from '@angular/compiler/src/util';
 export class ProfileComponent implements OnInit {
   currentRate = 5
   cursos: Array<Curso> = new Array();
-  
+  certificados: Array<Certificacion> = new Array()
   instructor = 'instructor'
   alumno = 'alumno'
   administrador = 'administrador'
@@ -32,6 +33,7 @@ export class ProfileComponent implements OnInit {
     this.getUser()
     this.getUsers()
     this.getCourses()
+    this.getCertificados();
     console.log(this.cursos);
     //this.getUsers()
   }
@@ -68,6 +70,19 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  getCertificados() {
+    this.db.collection('certificados').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        var certificado = item.data() as Certificacion
+        console.log(certificado);
+        if (certificado.user.uid == this.ar.snapshot.params.idMaestro && certificado.status=="aprobado") {
+          certificado.id = item.id
+          this.certificados.push(certificado);
+        }
+      })
+    })
+  }
+
   getCourses() {
     this.db.collection('cursos').get().subscribe((res) => {
       res.docs.forEach((item) => {
@@ -91,6 +106,14 @@ export class ProfileComponent implements OnInit {
         }
       })
     })
+  }
+  validateCurso(c: Curso){
+    for(let certificado of this.certificados){
+      if(c.categoria.nombre==certificado.categoria.nombre){
+        return true;
+      }
+    }
+    return false;
   }
 
 }

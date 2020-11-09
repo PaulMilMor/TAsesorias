@@ -18,24 +18,37 @@
 
 <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px">
   <div fxFlex="30%">
-
+    <h2><Strong>Certificaciones.</Strong></h2>
+    <div *ngIf="this.certificados.length>0">
+      <div *ngFor="let c of certificados">
+        <h4>{{c.descripcion}}<mat-icon style="color:#17a2b8;">verified_user</mat-icon></h4>
+      </div>
+    </div>
+    <div *ngIf="this.certificados.length==0">
+      <h4>Este instructor no está certificado.</h4>
+    </div>
   </div>
   <div fxFlex>
-
+    <h2><Strong>Asesorías.</Strong></h2>
+    
+    
     <mat-list role="list" class="list">
 
       <div *ngFor="let c of cursos" class="container" style="width:100%">
         <mat-list-item role="listitem" class="list" style="width:100%">
           <mat-card class="card-course" style="width:100%">
-            <mat-card-title> {{c.categoria.nombre}} </mat-card-title><br>
+            <mat-card-title> {{c.categoria.nombre}} <mat-icon *ngIf="this.validateCurso(c)" style="color:#17a2b8;">verified_user</mat-icon></mat-card-title> <br>
             <mat-card-content>
               <mat-list-item>
-                <strong>Tarifa por
-                  hora:</strong>
+                <h3>
+                  <strong>Tarifa por
+                    hora:</strong>
+                
                 {{c.tarifa |currency}}
-
+              </h3>
               </mat-list-item>
               <mat-list-item>
+                <h3><strong>Valoración: </strong></h3>
                 <ngb-rating [(rate)]="c.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem">
                 </ngb-rating>
 
@@ -46,7 +59,7 @@
               </mat-list-item>
               <mat-list-item>
                 <mat-chip-list aria-label="Etiquetas">
-                  <strong>Etiquetas: </strong>
+                  <h3><strong>Etiquetas: </strong></h3>
                   <mat-chip *ngFor="let etiqueta of c.etiquetas">{{etiqueta}}</mat-chip>
 
                 </mat-chip-list>
