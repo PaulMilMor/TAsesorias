@@ -31,6 +31,14 @@ export class CertificacionesinstructorComponent implements OnInit {
       height: '500px',
     });
   }
+  openFeedb(txt): void {
+
+    const dialogRef = this.dialog.open(feedbackInstructor, {
+      width: '600px',
+      height: '500px',
+      data:txt
+    });
+  }
   onResize(event) {
     this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 6;
   }
@@ -152,4 +160,23 @@ export class dialogNewcertificacion implements OnInit {
     document.getElementById('info').innerHTML = pdrs;
   }
 }
+@Component({
+  selector: 'feedbackInstuctor',
+  templateUrl: 'feedbackInstructor.html',
 
+})
+export class feedbackInstructor implements OnInit {
+
+
+  constructor(
+    public dialogRef: MatDialogRef<feedbackInstructor>,
+    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private msg: MsgService, private fb: FormBuilder,) { }
+  ngOnInit(): void {
+
+
+  }
+
+ 
+  
+
+}

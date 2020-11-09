@@ -7,8 +7,7 @@ import { MsgService } from 'src/services/msg.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { report } from 'process';
-import { newArray } from '@angular/compiler/src/util';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
