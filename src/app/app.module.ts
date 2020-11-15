@@ -52,6 +52,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { CertificacionesComponent, feedback } from './certificaciones/certificaciones.component';
 //import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 import { CertificacionesinstructorComponent, dialogNewcertificacion, feedbackInstructor } from './certificacionesinstructor/certificacionesinstructor.component';
+import { HomeComponent } from './home/home.component';
 //import { dialogNewcertificacion,CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 
 @NgModule({
@@ -78,7 +79,8 @@ import { CertificacionesinstructorComponent, dialogNewcertificacion, feedbackIns
     reportProfile,
     CertificacionesComponent,
     feedback,
-    feedbackInstructor
+    feedbackInstructor,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

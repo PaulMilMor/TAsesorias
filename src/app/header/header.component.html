@@ -27,6 +27,12 @@
             [matBadge]="certificaciones.length" matBadgeOverlap="false" matBadgeColor="accent">Certificaciones</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='alumno'"
+          [routerLink]="['/home']" routerLinkActive="router-link-active" style ="font-size: 17px;">
+          Home Test
+        </a> 
+      </li>
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">
       <li class="nav-item">
@@ -49,7 +55,7 @@
             *ngIf="usuario.tipoUsuario=='instructor'"><i class="material-icons">event</i>Horario</a>
           <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/certificacionesinstructor']"
             *ngIf="usuario.tipoUsuario=='instructor'"><i class="material-icons">star</i>Certificaciones</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect (click)="logOut()"><i
+          <a href="#" class="dropdown-item waves-light" mdbWavesEffect (click)="logOut()"><i
               class="material-icons">exit_to_app</i>Cerrar Sesión</a>
         </div>
       </li>

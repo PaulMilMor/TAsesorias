@@ -11,7 +11,7 @@ import { CalificarComponent } from './calificar/calificar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CertificacionesComponent } from './certificaciones/certificaciones.component';
 import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
-
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {path:'zoom',component:ZoomComponent},
@@ -23,7 +23,8 @@ const routes: Routes = [
   {path:'calificar/:idMaestro/:idAsesoria', component:CalificarComponent},
   {path:'perfil/:idMaestro',component:ProfileComponent},
   {path:'certificaciones', component:CertificacionesComponent},
-  {path:'certificacionesinstructor', component:CertificacionesinstructorComponent}
+  {path:'certificacionesinstructor', component:CertificacionesinstructorComponent},
+  {path: 'home', component:HomeComponent}
 
   
 ];
