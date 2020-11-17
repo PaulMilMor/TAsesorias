@@ -12,17 +12,20 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class HomeComponent implements OnInit {
   cursos: Curso[] = new Array<Curso>()
   cursosValorados: Curso[] = new Array<Curso>()
-  instructoresValorados: Curso[] = new Array<Curso>()
+  cursosCertificados: Curso[] = new Array<Curso>()
+  instructoresValorados: Usuario[] = new Array<Usuario>()
+  instructoresSolicitados: Usuario[] = new Array<Usuario>()
   usuario: Usuario
   isValid: boolean = false
-  constructor(private db: AngularFirestore,private auth: AngularFireAuth) { }
+  constructor(private db: AngularFirestore, private auth: AngularFireAuth) { }
 
   ngOnInit(): void {
     this.getUser()
     this.getCourses();
+    this.getTeachers();
     console.log("lenght " + this.cursos.length);
   }
-//Función para obtener todos los cursos
+  //Función para obtener todos los cursos
   getCourses() {
 
     this.db.collection('cursos').get().subscribe((res) => {
@@ -41,34 +44,102 @@ export class HomeComponent implements OnInit {
           })
           c.evaluaciones = E / e.length;
           //Este if es para obtener los cursos mejor valorados. Existe la posibilidad de que esté mal posicionado
-          if(c.evaluaciones>=4){
+          if (c.evaluaciones >= 4) {
             this.cursosValorados.push(c);
-            this.instructoresValorados.push(c);
-            for(let iv of this.instructoresValorados){
-              if(iv.user==c.user && iv.categoria!=c.categoria){
-                this.instructoresValorados.pop();
-              }
-            }
+            /*  this.instructoresValorados.push(c);
+              for(let iv of this.instructoresValorados){
+                console.log("entra al for");
+                console.log(iv.user);
+                console.log(c.user);
+                console.log(iv.categoria);
+                console.log(c.categoria);
+                if(iv.user.nombre==c.user.nombre && iv.categoria.nombre!=c.categoria.nombre){
+                  console.log("entra al if");
+                  this.instructoresValorados.pop();
+                }
+              }*/
           }
         })
+        this.db.collection('certificados').get().subscribe((res3) => {
+          console.log("Felxi 1");
+          res3.docs.forEach((item3) => {
+            console.log("Fleix 2");
+            if (item3.data().user.uid == c.user.uid && item3.data().categoria.id == c.categoria.id && item3.data().status == "aprobado") {
+              console.log("Feixls 3");
+              this.cursosCertificados.push(c);
+              for (let i in this.cursosCertificados) {
+                if (this.cursosCertificados[i] == c && parseInt(i) != this.cursosCertificados.length - 1) {
+                  this.cursosCertificados.pop();
+                }
+              }
+            }
+          })
+        })
+
         this.cursos.push(c);
-        
+
         console.log(c);
       })
     })
 
   }
 
- /* getValuedTeachers(){
-    this.instructoresValorados=this.cursosValorados
-    for(let c of this.instructoresValorados){
-      for(let c2 of this.instructoresValorados){
-        if(c.user=c2.user){
-          
+  getTeachers() {
+    this.db.collection('usuarios').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        let t = item.data() as Usuario;
+        t.id = item.id;
+        t.estudiantes=0;
+        console.log("Faro 1");
+        if (t.tipoUsuario == "instructor") {
+          console.log("Faro 2");
+          this.db.collection('evaluaciones').get().subscribe((res2) => {
+            var nEval = new Array<any>();
+            var total: number = 0;
+            console.log("Faro 3");
+            res2.docs.forEach((item2) => {
+              console.log("faro 4");
+              if (item2.data().maestro == t.uid) {
+                console.log("garo 5");
+                nEval.push(item2.data().calificacion)
+                total = total + item2.data().calificacion
+              }
+
+            })
+            t.evaluaciones = total / nEval.length;
+            if (t.evaluaciones >= 4) {
+              console.log("faro 6");
+              this.instructoresValorados.push(t);
+            }
+          })
+
+          this.db.collection('asesorias').get().subscribe((res3) => {
+            res3.docs.forEach((item3) => {
+              console.log("item3")
+              console.log(item3.data())
+              let idcurso = item3.id.split('@')[1];
+              console.log("Poolino 2")
+              this.db.collection('cursos').get().subscribe((res4)=> {
+                res4.docs.forEach((item4)=>{
+                  console.log("Poolino 3 " + " " + item4.id + " " + idcurso + "  " +item4.data().user.uid + " " + t.uid)
+                  if(item4.id==idcurso && item4.data().user.uid==t.uid) {
+                    console.log("Poolino 1")
+                    t.estudiantes = t.estudiantes+1;
+                    console.log(t.estudiantes + " " + t.uid)
+                  }
+                })
+              })
+            })
+            console.log("asdad " + t.estudiantes +" " + t.uid)
+            if(t.estudiantes>0){
+              this.instructoresSolicitados.push(t);
+            }
+          })
+
         }
-      }
-    }
-  }*/
+      })
+    })
+  }
 
   getUser() {
     this.db.collection('usuarios').get().subscribe((res) => {

@@ -11,4 +11,6 @@ export class Usuario{
     uid:string
     horario
     bio:string
+    evaluaciones:number;
+    estudiantes:number;
 }
