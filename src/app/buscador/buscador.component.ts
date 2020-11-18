@@ -9,6 +9,8 @@ import { inputs } from '@syncfusion/ej2-angular-schedule/src/schedule/schedule.c
 import { createModifiersFromModifierFlags } from 'typescript';
 import { FormControl } from '@angular/forms';
 import { Categoria } from 'src/models/categoria';
+import { firestore } from 'firebase/app';
+
 
 @Component({
   selector: 'app-buscador',
@@ -36,6 +38,7 @@ export class BuscadorComponent implements OnInit {
   usuario: Usuario
   isValid: boolean = false
   isCollapsed: boolean = false;
+  
   constructor(private db: AngularFirestore, private fb: FormBuilder,private auth: AngularFireAuth) { }
 
   ngOnInit(): void {
@@ -43,9 +46,11 @@ export class BuscadorComponent implements OnInit {
     this.categorias.length=0;
     this.getCourses()
     this.getCategories()
+    /* this.countVisitors() */
     this.checkedItems =  new Array<string>();
     this.getUser()
-   
+    
+    
   }
 
   getCategoriesId(e:any, nombre:string) {
@@ -103,11 +108,20 @@ this.allSelected=!this.allSelected
 
     })
   }
-
   
+   countVisitors(){
+   
+                        const increment = firestore.FieldValue.increment(1);
+                        const storyRef = this.db.collection('usuarios').doc('visitaUser');
+
+                        storyRef.update({ count: increment })
+
+                        
+  } 
+
 
   ///Obtiene todos los cursos con su promedio de evaluacion
-  getCourses(){
+  getCourses() {
   
     this.db.collection('cursos').get().subscribe((res)=>{
       res.docs.forEach((item)=>{
@@ -136,6 +150,12 @@ this.allSelected=!this.allSelected
 
   }
   
+   /* ountVisitors(){
+    
+    var visitas = this.db.collection('usuarios').doc('visitaUser');
+    visitas.update({
+        visitas:AngularFirestore.FieldValue.increment(1)
+  }  */
   getUser() {
     this.db.collection('usuarios').get().subscribe((res) => {
       res.docs.forEach((item) => {

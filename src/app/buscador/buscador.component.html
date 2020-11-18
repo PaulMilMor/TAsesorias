@@ -89,7 +89,7 @@
                         
                         </mat-card-content>
                         <mat-card-actions>
-                            <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
+                            <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]" (click)="countVisitors()">
                                 Ver Perfil
                             </button>
                             <button *ngIf="usuario.tipoUsuario==alumno" class="btn btn-primary" [routerLink]="['/agendar', curso.id ]">
@@ -124,7 +124,7 @@
                     <h5 class="card-title" style="font-size: 21px;">{{curso.user.nombre}} </h5>
                     <h5 class="card-title">{{curso.categoria.nombre}} </h5>
                     <h5 class="card-title">{{curso.tarifa}} </h5>
-                    <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
+                    <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]" (click)="countVisitors()">
                         Ver Perfil
                     </button>
                     <span *ngIf="usuario.tipoUsuario==alumno">
