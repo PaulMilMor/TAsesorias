@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
 
+  
     this.getUser()
     this.getUsers()
     this.getCourses()
@@ -189,7 +190,7 @@ export class reportProfile implements OnInit {
         // })
         var fechaInicio=new Date()
         var fechaFinal=new Date()
-        fechaFinal.setDate(fechaFinal.getDate()+30)
+        fechaFinal.setDate(fechaFinal.getUTCDate()+15)
         this.db.collection('baneados').doc(this.data.maestro.uid).set({
           fechaInicio:fechaInicio,
           fechaFinal:fechaFinal,

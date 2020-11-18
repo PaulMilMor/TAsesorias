@@ -34,6 +34,7 @@ this.getReportes()
         console.log(item.data().fecha);
       
         r.fecha=new Date((item.data().fecha)*1000)
+ 
         this.reportes.push(r)
         
         
