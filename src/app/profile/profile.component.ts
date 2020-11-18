@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
       height: '250px',
       //Para en enviar informacion a un dialogo se usa la variable data (teniendo en cuenta que existe una llamada asi tambien en el dialogo)
       data: {
-        maestro: this.ar.snapshot.params.idMaestro,
+        maestro: this.usuario,
         alumno: this.auth.auth.currentUser.uid
       }
     });
@@ -129,13 +129,17 @@ export class reportProfile implements OnInit {
     public dialogRef: MatDialogRef<reportProfile>,
     @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private msg: MsgService, private router: Router, private fb: FormBuilder, private ar: ActivatedRoute, private auth: AngularFireAuth) { }
   ngOnInit(): void {
+
     this.exitsReport()
     this.formReporte = this.fb.group({
       maestro: [''],
       alumno: [''],
-      reporte: ['', Validators.required]
-
+      reporte: ['', Validators.required],
+      fecha:['']
+      
     })
+
+
 
 
 
@@ -144,8 +148,11 @@ export class reportProfile implements OnInit {
 
   saveReport() {
 
+    console.log(this.data.maestro);
+    
     this.formReporte.value.maestro = this.data.maestro
     this.formReporte.value.alumno = this.data.alumno
+    this.formReporte.value.fecha= new Date()
 
 
 
@@ -153,32 +160,41 @@ export class reportProfile implements OnInit {
       console.log('entra aqui');
 
       if (this.allreports.length >= 4) {
-        console.log("entro al ban");
+        // console.log("entro al ban");
 
-        this.db.collection('usuarios').doc(this.data.maestro).update({
-          ban: true
+        // this.db.collection('usuarios').doc(this.data.maestro.uid).update({
+        //   ban: true
 
-        }).then(() => {
-          console.log("baneado 1");
+        // }).then(() => {
+        //   console.log("baneado 1");
 
-        })
-        this.db.collection('cursos').get().subscribe((res) => {
-          console.log(2);
+        // })
+        // this.db.collection('cursos').get().subscribe((res) => {
+        //   console.log(2);
 
-          res.forEach((item) => {
-            let c = item.data() as Curso
-            c.id = item.id
-            if (c.user.uid == this.data.maestro) {
-              console.log("deberia");
+        //   res.forEach((item) => {
+        //     let c = item.data() as Curso
+        //     c.id = item.id
+        //     if (c.user.uid == this.data.maestro.uid) {
+        //       console.log("deberia");
 
-              this.db.collection('cursos').doc(c.id).update({
-                ban: true
-              }).then(() => {
-                console.log("baneado 2");
+        //       this.db.collection('cursos').doc(c.id).update({
+        //         ban: true
+        //       }).then(() => {
+        //         console.log("baneado 2");
 
-              })
-            }
-          })
+        //       })
+        //     }
+        //   })
+        // })
+        var fechaInicio=new Date()
+        var fechaFinal=new Date()
+        fechaFinal.setDate(fechaFinal.getDate()+30)
+        this.db.collection('baneados').doc(this.data.maestro.uid).set({
+          fechaInicio:fechaInicio,
+          fechaFinal:fechaFinal,
+          tipoSuspension:'Automatica',
+          maestro:this.data.maestro 
         })
       }
       this.msg.msgSuccess('Exito', 'Reporte creado correctamente')
@@ -202,11 +218,11 @@ export class reportProfile implements OnInit {
 
 
       res.docs.forEach((item) => {
-        if (item.data().maestro == this.data.maestro) {
+        if (item.data().maestro.uid == this.data.maestro.uid) {
           this.allreports.push(item);
 
         }
-        if (item.data().maestro == this.data.maestro && item.data().alumno == this.data.alumno) {
+        if (item.data().maestro.uid == this.data.maestro.uid && item.data().alumno == this.data.alumno) {
           reports.push(item.data())
           console.log('eee')
           console.log(reports.length);

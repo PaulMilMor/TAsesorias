@@ -21,11 +21,20 @@
         <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='instructor'"
           [routerLink]="['/agregar-clase']" routerLinkActive="router-link-active" style="font-size: 17px;">Asesorias</a>
       </li>
+   
       <li class="nav-item">
         <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='administrador'"
           [routerLink]="['/certificaciones']" routerLinkActive="router-link-active" style="font-size: 17px; "><span
             [matBadge]="certificaciones.length" matBadgeOverlap="false" matBadgeColor="accent">Certificaciones</span>
         </a>
+      </li>
+      <li class="nav-item">
+        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='administrador'"
+          [routerLink]="['/reportes']" routerLinkActive="router-link-active" style="font-size: 17px;">Reportes</a>
+      </li>
+      <li class="nav-item">
+        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='administrador'"
+          [routerLink]="['/suspendidos']" routerLinkActive="router-link-active" style="font-size: 17px;">Instuctores Suspendidos</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">

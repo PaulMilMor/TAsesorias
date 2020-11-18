@@ -66,7 +66,9 @@ export class HeaderComponent implements OnInit {
     
   }
   logOut() {
+    
     this.auth.auth.signOut();
+
   }
   getUser() {
     this.db.collection('usuarios').get().subscribe((res) => {

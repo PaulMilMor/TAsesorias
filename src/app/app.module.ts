@@ -48,10 +48,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProfileComponent, reportProfile } from './profile/profile.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBadgeModule } from '@angular/material/badge';
-
+import { MatPaginator } from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 import { CertificacionesComponent, feedback } from './certificaciones/certificaciones.component';
 //import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 import { CertificacionesinstructorComponent, dialogNewcertificacion, feedbackInstructor } from './certificacionesinstructor/certificacionesinstructor.component';
+import { AdminreportComponent, dialogBan } from './adminreport/adminreport.component';
+import { BanlistComponent } from './banlist/banlist.component';
+
 //import { dialogNewcertificacion,CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 
 @NgModule({
@@ -78,7 +82,10 @@ import { CertificacionesinstructorComponent, dialogNewcertificacion, feedbackIns
     reportProfile,
     CertificacionesComponent,
     feedback,
-    feedbackInstructor
+    feedbackInstructor,
+    AdminreportComponent,
+    dialogBan,
+    BanlistComponent
   ],
   imports: [
     BrowserModule,
@@ -113,14 +120,15 @@ import { CertificacionesinstructorComponent, dialogNewcertificacion, feedbackIns
     NgbModule,
     MatIconModule,
     FlexLayoutModule,
-    MatBadgeModule
+    MatBadgeModule,
+
   ],
   entryComponents: [
     register,
     dialogStudent,
     reportProfile,
     dialogNewcertificacion, feedback,
-    feedbackInstructor
+    feedbackInstructor, dialogBan
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

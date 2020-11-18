@@ -11,6 +11,8 @@ import { CalificarComponent } from './calificar/calificar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CertificacionesComponent } from './certificaciones/certificaciones.component';
 import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
+import { AdminreportComponent } from './adminreport/adminreport.component';
+import { BanlistComponent } from './banlist/banlist.component';
 
 
 const routes: Routes = [
@@ -23,7 +25,9 @@ const routes: Routes = [
   {path:'calificar/:idMaestro/:idAsesoria', component:CalificarComponent},
   {path:'perfil/:idMaestro',component:ProfileComponent},
   {path:'certificaciones', component:CertificacionesComponent},
-  {path:'certificacionesinstructor', component:CertificacionesinstructorComponent}
+  {path:'certificacionesinstructor', component:CertificacionesinstructorComponent},
+  {path:'reportes', component:AdminreportComponent},
+  {path:'suspendidos',component:BanlistComponent}
 
   
 ];
