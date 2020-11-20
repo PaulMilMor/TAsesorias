@@ -9,6 +9,8 @@ import { inputs } from '@syncfusion/ej2-angular-schedule/src/schedule/schedule.c
 import { createModifiersFromModifierFlags } from 'typescript';
 import { FormControl } from '@angular/forms';
 import { Categoria } from 'src/models/categoria';
+import { firestore } from 'firebase/app';
+
 
 @Component({
   selector: 'app-buscador',
@@ -38,10 +40,11 @@ export class BuscadorComponent implements OnInit {
 
     this.getCourses()
     this.getCategories()
-    this.checkedItems = new Array<string>();
+    /* this.countVisitors() */
+    this.checkedItems =  new Array<string>();
     this.getUser()
-
-
+    
+    
   }
 
   getCategoriesId(e: any, nombre: string) {
@@ -148,7 +151,13 @@ export class BuscadorComponent implements OnInit {
     })
 
   }
-
+  
+   /* ountVisitors(){
+    
+    var visitas = this.db.collection('usuarios').doc('visitaUser');
+    visitas.update({
+        visitas:AngularFirestore.FieldValue.increment(1)
+  }  */
   getUser() {
     this.db.collection('usuarios').get().subscribe((res) => {
       res.docs.forEach((item) => {
@@ -164,4 +173,14 @@ export class BuscadorComponent implements OnInit {
     })
   }
 
+  ///Contar visitas a perfil de los instructores
+  
+  countVisitors(id: string){
+   
+    const increment = firestore.FieldValue.increment(1);
+    const storyRef = this.db.collection('usuarios').doc(id);
+
+    storyRef.update({ count: increment })
+
+    } 
 }
