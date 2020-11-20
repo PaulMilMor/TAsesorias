@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder,  } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {  Router } from '@angular/router';
 import { Certificacion } from 'src/models/certificacion';
+import { Curso } from 'src/models/curso';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,11 @@ import { Certificacion } from 'src/models/certificacion';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  instructor = 'instructor'
+  alumno = 'alumno'
+  administrador = 'administrador'
+  cursos: Array<Curso> = new Array();
+  //cursosChecked:Curso[]=new Array<Curso>()
   usuario: Usuario
   isValid: boolean = false
   isCollapsed: boolean = false;
@@ -35,10 +41,11 @@ export class HeaderComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.getUser()
-   
+    this.cursos.length=0;
+    this.getCourses()
        this.getCertificaciones()
-     
+       this.getUser()
+
   }
   getCertificaciones(){
   
@@ -84,6 +91,34 @@ export class HeaderComponent implements OnInit {
         this.openDialog()
       }
     })
+  }
+  getCourses(){
+  
+    this.db.collection('cursos').get().subscribe((res)=>{
+      res.docs.forEach((item)=>{
+        let c= item.data() as Curso;
+        c.id=item.id
+        this.db.collection('evaluaciones').get().subscribe((res2)=>{
+          var e=new Array<any>();
+          var E:any=0
+          res2.docs.forEach((item2)=>{
+
+             if(item2.id.split('@')[1]==c.id){
+               e.push(item2.data().calificacion)
+               E=E+item2.data().calificacion
+             }
+          })
+          c.evaluaciones=E/e.length;
+          if (c.ban!=true){
+            this.cursos.push(c);
+            //this.cursosChecked.push(c)
+
+          }
+         
+        })
+      })
+    })
+
   }
 }
 
