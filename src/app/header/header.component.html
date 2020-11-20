@@ -56,6 +56,8 @@
             routerLinkActive="router-link-active"><i class="material-icons">person</i>Mi Perfil</a>
           <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/horario']"
             *ngIf="usuario.tipoUsuario=='instructor'"><i class="material-icons">event</i>Horario</a>
+            <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/misasesorias']"
+            *ngIf="usuario.tipoUsuario=='alumno'"><i class="material-icons">event</i>Mis asesorias</a>
           <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/certificacionesinstructor']"
             *ngIf="usuario.tipoUsuario=='instructor'"><i class="material-icons">star</i>Certificaciones</a>
           <a class="dropdown-item waves-light" mdbWavesEffect (click)="logOut()"><i

@@ -22,15 +22,23 @@ getBaneados(){
       let b=item.data()
       b.id=item.id
       b.fechaInicio=new Date((item.data().fechaInicio)*1000)
-      b.fechaFinal=new Date((item.data().fechaFinal)*1000)
-      b.fechaFinal.setFullYear(2020)
-   
-      var diff = Math.floor(b.fechaFinal.getTime() - fecha.getTime());
-      var day = 1000 * 60 * 60 * 24;
+  
+   if(b.fechaFinal!='Indefinidamente'){
+    b.fechaFinal=new Date((item.data().fechaFinal)*1000)
+    b.fechaFinal.setFullYear(2020)
+    var diff = Math.floor(b.fechaFinal.getTime() - fecha.getTime());
+    var day = 1000 * 60 * 60 * 24;
 
-      var days = Math.floor(diff/day);
-      console.log(days);
-      b.dias=days
+    var days = Math.floor(diff/day);
+    console.log(days);
+    b.dias=days+" Dias"
+   }else{
+
+     
+     b.dias=b.fechaFinal
+   }
+     
+    
       this.baneados.push(b)
       
     })

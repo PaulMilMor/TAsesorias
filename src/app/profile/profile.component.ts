@@ -161,33 +161,7 @@ export class reportProfile implements OnInit {
       console.log('entra aqui');
 
       if (this.allreports.length >= 4) {
-        // console.log("entro al ban");
-
-        // this.db.collection('usuarios').doc(this.data.maestro.uid).update({
-        //   ban: true
-
-        // }).then(() => {
-        //   console.log("baneado 1");
-
-        // })
-        // this.db.collection('cursos').get().subscribe((res) => {
-        //   console.log(2);
-
-        //   res.forEach((item) => {
-        //     let c = item.data() as Curso
-        //     c.id = item.id
-        //     if (c.user.uid == this.data.maestro.uid) {
-        //       console.log("deberia");
-
-        //       this.db.collection('cursos').doc(c.id).update({
-        //         ban: true
-        //       }).then(() => {
-        //         console.log("baneado 2");
-
-        //       })
-        //     }
-        //   })
-        // })
+      
         var fechaInicio=new Date()
         var fechaFinal=new Date()
         fechaFinal.setDate(fechaFinal.getUTCDate()+15)

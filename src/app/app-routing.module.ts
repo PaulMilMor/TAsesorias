@@ -13,6 +13,7 @@ import { CertificacionesComponent } from './certificaciones/certificaciones.comp
 import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 import { AdminreportComponent } from './adminreport/adminreport.component';
 import { BanlistComponent } from './banlist/banlist.component';
+import { MisasesoriasComponent } from './misasesorias/misasesorias.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
   {path:'certificaciones', component:CertificacionesComponent},
   {path:'certificacionesinstructor', component:CertificacionesinstructorComponent},
   {path:'reportes', component:AdminreportComponent},
-  {path:'suspendidos',component:BanlistComponent}
+  {path:'suspendidos',component:BanlistComponent},
+  {path:'misasesorias', component:MisasesoriasComponent}
 
   
 ];

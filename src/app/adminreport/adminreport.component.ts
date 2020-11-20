@@ -18,11 +18,11 @@ export class AdminreportComponent implements OnInit {
   ngOnInit(): void {
 this.getReportes()
   }
-  openDialog(idM): void {
+  openDialog(maestro): void {
     const dialogRef = this.dialog.open(dialogBan, {
    
  data:{
-
+    maestro:maestro
  }
     });
   }
@@ -42,6 +42,9 @@ this.getReportes()
     })
 
   }
+
+
+ 
  
 }
 @Component({
@@ -59,6 +62,42 @@ export class dialogBan {
 
   }
 
+  banHammer(){
+    var fechaInicio=new Date()
+    var fechaFinal=new Date()
+    fechaFinal.setDate(fechaFinal.getUTCDate()+15)
+    this.db.collection('baneados').doc(this.data.maestro.uid).set({
+      fechaInicio:fechaInicio,
+      fechaFinal:fechaFinal,
+      tipoSuspension:'Manual',
+      maestro:this.data.maestro 
+    }).finally(()=>{
+      this.deleteReportes(this.data.maestro.uid)
+    })
+  }
+  banHammerU(){
+    var fechaInicio=new Date()
+    var fechaFinal='Indefinidamente'
 
-
+    this.db.collection('baneados').doc(this.data.maestro.uid).set({
+      fechaInicio:fechaInicio,
+      fechaFinal:fechaFinal,
+      tipoSuspension:'Manual',
+      maestro:this.data.maestro 
+    }).finally(()=>{
+      this.deleteReportes(this.data.maestro.uid)
+    })
+  }
+  deleteReportes(id){
+    this.db.collection('reportes').get().subscribe(res=>{
+      res.forEach(item=>{
+        let r=item.data() as Reporte
+         r.id=item.id
+        if(r.maestro.uid==id){
+          this.db.collection('reportes').doc(r.id).delete()
+        }
+      })
+      window.location.reload()
+    })
+  }
 }

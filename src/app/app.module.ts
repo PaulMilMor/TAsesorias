@@ -55,7 +55,8 @@ import { CertificacionesComponent, feedback } from './certificaciones/certificac
 import { CertificacionesinstructorComponent, dialogNewcertificacion, feedbackInstructor } from './certificacionesinstructor/certificacionesinstructor.component';
 import { AdminreportComponent, dialogBan } from './adminreport/adminreport.component';
 import { BanlistComponent } from './banlist/banlist.component';
-
+import { MisasesoriasComponent } from './misasesorias/misasesorias.component';
+import {MatDividerModule} from '@angular/material/divider';
 //import { dialogNewcertificacion,CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 
 @NgModule({
@@ -85,7 +86,8 @@ import { BanlistComponent } from './banlist/banlist.component';
     feedbackInstructor,
     AdminreportComponent,
     dialogBan,
-    BanlistComponent
+    BanlistComponent,
+    MisasesoriasComponent
   ],
   imports: [
     BrowserModule,
@@ -121,6 +123,7 @@ import { BanlistComponent } from './banlist/banlist.component';
     MatIconModule,
     FlexLayoutModule,
     MatBadgeModule,
+    MatDividerModule
 
   ],
   entryComponents: [

@@ -36,8 +36,12 @@ export class HeaderComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getUser()
-   
-       this.getCertificaciones()
+
+     this.getCertificaciones()
+
+        this.isBanned() 
+      
+  
      
   }
   getCertificaciones(){
@@ -86,6 +90,16 @@ export class HeaderComponent implements OnInit {
         this.openDialog()
       }
     })
+  }
+  isBanned(){
+   this.db.collection('baneados').get().subscribe((res)=>{
+     res.docs.forEach(item=>{
+       if(item.id==this.auth.auth.currentUser.uid)
+       this.msg.msgWarning('Suspendido','Estas suspendido ')
+     })
+
+   })
+
   }
 }
 
