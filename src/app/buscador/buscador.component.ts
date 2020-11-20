@@ -108,17 +108,6 @@ this.allSelected=!this.allSelected
 
     })
   }
-  
-   countVisitors(){
-   
-                        const increment = firestore.FieldValue.increment(1);
-                        const storyRef = this.db.collection('usuarios').doc('visitaUser');
-
-                        storyRef.update({ count: increment })
-
-                        
-  } 
-
 
   ///Obtiene todos los cursos con su promedio de evaluacion
   getCourses() {
@@ -170,4 +159,15 @@ this.allSelected=!this.allSelected
       })
     })
   }
+
+  ///Contar visitas a perfil de los instructores
+  
+  countVisitors(id: string){
+   
+    const increment = firestore.FieldValue.increment(1);
+    const storyRef = this.db.collection('usuarios').doc(id);
+
+    storyRef.update({ count: increment })
+
+    } 
 }

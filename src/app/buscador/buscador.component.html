@@ -88,8 +88,19 @@
                         </ngb-rating>
                         
                         </mat-card-content>
+                       <!--  <script> 
+                         countVisitors();{
+   
+                            const increment = firestore.FieldValue.increment(1);
+                            const storyRef = this.db.collection('usuarios').doc("[curso.user.uid]");
+
+                            storyRef.update({ count: increment })
+
+                            } 
+
+                        </script> -->
                         <mat-card-actions>
-                            <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]" (click)="countVisitors()">
+                            <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]" (click)="countVisitors(curso.user.uid)">
                                 Ver Perfil
                             </button>
                             <button *ngIf="usuario.tipoUsuario==alumno" class="btn btn-primary" [routerLink]="['/agendar', curso.id ]">
