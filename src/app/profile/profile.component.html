@@ -23,7 +23,7 @@
 <div class="container" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="10px">
   <div fxFlex="30%" fxFlex.sm fxFlex.xs>
     <h4>Correo electronico: {{usuario.correo}}</h4>
-    <h4>Telefono:</h4>
+    <h4>Telefono: {{usuario.cel}}</h4>
     <h2><Strong>Certificaciones.</Strong></h2>
     <div *ngIf="this.certificados.length>0">
       <div *ngFor="let c of certificados">

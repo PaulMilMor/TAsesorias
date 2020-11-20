@@ -401,7 +401,7 @@ export class editProfile implements OnInit {
           this.tipoCorreo = u.correo.split('@')[1]
           console.log(this.tipoCorreo);
           this.formUsuario.get('bio').setValue(this.usuario.bio)
-          //this.formUsuario.get('cel').setValue(this.usuario.cel)
+          this.formUsuario.get('cel').setValue(this.usuario.cel)
         }
       })
     })
