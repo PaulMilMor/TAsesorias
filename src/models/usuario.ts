@@ -12,5 +12,7 @@ export class Usuario{
     horario
     bio:string
     evaluaciones:number;
-    estudiantes:number;
+    estudiantes:any;
+    fecha:any;
+
 }

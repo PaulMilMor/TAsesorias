@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
 import { MsgService } from 'src/services/msg.service';
+import { Usuario } from 'src/models/usuario';
 
 declare var paypal;
 @Component({
@@ -126,7 +127,7 @@ export class dialogStudent implements OnInit {
   cdomingo: Array<any> = new Array();
 
   asesorias: Array<any> = new Array();
-
+  maestro: Usuario;
   tlunes: Array<any> = new Array();
   tmartes: Array<any> = new Array();
   tmiercoles: Array<any> = new Array();
@@ -147,6 +148,7 @@ export class dialogStudent implements OnInit {
     this.getHorario()
     this.setToggle();
     this.titulo = this.getWeek();
+    this.getTeacher(this.data.curso.user.uid);
     //Llama al boton de la api de paypal 
     paypal.Buttons({
       createOrder: (data, actions) => {
@@ -552,11 +554,16 @@ export class dialogStudent implements OnInit {
   save(){
 if (this.data.sesiones==0){
   var user=this.auth.auth.currentUser;
+  let date = new Date();
+  //let t = this.getTeacher(this.data.curso.user.uid);
+   
+  date.setUTCHours(0,0,0,0)
   console.log(this.asesorias)
   //para identificar la asesoria se le suma el id del usuario con la id  del curso
    this.db.collection('asesorias').doc(user.uid+'@'+this.data.curso.id).set({
 
-     dias:this.asesorias
+     dias:this.asesorias,
+     fecha:date
    }).finally(()=>{
      console.log("Guardado exitoso");
      this.msg.msgSuccess('Registrado', 'Asesorías registradas exitosamente');
@@ -566,6 +573,18 @@ if (this.data.sesiones==0){
      this.msg.msgError('Error',err);
      
    })
+   let students = {};
+  students["" +date.getTime()]=1;
+    console.log("THIS");
+   console.log(this.maestro);
+   /*students[""+date.getTime()]=t.estudiantes[""+date.getTime()];
+   students[""+date.getTime()]++;*/
+   //this.data.curso.user.estudiantes[""+date]=1;
+   this.db.collection('usuarios').doc(this.data.curso.user.uid).update({
+    estudiantes: students 
+   })
+
+   
   
 }else{
   //Aqui se puede poner una alerta 
@@ -588,6 +607,24 @@ if (this.data.sesiones==0){
 
     return ("Semana del " + todayDate + "/" + (todayMonth + 1) + "/" + todayYear + " al " +
       weekendDate + "/" + (weekendMonth + 1) + "/" + weekendYear);
+  }
+
+//Para obtener un maestro
+  getTeacher(id:string){
+    this.db.collection('usuarios').get().subscribe((res)=>{
+      res.docs.forEach((item)=>{
+        let t = item.data() as Usuario;
+        t.id=item.id;
+        console.log("THAT");
+        console.log(t);
+        if(t.uid==id){
+
+          this.maestro = t;
+          
+        }
+      })
+    })
+    
   }
 
 

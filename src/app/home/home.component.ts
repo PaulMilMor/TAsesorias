@@ -15,14 +15,34 @@ export class HomeComponent implements OnInit {
   cursosCertificados: Curso[] = new Array<Curso>()
   instructoresValorados: Usuario[] = new Array<Usuario>()
   instructoresSolicitados: Usuario[] = new Array<Usuario>()
+  instructoresNuevos: Usuario[] = new Array<Usuario>()
   usuario: Usuario
   isValid: boolean = false
+
+  itemsPerSlide = 3;
+  singleSlideOffset = true;
+  noWrap = true;
+
+  slides = [
+    { image: 'https://valor-software.com/ngx-bootstrap/assets/images/nature/1.jpg' },
+    { image: 'https://valor-software.com/ngx-bootstrap/assets/images/nature/2.jpg' },
+    { image: 'https://valor-software.com/ngx-bootstrap/assets/images/nature/3.jpg' },
+    { image: 'https://valor-software.com/ngx-bootstrap/assets/images/nature/4.jpg' },
+    { image: 'https://valor-software.com/ngx-bootstrap/assets/images/nature/5.jpg' },
+    { image: 'https://valor-software.com/ngx-bootstrap/assets/images/nature/6.jpg' },
+    { image: 'https://valor-software.com/ngx-bootstrap/assets/images/nature/7.jpg' },
+    { image: 'https://valor-software.com/ngx-bootstrap/assets/images/nature/8.jpg' },
+    { image: 'https://valor-software.com/ngx-bootstrap/assets/images/nature/1.jpg' },
+    { image: 'https://valor-software.com/ngx-bootstrap/assets/images/nature/2.jpg' }
+  ];
+
   constructor(private db: AngularFirestore, private auth: AngularFireAuth) { }
 
   ngOnInit(): void {
     this.getUser()
     this.getCourses();
     this.getTeachers();
+    this.getNewTeachers();
     console.log("lenght " + this.cursos.length);
   }
   //Función para obtener todos los cursos
@@ -89,10 +109,11 @@ export class HomeComponent implements OnInit {
       res.docs.forEach((item) => {
         let t = item.data() as Usuario;
         t.id = item.id;
-        t.estudiantes=0;
+        t.estudiantes = 0;
         console.log("Faro 1");
         if (t.tipoUsuario == "instructor") {
           console.log("Faro 2");
+
           this.db.collection('evaluaciones').get().subscribe((res2) => {
             var nEval = new Array<any>();
             var total: number = 0;
@@ -119,22 +140,50 @@ export class HomeComponent implements OnInit {
               console.log(item3.data())
               let idcurso = item3.id.split('@')[1];
               console.log("Poolino 2")
-              this.db.collection('cursos').get().subscribe((res4)=> {
-                res4.docs.forEach((item4)=>{
-                  console.log("Poolino 3 " + " " + item4.id + " " + idcurso + "  " +item4.data().user.uid + " " + t.uid)
-                  if(item4.id==idcurso && item4.data().user.uid==t.uid) {
+              this.db.collection('cursos').get().subscribe((res4) => {
+                res4.docs.forEach((item4) => {
+                  console.log("Poolino 3 " + " " + item4.id + " " + idcurso + "  " + item4.data().user.uid + " " + t.uid)
+                  if (item4.id == idcurso && item4.data().user.uid == t.uid) {
                     console.log("Poolino 1")
-                    t.estudiantes = t.estudiantes+1;
+                    t.estudiantes = t.estudiantes + 1;
                     console.log(t.estudiantes + " " + t.uid)
                   }
                 })
               })
             })
-            console.log("asdad " + t.estudiantes +" " + t.uid)
-            if(t.estudiantes>0){
+            console.log("asdad " + t.estudiantes + " " + t.uid)
+            if (t.estudiantes > 0) {
               this.instructoresSolicitados.push(t);
             }
           })
+        }
+      })
+    })
+  }
+
+  getNewTeachers() {
+    this.db.collection('usuarios').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        let t = item.data() as Usuario;
+        t.id = item.id;
+        t.estudiantes = 0;
+        t.evaluaciones = 0;
+        if (t.tipoUsuario == "instructor") {
+          console.log("What ")
+          this.instructoresNuevos.push(t);
+          let today = new Date();
+          let insDate = t.fecha.toDate();
+          today.setDate(today.getUTCDate() - 15);
+          //let refdateInMS = today.getTime()- 129600000
+          console.log("what2 " + today.getUTCDate())
+          //console.log("what of what " + t.fecha.getUTCDate())
+          //console.log("what 4 " + (t.fecha.getTime() < today.getTime()));
+          /*let numDays = Math.abs(today.getTime()-t.fecha.getTime()) / (1000*60*60*24); 
+          console.log("what3");*/
+          if (insDate.getTime() < today.getTime()) {
+            this.instructoresNuevos.pop();
+          }
+          this.instructoresNuevos.sort((a, b) => (a.fecha < b.fecha) ? 1 : -1)
 
         }
       })

@@ -48,6 +48,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProfileComponent, reportProfile } from './profile/profile.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBadgeModule } from '@angular/material/badge';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 import { CertificacionesComponent, feedback } from './certificaciones/certificaciones.component';
 //import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
@@ -115,7 +116,8 @@ import { HomeComponent } from './home/home.component';
     NgbModule,
     MatIconModule,
     FlexLayoutModule,
-    MatBadgeModule
+    MatBadgeModule,
+    CarouselModule.forRoot()
   ],
   entryComponents: [
     register,

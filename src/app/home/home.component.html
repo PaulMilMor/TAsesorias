@@ -147,3 +147,194 @@
         </div>
     </div>
 </div>
+<div *ngIf='this.instructoresNuevos.length>0'>
+    <h1>Nuevos Instructores.</h1>
+    <div>
+
+
+        <div class="row">
+            <carousel [itemsPerSlide] ="itemsPerSlide" 
+                      [singleSlideOffset]="singleSlideOffset"
+                      style="width:100%">
+                <slide *ngFor="let instructor of instructoresNuevos; let index=index" class="mx-auto" >
+                    <!--div class="card"-->
+                    <div class="carousel-item" style="display:block; width:75%">
+                        <div>
+                            <div class="card" style="min-width: 300px">
+                                <img class="card-img-top imgMaestro" [src]="instructor.img">
+                                <mat-card class="card-body">
+                                    <mat-card-content>
+                                        <h5 class="card-title" style="font-size: 21px;">{{instructor.nombre}} </h5>
+                                        <!--h5 class="card-title">{{curso.categoria.nombre}} </h5-->
+                                        <!--h5 class="card-title">{{curso.nivel.nombre}}</h5-->
+                                        <!--h5 class="card-title">{{curso.tarifa | currency}} </h5-->
+                                        <h5 class="card-title">{{ instructor.estudiantes }} Estudiantes en los últimos 30 días</h5>
+                                        <h5>{{instructor.fecha}}</h5>
+                                        <ngb-rating [(rate)]="instructor.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem">
+                                        </ngb-rating>
+            
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                        <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
+                                            Ver Perfil
+                                        </button>
+                                        <!--button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
+                                            [routerLink]="['/agendar', curso.id ]">
+                                            Ver Curso
+                                        </button-->
+            
+                                    </mat-card-actions>
+            
+                                </mat-card>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <!--/div-->
+                </slide>
+                <!--div class="col-sm-3" *ngFor="let instructor of instructoresNuevos" style="padding-top: 3%;">
+                    <div class="card">
+                        <img class="card-img-top imgMaestro" [src]="instructor.img">
+                        <mat-card class="card-body">
+                            <mat-card-content>
+                                <h5 class="card-title" style="font-size: 21px;">{{instructor.nombre}} </h5>
+                                <!--h5 class="card-title">{{curso.categoria.nombre}} </h5-->
+                                <!--h5 class="card-title">{{curso.nivel.nombre}}</h5-->
+                                <!--h5 class="card-title">{{curso.tarifa | currency}} </h5-->
+                                <!--h5 class="card-title">{{ instructor.estudiantes }} Estudiantes en los últimos 30 días</h5>
+                                <h5>{{instructor.fecha}}</h5>
+                                <ngb-rating [(rate)]="instructor.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem">
+                                </ngb-rating>
+    
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
+                                    Ver Perfil
+                                </button>
+                                <!--button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
+                                    [routerLink]="['/agendar', curso.id ]">
+                                    Ver Curso
+                                </button-->
+    
+                            <!--/mat-card-actions>
+    
+                        </mat-card>
+                    </div>
+                </div-->
+            </carousel> 
+            
+
+        </div>
+    </div>
+</div>
+
+<carousel [itemsPerSlide]="itemsPerSlide"
+          [singleSlideOffset]="singleSlideOffset"
+          [interval]="false"
+          [noWrap]="noWrap">
+  <slide *ngFor="let slide of slides; let index=index" class="mx-auto">
+    <img [src]="slide.image" alt="image slide" style="display: block; width: 100%;">
+    <div class="carousel-caption">
+      <h4>Slide {{index}}</h4>
+    </div>
+  </slide>
+</carousel>
+
+<mat-card class="mat-parent">
+    <carousel [singleSlideOffset]="singleSlideOffset">
+        <div class="carousel-iner" align="center" role="listbox">
+            <slide>
+                <div class="carousel-item" style="display:block; width:100%;">
+                    <div class="col-md-4">
+                        <mat-card class="example-card">
+                            <img mat-card-image src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" alt="Photo of a Shiba Inu">
+                            <mat-card-content>
+                                <div class="card-body">
+                                    <h4 class="card-title">Card title</h4>
+                                    <p>Some quick example text to build on the card title and make up the bulk of the card's
+                                        content.
+                                    </p>
+                                    <button mat-raised-button color="primary">Primary</button>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-card class="example-card">
+                            <img mat-card-image src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(53).jpg" alt="Photo of a Shiba Inu">
+                            <mat-card-content>
+                                <div class="card-body">
+                                    <h4 class="card-title">Card title</h4>
+                                    <p>Some quick example text to build on the card title and make up the bulk of the card's
+                                        content.
+                                    </p>
+                                    <button mat-raised-button color="primary">Primary</button>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-card class="example-card">
+                            <img mat-card-image src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg" alt="Photo of a Shiba Inu">
+                            <mat-card-content>
+                                <div class="card-body">
+                                    <h4 class="card-title">Card title</h4>
+                                    <p>Some quick example text to build on the card title and make up the bulk of the card's
+                                        content.
+                                    </p>
+                                    <button mat-raised-button color="primary">Primary</button>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div> 
+                </div>
+            </slide>
+            <slide>
+                <div class="carousel-item" style="display: block; width: 100%;">
+                    <div class="col-md-4">
+                        <mat-card class="example-card">
+                            <img mat-card-image src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg" alt="Photo of a Shiba Inu">
+                            <mat-card-content>
+                                <div class="card-body">
+                                    <h4 class="card-title">Card title</h4>
+                                    <p>Some quick example text to build on the card title and make up the bulk of the card's
+                                        content.
+                                    </p>
+                                    <button mat-raised-button color="primary">Primary</button>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-card class="example-card">
+                            <img mat-card-image src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(45).jpg" alt="Photo of a Shiba Inu">
+                            <mat-card-content>
+                                <div class="card-body">
+                                    <h4 class="card-title">Card title</h4>
+                                    <p>Some quick example text to build on the card title and make up the bulk of the card's
+                                        content.
+                                    </p>
+                                    <button mat-raised-button color="primary">Primary</button>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-card class="example-card">
+                            <img mat-card-image src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(48).jpg" alt="Photo of a Shiba Inu">
+                            <mat-card-content>
+                                <div class="card-body">
+                                    <h4 class="card-title">Card title</h4>
+                                    <p>Some quick example text to build on the card title and make up the bulk of the card's
+                                        content.
+                                    </p>
+                                    <button mat-raised-button color="primary">Primary</button>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </slide>
+        </div>
+    </carousel>
+</mat-card>
