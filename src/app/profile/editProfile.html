@@ -1,10 +1,6 @@
-<div class="main-div">
-    <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
-  
-    <form style="margin-top:40px" *ngIf="editProfile" [formGroup]="formUsuario"
-      class="text-center border border-light p-5" action="#!">
-  
-  
+
+  <form style="margin-top:40px"  [formGroup]="formUsuario"
+  class="text-center border border-light p-5" action="#!">
       <p class="h4 mb-4">EDITAR MIS DATOS</p>
   
       <input (click)="editCorreo=!editCorreo" type="email" id="defaultContactFormEmail" class="form-control mb-4"
@@ -30,10 +26,10 @@
   
         </textarea>
       </div>
-  
-  
+      <div class="form-group">
+      <input type="tel" id="defaultContactFormName"  class="form-control mb-4"
+      placeholder="Telefono" name="tel" formControlName="cel">
+    </div>
       <button class="mt-5" (click)="editUser()" class="btn btn-info btn-block" type="submit">GUARDAR CAMBIOS</button>
-  
     </form>
-  </div>
-  
+

@@ -259,6 +259,7 @@ export class editProfile implements OnInit {
   editImg: boolean = false
   editProfile: boolean = false
   editBiog: boolean = true
+  editcelular: boolean = true
   isValid: boolean = false
   normal: 'normal'
   tipoCorreo: string
@@ -272,7 +273,8 @@ export class editProfile implements OnInit {
       correo: ['', Validators.email],
       contraseña: ['', Validators.minLength(8)],
       img: [''],
-      bio: ['']
+      bio: [''],
+      cel: ['']
     })
 
   }
@@ -351,6 +353,20 @@ export class editProfile implements OnInit {
     })
 
   }
+  editCel() {
+    var user = this.auth.auth.currentUser.uid
+    this.db.collection('usuarios').doc(user).update({
+      cel: this.formUsuario.value.cel
+    }
+    ).then(() => {
+      this.msg.msgSuccess('Exito', 'Telefono actualizado correctamente')
+    }).catch((err) => {
+      console.log(err);
+
+
+    })
+
+  }
   //Se encarga de ver que cambio se van a realizar y llama a los metodos correspondientes
   editUser() {
     if (this.editImg) {
@@ -367,6 +383,9 @@ export class editProfile implements OnInit {
     if (this.editBiog) {
       this.editBio()
     }
+    if (this.editcelular) {
+      this.editCel()
+    }
   }
   
   //Obtiene el usuario
@@ -381,8 +400,8 @@ export class editProfile implements OnInit {
           console.log(this.usuario.img)
           this.tipoCorreo = u.correo.split('@')[1]
           console.log(this.tipoCorreo);
-
           this.formUsuario.get('bio').setValue(this.usuario.bio)
+          //this.formUsuario.get('cel').setValue(this.usuario.cel)
         }
       })
     })

@@ -45,7 +45,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatChipsModule } from '@angular/material/chips';
 import { CalificarComponent } from './calificar/calificar.component';
 import { MatIconModule } from '@angular/material/icon';
-import { ProfileComponent, reportProfile } from './profile/profile.component';
+import { ProfileComponent, reportProfile,editProfile } from './profile/profile.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBadgeModule } from '@angular/material/badge';
 
@@ -76,6 +76,7 @@ import { CertificacionesinstructorComponent, dialogNewcertificacion, feedbackIns
     CertificacionesinstructorComponent,
     dialogNewcertificacion,
     reportProfile,
+    editProfile,
     CertificacionesComponent,
     feedback,
     feedbackInstructor
@@ -119,6 +120,7 @@ import { CertificacionesinstructorComponent, dialogNewcertificacion, feedbackIns
     register,
     dialogStudent,
     reportProfile,
+    editProfile,
     dialogNewcertificacion, feedback,
     feedbackInstructor
   ],
