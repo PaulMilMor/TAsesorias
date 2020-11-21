@@ -51,9 +51,14 @@
             style="width: 41px; height: 41px;"></a>
 
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <span *ngIf="usuario.tipoUsuario=='alumno'">
           <a class="dropdown-item waves-light" mdbWavesEffect [routerLinkActive]="['active']" [routerLink]="['/editar']"
-            *ngIf="usuario.tipoUsuario=='alumno' || usuario.tipoUsuario=='instructor'"
             routerLinkActive="router-link-active"><i class="material-icons">person</i>Mi Perfil</a>
+          </span>
+          <span *ngIf="usuario.tipoUsuario=='instructor'">
+            <a class="dropdown-item waves-light" mdbWavesEffect [routerLinkActive]="['active']" [routerLink]="['/perfil', auth.auth.currentUser.uid]"
+              routerLinkActive="router-link-active"><i class="material-icons">person</i>Mi Perfil</a>
+            </span>
           <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/horario']"
             *ngIf="usuario.tipoUsuario=='instructor'"><i class="material-icons">event</i>Horario</a>
             <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/misasesorias']"

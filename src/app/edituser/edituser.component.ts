@@ -14,14 +14,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EdituserComponent implements OnInit {
   formUsuario: FormGroup
+  instructor = 'instructor'
+  alumno = 'alumno'
+  administrador = 'administrador'
   urlImg: string
   usuario: Usuario
+  usuarios: Usuario
   idUsuario: string
   editCorreo: boolean = false
   editContra: boolean = false
   editImg: boolean = false
   editProfile: boolean = false
   editBiog: boolean = true
+  isValid: boolean = false
   normal: 'normal'
   tipoCorreo: string
   constructor(private db: AngularFirestore, private fb: FormBuilder, private storage: AngularFireStorage, private msg: MsgService, private auth: AngularFireAuth, private activeRoute: ActivatedRoute) { }
@@ -29,6 +34,7 @@ export class EdituserComponent implements OnInit {
   ngOnInit(): void {
     this.idUsuario = this.auth.auth.currentUser.uid
     this.getUser();
+    this.getUsers();
     this.formUsuario = this.fb.group({
       correo: ['', Validators.email],
       contraseña: ['', Validators.minLength(8)],
@@ -129,6 +135,7 @@ export class EdituserComponent implements OnInit {
       this.editBio()
     }
   }
+  
   //Obtiene el usuario
   getUser() {
     this.db.collection('usuarios').get().subscribe((res) => {
@@ -147,6 +154,26 @@ export class EdituserComponent implements OnInit {
       })
     })
 
+  }
+  /*getUser() {
+    this.db.collection('usuarios').doc(this.ar.snapshot.params.idMaestro).get().forEach((res) => {
+      this.usuario = res.data() as Usuario
+      console.log(this.usuario)
+    })
+  }*/
+  getUsers() {
+    this.db.collection('usuarios').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        let u = item.data() as Usuario
+        if (u.uid == this.auth.auth.currentUser.uid) {
+          this.usuarios = u;
+          this.isValid = true
+          console.log(this.isValid)
+        } else {
+          console.log("no existe");
+        }
+      })
+    })
   }
 
 }
