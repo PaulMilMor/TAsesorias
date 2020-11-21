@@ -1,0 +1,50 @@
+<div *ngIf="vista=='opcion'">
+    <button (click)="vista='gdrive'">
+        <img src="https://img.icons8.com/fluent/96/000000/google-drive--v1.png" />
+        <br>
+        Google Drive
+    </button>
+
+    <button style="margin-left: 50px;" (click)="vista='odrive'">
+        <img src="https://img.icons8.com/fluent/96/000000/microsoft-onedrive-2019.png" />
+        <br>
+        Onedrive
+    </button>
+    <button style="margin-left: 50px;" (click)="vista='github'">
+        <img src="https://img.icons8.com/fluent/96/000000/github.png" />
+        <br>
+        Github
+    </button>
+</div>
+
+
+<div *ngIf="vista=='github'">
+    <form [formGroup]="formEnlaceGit">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Enlace de repositorio</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="enlace">
+          </div>
+    </form>
+    <button mat-flat-button (click)="vista='opcion'" color="primary">Atras</button>
+  <button mat-flat-button style="margin-left: 10px;" color="primary" (click)='guardarGit()'>Guardar</button>
+</div>
+<div *ngIf="vista=='gdrive'">
+    <form [formGroup]="formEnlaceGD">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Enlace de carpeta de Google Drive</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="enlace">
+          </div>
+    </form>
+    <button mat-flat-button (click)="vista='opcion'" color="primary">Atras</button>
+  <button mat-flat-button style="margin-left: 10px;" color="primary" (click)='guardarGD()'>Guardar</button>
+</div>
+<div *ngIf="vista=='odrive'">
+    <form [formGroup]="formEnlaceOD">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Enlace de carpeta de Onedrive</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="enlace">
+          </div>
+    </form>
+    <button mat-flat-button (click)="vista='opcion'" color="primary">Atras</button>
+  <button mat-flat-button style="margin-left: 10px;" color="primary" (click)='guardarOD()'>Guardar</button>
+</div>

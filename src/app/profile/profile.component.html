@@ -72,7 +72,7 @@
                 </ngb-rating></h3>
               </div>
               <div class=col align = "end">
-                <button mat-flat-button color="primary" *ngIf="usuarios.tipoUsuario==instructor">Añadir material <mat-icon>collections_bookmark
+                <button mat-flat-button color="primary" *ngIf="usuarios.tipoUsuario=='instructor'" (click)="openMaterial(c.id,c.gdrive,c.odrive,c.github)">Añadir material <mat-icon>collections_bookmark
                 </mat-icon></button>
               </div>
               </mat-list-item>

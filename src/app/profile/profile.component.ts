@@ -120,40 +120,53 @@ export class ProfileComponent implements OnInit {
 
 
   }
-  openImages(imgs,id) {
+  openImages(imgs, id) {
     console.log(imgs);
-    if(imgs==undefined){
- imgs=new Array()
+    if (imgs == undefined) {
+      imgs = new Array()
 
     }
-    
+
     const dialogRef3 = this.dialog.open(addImages, {
       width: '500px',
       height: '500px',
 
-    data:{
-      imagenes:imgs,
-      tipoUsuario:this.usuario.tipoUsuario
-    }
-  });
-  dialogRef3.afterClosed().subscribe(res=>{
-    this.db.collection('cursos').doc(id).update({
-      evidencia:res
+      data: {
+        imagenes: imgs,
+        tipoUsuario: this.usuario.tipoUsuario
+      }
+    });
+    dialogRef3.afterClosed().subscribe(res => {
+      this.db.collection('cursos').doc(id).update({
+        evidencia: res
+      })
     })
-  })
-}
-
-
-
-//Sesion de operaciones
-validateCurso(c: Curso) {
-  for (let certificado of this.certificados) {
-    if (c.categoria.nombre == certificado.categoria.nombre) {
-      return true;
-    }
   }
-  return false;
-}
+
+  openMaterial(id, gd, od, git) {
+    const dialogRef4 = this.dialog.open(material, {
+      width: '440px',
+      height: '175px',
+      data: {
+        id: id,
+        github: git,
+        odrive: od,
+        gdrive: gd
+      }
+    }
+
+    )
+  }
+
+  //Sesion de operaciones
+  validateCurso(c: Curso) {
+    for (let certificado of this.certificados) {
+      if (c.categoria.nombre == certificado.categoria.nombre) {
+        return true;
+      }
+    }
+    return false;
+  }
 
 }
 @Component({
@@ -457,40 +470,40 @@ export class editProfile implements OnInit {
 export class addImages implements OnInit {
 
 
-cantidad:number=1
-tabs
-value
+  cantidad: number = 1
+  tabs
+  value
   constructor(
     public dialogRef: MatDialogRef<addImages>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private storage: AngularFireStorage,private msg: MsgService, private router: Router, private ar: ActivatedRoute, private auth: AngularFireAuth) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private storage: AngularFireStorage, private msg: MsgService, private router: Router, private ar: ActivatedRoute, private auth: AngularFireAuth) { }
   ngOnInit(): void {
 
-console.log(this.data.imagenes);
+    console.log(this.data.imagenes);
 
-this.getTabs()
+    this.getTabs()
 
 
 
   }
-  getTabs(){
-    if(this.data.imagenes==undefined || this.data.imagenes.length<1){
-      this.tabs=['Imagen 1']
-    }else{
-       var n=1;
-       this.tabs=new Array()
+  getTabs() {
+    if (this.data.imagenes == undefined || this.data.imagenes.length < 1) {
+      this.tabs = ['Imagen 1']
+    } else {
+      var n = 1;
+      this.tabs = new Array()
       this.data.imagenes.forEach(element => {
-        this.tabs.push('Imagen '+n)
+        this.tabs.push('Imagen ' + n)
         n++
       });
     }
   }
-  addTabs(){
-    var n=this.tabs.length+1
-    this.tabs.push('Imagen '+n)
+  addTabs() {
+    var n = this.tabs.length + 1
+    this.tabs.push('Imagen ' + n)
     console.log("new tab");
-    
+
   }
-  addImg(event,i) {
+  addImg(event, i) {
     if (event.target.files.length > 0) {
       let name = new Date().getTime().toString()
       let file = event.target.files[0]
@@ -500,11 +513,87 @@ this.getTabs()
       const task = ref.put(file)
       task.then((obj) => {
         ref.getDownloadURL().subscribe((url) => {
-          this.data.imagenes[i]=url
+          this.data.imagenes[i] = url
           console.log(this.data.imagenes[0]);
-          
+
         })
       })
     }
+  }
+}
+@Component({
+  selector: 'material',
+  templateUrl: 'material.html',
+
+})
+export class material implements OnInit {
+  vista = 'opcion'
+  txtGit = ' '
+  formEnlaceGit: FormGroup
+  formEnlaceOD: FormGroup
+  formEnlaceGD: FormGroup
+  constructor(
+    public dialogRef: MatDialogRef<material>,
+    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private storage: AngularFireStorage, private msg: MsgService, private fb: FormBuilder) { }
+  ngOnInit(): void {
+    this.formEnlaceGit = this.fb.group({
+      enlace: ['']
+    })
+    this.formEnlaceOD = this.fb.group({
+      enlace: ['']
+    })
+    this.formEnlaceGD = this.fb.group({
+      enlace: ['']
+    })
+   
+if(this.data.github!=undefined){
+
+  
+this.formEnlaceGit.get('enlace').setValue(this.data.github)
+}
+if(this.data.odrive!=undefined){
+  
+  
+this.formEnlaceOD.get('enlace').setValue(this.data.odrive)
+}
+if(this.data.gdrive!=undefined){
+ 
+this.formEnlaceGD.get('enlace').setValue(this.data.gdrive)
+}
+
+  }
+  guardarGit() {
+
+    if (this.formEnlaceGit.value.enlace.startsWith('https://github.com/')) {
+      this.db.collection('cursos').doc(this.data.id).update({
+        github:this.formEnlaceGit.value.enlace
+      }).finally(()=>{
+        this.msg.msgSuccess('Exito','Material actualizado correctamente')
+      })
+
+    } else {
+      this.msg.msgWarning('Error', 'Enlace no valido')
+    }
+
+  }
+  guardarOD() {
+
+    if (this.formEnlaceOD.value.enlace.startsWith('https://onedrive.live.com/')) {
+      console.log('simon');
+
+    } else {
+      this.msg.msgWarning('Error', 'Enlace no valido')
+    }
+
+  }
+  guardarGD() {
+
+    if (this.formEnlaceGD.value.enlace.startsWith('https://drive.google.com/')) {
+      console.log('simon');
+
+    } else {
+      this.msg.msgWarning('Error', 'Enlace no valido')
+    }
+
   }
 }

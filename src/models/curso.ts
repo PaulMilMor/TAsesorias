@@ -11,4 +11,7 @@ export class Curso{
    etiquetas:any
    ban:boolean
    evidencia:Array<string>
+   github:string
+   odrive:string
+   gdrive:string
 }

@@ -45,7 +45,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatChipsModule } from '@angular/material/chips';
 import { CalificarComponent } from './calificar/calificar.component';
 import { MatIconModule } from '@angular/material/icon';
-import { ProfileComponent, reportProfile,editProfile, addImages } from './profile/profile.component';
+import { ProfileComponent, reportProfile,editProfile, addImages, material } from './profile/profile.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatPaginator } from '@angular/material/paginator';
@@ -89,7 +89,8 @@ import {MatDividerModule} from '@angular/material/divider';
     dialogBan,
     BanlistComponent,
     MisasesoriasComponent, 
-    addImages
+    addImages,
+    material
   ],
   imports: [
     BrowserModule,
@@ -135,7 +136,8 @@ import {MatDividerModule} from '@angular/material/divider';
     editProfile,
     dialogNewcertificacion, feedback,
     feedbackInstructor, dialogBan,
-    addImages
+    addImages,
+    material
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
