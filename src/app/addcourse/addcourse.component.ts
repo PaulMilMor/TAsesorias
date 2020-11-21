@@ -176,7 +176,8 @@ export class AddcourseComponent implements OnInit {
       width: '500px',
       height: '500px',
        data:{
-         imagenes:this.imagenes
+         imagenes:this.imagenes,
+         tipoUsuario:'instructor'
        }   
 
     });

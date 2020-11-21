@@ -132,7 +132,8 @@ export class ProfileComponent implements OnInit {
       height: '500px',
 
     data:{
-      imagenes:imgs
+      imagenes:imgs,
+      tipoUsuario:this.usuario.tipoUsuario
     }
   });
   dialogRef3.afterClosed().subscribe(res=>{

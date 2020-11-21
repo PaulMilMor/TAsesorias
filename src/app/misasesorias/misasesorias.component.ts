@@ -4,6 +4,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Curso } from 'src/models/curso';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Asesoria } from 'src/models/asesoria';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { addImages } from '../profile/profile.component';
 @Component({
   selector: 'app-misasesorias',
   templateUrl: './misasesorias.component.html',
@@ -13,7 +15,7 @@ export class MisasesoriasComponent implements OnInit {
   misAsesorias: Array<Asesoria> = new Array()
   fechaActual: Date = new Date()
   isVisible_A:boolean=false
-  constructor(private db: AngularFirestore, private auth: AngularFireAuth) { }
+  constructor(private db: AngularFirestore, private auth: AngularFireAuth,public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getAsesorias()
@@ -89,5 +91,18 @@ export class MisasesoriasComponent implements OnInit {
     })
 
 
+  }
+  openImages(imagenes) {
+    const dialogRef3 = this.dialog.open(addImages, {
+      width: '500px',
+      height: '500px',
+       data:{
+         imagenes:imagenes,
+         tipoUsuario:'alumno'
+       }   
+
+    });
+ 
+      
   }
 }
