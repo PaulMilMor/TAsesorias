@@ -33,7 +33,7 @@ this.getReportes()
         r.id = item.id
         console.log(item.data().fecha);
       
-        r.fecha=new Date((item.data().fecha)*1000)
+        r.fecha=new Date((item.data().fecha.seconds)*1000)
  
         this.reportes.push(r)
         

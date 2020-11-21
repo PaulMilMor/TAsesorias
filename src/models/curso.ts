@@ -10,4 +10,5 @@ export class Curso{
    nivel:any
    etiquetas:any
    ban:boolean
+   evidencia:Array<string>
 }

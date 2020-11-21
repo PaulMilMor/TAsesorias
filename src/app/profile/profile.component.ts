@@ -38,6 +38,8 @@ export class ProfileComponent implements OnInit {
     console.log(this.cursos);
     //this.getUsers()
   }
+
+  // seccion de llamar informacion
   getUser() {
     this.db.collection('usuarios').doc(this.ar.snapshot.params.idMaestro).get().forEach((res) => {
       this.usuario = res.data() as Usuario
@@ -58,28 +60,6 @@ export class ProfileComponent implements OnInit {
       })
     })
   }
-  openDialog(): void {
-    /*const dialogRef = this.dialog.open(reportProfile, {
-      width: '500px',
-      height: '250px',
-      //Para en enviar informacion a un dialogo se usa la variable data (teniendo en cuenta que existe una llamada asi tambien en el dialogo)
-      data: {
-        maestro: this.usuario,
-        alumno: this.auth.auth.currentUser.uid
-      }
-    });*/
-    const dialogRef2 = this.dialog.open(editProfile, {
-      width: '500px',
-      height: '500px',
-      //Para en enviar informacion a un dialogo se usa la variable data (teniendo en cuenta que existe una llamada asi tambien en el dialogo)
-      /*data: {
-        maestro: this.ar.snapshot.params.idMaestro,
-        alumno: this.auth.auth.currentUser.uid
-      }*/
-    });
-
-  }
-
   getCertificados() {
     this.db.collection('certificados').get().subscribe((res) => {
       res.docs.forEach((item) => {
@@ -117,14 +97,62 @@ export class ProfileComponent implements OnInit {
       })
     })
   }
-  validateCurso(c: Curso) {
-    for (let certificado of this.certificados) {
-      if (c.categoria.nombre == certificado.categoria.nombre) {
-        return true;
-      }
-    }
-    return false;
+  // secccion de dialogos
+  openDialog(): void {
+
+    const dialogRef2 = this.dialog.open(editProfile, {
+      width: '500px',
+      height: '500px',
+
+    });
+
   }
+  openReport(): void {
+    const dialogRef = this.dialog.open(reportProfile, {
+      width: '500px',
+      height: '250px',
+      //Para en enviar informacion a un dialogo se usa la variable data (teniendo en cuenta que existe una llamada asi tambien en el dialogo)
+      data: {
+        maestro: this.usuario,
+        alumno: this.auth.auth.currentUser.uid
+      }
+    });
+
+
+  }
+  openImages(imgs,id) {
+    console.log(imgs);
+    if(imgs==undefined){
+ imgs=new Array()
+
+    }
+    
+    const dialogRef3 = this.dialog.open(addImages, {
+      width: '500px',
+      height: '500px',
+
+    data:{
+      imagenes:imgs
+    }
+  });
+  dialogRef3.afterClosed().subscribe(res=>{
+    this.db.collection('cursos').doc(id).update({
+      evidencia:res
+    })
+  })
+}
+
+
+
+//Sesion de operaciones
+validateCurso(c: Curso) {
+  for (let certificado of this.certificados) {
+    if (c.categoria.nombre == certificado.categoria.nombre) {
+      return true;
+    }
+  }
+  return false;
+}
 
 }
 @Component({
@@ -419,4 +447,63 @@ export class editProfile implements OnInit {
     })
   }
 
+}
+@Component({
+  selector: 'addImages',
+  templateUrl: 'addImages.html',
+
+})
+export class addImages implements OnInit {
+
+
+cantidad:number=1
+tabs
+value
+  constructor(
+    public dialogRef: MatDialogRef<addImages>,
+    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private storage: AngularFireStorage,private msg: MsgService, private router: Router, private ar: ActivatedRoute, private auth: AngularFireAuth) { }
+  ngOnInit(): void {
+
+console.log(this.data.imagenes);
+
+this.getTabs()
+
+
+
+  }
+  getTabs(){
+    if(this.data.imagenes==undefined || this.data.imagenes.length<1){
+      this.tabs=['Imagen 1']
+    }else{
+       var n=1;
+       this.tabs=new Array()
+      this.data.imagenes.forEach(element => {
+        this.tabs.push('Imagen '+n)
+        n++
+      });
+    }
+  }
+  addTabs(){
+    var n=this.tabs.length+1
+    this.tabs.push('Imagen '+n)
+    console.log("new tab");
+    
+  }
+  addImg(event,i) {
+    if (event.target.files.length > 0) {
+      let name = new Date().getTime().toString()
+      let file = event.target.files[0]
+      let type = file.name.toString().substring(file.name.toString().lastIndexOf('.'))
+      let imgpath = 'evidencia/' + name + type;
+      const ref = this.storage.ref(imgpath);
+      const task = ref.put(file)
+      task.then((obj) => {
+        ref.getDownloadURL().subscribe((url) => {
+          this.data.imagenes[i]=url
+          console.log(this.data.imagenes[0]);
+          
+        })
+      })
+    }
+  }
 }

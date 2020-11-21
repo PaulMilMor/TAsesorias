@@ -1,0 +1,12 @@
+<button mat-raised-button color="primary" (click)="addTabs()"  *ngIf="tabs.length<5">Añadir Imagen</button>
+<button mat-raised-button color="accent"  style=" margin-left: 10px;"  [mat-dialog-close]="data.imagenes" cdkFocusInitial> Guardar</button>
+<button mat-raised-button color="primary"  style="background-color:red; margin-left: 10px;"  > Cancelar</button>
+<mat-tab-group [selectedIndex]="value">  
+    <mat-tab [label]="item" *ngFor="let item of tabs" > 
+        {{value}}
+        <input  (change)="addImg($event,tabs.indexOf(item))" type="file" class="form-control-file">
+        <img [src]="data.imagenes[tabs.indexOf(item)]" height="200" >
+    </mat-tab>
+   
+
+  </mat-tab-group>

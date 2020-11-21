@@ -6,7 +6,7 @@
       <br>
     </div>
     <button class="reportbtn" mat-raised-button color="accent" *ngIf="usuarios.tipoUsuario==alumno"
-      (click)="openDialog()">
+      (click)="openReport()">
       <mat-icon>flag</mat-icon>Reportar
     </button>
     <button class="reportbtn" mat-raised-button color="accent" *ngIf="usuarios.tipoUsuario==instructor"
@@ -82,7 +82,7 @@
                 <h3><strong>Nivel académico: </strong>{{c.nivel.nombre}}</h3>
               </div>
               <div class=col align = "end">
-                <button mat-flat-button color="primary" *ngIf="usuarios.tipoUsuario==instructor">Modificar imagenes <mat-icon>add_photo_alternate
+                <button mat-flat-button color="primary" *ngIf="usuarios.tipoUsuario=='instructor'"(click)="openImages(c.evidencia, c.id)">Modificar imagenes <mat-icon>add_photo_alternate
                 </mat-icon></button>
               </div>
               </mat-list-item>
