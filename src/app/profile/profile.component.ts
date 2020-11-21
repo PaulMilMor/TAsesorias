@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
 
-  
+
     this.getUser()
     this.getUsers()
     this.getCourses()
@@ -147,8 +147,8 @@ export class reportProfile implements OnInit {
       maestro: [''],
       alumno: [''],
       reporte: ['', Validators.required],
-      fecha:['']
-      
+      fecha: ['']
+
     })
 
 
@@ -161,10 +161,10 @@ export class reportProfile implements OnInit {
   saveReport() {
 
     console.log(this.data.maestro);
-    
+
     this.formReporte.value.maestro = this.data.maestro
     this.formReporte.value.alumno = this.data.alumno
-    this.formReporte.value.fecha= new Date()
+    this.formReporte.value.fecha = new Date()
 
 
 
@@ -172,15 +172,15 @@ export class reportProfile implements OnInit {
       console.log('entra aqui');
 
       if (this.allreports.length >= 4) {
-      
-        var fechaInicio=new Date()
-        var fechaFinal=new Date()
-        fechaFinal.setDate(fechaFinal.getUTCDate()+15)
+
+        var fechaInicio = new Date()
+        var fechaFinal = new Date()
+        fechaFinal.setDate(fechaFinal.getUTCDate() + 15)
         this.db.collection('baneados').doc(this.data.maestro.uid).set({
-          fechaInicio:fechaInicio,
-          fechaFinal:fechaFinal,
-          tipoSuspension:'Automatica',
-          maestro:this.data.maestro 
+          fechaInicio: fechaInicio,
+          fechaFinal: fechaFinal,
+          tipoSuspension: 'Automatica',
+          maestro: this.data.maestro
         })
       }
       this.msg.msgSuccess('Exito', 'Reporte creado correctamente')
@@ -378,7 +378,7 @@ export class editProfile implements OnInit {
       this.editCel()
     }
   }
-  
+
   //Obtiene el usuario
   getUser() {
     this.db.collection('usuarios').get().subscribe((res) => {
