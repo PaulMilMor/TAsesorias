@@ -21,10 +21,43 @@ img{
     margin-right: 5px;
 }
 
-.carousel-inner {
+.karousel-inner {
   width: 75% !important;
   margin-left: auto !important;
   margin-right: auto !important;  
 }
 
-.carousel-indicators li { visibility: hidden; }
+.karousel-indicators li { visibility: hidden; }
+
+::ng-deep .carousel-control.left, ::ng-deep .carousel-control.right {
+  background-image: none;
+}
+
+::ng-deep .carousel-inner {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+::ng-deep .carousel-control-prev-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+::ng-deep .carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+
+::ng-deep .carousel-control-prev:hover, ::ng-deep .carousel-control-prev:focus,
+::ng-deep .carousel-control-next:hover,
+::ng-deep .carousel-control-next:focus {
+  color: #000;
+  text-decoration: none;
+  outline: 0;
+  opacity: 0.9;
+}
+
+::ng-deep .carousel-control-next, ::ng-deep .carousel-control-prev {
+  color:#000;
+}
+
+
