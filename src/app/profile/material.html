@@ -1,19 +1,40 @@
 <div *ngIf="vista=='opcion'">
-    <button (click)="vista='gdrive'">
+    <button (click)="vista='gdrive'" *ngIf="data.tipoUsuario=='instructor'">
         <img src="https://img.icons8.com/fluent/96/000000/google-drive--v1.png" />
         <br>
         Google Drive
     </button>
+    <button (click)="vista='gdrive'"*ngIf="data.tipoUsuario=='alumno' && !isVisibleGD">
+      <a style="text-decoration: none; color: white; font-size: 19px;"
+      [href]="data.gdrive " target=”_blank”>
+      <img src="https://img.icons8.com/fluent/96/000000/google-drive--v1.png" /></a>
+      <br>
+    Google Drive 
+  </button>
 
-    <button style="margin-left: 50px;" (click)="vista='odrive'">
+    <button style="margin-left: 50px;" (click)="vista='odrive'"  *ngIf="data.tipoUsuario=='instructor'">
         <img src="https://img.icons8.com/fluent/96/000000/microsoft-onedrive-2019.png" />
         <br>
         Onedrive
     </button>
-    <button style="margin-left: 50px;" (click)="vista='github'">
+    <button style="margin-left: 50px;"  *ngIf="data.tipoUsuario=='alumno' && !isVisibleOD">
+      <a style="text-decoration: none; color: white; font-size: 19px;"
+      [href]="data.odrive " target=”_blank”> 
+      <img src="https://img.icons8.com/fluent/96/000000/microsoft-onedrive-2019.png" /></a>
+      <br>
+      Onedrive
+  </button>
+    <button style="margin-left: 50px;" (click)="vista='github'"  *ngIf="data.tipoUsuario=='instructor'">
         <img src="https://img.icons8.com/fluent/96/000000/github.png" />
         <br>
         Github
+    </button>
+    <button style="margin-left: 50px;"  *ngIf="data.tipoUsuario=='alumno' && !isVisibleGit">
+      <a style="text-decoration: none; color: white; font-size: 19px;"
+      [href]="data.github " target=”_blank”>   <img src="https://img.icons8.com/fluent/96/000000/github.png" /> </a>
+   
+      <br>
+      Github
     </button>
 </div>
 
@@ -26,7 +47,7 @@
           </div>
     </form>
     <button mat-flat-button (click)="vista='opcion'" color="primary">Atras</button>
-  <button mat-flat-button style="margin-left: 10px;" color="primary" (click)='guardarGit()'>Guardar</button>
+  <button mat-flat-button style="margin-left: 10px;" color="primary" (click)='guardarGit()' >Guardar</button>
 </div>
 <div *ngIf="vista=='gdrive'">
     <form [formGroup]="formEnlaceGD">

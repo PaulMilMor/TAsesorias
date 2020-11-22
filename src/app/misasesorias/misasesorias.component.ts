@@ -5,7 +5,7 @@ import { Curso } from 'src/models/curso';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Asesoria } from 'src/models/asesoria';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { addImages } from '../profile/profile.component';
+import { addImages, material } from '../profile/profile.component';
 @Component({
   selector: 'app-misasesorias',
   templateUrl: './misasesorias.component.html',
@@ -105,4 +105,27 @@ export class MisasesoriasComponent implements OnInit {
  
       
   }
+  
+  openMaterial(item) {
+    console.log(item);
+    
+    
+    
+    
+    
+    const dialogRef4 = this.dialog.open(material, {
+      width: '440px',
+      height: '175px',
+      data: {
+        id: item.curso.id,
+        github: item.curso.github,
+        odrive: item.curso.odrive,
+        gdrive: item.curso.gdrive,
+        tipoUsuario: 'alumno'
+      }
+    }
+
+     )
+  }
+
 }

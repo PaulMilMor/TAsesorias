@@ -84,7 +84,7 @@
         <button mat-flat-button color="primary" style="margin-top: 10px;" (click)="openImages(item.curso.evidencia)"> 
             Ver Imagenes
         </button> <br>
-        <button mat-flat-button color="primary" style="margin-top: 10px;">
+        <button mat-flat-button color="primary" style="margin-top: 10px;" (click)="openMaterial(item)" *ngIf="item.curso.gdrive!=undefined || item.curso.github!=undefined ||item.curso.odrive!=undefined">
             Ver Material
         </button><br>
         <button mat-flat-button color="primary" style="margin-top: 10px;"  [routerLink]="['/zoom']" *ngIf="isVisible_A">

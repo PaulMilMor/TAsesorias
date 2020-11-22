@@ -151,7 +151,8 @@ export class ProfileComponent implements OnInit {
         id: id,
         github: git,
         odrive: od,
-        gdrive: gd
+        gdrive: gd,
+        tipoUsuario: this.usuario.tipoUsuario
       }
     }
 
@@ -532,6 +533,9 @@ export class material implements OnInit {
   formEnlaceGit: FormGroup
   formEnlaceOD: FormGroup
   formEnlaceGD: FormGroup
+  isVisibleGit: boolean = true;
+  isVisibleGD: boolean = true;
+  isVisibleOD: boolean = true;
   constructor(
     public dialogRef: MatDialogRef<material>,
     @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private storage: AngularFireStorage, private msg: MsgService, private fb: FormBuilder) { }
@@ -545,30 +549,32 @@ export class material implements OnInit {
     this.formEnlaceGD = this.fb.group({
       enlace: ['']
     })
-   
-if(this.data.github!=undefined){
 
-  
-this.formEnlaceGit.get('enlace').setValue(this.data.github)
-}
-if(this.data.odrive!=undefined){
-  
-  
-this.formEnlaceOD.get('enlace').setValue(this.data.odrive)
-}
-if(this.data.gdrive!=undefined){
- 
-this.formEnlaceGD.get('enlace').setValue(this.data.gdrive)
-}
+    if (this.data.github != undefined) {
+      console.log("here");
+
+      this.isVisibleGit = false;
+      this.formEnlaceGit.get('enlace').setValue(this.data.github)
+    }
+    if (this.data.odrive != undefined) {
+      this.isVisibleOD = false
+
+      this.formEnlaceOD.get('enlace').setValue(this.data.odrive)
+    }
+    if (this.data.gdrive != undefined) {
+      this.isVisibleGD = false
+      this.formEnlaceGD.get('enlace').setValue(this.data.gdrive)
+    }
 
   }
   guardarGit() {
+console.log(this.data);
 
     if (this.formEnlaceGit.value.enlace.startsWith('https://github.com/')) {
       this.db.collection('cursos').doc(this.data.id).update({
-        github:this.formEnlaceGit.value.enlace
-      }).finally(()=>{
-        this.msg.msgSuccess('Exito','Material actualizado correctamente')
+        github: this.formEnlaceGit.value.enlace
+      }).finally(() => {
+        this.msg.msgSuccess('Exito', 'Material actualizado correctamente')
       })
 
     } else {
@@ -579,7 +585,12 @@ this.formEnlaceGD.get('enlace').setValue(this.data.gdrive)
   guardarOD() {
 
     if (this.formEnlaceOD.value.enlace.startsWith('https://onedrive.live.com/')) {
-      console.log('simon');
+      this.db.collection('cursos').doc(this.data.id).update({
+        odrive: this.formEnlaceGit.value.enlace
+      }).finally(() => {
+        this.msg.msgSuccess('Exito', 'Material actualizado correctamente')
+      })
+
 
     } else {
       this.msg.msgWarning('Error', 'Enlace no valido')
@@ -589,7 +600,12 @@ this.formEnlaceGD.get('enlace').setValue(this.data.gdrive)
   guardarGD() {
 
     if (this.formEnlaceGD.value.enlace.startsWith('https://drive.google.com/')) {
-      console.log('simon');
+      this.db.collection('cursos').doc(this.data.id).update({
+       gdrive: this.formEnlaceGit.value.enlace
+      }).finally(() => {
+        this.msg.msgSuccess('Exito', 'Material actualizado correctamente')
+      })
+
 
     } else {
       this.msg.msgWarning('Error', 'Enlace no valido')
