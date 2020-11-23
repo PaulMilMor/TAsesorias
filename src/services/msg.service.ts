@@ -28,4 +28,24 @@ export class MsgService {
       icon:"error"
     })
   }
+  msgAlerta(title:string, text: string,showCancelButton:boolean){
+  Swal.fire({
+    title: title,
+    text: text,
+    icon: 'warning',
+    showCancelButton: showCancelButton,//true
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        'Asesoria eliminada',
+        'Your file has been deleted.',
+        'success'
+      )
+    }
+  })
+  
+}
 }

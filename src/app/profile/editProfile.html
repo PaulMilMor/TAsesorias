@@ -30,6 +30,12 @@
       <input type="tel" id="defaultContactFormName"  class="form-control mb-4"
       placeholder="Telefono" name="tel" formControlName="cel">
     </div>
+    <div class="form-group">
+      <input type="radio" id="si"  class="form-control mb-4" name="mostrar" formControlName="mostrarinfo" value='true'>
+      <label for='true'>Mostrar información</label>
+      <input type="radio" id="no"  class="form-control mb-4" name="mostrar" formControlName="mostrarinfo" value='false'>
+      <label for='false'>No publicar información</label>
+    </div>
       <button class="mt-5" (click)="editUser()" class="btn btn-info btn-block" type="submit">GUARDAR CAMBIOS</button>
     </form>
 

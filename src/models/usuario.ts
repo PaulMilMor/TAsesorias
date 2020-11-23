@@ -12,4 +12,5 @@ export class Usuario{
     horario
     bio:string
     cel:string
+    mostrarinfo:string
 }

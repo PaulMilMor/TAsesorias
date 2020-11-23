@@ -17,13 +17,24 @@
   <div fxFlex>
     <h1><strong>{{usuario.nombre}}</strong></h1>
     <h4> {{usuario.bio}} </h4>
+    
   </div>
 </div>
 
 <div class="container" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="10px">
   <div fxFlex="30%" fxFlex.sm fxFlex.xs>
+    <div *ngIf="usuarios.tipoUsuario==instructor">
+
     <h4>Correo electronico: {{usuario.correo}}</h4>
     <h4>Telefono: {{usuario.cel}}</h4>
+    </div>
+    <div *ngIf="usuarios.tipoUsuario==alumno">
+
+      <div *ngIf="usuarios.mostrarinfo=='true'">
+      <h4>Correo electronico: {{usuario.correo}}</h4>
+      <h4>Telefono: {{usuario.cel}}</h4>
+      </div>
+    </div>
     <h2><Strong>Certificaciones.</Strong></h2>
     <div *ngIf="this.certificados.length>0">
       <div *ngFor="let c of certificados">
@@ -49,7 +60,8 @@
             </mat-card-title>
             </div>
             <div class=col align = "end">
-              <button class="deletebtn" mat-raised-button color="accent" *ngIf="usuarios.tipoUsuario==instructor" align ="end">
+              <button (click)="eliminarAsesoria()" class="deletebtn" mat-raised-button color="accent" *ngIf="usuarios.tipoUsuario==instructor" align ="end"
+              >
                 <mat-icon>delete</mat-icon>Eliminar asesoria</button>
                 </div>
           </mat-list-item>

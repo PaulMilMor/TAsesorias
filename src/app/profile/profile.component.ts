@@ -44,6 +44,7 @@ export class ProfileComponent implements OnInit {
       console.log(this.usuario)
     })
   }
+  
   getUsers() {
     this.db.collection('usuarios').get().subscribe((res) => {
       res.docs.forEach((item) => {
@@ -59,7 +60,8 @@ export class ProfileComponent implements OnInit {
     })
   }
   openDialog(): void {
-    /*const dialogRef = this.dialog.open(reportProfile, {
+    if(this.usuario.tipoUsuario == this.alumno){
+      const dialogRef = this.dialog.open(reportProfile, {
       width: '500px',
       height: '250px',
       //Para en enviar informacion a un dialogo se usa la variable data (teniendo en cuenta que existe una llamada asi tambien en el dialogo)
@@ -67,7 +69,8 @@ export class ProfileComponent implements OnInit {
         maestro: this.usuario,
         alumno: this.auth.auth.currentUser.uid
       }
-    });*/
+    });}
+    if(this.usuario.tipoUsuario == this.instructor){
     const dialogRef2 = this.dialog.open(editProfile, {
       width: '500px',
       height: '500px',
@@ -76,7 +79,7 @@ export class ProfileComponent implements OnInit {
         maestro: this.ar.snapshot.params.idMaestro,
         alumno: this.auth.auth.currentUser.uid
       }*/
-    });
+    });}
 
   }
 
@@ -125,7 +128,26 @@ export class ProfileComponent implements OnInit {
     }
     return false;
   }
+  eliminarAsesoria(){
+    //this.msg.msgAlerta('¿Seguro que quieres eliminar esta asesoria?','Se eliminara todo lo relacionado a esta asesoria',true);
 
+    this.db.collection('cursos').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        console.log("estamadre que pedo"+curso.user.uid)
+        var curso = item.data() as Curso
+        if (curso.user.uid == this.ar.snapshot.params.idMaestro) {
+          this.db.collection('cursos').doc(curso.id).delete()
+          curso.id = item.id
+          //console.log("estamadre que pedo"+curso.id)
+          //this.db.collection('cursos').doc(curso.id).delete()
+
+        }
+        //window.location.reload()
+      })
+    })
+
+
+  }
 }
 @Component({
   selector: 'reportProfile',
@@ -150,9 +172,6 @@ export class reportProfile implements OnInit {
       fecha: ['']
 
     })
-
-
-
 
 
   }
@@ -251,6 +270,7 @@ export class editProfile implements OnInit {
   editProfile: boolean = false
   editBiog: boolean = true
   editcelular: boolean = true
+  mostrar: boolean = true
   isValid: boolean = false
   normal: 'normal'
   tipoCorreo: string
@@ -265,7 +285,8 @@ export class editProfile implements OnInit {
       contraseña: ['', Validators.minLength(8)],
       img: [''],
       bio: [''],
-      cel: ['']
+      cel: [''],
+      mostrarinfo:['']
     })
 
   }
@@ -358,6 +379,18 @@ export class editProfile implements OnInit {
     })
 
   }
+  editInfo() {
+    var user = this.auth.auth.currentUser.uid
+    this.db.collection('usuarios').doc(user).update({
+      mostrarinfo: this.formUsuario.value.mostrarinfo
+    }
+    ).then(() => {
+      this.msg.msgSuccess('Exito', 'Se actualizo su preferencia')
+    }).catch((err) => {
+      console.log(err);
+
+    })
+  }
   //Se encarga de ver que cambio se van a realizar y llama a los metodos correspondientes
   editUser() {
     if (this.editImg) {
@@ -376,6 +409,9 @@ export class editProfile implements OnInit {
     }
     if (this.editcelular) {
       this.editCel()
+    }
+    if (this.mostrar) {
+      this.editInfo()
     }
   }
 
