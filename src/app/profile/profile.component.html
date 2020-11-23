@@ -17,6 +17,14 @@
   <div fxFlex>
     <h1><strong>{{usuario.nombre}}</strong></h1>
     <h4> {{usuario.bio}} </h4>
+    <div *ngIf="usuarios.tipoUsuario==alumno || usuarios.tipoUsuario==administrador">
+      <h5>Este instructor ha tenido {{usuario.totalEstudiantes}} estudiantes en los últimos 30 días</h5>
+    </div>
+    <div *ngIf="usuarios.tipoUsuario==instructor">
+      <h5>Has tenido {{usuario.totalEstudiantes}} estudiantes en los últimos 30 días</h5>
+    </div>
+    
+    
   </div>
 </div>
 

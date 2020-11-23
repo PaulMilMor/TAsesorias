@@ -35,15 +35,35 @@ export class ProfileComponent implements OnInit {
     this.getUsers()
     this.getCourses()
     this.getCertificados();
+    //this.getEstudiantes();
     console.log(this.cursos);
     //this.getUsers()
   }
 
+  //Con este método se obtiene el número de estudiantes que ha tenido el instructor en el último mes
+  getEstudiantes() {
+    console.log("EEEEEEE");
+    this.usuario.totalEstudiantes = 0;
+    let today = new Date();
+    today.setDate(today.getUTCDate() - 30);
+    console.log("AAAAAAA")
+    console.log(this.usuario.estudiantes);
+    for (let estudiante in this.usuario.estudiantes) {
+      let date = new Date();
+      date.setTime(parseInt(estudiante));
+      
+      if (date.getTime() > today.getTime()) {
+        this.usuario.totalEstudiantes = this.usuario.totalEstudiantes + parseInt(this.usuario.estudiantes[estudiante]);
+      }
+    }
+  }
   // seccion de llamar informacion
   getUser() {
     this.db.collection('usuarios').doc(this.ar.snapshot.params.idMaestro).get().forEach((res) => {
       this.usuario = res.data() as Usuario
+      console.log("USUARIO");
       console.log(this.usuario)
+      this.getEstudiantes();
     })
   }
   getUsers() {
@@ -568,7 +588,7 @@ export class material implements OnInit {
 
   }
   guardarGit() {
-console.log(this.data);
+    console.log(this.data);
 
     if (this.formEnlaceGit.value.enlace.startsWith('https://github.com/')) {
       this.db.collection('cursos').doc(this.data.id).update({
@@ -601,7 +621,7 @@ console.log(this.data);
 
     if (this.formEnlaceGD.value.enlace.startsWith('https://drive.google.com/')) {
       this.db.collection('cursos').doc(this.data.id).update({
-       gdrive: this.formEnlaceGit.value.enlace
+        gdrive: this.formEnlaceGit.value.enlace
       }).finally(() => {
         this.msg.msgSuccess('Exito', 'Material actualizado correctamente')
       })
