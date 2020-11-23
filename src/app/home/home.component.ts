@@ -66,7 +66,10 @@ export class HomeComponent implements OnInit {
                   this.instructoresValorados.pop();
                 }
               }*/
+              this.cursosValorados.sort((a, b) => (a.evaluaciones < b.evaluaciones) ? 1 : -1)
+              
           }
+          
         })
         this.db.collection('certificados').get().subscribe((res3) => {
           console.log("Felxi 1");
@@ -75,11 +78,13 @@ export class HomeComponent implements OnInit {
             if (item3.data().user.uid == c.user.uid && item3.data().categoria.id == c.categoria.id && item3.data().status == "aprobado") {
               console.log("Feixls 3");
               this.cursosCertificados.push(c);
+              //Hijole no me acuerdo para qué era este for
               for (let i in this.cursosCertificados) {
                 if (this.cursosCertificados[i] == c && parseInt(i) != this.cursosCertificados.length - 1) {
                   this.cursosCertificados.pop();
                 }
               }
+              
             }
           })
         })
@@ -97,11 +102,31 @@ export class HomeComponent implements OnInit {
       res.docs.forEach((item) => {
         let t = item.data() as Usuario;
         t.id = item.id;
-        t.estudiantes = 0;
+        //t.estudiantes = 0;
         console.log("Faro 1");
         if (t.tipoUsuario == "instructor") {
           console.log("Faro 2");
-
+          t.totalEstudiantes = 0;
+          console.log("HEREEEE");
+          console.log(t.estudiantes);
+          let today = new Date();
+          today.setDate(today.getUTCDate()-30);
+          console.log("HERREEEEEEEEEEE");
+          for(let estudiante in t.estudiantes){
+            console.log("HERE");
+            console.log(t.estudiantes[estudiante]);
+            let date = new Date();
+            date.setTime(parseInt(estudiante));
+            console.log(date);
+            
+            if(date.getTime() > today.getTime()){
+              t.totalEstudiantes=t.totalEstudiantes+parseInt(t.estudiantes[estudiante]);  
+            }
+          }
+          if(t.totalEstudiantes>=1){
+            this.instructoresSolicitados.push(t);
+            this.instructoresSolicitados.sort((a,b)=> (a.totalEstudiantes < b.totalEstudiantes) ? 1 : -1);
+          }
           this.db.collection('evaluaciones').get().subscribe((res2) => {
             var nEval = new Array<any>();
             var total: number = 0;
@@ -119,10 +144,11 @@ export class HomeComponent implements OnInit {
             if (t.evaluaciones >= 4) {
               console.log("faro 6");
               this.instructoresValorados.push(t);
+              this.instructoresValorados.sort((a, b) => (a.evaluaciones < b.evaluaciones) ? 1 : -1)
             }
           })
-
-          this.db.collection('asesorias').get().subscribe((res3) => {
+          
+          /*this.db.collection('asesorias').get().subscribe((res3) => {
             res3.docs.forEach((item3) => {
               console.log("item3")
               console.log(item3.data())
@@ -143,7 +169,10 @@ export class HomeComponent implements OnInit {
             if (t.estudiantes > 0) {
               this.instructoresSolicitados.push(t);
             }
-          })
+          })*/
+        }
+        if(this.instructoresSolicitados.length>10){
+          this.instructoresSolicitados.splice(11,(this.instructoresSolicitados.length-10));
         }
       })
     })
@@ -157,17 +186,21 @@ export class HomeComponent implements OnInit {
         t.estudiantes = 0;
         t.evaluaciones = 0;
         if (t.tipoUsuario == "instructor") {
+
+          
+
           console.log("What ")
           this.instructoresNuevos.push(t);
           let today = new Date();
           let insDate = t.fecha.toDate();
           today.setDate(today.getUTCDate() - 15);
           //let refdateInMS = today.getTime()- 129600000
-          console.log("what2 " + today.getUTCDate())
+          //console.log("what2 " + today.getUTCDate())
           //console.log("what of what " + t.fecha.getUTCDate())
           //console.log("what 4 " + (t.fecha.getTime() < today.getTime()));
           /*let numDays = Math.abs(today.getTime()-t.fecha.getTime()) / (1000*60*60*24); 
           console.log("what3");*/
+          
           if (insDate.getTime() < today.getTime()) {
             this.instructoresNuevos.pop();
           }

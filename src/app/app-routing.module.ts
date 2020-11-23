@@ -24,7 +24,7 @@ const routes: Routes = [
   {path:'perfil/:idMaestro',component:ProfileComponent},
   {path:'certificaciones', component:CertificacionesComponent},
   {path:'certificacionesinstructor', component:CertificacionesinstructorComponent},
-  {path: 'home', component:HomeComponent}
+  {path: 'inicio', component:HomeComponent}
 
   
 ];

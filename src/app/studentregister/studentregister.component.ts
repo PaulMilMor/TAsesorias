@@ -574,10 +574,17 @@ if (this.data.sesiones==0){
      
    })
    let students = {};
-  students["" +date.getTime()]=1;
-    console.log("THIS");
+  students["" +date.getTime()]=0;
+  /*  console.log("THIS");
    console.log(this.maestro);
-   /*students[""+date.getTime()]=t.estudiantes[""+date.getTime()];
+   */
+  for(let estudiante in this.maestro.estudiantes ){
+    if(estudiante==""+date.getTime()){
+      students[""+date.getTime()] = this.maestro.estudiantes[estudiante];
+    }
+  }
+  students[""+date.getTime()]++;
+  /*students[""+date.getTime()]=t.estudiantes[""+date.getTime()];
    students[""+date.getTime()]++;*/
    //this.data.curso.user.estudiantes[""+date]=1;
    this.db.collection('usuarios').doc(this.data.curso.user.uid).update({

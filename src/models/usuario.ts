@@ -14,5 +14,5 @@ export class Usuario{
     evaluaciones:number;
     estudiantes:any;
     fecha:any;
-
+    totalEstudiantes: number;
 }
