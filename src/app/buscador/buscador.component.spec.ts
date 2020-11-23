@@ -13,6 +13,7 @@ describe('BuscadorComponent', () => {
     .compileComponents();
   });
 
+
   beforeEach(() => {
     fixture = TestBed.createComponent(BuscadorComponent);
     component = fixture.componentInstance;

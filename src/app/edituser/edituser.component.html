@@ -3,7 +3,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
   <form class="text-center border border-light p-5"
-    style="height: 470px; box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: rgb(243, 243, 243);"
+    style="height: 477px; box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: rgb(243, 243, 243);"
     action="#!">
     <mdb-flipping-card #cards>
       <!--Front Side-->
@@ -26,10 +26,13 @@
 
         <!--DESCRIPCION-->
         <h4>{{usuario.correo}}</h4>
-       
+        <div *ngIf="usuario.tipoUsuario=='instructor'">
+          
+        <h5>Visitas a mi perfil: {{usuario.count}}</h5>
+      </div>
         <hr>
       </div>
-      <button class="mt-5" style="background-color: rgb(238, 131, 43); margin-top: 25px;" class="btn btn-info btn-block"
+      <button class="mt-5" style="background-color: rgb(238, 131, 43); margin-top: 17px;" class="btn btn-info btn-block"
         (click)="editProfile=!editProfile">EDITAR PERFIL</button>
       <!--/.Back Side-->
     </mdb-flipping-card>

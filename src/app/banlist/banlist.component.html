@@ -1,0 +1,34 @@
+<div >
+    <div class="main-div container">
+  
+      <div class="lista mt-3">
+        <table class="table dark">
+          <thead>
+            <tr>
+  
+              <th scope="col">Instructor</th>
+         
+              <th scope="col">Fecha</th>
+              <th scope="col">Tipo de suspension</th>
+              <th scope="col">Tiempo restante</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of baneados">
+  
+              <td>{{item.maestro.nombre}}</td>
+              <td>{{item.fechaInicio| date:"dd/MM/yy "}}</td>
+              <td>{{item.tipoSuspension}}</td>
+              <td>{{item.dias}} </td>
+              <td><button mat-flat-button color="warn" style="background-color: red;" (click)="unBan(item.id)">Anular Suspension</button></td>
+            </tr>
+            
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+  </div>
+  

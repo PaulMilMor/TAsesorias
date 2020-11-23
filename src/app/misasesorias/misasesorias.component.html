@@ -1,0 +1,94 @@
+<div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center"
+    fxLayoutGap="10px" style="margin-top: 20px;" *ngFor="let item of this.misAsesorias">
+    <div fxFlex="30%" fxFlex.sm fxFlex.xs>
+        <div class="profile-img" style="margin-left: auto; margin-right:auto;">
+            <img [src]="item.curso.user.img">
+            <br>
+
+        </div>
+        <h2><strong>{{item.curso.user.nombre}}</strong></h2>
+        <h3>{{item.curso.categoria.nombre}}</h3>
+    </div>
+    <div fxFlex>
+
+        <table class="table" style="width: 150px;">
+            <thead>
+                <tr>
+                    <th scope="col">Dia</th>
+                    <th scope="col">Hora</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="item.lunes.length!=0">
+
+                    <th scope="row">Lunes</th>
+                    <td><span *ngFor="let hora of item.lunes">{{hora}} </span></td>
+
+
+
+                </tr>
+                <tr *ngIf="item.martes.length!=0">
+
+                    <th scope="row">Martes</th>
+                    <td><span *ngFor="let hora of item.martes">{{hora}} </span></td>
+
+
+
+                </tr>
+                <tr *ngIf="item.miercoles.length!=0">
+
+                    <th scope="row">Miercoles</th>
+                    <td><span *ngFor="let hora of item.miercoles">{{hora}} </span></td>
+
+
+
+                </tr>
+                <tr *ngIf="item.jueves.length!=0">
+
+                    <th scope="row">Jueves</th>
+                    <td><span *ngFor="let hora of item.jueves">{{hora}} </span></td>
+
+
+
+                </tr>
+                <tr *ngIf="item.viernes.length!=0">
+
+                    <th scope="row">Viernes</th>
+                    <td><span *ngFor="let hora of item.viernes">{{hora}} </span></td>
+
+
+
+                </tr>
+                <tr *ngIf="item.sabado.length!=0">
+
+                    <th scope="row">Sabado</th>
+                    <td><span *ngFor="let hora of item.sabado">{{hora}} </span></td>
+
+
+
+                </tr>
+                <tr *ngIf="item.domingo.length!=0">
+
+                    <th scope="row">Domingo</th>
+                    <td><span *ngFor="let hora of item.domingo">{{hora}} </span></td>
+
+
+
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div fxFlex>
+        <button mat-flat-button color="primary" style="margin-top: 10px;" (click)="openImages(item.curso.evidencia)"> 
+            Ver Imagenes
+        </button> <br>
+        <button mat-flat-button color="primary" style="margin-top: 10px;" (click)="openMaterial(item)" *ngIf="item.curso.gdrive!=undefined || item.curso.github!=undefined ||item.curso.odrive!=undefined">
+            Ver Material
+        </button><br>
+        <button mat-flat-button color="primary" style="margin-top: 10px;"  [routerLink]="['/zoom']" *ngIf="isVisible_A">
+            Entrar a llamada
+        </button>
+    </div>
+</div>

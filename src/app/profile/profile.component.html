@@ -6,8 +6,12 @@
       <br>
     </div>
     <button class="reportbtn" mat-raised-button color="accent" *ngIf="usuarios.tipoUsuario==alumno"
-      (click)="openDialog()">
+      (click)="openReport()">
       <mat-icon>flag</mat-icon>Reportar
+    </button>
+    <button class="reportbtn" mat-raised-button color="accent" *ngIf="usuarios.tipoUsuario==instructor"
+    (click)="openDialog()">
+      <mat-icon>edit</mat-icon>Editar
     </button>
   </div>
   <div fxFlex>
@@ -18,6 +22,8 @@
 
 <div class="container" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="10px">
   <div fxFlex="30%" fxFlex.sm fxFlex.xs>
+    <h4>Correo electronico: {{usuario.correo}}</h4>
+    <h4>Telefono: {{usuario.cel}}</h4>
     <h2><Strong>Certificaciones.</Strong></h2>
     <div *ngIf="this.certificados.length>0">
       <div *ngFor="let c of certificados">
@@ -37,8 +43,19 @@
       <div *ngFor="let c of cursos" class="container" style="width:100%">
         <mat-list-item role="listitem" class="list" style="width:100%">
           <mat-card class="card-course" style="width:100%">
-            <mat-card-title> {{c.categoria.nombre}} <mat-icon *ngIf="this.validateCurso(c)" style="color:#17a2b8;">verified_user</mat-icon></mat-card-title> <br>
+            <mat-list-item>
+              <div class=col>
+            <mat-card-title > {{c.categoria.nombre}} <mat-icon *ngIf="this.validateCurso(c)" style="color:#17a2b8;">verified_user</mat-icon>
+            </mat-card-title>
+            </div>
+            <div class=col align = "end">
+              <button class="deletebtn" mat-raised-button color="accent" *ngIf="usuarios.tipoUsuario==instructor" align ="end">
+                <mat-icon>delete</mat-icon>Eliminar asesoria</button>
+                </div>
+          </mat-list-item>
+              <br>
             <mat-card-content>
+              
               <mat-list-item>
                 <h3>
                   <strong>Tarifa por
@@ -48,14 +65,26 @@
               </h3>
               </mat-list-item>
               <mat-list-item>
+                <div class=col align = "start">
                 <h3><strong>Valoración: </strong>
+                  
                 <ngb-rating [(rate)]="c.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem">
                 </ngb-rating></h3>
-
+              </div>
+              <div class=col align = "end">
+                <button mat-flat-button color="primary" *ngIf="usuarios.tipoUsuario=='instructor'" (click)="openMaterial(c.id,c.gdrive,c.odrive,c.github)">Añadir material <mat-icon>collections_bookmark
+                </mat-icon></button>
+              </div>
               </mat-list-item>
+              
               <mat-list-item>
-                <h3><strong>Nivel académico: </strong>{{c.nivel.nombre}}</h3> 
-
+                <div class=col>
+                <h3><strong>Nivel académico: </strong>{{c.nivel.nombre}}</h3>
+              </div>
+              <div class=col align = "end">
+                <button mat-flat-button color="primary" *ngIf="usuarios.tipoUsuario=='instructor'"(click)="openImages(c.evidencia, c.id)">Modificar imagenes <mat-icon>add_photo_alternate
+                </mat-icon></button>
+              </div>
               </mat-list-item>
               <mat-list-item>
                 <mat-chip-list aria-label="Etiquetas">
@@ -68,11 +97,13 @@
             </mat-card-content>
             <mat-card-actions align="end">
 
+              
+
               <button mat-flat-button color="primary" *ngIf="usuarios.tipoUsuario==alumno"
                 [routerLink]="['/agendar', c.id ]">Agendar <mat-icon>add
                 </mat-icon></button>
             </mat-card-actions>
-
+            
 
 
 

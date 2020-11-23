@@ -12,21 +12,28 @@ import { ProfileComponent } from './profile/profile.component';
 import { CertificacionesComponent } from './certificaciones/certificaciones.component';
 import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 import { HomeComponent } from './home/home.component';
+import { AdminreportComponent } from './adminreport/adminreport.component';
+import { BanlistComponent } from './banlist/banlist.component';
+import { MisasesoriasComponent } from './misasesorias/misasesorias.component';
+
 
 const routes: Routes = [
-  {path:'zoom',component:ZoomComponent},
-  {path:'editar', component:EdituserComponent },
-  {path:'agregar-clase', component:AddcourseComponent},
-  {path:'horario',component:ScheduleComponent},
-  {path:'buscador', component:BuscadorComponent},
-  {path:'agendar/:idCurso', component:StudentregisterComponent},
-  {path:'calificar/:idMaestro/:idAsesoria', component:CalificarComponent},
-  {path:'perfil/:idMaestro',component:ProfileComponent},
-  {path:'certificaciones', component:CertificacionesComponent},
-  {path:'certificacionesinstructor', component:CertificacionesinstructorComponent},
-  {path: 'inicio', component:HomeComponent}
+  { path: 'zoom', component: ZoomComponent },
+  { path: 'editar', component: EdituserComponent },
+  { path: 'agregar-clase', component: AddcourseComponent },
+  { path: 'horario', component: ScheduleComponent },
+  { path: 'buscador', component: BuscadorComponent },
+  { path: 'agendar/:idCurso', component: StudentregisterComponent },
+  { path: 'calificar/:idMaestro/:idAsesoria', component: CalificarComponent },
+  { path: 'perfil/:idMaestro', component: ProfileComponent },
+  { path: 'certificaciones', component: CertificacionesComponent },
+  { path: 'certificacionesinstructor', component: CertificacionesinstructorComponent },
+  { path: 'inicio', component: HomeComponent },
+  { path: 'reportes', component: AdminreportComponent },
+  { path: 'suspendidos', component: BanlistComponent },
+  { path: 'misasesorias', component: MisasesoriasComponent }
 
-  
+
 ];
 
 @NgModule({

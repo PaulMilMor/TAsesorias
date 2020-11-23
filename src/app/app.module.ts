@@ -45,7 +45,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatChipsModule } from '@angular/material/chips';
 import { CalificarComponent } from './calificar/calificar.component';
 import { MatIconModule } from '@angular/material/icon';
-import { ProfileComponent, reportProfile } from './profile/profile.component';
+import { ProfileComponent, reportProfile,editProfile, addImages, material } from './profile/profile.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBadgeModule } from '@angular/material/badge';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
@@ -54,6 +54,13 @@ import { CertificacionesComponent, feedback } from './certificaciones/certificac
 //import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 import { CertificacionesinstructorComponent, dialogNewcertificacion, feedbackInstructor } from './certificacionesinstructor/certificacionesinstructor.component';
 import { HomeComponent } from './home/home.component';
+import { MatPaginator } from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+//import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
+import { AdminreportComponent, dialogBan } from './adminreport/adminreport.component';
+import { BanlistComponent } from './banlist/banlist.component';
+import { MisasesoriasComponent } from './misasesorias/misasesorias.component';
+import {MatDividerModule} from '@angular/material/divider';
 //import { dialogNewcertificacion,CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 
 @NgModule({
@@ -78,10 +85,17 @@ import { HomeComponent } from './home/home.component';
     CertificacionesinstructorComponent,
     dialogNewcertificacion,
     reportProfile,
+    editProfile,
     CertificacionesComponent,
     feedback,
     feedbackInstructor,
-    HomeComponent
+    HomeComponent,
+    AdminreportComponent,
+    dialogBan,
+    BanlistComponent,
+    MisasesoriasComponent, 
+    addImages,
+    material
   ],
   imports: [
     BrowserModule,
@@ -117,14 +131,19 @@ import { HomeComponent } from './home/home.component';
     MatIconModule,
     FlexLayoutModule,
     MatBadgeModule,
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    MatDividerModule
+
   ],
   entryComponents: [
     register,
     dialogStudent,
     reportProfile,
+    editProfile,
     dialogNewcertificacion, feedback,
-    feedbackInstructor
+    feedbackInstructor, dialogBan,
+    addImages,
+    material
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

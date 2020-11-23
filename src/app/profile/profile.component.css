@@ -45,7 +45,13 @@
    margin-left:auto; 
    margin-right:auto;
 }
- 
+.deletebnt {
+   display:block;
+   width:75%; 
+   margin-top:10px; 
+   margin-left:auto; 
+   margin-right:auto;
+}
 
 h1,h2,h3,h4 {
    color: black !important;
