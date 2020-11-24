@@ -6,12 +6,12 @@
       <br>
     </div>
     <button class="reportbtn" mat-raised-button color="accent" *ngIf="usuarios.tipoUsuario==alumno"
-      (click)="openDialog()">
-      <mat-icon>flag</mat-icon>Reportar
+      (click)="openDialog()">Reportar
+      <mat-icon>Repor</mat-icon>
     </button>
     <button class="reportbtn" mat-raised-button color="accent" *ngIf="usuarios.tipoUsuario==instructor"
-    (click)="openDialog()">
-      <mat-icon>edit</mat-icon>Editar
+    (click)="openDialog()">Editar
+      <mat-icon>edit</mat-icon>
     </button>
   </div>
   <div fxFlex>
@@ -60,9 +60,9 @@
             </mat-card-title>
             </div>
             <div class=col align = "end">
-              <button (click)="eliminarAsesoria()" class="deletebtn" mat-raised-button color="accent" *ngIf="usuarios.tipoUsuario==instructor" align ="end"
+              <button (click)="eliminarAsesoria(c.id)" class="deletebtn" mat-raised-button color="accent" *ngIf="usuarios.tipoUsuario==instructor" align ="end"
               >
-                <mat-icon>delete</mat-icon>Eliminar asesoria</button>
+                <mat-icon>delete</mat-icon></button>
                 </div>
           </mat-list-item>
               <br>

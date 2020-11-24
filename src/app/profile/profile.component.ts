@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Certificacion } from 'src/models/certificacion';
 import { AngularFireStorage } from '@angular/fire/storage';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit {
   usuarios: Usuario
   isValid: boolean = false
   isCollapsed: boolean = false;
+  confirmar: boolean = false;
   constructor(private ar: ActivatedRoute, public dialog: MatDialog, private msg: MsgService, private db: AngularFirestore, private auth: AngularFireAuth, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -128,24 +130,33 @@ export class ProfileComponent implements OnInit {
     }
     return false;
   }
-  eliminarAsesoria(){
-    //this.msg.msgAlerta('¿Seguro que quieres eliminar esta asesoria?','Se eliminara todo lo relacionado a esta asesoria',true);
+  eliminarAsesoria(id){
+    //this.msg.msgAlerta('¿Seguro que quieres eliminar esta asesoria?','Se eliminara todo lo relacionado a esta asesoria',this.confirmar);
+    
+      Swal.fire({
+        title: '¿Seguro que quieres eliminar esta asesoria?',
+        text: 'Se eliminara todo lo relacionado a esta asesoria',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          
+          Swal.fire(
+            'Asesoria eliminada',
+            'success'
+          )
+          this.db.collection('cursos').doc(id).delete().finally(()=>{
 
-    this.db.collection('cursos').get().subscribe((res) => {
-      res.docs.forEach((item) => {
-        console.log("estamadre que pedo"+curso.user.uid)
-        var curso = item.data() as Curso
-        if (curso.user.uid == this.ar.snapshot.params.idMaestro) {
-          this.db.collection('cursos').doc(curso.id).delete()
-          curso.id = item.id
-          //console.log("estamadre que pedo"+curso.id)
-          //this.db.collection('cursos').doc(curso.id).delete()
-
+            window.location.reload()
+        })
         }
-        //window.location.reload()
       })
-    })
-
+      
+    
+  
 
   }
 }
