@@ -81,13 +81,13 @@
 
     </div>
     <div fxFlex="17%">
-        <button mat-flat-button color="primary" style="margin-top: 10px; background-color: #bb2205;"  (click)="openImages(item.curso.evidencia)"> 
+        <button mat-flat-button color="warn"   (click)="openImages(item.curso.evidencia)"> 
             Ver Imagenes
         </button> <br>
-        <button mat-flat-button color="primary" style="margin-top: 10px; background-color: #bb2205;" (click)="openMaterial(item)" *ngIf="item.curso.gdrive!=undefined || item.curso.github!=undefined ||item.curso.odrive!=undefined">
+        <button mat-flat-button color="primary" style="margin-top: 10px" (click)="openMaterial(item)" *ngIf="item.curso.gdrive!=undefined || item.curso.github!=undefined ||item.curso.odrive!=undefined">
             Ver Material
         </button><br>
-        <button mat-flat-button color="primary" style="margin-top: 10px; background-color: #bb2205;"  [routerLink]="['/zoom']" *ngIf="isVisible_A">
+        <button mat-flat-button color="primary" style="margin-top: 10px"  [routerLink]="['/zoom']" *ngIf="isVisible_A">
             Entrar a llamada
         </button>
     </div>
