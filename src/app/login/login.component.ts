@@ -12,46 +12,51 @@ import { AuthService } from 'src/services/auth.service';
 
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+   selector: 'app-login',
+   templateUrl: './login.component.html',
+   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
-  formLogin:FormGroup
 
-  constructor(private fb:FormBuilder,public auth: AngularFireAuth, private msg:MsgService, public authService: AuthService, private router:Router) { }
+   formLogin: FormGroup
+   route: string;
+   constructor(private fb: FormBuilder, public auth: AngularFireAuth, private msg: MsgService, public authService: AuthService, private router: Router) { }
 
-  ngOnInit(): void {
-        this.formLogin=this.fb.group({
-           correo:['', Validators.compose([Validators.required,  Validators.email])],
-           contraseña:['', Validators.required]
-        })  
-  }
-   logIn(){
-      this.auth.auth.signInWithEmailAndPassword(this.formLogin.value.correo, this.formLogin.value.contraseña).then((usuario)=>{
-            this.msg.msgSuccess('Exito','Bienvenido de nuevo')
-        
-      }).catch((error)=>{
-         switch(error.code){
+   ngOnInit(): void {
+      //this.route="#";
+      
+      this.formLogin = this.fb.group({
+         correo: ['', Validators.compose([Validators.required, Validators.email])],
+         contraseña: ['', Validators.required]
+      })
+   }
+   logIn() {
+      this.auth.auth.signInWithEmailAndPassword(this.formLogin.value.correo, this.formLogin.value.contraseña).then((usuario) => {
+         //this.route='/inicio';
+         this.router.navigate(['/inicio']);
+         this.msg.msgSuccess('Exito', 'Bienvenido de nuevo')
+
+      }).catch((error) => {
+         this.route="#";
+         switch (error.code) {
             case 'auth/user-not-found': {
-               this.msg.msgError('Error','No se ha encontrado el usuario');
+               this.msg.msgError('Error', 'No se ha encontrado el usuario');
                break;
             }
             case 'auth/invalid-email': {
-               this.msg.msgError('Error','El correo es inválido');
+               this.msg.msgError('Error', 'El correo es inválido');
                break;
             }
-            case 'auth/wrong-password':{
-               this.msg.msgError('Error','Contraseña incorrecta');
+            case 'auth/wrong-password': {
+               this.msg.msgError('Error', 'Contraseña incorrecta');
                break;
             }
             default: {
-               this.msg.msgError('Error','Se encontró el error: ' + error.code + 'por favor contacta a soporte');
+               this.msg.msgError('Error', 'Se encontró el error: ' + error.code + 'por favor contacta a soporte');
                break;
             }
          }
-             
+
       })
 
    }

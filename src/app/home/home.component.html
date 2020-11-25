@@ -1,4 +1,4 @@
-<div >
+<div>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap" rel="stylesheet">
     <h1 class="tusasesorias">BIENVENIDO A TUS ASESORíAS</h1>
@@ -10,421 +10,430 @@
     <br><br>
     Así mismo, brinda una herramienta de aprendizaje para aquellos que deseen generar experiencia en las asignaturas de
     su preferencia.
-  </div>
+</div>
 
+<div *ngIf="usuario.tipoUsuario=='alumno'">
+    <!--Cursos Valorados-->
+    <!--Si hay menos de 4 cursos no se abre el carrusel-->
+    <div *ngIf='this.cursosValorados.length>0 && this.cursosValorados.length<=3'
+        style="margin-top: 50px; margin-bottom: 50px;">
+        <div style="margin-left: auto; margin-right: auto; width:75%">
+            <h1>Cursos Mejor Valorados.</h1>
+        </div>
+        <div class="row" style="width:75%; margin-right:auto; margin-left:auto;">
+            <div style="display:block" *ngFor='let curso of cursosValorados'>
+                <div>
+                    <div class="card" style="min-width: 250px; margin-right: 85px;">
+                        <img class="card-img-top imgMaestro" [src]="curso.user.img">
+                        <mat-card class="card-body">
+                            <mat-card-content>
+                                <h5 class="card-title" style="font-size: 21px;">{{curso.user.nombre}} </h5>
+                                <h5 class="card-title">{{curso.categoria.nombre}} </h5>
+                                <!--h5 class="card-title">{{curso.nivel.nombre}}</h5-->
+                                <h5 class="card-title">{{curso.tarifa | currency}} </h5>
+                                <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5
+                                    style="font-size: 1rem">
+                                </ngb-rating>
 
-<!--Cursos Valorados-->
-<!--Si hay menos de 4 cursos no se abre el carrusel-->
-<div *ngIf='this.cursosValorados.length>0 && this.cursosValorados.length<=3'
-    style="margin-top: 50px; margin-bottom: 50px;">
-    <div style="margin-left: auto; margin-right: auto; width:75%">
-        <h1>Cursos Mejor Valorados.</h1>
-    </div>
-    <div class="row" style="width:75%; margin-right:auto; margin-left:auto;">
-        <div style="display:block" *ngFor='let curso of cursosValorados'>
-            <div>
-                <div class="card" style="min-width: 250px; margin-right: 85px;">
-                    <img class="card-img-top imgMaestro" [src]="curso.user.img">
-                    <mat-card class="card-body">
-                        <mat-card-content>
-                            <h5 class="card-title" style="font-size: 21px;">{{curso.user.nombre}} </h5>
-                            <h5 class="card-title">{{curso.categoria.nombre}} </h5>
-                            <!--h5 class="card-title">{{curso.nivel.nombre}}</h5-->
-                            <h5 class="card-title">{{curso.tarifa | currency}} </h5>
-                            <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem">
-                            </ngb-rating>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
+                                    Ver Perfil
+                                </button>
+                                <button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
+                                    [routerLink]="['/agendar', curso.id ]">
+                                    Ver Curso
+                                </button>
 
-                        </mat-card-content>
-                        <mat-card-actions>
-                            <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
-                                Ver Perfil
-                            </button>
-                            <button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
-                                [routerLink]="['/agendar', curso.id ]">
-                                Ver Curso
-                            </button>
+                            </mat-card-actions>
 
-                        </mat-card-actions>
-
-                    </mat-card>
+                        </mat-card>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!--Cursos Valorados-->
-<!--Si hay más de 3 cursos se abre el carrusel-->
-<div *ngIf='this.cursosValorados.length>3' style="margin-top: 50px; margin-bottom: 50px;">
-    <div style="margin-left: auto; margin-right: auto; width:75%;">
-        <h1>Cursos Mejor Valorados.</h1>
-    </div>
-    <div>
+    <!--Cursos Valorados-->
+    <!--Si hay más de 3 cursos se abre el carrusel-->
+    <div *ngIf='this.cursosValorados.length>3' style="margin-top: 50px; margin-bottom: 50px;">
+        <div style="margin-left: auto; margin-right: auto; width:75%;">
+            <h1>Cursos Mejor Valorados.</h1>
+        </div>
+        <div>
 
 
-        <div class="row" style="width:100%">
-            <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset" [showIndicators]="false"
-                style="width:100%">
-                <slide *ngFor="let curso of cursosValorados" class="mx-auto">
-                    <div class="carousel-item" style="display:block; width:75%">
-                        <div>
-                            <div class="card" style="min-width: 250px">
-                                <img class="card-img-top imgMaestro" [src]="curso.user.img">
-                                <mat-card class="card-body">
-                                    <mat-card-content>
-                                        <h5 class="card-title" style="font-size: 21px;">{{curso.user.nombre}} </h5>
-                                        <h5 class="card-title">{{curso.categoria.nombre}} </h5>
-                                        <!--h5 class="card-title">{{curso.nivel.nombre}}</h5-->
-                                        <h5 class="card-title">{{curso.tarifa | currency}} </h5>
-                                        <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem">
-                                        </ngb-rating>
-            
-                                    </mat-card-content>
-                                    <mat-card-actions>
-                                        <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
-                                            Ver Perfil
-                                        </button>
-                                        <button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
-                                            [routerLink]="['/agendar', curso.id ]">
-                                            Ver Curso
-                                        </button>
-            
-                                    </mat-card-actions>
-            
-                                </mat-card>
+            <div class="row" style="width:100%">
+                <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset"
+                    [showIndicators]="false" style="width:100%">
+                    <slide *ngFor="let curso of cursosValorados" class="mx-auto">
+                        <div class="carousel-item" style="display:block; width:75%">
+                            <div>
+                                <div class="card" style="min-width: 250px">
+                                    <img class="card-img-top imgMaestro" [src]="curso.user.img">
+                                    <mat-card class="card-body">
+                                        <mat-card-content>
+                                            <h5 class="card-title" style="font-size: 21px;">{{curso.user.nombre}} </h5>
+                                            <h5 class="card-title">{{curso.categoria.nombre}} </h5>
+                                            <!--h5 class="card-title">{{curso.nivel.nombre}}</h5-->
+                                            <h5 class="card-title">{{curso.tarifa | currency}} </h5>
+                                            <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5
+                                                style="font-size: 1rem">
+                                            </ngb-rating>
+
+                                        </mat-card-content>
+                                        <mat-card-actions>
+                                            <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
+                                                Ver Perfil
+                                            </button>
+                                            <button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
+                                                [routerLink]="['/agendar', curso.id ]">
+                                                Ver Curso
+                                            </button>
+
+                                        </mat-card-actions>
+
+                                    </mat-card>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </slide>
+                    </slide>
 
-            </carousel>
+                </carousel>
 
 
+            </div>
         </div>
     </div>
-</div>
 
 
-<!--Cursos Certificados-->
-<!--Si hay menos de 4 cursos no se abre el carrusel-->
-<div *ngIf='this.cursosCertificados.length>0 && this.cursosCertificados.length<=3'
-    style="margin-top: 50px; margin-bottom: 50px;">
-    <div style="margin-left: auto; margin-right: auto; width:75%">
-        <h1>Cursos certificados.</h1>
-    </div>
-    <div class="row" style="width:75%; margin-right:auto; margin-left:auto;">
-        <div style="display:block" *ngFor='let curso of cursosCertificados'>
-            <div>
-                <div class="card" style="min-width: 250px; margin-right: 85px;">
-                    <img class="card-img-top imgMaestro" [src]="curso.user.img">
-                    <mat-card class="card-body">
-                        <mat-card-content>
-                            <h5 class="card-title" style="font-size: 21px;">{{curso.user.nombre}} </h5>
-                            <h5 class="card-title">{{curso.categoria.nombre}} </h5>
-                            <!--h5 class="card-title">{{curso.nivel.nombre}}</h5-->
-                            <h5 class="card-title">{{curso.tarifa | currency}} </h5>
-                            <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem">
-                            </ngb-rating>
+    <!--Cursos Certificados-->
+    <!--Si hay menos de 4 cursos no se abre el carrusel-->
+    <div *ngIf='this.cursosCertificados.length>0 && this.cursosCertificados.length<=3'
+        style="margin-top: 50px; margin-bottom: 50px;">
+        <div style="margin-left: auto; margin-right: auto; width:75%">
+            <h1>Cursos certificados.</h1>
+        </div>
+        <div class="row" style="width:75%; margin-right:auto; margin-left:auto;">
+            <div style="display:block" *ngFor='let curso of cursosCertificados'>
+                <div>
+                    <div class="card" style="min-width: 250px; margin-right: 85px;">
+                        <img class="card-img-top imgMaestro" [src]="curso.user.img">
+                        <mat-card class="card-body">
+                            <mat-card-content>
+                                <h5 class="card-title" style="font-size: 21px;">{{curso.user.nombre}} </h5>
+                                <h5 class="card-title">{{curso.categoria.nombre}} </h5>
+                                <!--h5 class="card-title">{{curso.nivel.nombre}}</h5-->
+                                <h5 class="card-title">{{curso.tarifa | currency}} </h5>
+                                <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5
+                                    style="font-size: 1rem">
+                                </ngb-rating>
 
-                        </mat-card-content>
-                        <mat-card-actions>
-                            <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
-                                Ver Perfil
-                            </button>
-                            <button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
-                                [routerLink]="['/agendar', curso.id ]">
-                                Ver Curso
-                            </button>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
+                                    Ver Perfil
+                                </button>
+                                <button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
+                                    [routerLink]="['/agendar', curso.id ]">
+                                    Ver Curso
+                                </button>
 
-                        </mat-card-actions>
+                            </mat-card-actions>
 
-                    </mat-card>
+                        </mat-card>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!--Cursos Certificados-->
-<!--Si hay más de 3 cursos se abre el carrusel-->
-<div *ngIf='this.cursosCertificados.length>3' style="margin-top: 50px; margin-bottom: 50px;">
-    <div style="margin-left: auto; margin-right: auto; width:75%;">
-        <h1>Cursos Certificados.</h1>
-    </div>
-    <div>
+    <!--Cursos Certificados-->
+    <!--Si hay más de 3 cursos se abre el carrusel-->
+    <div *ngIf='this.cursosCertificados.length>3' style="margin-top: 50px; margin-bottom: 50px;">
+        <div style="margin-left: auto; margin-right: auto; width:75%;">
+            <h1>Cursos Certificados.</h1>
+        </div>
+        <div>
 
 
-        <div class="row" style="width:100%">
-            <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset" [showIndicators]="false"
-                style="width:100%">
-                <slide *ngFor="let curso of cursosCertificados" class="mx-auto">
-                    <div class="carousel-item" style="display:block; width:75%">
-                        <div>
-                            <div class="card" style="min-width: 250px">
-                                <img class="card-img-top imgMaestro" [src]="curso.user.img">
-                                <mat-card class="card-body">
-                                    <mat-card-content>
-                                        <h5 class="card-title" style="font-size: 21px;">{{curso.user.nombre}} </h5>
-                                        <h5 class="card-title">{{curso.categoria.nombre}} </h5>
-                                        <!--h5 class="card-title">{{curso.nivel.nombre}}</h5-->
-                                        <h5 class="card-title">{{curso.tarifa | currency}} </h5>
-                                        <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5 style="font-size: 1rem">
-                                        </ngb-rating>
-            
-                                    </mat-card-content>
-                                    <mat-card-actions>
-                                        <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
-                                            Ver Perfil
-                                        </button>
-                                        <button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
-                                            [routerLink]="['/agendar', curso.id ]">
-                                            Ver Curso
-                                        </button>
-            
-                                    </mat-card-actions>
-            
-                                </mat-card>
+            <div class="row" style="width:100%">
+                <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset"
+                    [showIndicators]="false" style="width:100%">
+                    <slide *ngFor="let curso of cursosCertificados" class="mx-auto">
+                        <div class="carousel-item" style="display:block; width:75%">
+                            <div>
+                                <div class="card" style="min-width: 250px">
+                                    <img class="card-img-top imgMaestro" [src]="curso.user.img">
+                                    <mat-card class="card-body">
+                                        <mat-card-content>
+                                            <h5 class="card-title" style="font-size: 21px;">{{curso.user.nombre}} </h5>
+                                            <h5 class="card-title">{{curso.categoria.nombre}} </h5>
+                                            <!--h5 class="card-title">{{curso.nivel.nombre}}</h5-->
+                                            <h5 class="card-title">{{curso.tarifa | currency}} </h5>
+                                            <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5
+                                                style="font-size: 1rem">
+                                            </ngb-rating>
+
+                                        </mat-card-content>
+                                        <mat-card-actions>
+                                            <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
+                                                Ver Perfil
+                                            </button>
+                                            <button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
+                                                [routerLink]="['/agendar', curso.id ]">
+                                                Ver Curso
+                                            </button>
+
+                                        </mat-card-actions>
+
+                                    </mat-card>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </slide>
+                    </slide>
 
-            </carousel>
+                </carousel>
 
 
+            </div>
         </div>
     </div>
-</div>
 
 
-<!--Instructores valorados-->
-<!--Si hay menos de 4 instructores no entra al carrusel-->
-<div *ngIf='this.instructoresValorados.length>0 && this.instructoresValorados.length<=3'
-    style="margin-top: 50px; margin-bottom: 50px;">
-    <div style="margin-left: auto; margin-right: auto; width:75%;">
-        <h1>Instructores Mejor Valorados.</h1>
-    </div>
-    <div class="row" style="width:75%; margin-right:auto; margin-left:auto">
-        <div style="display:block" *ngFor='let instructor of instructoresValorados'>
-            <div>
-                <div class="card" style="min-width: 250px; margin-right: 85px;">
-                    <img class="card-img-top imgMaestro" [src]="instructor.img">
-                    <mat-card class="card-body">
-                        <mat-card-content>
-                            <h5 class="card-title" style="font-size: 21px;">{{instructor.nombre}} </h5>
-                            <h5 class="card-title">{{ instructor.totalEstudiantes }} Estudiantes recientes</h5>
-                            
-                            <ngb-rating [(rate)]="instructor.evaluaciones" [readonly]="true" [max]=5
-                                style="font-size: 1rem">
-                            </ngb-rating>
+    <!--Instructores valorados-->
+    <!--Si hay menos de 4 instructores no entra al carrusel-->
+    <div *ngIf='this.instructoresValorados.length>0 && this.instructoresValorados.length<=3'
+        style="margin-top: 50px; margin-bottom: 50px;">
+        <div style="margin-left: auto; margin-right: auto; width:75%;">
+            <h1>Instructores Mejor Valorados.</h1>
+        </div>
+        <div class="row" style="width:75%; margin-right:auto; margin-left:auto">
+            <div style="display:block" *ngFor='let instructor of instructoresValorados'>
+                <div>
+                    <div class="card" style="min-width: 250px; margin-right: 85px;">
+                        <img class="card-img-top imgMaestro" [src]="instructor.img">
+                        <mat-card class="card-body">
+                            <mat-card-content>
+                                <h5 class="card-title" style="font-size: 21px;">{{instructor.nombre}} </h5>
+                                <h5 class="card-title">{{ instructor.totalEstudiantes }} Estudiantes recientes</h5>
 
-                        </mat-card-content>
-                        <mat-card-actions>
-                            <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
-                                Ver Perfil
-                            </button>
-                        </mat-card-actions>
-                    </mat-card>
+                                <ngb-rating [(rate)]="instructor.evaluaciones" [readonly]="true" [max]=5
+                                    style="font-size: 1rem">
+                                </ngb-rating>
+
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
+                                    Ver Perfil
+                                </button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!--Instructores valorados-->
-<!--Si hay 4 o más instructores no entra al carrusel-->
-<div *ngIf='this.instructoresValorados.length>3' style="margin-top: 50px; margin-bottom: 50px;">
-    <div style="margin-left: auto; margin-right: auto; width:75%;">
-        <h1>Instructores Mejor Valorados.</h1>
-    </div>
-    <div>
+    <!--Instructores valorados-->
+    <!--Si hay 4 o más instructores no entra al carrusel-->
+    <div *ngIf='this.instructoresValorados.length>3' style="margin-top: 50px; margin-bottom: 50px;">
+        <div style="margin-left: auto; margin-right: auto; width:75%;">
+            <h1>Instructores Mejor Valorados.</h1>
+        </div>
+        <div>
 
 
-        <div class="row" style="width:100%">
-            <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset" [showIndicators]="false"
-                style="width:100%">
-                <slide *ngFor="let instructor of instructoresValorados" class="mx-auto">
-                    <div class="carousel-item" style="display:block; width:75%">
-                        <div>
-                            <div class="card" style="min-width: 250px">
-                                <img class="card-img-top imgMaestro" [src]="instructor.img">
-                                <mat-card class="card-body">
-                                    <mat-card-content>
-                                        <h5 class="card-title" style="font-size: 21px;">{{instructor.nombre}} </h5>
-                                        <h5 class="card-title">{{ instructor.totalEstudiantes }} Estudiantes recientes</h5>
-                            
-                                        <ngb-rating [(rate)]="instructor.evaluaciones" [readonly]="true" [max]=5
-                                            style="font-size: 1rem">
-                                        </ngb-rating>
+            <div class="row" style="width:100%">
+                <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset"
+                    [showIndicators]="false" style="width:100%">
+                    <slide *ngFor="let instructor of instructoresValorados" class="mx-auto">
+                        <div class="carousel-item" style="display:block; width:75%">
+                            <div>
+                                <div class="card" style="min-width: 250px">
+                                    <img class="card-img-top imgMaestro" [src]="instructor.img">
+                                    <mat-card class="card-body">
+                                        <mat-card-content>
+                                            <h5 class="card-title" style="font-size: 21px;">{{instructor.nombre}} </h5>
+                                            <h5 class="card-title">{{ instructor.totalEstudiantes }} Estudiantes
+                                                recientes
+                                            </h5>
 
-                                    </mat-card-content>
-                                    <mat-card-actions>
-                                        <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
-                                            Ver Perfil
-                                        </button>
-                                    </mat-card-actions>
-                                </mat-card>
+                                            <ngb-rating [(rate)]="instructor.evaluaciones" [readonly]="true" [max]=5
+                                                style="font-size: 1rem">
+                                            </ngb-rating>
+
+                                        </mat-card-content>
+                                        <mat-card-actions>
+                                            <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
+                                                Ver Perfil
+                                            </button>
+                                        </mat-card-actions>
+                                    </mat-card>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </slide>
+                    </slide>
 
-            </carousel>
+                </carousel>
 
 
+            </div>
         </div>
     </div>
-</div>
 
 
 
-<!--Instructores solicitados-->
-<!--Si hay menos de 4 instructores no entra al carrusel-->
-<div *ngIf='this.instructoresSolicitados.length>0 && this.instructoresSolicitados.length<=3'
-    style="margin-top: 50px; margin-bottom: 50px;">
-    <div style="margin-left: auto; margin-right: auto; width:75%;">
-        <h1>Instructores Más Solicitados.</h1>
-    </div>
-    <div class="row" style="width:75%; margin-right:auto; margin-left:auto">
-        <div style="display:block" *ngFor='let instructor of instructoresSolicitados'>
-            <div>
-                <div class="card" style="min-width: 250px; margin-right: 85px;">
-                    <img class="card-img-top imgMaestro" [src]="instructor.img">
-                    <mat-card class="card-body">
-                        <mat-card-content>
-                            <h5 class="card-title" style="font-size: 21px;">{{instructor.nombre}} </h5>
-                            <h5 class="card-title">{{ instructor.totalEstudiantes }} Estudiantes recientes</h5>
-                            
-                            <ngb-rating [(rate)]="instructor.evaluaciones" [readonly]="true" [max]=5
-                                style="font-size: 1rem">
-                            </ngb-rating>
+    <!--Instructores solicitados-->
+    <!--Si hay menos de 4 instructores no entra al carrusel-->
+    <div *ngIf='this.instructoresSolicitados.length>0 && this.instructoresSolicitados.length<=3'
+        style="margin-top: 50px; margin-bottom: 50px;">
+        <div style="margin-left: auto; margin-right: auto; width:75%;">
+            <h1>Instructores Más Solicitados.</h1>
+        </div>
+        <div class="row" style="width:75%; margin-right:auto; margin-left:auto">
+            <div style="display:block" *ngFor='let instructor of instructoresSolicitados'>
+                <div>
+                    <div class="card" style="min-width: 250px; margin-right: 85px;">
+                        <img class="card-img-top imgMaestro" [src]="instructor.img">
+                        <mat-card class="card-body">
+                            <mat-card-content>
+                                <h5 class="card-title" style="font-size: 21px;">{{instructor.nombre}} </h5>
+                                <h5 class="card-title">{{ instructor.totalEstudiantes }} Estudiantes recientes</h5>
 
-                        </mat-card-content>
-                        <mat-card-actions>
-                            <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
-                                Ver Perfil
-                            </button>
-                        </mat-card-actions>
-                    </mat-card>
+                                <ngb-rating [(rate)]="instructor.evaluaciones" [readonly]="true" [max]=5
+                                    style="font-size: 1rem">
+                                </ngb-rating>
+
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
+                                    Ver Perfil
+                                </button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!--Instructores solicitados-->
-<!--Si hay 4 o más instructores no entra al carrusel-->
-<div *ngIf='this.instructoresSolicitados.length>3' style="margin-top: 50px; margin-bottom: 50px;">
-    <div style="margin-left: auto; margin-right: auto; width:75%;">
-        <h1>Instructores Más Solicitados.</h1>
-    </div>
-    <div>
+    <!--Instructores solicitados-->
+    <!--Si hay 4 o más instructores no entra al carrusel-->
+    <div *ngIf='this.instructoresSolicitados.length>3' style="margin-top: 50px; margin-bottom: 50px;">
+        <div style="margin-left: auto; margin-right: auto; width:75%;">
+            <h1>Instructores Más Solicitados.</h1>
+        </div>
+        <div>
 
 
-        <div class="row" style="width:100%">
-            <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset" [showIndicators]="false"
-                style="width:100%">
-                <slide *ngFor="let instructor of instructoresValorados" class="mx-auto">
-                    <div class="carousel-item" style="display:block; width:75%">
-                        <div>
-                            <div class="card" style="min-width: 250px">
-                                <img class="card-img-top imgMaestro" [src]="instructor.img">
-                                <mat-card class="card-body">
-                                    <mat-card-content>
-                                        <h5 class="card-title" style="font-size: 21px;">{{instructor.nombre}} </h5>
-                                        <h5 class="card-title">{{ instructor.totalEstudiantes }} Estudiantes recientes</h5>
-                            
-                                        <ngb-rating [(rate)]="instructor.evaluaciones" [readonly]="true" [max]=5
-                                            style="font-size: 1rem">
-                                        </ngb-rating>
+            <div class="row" style="width:100%">
+                <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset"
+                    [showIndicators]="false" style="width:100%">
+                    <slide *ngFor="let instructor of instructoresSolicitados" class="mx-auto">
+                        <div class="carousel-item" style="display:block; width:75%">
+                            <div>
+                                <div class="card" style="min-width: 250px">
+                                    <img class="card-img-top imgMaestro" [src]="instructor.img">
+                                    <mat-card class="card-body">
+                                        <mat-card-content>
+                                            <h5 class="card-title" style="font-size: 21px;">{{instructor.nombre}} </h5>
+                                            <h5 class="card-title">{{ instructor.totalEstudiantes }} Estudiantes
+                                                recientes
+                                            </h5>
 
-                                    </mat-card-content>
-                                    <mat-card-actions>
-                                        <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
-                                            Ver Perfil
-                                        </button>
-                                    </mat-card-actions>
-                                </mat-card>
+                                            <ngb-rating [(rate)]="instructor.evaluaciones" [readonly]="true" [max]=5
+                                                style="font-size: 1rem">
+                                            </ngb-rating>
+
+                                        </mat-card-content>
+                                        <mat-card-actions>
+                                            <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
+                                                Ver Perfil
+                                            </button>
+                                        </mat-card-actions>
+                                    </mat-card>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </slide>
+                    </slide>
 
-            </carousel>
+                </carousel>
 
 
+            </div>
         </div>
     </div>
-</div>
 
 
 
-<!--Instructores nuevos-->
-<!--Si hay menos de 4 instructores no entra al carrusel-->
-<div *ngIf='this.instructoresNuevos.length>0 && this.instructoresNuevos.length<=3'
-    style="margin-top: 50px; margin-bottom: 50px; width:75%;">
-    <div style="margin-left: auto; margin-right: auto;">
-        <h1>Nuevos Instructores.</h1>
-    </div>
-    <div class="row" style="width:75%; margin-right:auto; margin-left:auto">
-        <div style="display:block" *ngFor='let instructor of instructoresNuevos'>
-            <div>
-                <div class="card" style="min-width: 250px">
-                    <img class="card-img-top imgMaestro" [src]="instructor.img">
-                    <mat-card class="card-body">
-                        <mat-card-content>
-                            <h5 class="card-title" style="font-size: 21px;">{{instructor.nombre}} </h5>
-                            <ngb-rating [(rate)]="instructor.evaluaciones" [readonly]="true" [max]=5
-                                style="font-size: 1rem">
-                            </ngb-rating>
+    <!--Instructores nuevos-->
+    <!--Si hay menos de 4 instructores no entra al carrusel-->
+    <div *ngIf='this.instructoresNuevos.length>0 && this.instructoresNuevos.length<=3'
+        style="margin-top: 50px; margin-bottom: 50px; width:75%;">
+        <div style="margin-left: auto; margin-right: auto;">
+            <h1>Nuevos Instructores.</h1>
+        </div>
+        <div class="row" style="width:75%; margin-right:auto; margin-left:auto">
+            <div style="display:block" *ngFor='let instructor of instructoresNuevos'>
+                <div>
+                    <div class="card" style="min-width: 250px">
+                        <img class="card-img-top imgMaestro" [src]="instructor.img">
+                        <mat-card class="card-body">
+                            <mat-card-content>
+                                <h5 class="card-title" style="font-size: 21px;">{{instructor.nombre}} </h5>
+                                <ngb-rating [(rate)]="instructor.evaluaciones" [readonly]="true" [max]=5
+                                    style="font-size: 1rem">
+                                </ngb-rating>
 
-                        </mat-card-content>
-                        <mat-card-actions>
-                            <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
-                                Ver Perfil
-                            </button>
-                        </mat-card-actions>
-                    </mat-card>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
+                                    Ver Perfil
+                                </button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!--Instructores nuevos-->
-<!--Si hay 4 o más instructores no entra al carrusel-->
-<div *ngIf='this.instructoresNuevos.length>3' style="margin-top: 50px; margin-bottom: 50px;">
-    <div style="margin-left: auto; margin-right: auto; width:75%;">
-        <h1>Nuevos Instructores.</h1>
-    </div>
-    <div>
+    <!--Instructores nuevos-->
+    <!--Si hay 4 o más instructores no entra al carrusel-->
+    <div *ngIf='this.instructoresNuevos.length>3' style="margin-top: 50px; margin-bottom: 50px;">
+        <div style="margin-left: auto; margin-right: auto; width:75%;">
+            <h1>Nuevos Instructores.</h1>
+        </div>
+        <div>
 
 
-        <div class="row" style="width:100%">
-            <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset" [showIndicators]="false"
-                style="width:100%">
-                <slide *ngFor="let instructor of instructoresNuevos" class="mx-auto">
-                    <div class="carousel-item" style="display:block; width:75%">
-                        <div>
-                            <div class="card" style="min-width: 250px">
-                                <img class="card-img-top imgMaestro" [src]="instructor.img">
-                                <mat-card class="card-body">
-                                    <mat-card-content>
-                                        <h5 class="card-title" style="font-size: 21px;">{{instructor.nombre}} </h5>
-                                        <ngb-rating [(rate)]="instructor.evaluaciones" [readonly]="true" [max]=5
-                                            style="font-size: 1rem">
-                                        </ngb-rating>
+            <div class="row" style="width:100%">
+                <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset"
+                    [showIndicators]="false" style="width:100%">
+                    <slide *ngFor="let instructor of instructoresNuevos" class="mx-auto">
+                        <div class="carousel-item" style="display:block; width:75%">
+                            <div>
+                                <div class="card" style="min-width: 250px">
+                                    <img class="card-img-top imgMaestro" [src]="instructor.img">
+                                    <mat-card class="card-body">
+                                        <mat-card-content>
+                                            <h5 class="card-title" style="font-size: 21px;">{{instructor.nombre}} </h5>
+                                            <ngb-rating [(rate)]="instructor.evaluaciones" [readonly]="true" [max]=5
+                                                style="font-size: 1rem">
+                                            </ngb-rating>
 
-                                    </mat-card-content>
-                                    <mat-card-actions>
-                                        <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
-                                            Ver Perfil
-                                        </button>
-                                    </mat-card-actions>
-                                </mat-card>
+                                        </mat-card-content>
+                                        <mat-card-actions>
+                                            <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
+                                                Ver Perfil
+                                            </button>
+                                        </mat-card-actions>
+                                    </mat-card>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </slide>
+                    </slide>
 
-            </carousel>
+                </carousel>
 
 
+            </div>
         </div>
     </div>
 </div>
