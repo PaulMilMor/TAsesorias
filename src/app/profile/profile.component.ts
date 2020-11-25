@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Certificacion } from 'src/models/certificacion';
 import { AngularFireStorage } from '@angular/fire/storage';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit {
   usuarios: Usuario
   isValid: boolean = false
   isCollapsed: boolean = false;
+  confirmar: boolean = false;
   constructor(private ar: ActivatedRoute, public dialog: MatDialog, private msg: MsgService, private db: AngularFirestore, private auth: AngularFireAuth, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -51,7 +53,7 @@ export class ProfileComponent implements OnInit {
     for (let estudiante in this.usuario.estudiantes) {
       let date = new Date();
       date.setTime(parseInt(estudiante));
-      
+
       if (date.getTime() > today.getTime()) {
         this.usuario.totalEstudiantes = this.usuario.totalEstudiantes + parseInt(this.usuario.estudiantes[estudiante]);
       }
@@ -66,6 +68,7 @@ export class ProfileComponent implements OnInit {
       this.getEstudiantes();
     })
   }
+
   getUsers() {
     this.db.collection('usuarios').get().subscribe((res) => {
       res.docs.forEach((item) => {
@@ -80,6 +83,32 @@ export class ProfileComponent implements OnInit {
       })
     })
   }
+  openDialog(): void {
+    if (this.usuario.tipoUsuario == this.alumno) {
+      const dialogRef = this.dialog.open(reportProfile, {
+        width: '500px',
+        height: '250px',
+        //Para en enviar informacion a un dialogo se usa la variable data (teniendo en cuenta que existe una llamada asi tambien en el dialogo)
+        data: {
+          maestro: this.usuario,
+          alumno: this.auth.auth.currentUser.uid
+        }
+      });
+    }
+    if (this.usuario.tipoUsuario == this.instructor) {
+      const dialogRef2 = this.dialog.open(editProfile, {
+        width: '500px',
+        height: '500px',
+        //Para en enviar informacion a un dialogo se usa la variable data (teniendo en cuenta que existe una llamada asi tambien en el dialogo)
+        /*data: {
+          maestro: this.ar.snapshot.params.idMaestro,
+          alumno: this.auth.auth.currentUser.uid
+        }*/
+      });
+    }
+
+  }
+
   getCertificados() {
     this.db.collection('certificados').get().subscribe((res) => {
       res.docs.forEach((item) => {
@@ -118,15 +147,7 @@ export class ProfileComponent implements OnInit {
     })
   }
   // secccion de dialogos
-  openDialog(): void {
 
-    const dialogRef2 = this.dialog.open(editProfile, {
-      width: '500px',
-      height: '500px',
-
-    });
-
-  }
   openReport(): void {
     const dialogRef = this.dialog.open(reportProfile, {
       width: '500px',
@@ -188,7 +209,35 @@ export class ProfileComponent implements OnInit {
     }
     return false;
   }
+  eliminarAsesoria(id) {
+    //this.msg.msgAlerta('¿Seguro que quieres eliminar esta asesoria?','Se eliminara todo lo relacionado a esta asesoria',this.confirmar);
 
+    Swal.fire({
+      title: '¿Seguro que quieres eliminar esta asesoria?',
+      text: 'Se eliminara todo lo relacionado a esta asesoria',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        Swal.fire(
+          'Asesoria eliminada',
+          'success'
+        )
+        this.db.collection('cursos').doc(id).delete().finally(() => {
+
+          window.location.reload()
+        })
+      }
+    })
+
+
+
+
+  }
 }
 @Component({
   selector: 'reportProfile',
@@ -213,9 +262,6 @@ export class reportProfile implements OnInit {
       fecha: ['']
 
     })
-
-
-
 
 
   }
@@ -314,6 +360,7 @@ export class editProfile implements OnInit {
   editProfile: boolean = false
   editBiog: boolean = true
   editcelular: boolean = true
+  mostrar: boolean = true
   isValid: boolean = false
   normal: 'normal'
   tipoCorreo: string
@@ -328,7 +375,8 @@ export class editProfile implements OnInit {
       contraseña: ['', Validators.minLength(8)],
       img: [''],
       bio: [''],
-      cel: ['']
+      cel: [''],
+      mostrarinfo: ['']
     })
 
   }
@@ -421,6 +469,18 @@ export class editProfile implements OnInit {
     })
 
   }
+  editInfo() {
+    var user = this.auth.auth.currentUser.uid
+    this.db.collection('usuarios').doc(user).update({
+      mostrarinfo: this.formUsuario.value.mostrarinfo
+    }
+    ).then(() => {
+      this.msg.msgSuccess('Exito', 'Se actualizo su preferencia')
+    }).catch((err) => {
+      console.log(err);
+
+    })
+  }
   //Se encarga de ver que cambio se van a realizar y llama a los metodos correspondientes
   editUser() {
     if (this.editImg) {
@@ -439,6 +499,9 @@ export class editProfile implements OnInit {
     }
     if (this.editcelular) {
       this.editCel()
+    }
+    if (this.mostrar) {
+      this.editInfo()
     }
   }
 
