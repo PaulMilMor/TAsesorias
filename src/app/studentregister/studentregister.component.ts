@@ -118,6 +118,8 @@ export class StudentregisterComponent implements OnInit {
   styleUrls: ['./dialogStudent.css'],
 })
 export class dialogStudent implements OnInit {
+  dia:number=new Date().getDay();
+  hora:number=new Date().getHours();
   clunes: Array<any> = new Array();
   cmartes: Array<any> = new Array();
   cmiercoles: Array<any> = new Array();
@@ -143,6 +145,10 @@ export class dialogStudent implements OnInit {
     public dialogRef: MatDialogRef<dialogStudent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private auth: AngularFireAuth, private msg: MsgService, private router: Router) { }
   ngOnInit(): void {
+    console.log(this.hora);
+    console.log(this.dia);
+    
+    
     const sesionesInicial = this.data.sesiones
     const precio = parseInt(this.data.curso.tarifa) * parseInt(this.data.sesiones)
     this.getHorario()
@@ -529,10 +535,12 @@ export class dialogStudent implements OnInit {
           this.cviernes = h.viernes;
           this.csabado = h.sabado;
           this.cdomingo = h.domingo;
-
         }
       })
     })
+  }
+  convertir(value):number{
+    return parseInt( value.split(':')[0])
   }
 //agrega las hora que tu solicitas la asesoria
   prueba(hour, dia) {

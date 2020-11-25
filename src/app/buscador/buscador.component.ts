@@ -41,10 +41,10 @@ export class BuscadorComponent implements OnInit {
     this.getCourses()
     this.getCategories()
     /* this.countVisitors() */
-    this.checkedItems =  new Array<string>();
+    this.checkedItems = new Array<string>();
     this.getUser()
-    
-    
+
+
   }
 
   getCategoriesId(e: any, nombre: string) {
@@ -151,13 +151,13 @@ export class BuscadorComponent implements OnInit {
     })
 
   }
-  
-   /* ountVisitors(){
-    
-    var visitas = this.db.collection('usuarios').doc('visitaUser');
-    visitas.update({
-        visitas:AngularFirestore.FieldValue.increment(1)
-  }  */
+
+  /* ountVisitors(){
+   
+   var visitas = this.db.collection('usuarios').doc('visitaUser');
+   visitas.update({
+       visitas:AngularFirestore.FieldValue.increment(1)
+ }  */
   getUser() {
     this.db.collection('usuarios').get().subscribe((res) => {
       res.docs.forEach((item) => {
@@ -174,13 +174,13 @@ export class BuscadorComponent implements OnInit {
   }
 
   ///Contar visitas a perfil de los instructores
-  
-  countVisitors(id: string){
-   
+
+  countVisitors(id: string) {
+
     const increment = firestore.FieldValue.increment(1);
     const storyRef = this.db.collection('usuarios').doc(id);
 
     storyRef.update({ count: increment })
 
-    } 
+  }
 }
