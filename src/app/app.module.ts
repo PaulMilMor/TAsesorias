@@ -49,7 +49,6 @@ import { ProfileComponent, reportProfile,editProfile, addImages, material } from
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBadgeModule } from '@angular/material/badge';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
-
 import { CertificacionesComponent, feedback } from './certificaciones/certificaciones.component';
 //import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 import { CertificacionesinstructorComponent, dialogNewcertificacion, feedbackInstructor } from './certificacionesinstructor/certificacionesinstructor.component';
@@ -61,6 +60,8 @@ import { AdminreportComponent, dialogBan } from './adminreport/adminreport.compo
 import { BanlistComponent } from './banlist/banlist.component';
 import { MisasesoriasComponent } from './misasesorias/misasesorias.component';
 import {MatDividerModule} from '@angular/material/divider';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatSidenavModule } from '@angular/material/sidenav';
 //import { dialogNewcertificacion,CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 
 @NgModule({
@@ -95,7 +96,8 @@ import {MatDividerModule} from '@angular/material/divider';
     BanlistComponent,
     MisasesoriasComponent, 
     addImages,
-    material
+    material,
+   
   ],
   imports: [
     BrowserModule,
@@ -132,7 +134,10 @@ import {MatDividerModule} from '@angular/material/divider';
     FlexLayoutModule,
     MatBadgeModule,
     CarouselModule.forRoot(),
-    MatDividerModule
+    MatDividerModule,
+    LayoutModule,
+    MatSidenavModule
+    
 
   ],
   entryComponents: [

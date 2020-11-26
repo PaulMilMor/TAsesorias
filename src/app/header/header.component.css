@@ -7,6 +7,12 @@
     
 }
 
+@media (max-width: 767px) {
+    .navbar-collapse
+      {
+          background-color: rgb(255, 82, 62);;
+      }
+  }
 *:before, *:after{
     content: normal !important;
 }
