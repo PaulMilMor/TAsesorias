@@ -47,7 +47,7 @@
 
             </mat-error>
          </mat-form-field>
-         <input formControlName="img" (change)="addImg($event)" type="file" class="form-control-file">
+         <input formControlName="img" (change)="addImg($event)" accept="image/*" type="file" class="form-control-file">
          <div class="container">
             <button mat-flat-button [disabled]="formUsuario.invalid" class="button" style="margin-right: 5px;"
                (click)="addUser()" color="warn" style="font-size: 17px;">Registrarse</button>

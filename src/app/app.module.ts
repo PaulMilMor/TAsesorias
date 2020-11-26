@@ -55,7 +55,8 @@ import { CertificacionesComponent, feedback } from './certificaciones/certificac
 import { CertificacionesinstructorComponent, dialogNewcertificacion, feedbackInstructor } from './certificacionesinstructor/certificacionesinstructor.component';
 import { HomeComponent } from './home/home.component';
 import { MatPaginator } from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
+
+import {MatSortModule} from '@angular/material/sort';
 //import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 import { AdminreportComponent, dialogBan } from './adminreport/adminreport.component';
 import { BanlistComponent } from './banlist/banlist.component';
@@ -132,8 +133,9 @@ import {MatDividerModule} from '@angular/material/divider';
     FlexLayoutModule,
     MatBadgeModule,
     CarouselModule.forRoot(),
-    MatDividerModule
-
+    MatDividerModule,
+    MatSortModule
+ 
   ],
   entryComponents: [
     register,

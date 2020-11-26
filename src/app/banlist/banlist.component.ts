@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MsgService } from 'src/services/msg.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Reporte } from 'src/models/reportes';
+import {Sort} from '@angular/material/sort';
 @Component({
   selector: 'app-banlist',
   templateUrl: './banlist.component.html',
@@ -9,10 +10,15 @@ import { Reporte } from 'src/models/reportes';
 })
 export class BanlistComponent implements OnInit {
 baneados:Array<any>=new Array()
-  constructor(private db:AngularFirestore) { }
+sortedData: any[];
+  constructor(private db:AngularFirestore) { 
+    this.sortedData = this.baneados.slice();
+  }
 
   ngOnInit(): void {
     this.getBaneados()
+    
+
   }
 getBaneados(){
 
@@ -43,6 +49,7 @@ getBaneados(){
       
     })
   })
+this.sortedData=this.baneados
 }
 unBan(id){
 this.db.collection('baneados').doc(id).delete().finally(()=>{
@@ -60,5 +67,29 @@ this.db.collection('baneados').doc(id).delete().finally(()=>{
 });
 
 }
+sortData(sort: Sort) {
+  console.log(sort);
+  
+  const data = this.baneados.slice();
+  if (!sort.active || sort.direction === '') {
+    this.sortedData = data;
+    return;
+  }
 
+  this.sortedData = data.sort((a, b) => {
+    const isAsc = sort.direction === 'asc';
+    switch (sort.active) {
+      case 'instructor': return compare(a.maestro.nombre, b.maestro.nombre, isAsc);
+      case 'fecha': return compare(a.fechaInicial, b.fechaInicial, isAsc);
+      case 'tipo': return compare(a.tipoSuspension, b.tipoSuspension, isAsc);
+      case 'tiempo': return compare(a.fechaFinal, b.fechaFinal, isAsc);
+  
+      default: return 0;
+    }
+  });
+}
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

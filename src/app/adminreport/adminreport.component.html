@@ -2,19 +2,19 @@
   <div class="main-div container">
 
     <div class="lista mt-3">
-      <table class="table dark">
+      <table class="table dark" matSort (matSortChange)="sortData($event)">
         <thead>
           <tr>
 
-            <th scope="col">Instructor</th>
+            <th scope="col" mat-sort-header="instructor">Instructor</th>
        
-            <th scope="col">Fecha</th>
-            <th scope="col">Reporte</th>
+            <th scope="col" mat-sort-header="fecha" >Fecha</th>
+            <th scope="col" mat-sort-header="reporte">Reporte</th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of reportes">
+          <tr *ngFor="let item of sortedData">
 
             <td>{{item.maestro.nombre}}</td>
             <td>{{item.fecha | date:"dd/MM/yy "}}</td>

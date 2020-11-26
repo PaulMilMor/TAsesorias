@@ -4,7 +4,7 @@
 <mat-tab-group [selectedIndex]="value">  
     <mat-tab [label]="item" *ngFor="let item of tabs" > 
         {{value}}
-        <input  (change)="addImg($event,tabs.indexOf(item))" type="file" class="form-control-file" *ngIf="data.tipoUsuario=='instructor'">
+        <input  (change)="addImg($event,tabs.indexOf(item))" type="file"  accept="image/*" class="form-control-file" *ngIf="data.tipoUsuario=='instructor'">
         <img [src]="data.imagenes[tabs.indexOf(item)]" height="400" >
     </mat-tab>
    

@@ -6,6 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Reporte } from 'src/models/reportes';
 import { Usuario } from 'src/models/usuario';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {Sort} from '@angular/material/sort';
 @Component({
   selector: 'app-adminreport',
   templateUrl: './adminreport.component.html',
@@ -13,10 +14,14 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 })
 export class AdminreportComponent implements OnInit {
   reportes: Array<Reporte> = new Array();
-  constructor(private db: AngularFirestore, private msg: MsgService, public dialog: MatDialog) { }
+  sortedData: any[];
+  constructor(private db: AngularFirestore, private msg: MsgService, public dialog: MatDialog) {
+    this.sortedData = this.reportes.slice();
+   }
 
   ngOnInit(): void {
 this.getReportes()
+
   }
   openDialog(maestro): void {
     const dialogRef = this.dialog.open(dialogBan, {
@@ -40,13 +45,39 @@ this.getReportes()
         
       })
     })
-
+    this.sortedData = this.reportes
   }
 
 
+  sortData(sort: Sort) {
+    console.log(sort);
+    
+    const data = this.reportes.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+  
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'instructor': return compare(a.maestro.nombre, b.maestro.nombre, isAsc);
+        case 'fecha': return compare(a.fecha, b.fecha, isAsc);
+        case 'reporte': return compare(a.reporte, b.reporte, isAsc);
+       
+    
+        default: return 0;
+      }
+    });
+  }
+  }
+  
+  function compare(a: number | string | Date, b: number | string |Date, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+   
  
- 
-}
+
 @Component({
   selector: 'dialogBan',
   templateUrl: 'dialog.html',
