@@ -9,7 +9,7 @@
     <input [(ngModel)]="filter" name="filter" class="form-control" type="text"
         placeholder=" Escribe nombre de instructor o etiqueta" style="width: 500px;" autofocus>
 
-    <button mat-flat-button class="mt-5" class="btn btn-info btn-block"
+    <button mat-flat-button class="mt-5" class="btn btn-info btn-block" title="Filtrar por categorias"
         style="width: 187px; text-align: center; height: 6vh;" (click)="filtrarCategoria=!filtrarCategoria"><i
             class="material-icons" style="font-size: 130%;">filter_alt</i> Filtrar categorías</button>
 
@@ -114,11 +114,11 @@
                         </script> -->
                         <mat-card-actions>
                             <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]"
-                                (click)="countVisitors(curso.user.uid)">
+                                (click)="countVisitors(curso.user.uid)" title="Ver perfil de este instructor">
                                 Ver Perfil
                             </button>
                             <button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
-                                [routerLink]="['/agendar', curso.id ]">
+                                [routerLink]="['/agendar', curso.id ]" title="Agendar curso">
                                 Ver Curso
                             </button>
 

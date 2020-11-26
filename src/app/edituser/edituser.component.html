@@ -32,7 +32,7 @@
       </div>
         <hr>
       </div>
-      <button class="mt-5" style="background-color: rgb(238, 131, 43); margin-top: 17px;" class="btn btn-info btn-block"
+      <button class="mt-5" style="background-color: rgb(238, 131, 43); margin-top: 17px;" title="Editar perfil"class="btn btn-info btn-block"
         (click)="editProfile=!editProfile">EDITAR PERFIL</button>
       <!--/.Back Side-->
     </mdb-flipping-card>
@@ -59,7 +59,7 @@
    
 
 
-    <button color="primary" (click)="editImg=!editImg"
+    <button color="primary" (click)="editImg=!editImg"title="Cambiar imagen de perfil"
       style=" background-color: rgb(77, 65, 61); margin-bottom: 21px; width: 50px; height: 40px;"
       class="btn btn-info btn-block" type="submit"><i class="material-icons">camera_enhance</i></button>
     <input formControlName="img" (change)="addImg($event)" type="file" class="form-control-file" *ngIf="editImg">
@@ -75,7 +75,7 @@
     </div>
 
 
-    <button class="mt-5" (click)="editUser()" class="btn btn-info btn-block" type="submit">GUARDAR CAMBIOS</button>
+    <button class="mt-5" (click)="editUser()" title="Guardar cambios"class="btn btn-info btn-block" type="submit">GUARDAR CAMBIOS</button>
 
   </form>
 </div>

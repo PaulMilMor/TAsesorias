@@ -14,17 +14,17 @@
 
       <li class="nav-item">
         <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='alumno'"
-          [routerLink]="['/zoom']" routerLinkActive="router-link-active" style="font-size: 17px;">Comunicacion</a>
+          [routerLink]="['/zoom']" routerLinkActive="router-link-active" title="Comunicación" style="font-size: 17px;">Comunicación</a>
       </li>
 
       <li class="nav-item">
         <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='instructor'"
-          [routerLink]="['/agregar-clase']" routerLinkActive="router-link-active" style="font-size: 17px;">Asesorias</a>
+          [routerLink]="['/agregar-clase']" routerLinkActive="router-link-active"title="Crar asesorias" style="font-size: 17px;">Asesorias</a>
       </li>
 
       <li class="nav-item">
         <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='administrador'"
-          [routerLink]="['/certificaciones']" routerLinkActive="router-link-active" style="font-size: 17px; "><span
+          [routerLink]="['/certificaciones']" routerLinkActive="router-link-active" title="Certificaciones" style="font-size: 17px; "><span
             [matBadge]="certificaciones.length" matBadgeOverlap="false" matBadgeColor="accent">Certificaciones</span>
         </a>
       </li>
@@ -36,11 +36,11 @@
       </li-->
       <li class="nav-item">
         <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='administrador'"
-          [routerLink]="['/reportes']" routerLinkActive="router-link-active" style="font-size: 17px;">Reportes</a>
+          [routerLink]="['/reportes']" routerLinkActive="router-link-active" title="Reportes" style="font-size: 17px;">Reportes</a>
       </li>
       <li class="nav-item">
         <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='administrador'"
-          [routerLink]="['/suspendidos']" routerLinkActive="router-link-active" style="font-size: 17px;">Instuctores
+          [routerLink]="['/suspendidos']" routerLinkActive="router-link-active" title="Instructores suspendidos"style="font-size: 17px;">Instuctores
           Suspendidos</a>
       </li>
     </ul>
@@ -48,14 +48,14 @@
       <li class="nav-item">
         <a [routerLinkActive]="['active']" class="nav-link"
           *ngIf="usuario.tipoUsuario=='alumno' || usuario.tipoUsuario=='administrador'" [routerLink]="['/buscador']"
-          routerLinkActive="router-link-active" style="font-size: 14px; padding-top: 61%;"><i
+          routerLinkActive="router-link-active" title="Buscar" style="font-size: 14px; padding-top: 61%;"><i
             class="material-icons">search</i></a>
       </li>
       <li class="nav-item avatar dropdown" dropdown>
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
 
           <img [src]="usuario.img" alt="unplash" class="img-fluid rounded-circle"
-            style="width: 41px; height: 41px;"></a>
+            style="width: 41px; height: 41px;" title="Perfil"></a>
 
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
           <span *ngIf="usuario.tipoUsuario=='alumno'">

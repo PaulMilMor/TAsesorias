@@ -36,7 +36,7 @@
       <mat-error>Introduce al menos 1 etiqueta.</mat-error>
     </mat-form-field>
     <br>
-  <button mat-stroked-button (click)="openImages()">Añadir Evidencia</button>
+  <button mat-stroked-button (click)="openImages() "title="Añadir evidencia a la asesoria">Añadir Evidencia</button>
     <mat-form-field appearance="fill" style="margin-top: 9px;">
       <mat-label>Tarifa</mat-label>
       <input matInput formControlName="tarifa" type="number" min="0" max="2000" oninput="validity.valid||(value='0');">
@@ -44,7 +44,7 @@
     </mat-form-field>
     <h4 style="margin-left: 41px; font-size: 13px;">*Tarifa máxima de $2000.00 MXN por hora</h4>
     <br>
-    <button mat-raised-button (click)="setCourse()" [disabled]="formCursos.invalid" class="validated"
+    <button mat-raised-button (click)="setCourse()" title="Publicar asesoria" [disabled]="formCursos.invalid" class="validated"
       style="font-size: 17px; margin-top: 1px; margin-left: 127px; width: 150px; ">PUBLICAR</button>
   </form>
 

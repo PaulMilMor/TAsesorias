@@ -22,16 +22,16 @@
                                 </div>
                                 <ul class="list-group list-group-flush align-items-end">
                                     <div class="col">
-                                        <button class="btn btn-danger"style="width:150px; height:85px; margin-top: 25px; margin-botton: 5px"><a style="text-decoration: none; color: white;"
-                                            [href]="c.docref " target=”_blank”>Ver PDF</a></button>
+                                        <button class="btn btn-danger" title="Ver PDF" style="width:150px; height:85px; margin-top: 25px; margin-botton: 5px"><a style="text-decoration: none; color: white;"
+                                            [href]="c.docref" target=”_blank”>Ver PDF</a></button>
                                     </div>
                                 </ul>
 
                                 <div class="col"> 
                                         <ul class="list-group list-group-flush align-items-start">
-                                            <button class="btn btn-primary "style="width:150px; margin-top: 20px; " (click)="updateStatus(c.id,'aprobado')">Verificar</button>
+                                            <button class="btn btn-primary "title="Verificar certificado" style="width:150px; margin-top: 20px; " (click)="updateStatus(c.id,'aprobado')">Verificar</button>
                                             <br>
-                                            <button class="btn btn-danger"style="width:150px; padding-botton: 20px;" (click)="updateStatus(c.id,'denegado')">Denegar</button>    
+                                            <button class="btn btn-danger" title="Denegar certificado" style="width:150px; padding-botton: 20px;" (click)="updateStatus(c.id,'denegado')">Denegar</button>    
                                         </ul>
                                 </div>
 
