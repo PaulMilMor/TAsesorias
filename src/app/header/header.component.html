@@ -1,55 +1,67 @@
 <nav class="navbar navbar-expand-lg navbar-dark  navbar-custom">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap" rel="stylesheet">
+  <ul style="list-style: none; display: flexbox; margin-top: 17px;">
+<li>
+  <a class="navbar-brand" href="#" style="margin-left: -7px; font-size: 34px; margin-bottom: -24px;">TusAsesorias</a>
+  </li>
+  <li>
+    <a style= "color: white; font-size: 9px; margin-left: 171px; display: block;" *ngIf="usuario.tipoUsuario=='alumno'">ALUMNO</a>
+</li>
+<li>
+  <a style= "color: white; font-size: 9px; margin-left: 154px; display: block;" *ngIf="usuario.tipoUsuario=='instructor'">INSTRUCTOR</a>
+</li>
+  <li>
+    <a style= "color: white; font-size: 9px; margin-left: 164px; display: block;" *ngIf="usuario.tipoUsuario=='administrador'">ADMINISTRADOR</a>
+</li>
+</ul>
 
-
-  <a class="navbar-brand" href="#" style="margin-left: 7px;" style="margin-top: 21px;"
-    style="font-size: 30px;">TusAsesorias</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap" rel="stylesheet">
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+  <ul class="navbar-nav mr-auto" style="margin-left: 24px">
 
-      <li class="nav-item">
-        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='alumno'"
-          [routerLink]="['/zoom']" routerLinkActive="router-link-active" style="font-size: 17px;">Comunicacion</a>
-      </li>
-
-      <li class="nav-item">
-        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='instructor'"
-          [routerLink]="['/agregar-clase']" routerLinkActive="router-link-active" style="font-size: 17px;">Asesorias</a>
-      </li>
-   
-      <li class="nav-item">
-        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='administrador'"
-          [routerLink]="['/certificaciones']" routerLinkActive="router-link-active" style="font-size: 17px; "><span
-            [matBadge]="certificaciones.length" matBadgeOverlap="false" matBadgeColor="accent">Certificaciones</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='administrador'"
-          [routerLink]="['/reportes']" routerLinkActive="router-link-active" style="font-size: 17px;">Reportes</a>
-      </li>
-      <li class="nav-item">
-        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='administrador'"
-          [routerLink]="['/suspendidos']" routerLinkActive="router-link-active" style="font-size: 17px;">Instuctores Suspendidos</a>
-      </li>
-    </ul>
+    <li class="nav-item">
+      <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='alumno'"
+        [routerLink]="['/misasesorias']" routerLinkActive="router-link-active" style="font-size: 17px; margin-left: 17px;">Mis Asesorías</a>
+    </li>
+  
+    <li class="nav-item">
+      <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='instructor'"
+        [routerLink]="['/agregar-clase']" routerLinkActive="router-link-active" style="font-size: 17px;">Asesorías</a>
+    </li>
+  
+    <li class="nav-item">
+      <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='administrador'"
+        [routerLink]="['/certificaciones']" routerLinkActive="router-link-active" style="font-size: 17px; "><span
+          [matBadge]="certificaciones.length" matBadgeOverlap="false" matBadgeColor="accent">Certificaciones</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='administrador'"
+        [routerLink]="['/reportes']" routerLinkActive="router-link-active" style="font-size: 17px;">Reportes</a>
+    </li>
+    <li class="nav-item">
+      <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='administrador'"
+        [routerLink]="['/suspendidos']" routerLinkActive="router-link-active" style="font-size: 17px;">Instructores Suspendidos</a>
+    </li>
+  </ul>
+  
     <ul class="navbar-nav ml-auto nav-flex-icons">
       <li class="nav-item">
         <a [routerLinkActive]="['active']" class="nav-link"
           *ngIf="usuario.tipoUsuario=='alumno' || usuario.tipoUsuario=='administrador'" [routerLink]="['/buscador']"
-          routerLinkActive="router-link-active" style="font-size: 14px; padding-top: 61%;"><i
+          routerLinkActive="router-link-active" style="font-size: 14px; padding-top: 61%; color: black;"><i
             class="material-icons">search</i></a>
       </li>
       <li class="nav-item avatar dropdown" dropdown>
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-
+  
           <img [src]="usuario.img" alt="unplash" class="img-fluid rounded-circle"
-            style="width: 41px; height: 41px;"></a>
-
+            style="width: 41px; height: 41px; color: black;"></a>
+          
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
           <span *ngIf="usuario.tipoUsuario=='alumno'">
           <a class="dropdown-item waves-light" mdbWavesEffect [routerLinkActive]="['active']" [routerLink]="['/editar']"
@@ -61,12 +73,11 @@
             </span>
           <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/horario']"
             *ngIf="usuario.tipoUsuario=='instructor'"><i class="material-icons">event</i>Horario</a>
-            <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/misasesorias']"
-            *ngIf="usuario.tipoUsuario=='alumno'"><i class="material-icons">event</i>Mis asesorias</a>
           <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/certificacionesinstructor']"
             *ngIf="usuario.tipoUsuario=='instructor'"><i class="material-icons">star</i>Certificaciones</a>
           <a class="dropdown-item waves-light" mdbWavesEffect (click)="logOut()"><i
               class="material-icons">exit_to_app</i>Cerrar Sesión</a>
+            
         </div>
       </li>
     </ul>
