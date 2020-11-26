@@ -62,6 +62,7 @@ import { AdminreportComponent, dialogBan } from './adminreport/adminreport.compo
 import { BanlistComponent } from './banlist/banlist.component';
 import { MisasesoriasComponent } from './misasesorias/misasesorias.component';
 import {MatDividerModule} from '@angular/material/divider';
+import { MisasesoriasIComponent } from './misasesorias-i/misasesorias-i.component';
 //import { dialogNewcertificacion,CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 
 @NgModule({
@@ -96,7 +97,8 @@ import {MatDividerModule} from '@angular/material/divider';
     BanlistComponent,
     MisasesoriasComponent, 
     addImages,
-    material
+    material,
+    MisasesoriasIComponent
   ],
   imports: [
     BrowserModule,

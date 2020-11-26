@@ -15,10 +15,25 @@ export class MisasesoriasComponent implements OnInit {
   misAsesorias: Array<Asesoria> = new Array()
   fechaActual: Date = new Date()
   isVisible_A:boolean=false
+  usuario:Usuario
   constructor(private db: AngularFirestore, private auth: AngularFireAuth,public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.getUser()
     this.getAsesorias()
+  }
+  getUser() {
+    this.db.collection('usuarios').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        let u = item.data() as Usuario
+        if (u.uid == this.auth.auth.currentUser.uid) {
+          this.usuario = u;
+     
+   
+        } 
+      })
+     
+    })
   }
   getAsesorias() {
     this.db.collection('asesorias').get().subscribe(res => {

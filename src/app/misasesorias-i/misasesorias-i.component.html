@@ -1,0 +1,33 @@
+<div >
+    <div class="main-div container">
+  
+      <div class="lista mt-3">
+        <table class="table dark" matSort (matSortChange)="sortData($event)">
+          <thead>
+            <tr>
+              <th scope="col"  mat-sort-header="categoria">Categoria</th>
+              <th scope="col" mat-sort-header="alumno">Alumno</th>
+              <th scope="col" >Fecha</th>
+             
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let item of sortedData">
+                
+         
+                    <td>{{item.categoria}}</td>
+                    <td>{{item.alumno}}</td>
+                    <td>{{item.fecha.fecha | date:"dd/MM/yy h:mm a"}}</td>
+                    <td *ngIf="item.fecha.fecha.getUTCDate()==fechaActual.getUTCDate()"><button mat-flat-button color="accent" [routerLink]="['/zoom']">Hay clases</button></td>
+           
+            </tr>
+          
+            
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+  </div>

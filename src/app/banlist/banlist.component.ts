@@ -11,6 +11,7 @@ import {Sort} from '@angular/material/sort';
 export class BanlistComponent implements OnInit {
 baneados:Array<any>=new Array()
 sortedData: any[];
+
   constructor(private db:AngularFirestore) { 
     this.sortedData = this.baneados.slice();
   }
