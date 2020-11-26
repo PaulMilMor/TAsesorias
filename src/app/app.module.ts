@@ -45,14 +45,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatChipsModule } from '@angular/material/chips';
 import { CalificarComponent } from './calificar/calificar.component';
 import { MatIconModule } from '@angular/material/icon';
-import { ProfileComponent, reportProfile,editProfile } from './profile/profile.component';
+import { ProfileComponent, reportProfile,editProfile, addImages, material } from './profile/profile.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBadgeModule } from '@angular/material/badge';
-import { MatPaginator } from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+
 import { CertificacionesComponent, feedback } from './certificaciones/certificaciones.component';
 //import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 import { CertificacionesinstructorComponent, dialogNewcertificacion, feedbackInstructor } from './certificacionesinstructor/certificacionesinstructor.component';
+import { HomeComponent } from './home/home.component';
+import { MatPaginator } from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+//import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 import { AdminreportComponent, dialogBan } from './adminreport/adminreport.component';
 import { BanlistComponent } from './banlist/banlist.component';
 import { MisasesoriasComponent } from './misasesorias/misasesorias.component';
@@ -85,10 +89,13 @@ import {MatDividerModule} from '@angular/material/divider';
     CertificacionesComponent,
     feedback,
     feedbackInstructor,
+    HomeComponent,
     AdminreportComponent,
     dialogBan,
     BanlistComponent,
-    MisasesoriasComponent
+    MisasesoriasComponent, 
+    addImages,
+    material
   ],
   imports: [
     BrowserModule,
@@ -124,6 +131,7 @@ import {MatDividerModule} from '@angular/material/divider';
     MatIconModule,
     FlexLayoutModule,
     MatBadgeModule,
+    CarouselModule.forRoot(),
     MatDividerModule
 
   ],
@@ -133,7 +141,9 @@ import {MatDividerModule} from '@angular/material/divider';
     reportProfile,
     editProfile,
     dialogNewcertificacion, feedback,
-    feedbackInstructor, dialogBan
+    feedbackInstructor, dialogBan,
+    addImages,
+    material
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

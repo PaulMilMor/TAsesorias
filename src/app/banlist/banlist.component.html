@@ -18,7 +18,7 @@
             <tr *ngFor="let item of baneados">
   
               <td>{{item.maestro.nombre}}</td>
-              <td>{{item.fechaInicio| date:"MMM dd "}}</td>
+              <td>{{item.fechaInicio| date:"dd/MM/yy "}}</td>
               <td>{{item.tipoSuspension}}</td>
               <td>{{item.dias}} </td>
               <td><button mat-flat-button color="warn" style="background-color: red;" (click)="unBan(item.id)">Anular Suspension</button></td>

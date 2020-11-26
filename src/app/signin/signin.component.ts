@@ -57,6 +57,7 @@ export class SigninComponent implements OnInit {
       this.auth.auth.createUserWithEmailAndPassword(this.formUsuario.value.correo, this.formUsuario.value.contraseña).then((data) => {
         this.formUsuario.value.uid = data.user.uid
         this.formUsuario.value.nombre = this.formUsuario.value.nombre + " " + this.formUsuario.value.apellido
+        this.formUsuario.value.fecha = new Date()
         this.db.collection('usuarios').doc(data.user.uid).set(this.formUsuario.value).then((finish) => {
         }).catch(() => {
           this.msg.msgError('Error', 'Algo fallo :(')

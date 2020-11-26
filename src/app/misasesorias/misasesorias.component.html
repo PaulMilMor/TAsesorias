@@ -1,7 +1,7 @@
 <div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center"
-    fxLayoutGap="10px" style="margin-top: 20px;" *ngFor="let item of this.misAsesorias">
-    <div fxFlex="30%" fxFlex.sm fxFlex.xs>
-        <div class="profile-img" style="margin-left: auto; margin-right:auto;">
+    fxLayoutGap="10px" style="margin-top: 50px; border:#bb2205 solid 1px;border-radius: 10px" *ngFor="let item of this.misAsesorias">
+    <div fxFlex="33%" fxFlex.sm fxFlex.xs>
+        <div class="profile-img" style="margin-left: auto; margin-right:auto; margin-top: 5px;">
             <img [src]="item.curso.user.img">
             <br>
 
@@ -9,7 +9,7 @@
         <h2><strong>{{item.curso.user.nombre}}</strong></h2>
         <h3>{{item.curso.categoria.nombre}}</h3>
     </div>
-    <div fxFlex>
+    <div  fxFlex="50%">
 
         <table class="table" style="width: 150px;">
             <thead>
@@ -80,14 +80,14 @@
         </table>
 
     </div>
-    <div fxFlex>
-        <button mat-flat-button color="primary" style="margin-top: 10px;">
+    <div fxFlex="17%">
+        <button mat-flat-button color="primary" style="margin-top: 10px; background-color: #bb2205;"  (click)="openImages(item.curso.evidencia)"> 
             Ver Imagenes
         </button> <br>
-        <button mat-flat-button color="primary" style="margin-top: 10px;">
+        <button mat-flat-button color="primary" style="margin-top: 10px; background-color: #bb2205;" (click)="openMaterial(item)" *ngIf="item.curso.gdrive!=undefined || item.curso.github!=undefined ||item.curso.odrive!=undefined">
             Ver Material
         </button><br>
-        <button mat-flat-button color="primary" style="margin-top: 10px;"  [routerLink]="['/zoom']" *ngIf="isVisible_A">
+        <button mat-flat-button color="primary" style="margin-top: 10px; background-color: #bb2205;"  [routerLink]="['/zoom']" *ngIf="isVisible_A">
             Entrar a llamada
         </button>
     </div>

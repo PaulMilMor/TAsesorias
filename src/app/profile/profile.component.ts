@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Certificacion } from 'src/models/certificacion';
 import { AngularFireStorage } from '@angular/fire/storage';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit {
   usuarios: Usuario
   isValid: boolean = false
   isCollapsed: boolean = false;
+  confirmar: boolean = false;
   constructor(private ar: ActivatedRoute, public dialog: MatDialog, private msg: MsgService, private db: AngularFirestore, private auth: AngularFireAuth, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -35,15 +37,38 @@ export class ProfileComponent implements OnInit {
     this.getUsers()
     this.getCourses()
     this.getCertificados();
+    //this.getEstudiantes();
     console.log(this.cursos);
     //this.getUsers()
   }
+
+  //Con este método se obtiene el número de estudiantes que ha tenido el instructor en el último mes
+  getEstudiantes() {
+    console.log("EEEEEEE");
+    this.usuario.totalEstudiantes = 0;
+    let today = new Date();
+    today.setDate(today.getUTCDate() - 30);
+    console.log("AAAAAAA")
+    console.log(this.usuario.estudiantes);
+    for (let estudiante in this.usuario.estudiantes) {
+      let date = new Date();
+      date.setTime(parseInt(estudiante));
+
+      if (date.getTime() > today.getTime()) {
+        this.usuario.totalEstudiantes = this.usuario.totalEstudiantes + parseInt(this.usuario.estudiantes[estudiante]);
+      }
+    }
+  }
+  // seccion de llamar informacion
   getUser() {
     this.db.collection('usuarios').doc(this.ar.snapshot.params.idMaestro).get().forEach((res) => {
       this.usuario = res.data() as Usuario
+      console.log("USUARIO");
       console.log(this.usuario)
+      this.getEstudiantes();
     })
   }
+
   getUsers() {
     this.db.collection('usuarios').get().subscribe((res) => {
       res.docs.forEach((item) => {
@@ -59,24 +84,28 @@ export class ProfileComponent implements OnInit {
     })
   }
   openDialog(): void {
-    /*const dialogRef = this.dialog.open(reportProfile, {
-      width: '500px',
-      height: '250px',
-      //Para en enviar informacion a un dialogo se usa la variable data (teniendo en cuenta que existe una llamada asi tambien en el dialogo)
-      data: {
-        maestro: this.usuario,
-        alumno: this.auth.auth.currentUser.uid
-      }
-    });*/
-    const dialogRef2 = this.dialog.open(editProfile, {
-      width: '500px',
-      height: '500px',
-      //Para en enviar informacion a un dialogo se usa la variable data (teniendo en cuenta que existe una llamada asi tambien en el dialogo)
-      /*data: {
-        maestro: this.ar.snapshot.params.idMaestro,
-        alumno: this.auth.auth.currentUser.uid
-      }*/
-    });
+    if (this.usuario.tipoUsuario == this.alumno) {
+      const dialogRef = this.dialog.open(reportProfile, {
+        width: '500px',
+        height: '250px',
+        //Para en enviar informacion a un dialogo se usa la variable data (teniendo en cuenta que existe una llamada asi tambien en el dialogo)
+        data: {
+          maestro: this.usuario,
+          alumno: this.auth.auth.currentUser.uid
+        }
+      });
+    }
+    if (this.usuario.tipoUsuario == this.instructor) {
+      const dialogRef2 = this.dialog.open(editProfile, {
+        width: '500px',
+        height: '500px',
+        //Para en enviar informacion a un dialogo se usa la variable data (teniendo en cuenta que existe una llamada asi tambien en el dialogo)
+        /*data: {
+          maestro: this.ar.snapshot.params.idMaestro,
+          alumno: this.auth.auth.currentUser.uid
+        }*/
+      });
+    }
 
   }
 
@@ -117,6 +146,61 @@ export class ProfileComponent implements OnInit {
       })
     })
   }
+  // secccion de dialogos
+
+  openReport(): void {
+    const dialogRef = this.dialog.open(reportProfile, {
+      width: '500px',
+      height: '250px',
+      //Para en enviar informacion a un dialogo se usa la variable data (teniendo en cuenta que existe una llamada asi tambien en el dialogo)
+      data: {
+        maestro: this.usuario,
+        alumno: this.auth.auth.currentUser.uid
+      }
+    });
+
+
+  }
+  openImages(imgs, id) {
+    console.log(imgs);
+    if (imgs == undefined) {
+      imgs = new Array()
+
+    }
+
+    const dialogRef3 = this.dialog.open(addImages, {
+      width: '500px',
+      height: '500px',
+
+      data: {
+        imagenes: imgs,
+        tipoUsuario: this.usuario.tipoUsuario
+      }
+    });
+    dialogRef3.afterClosed().subscribe(res => {
+      this.db.collection('cursos').doc(id).update({
+        evidencia: res
+      })
+    })
+  }
+
+  openMaterial(id, gd, od, git) {
+    const dialogRef4 = this.dialog.open(material, {
+      width: '440px',
+      height: '175px',
+      data: {
+        id: id,
+        github: git,
+        odrive: od,
+        gdrive: gd,
+        tipoUsuario: this.usuario.tipoUsuario
+      }
+    }
+
+    )
+  }
+
+  //Sesion de operaciones
   validateCurso(c: Curso) {
     for (let certificado of this.certificados) {
       if (c.categoria.nombre == certificado.categoria.nombre) {
@@ -125,7 +209,35 @@ export class ProfileComponent implements OnInit {
     }
     return false;
   }
+  eliminarAsesoria(id) {
+    //this.msg.msgAlerta('¿Seguro que quieres eliminar esta asesoria?','Se eliminara todo lo relacionado a esta asesoria',this.confirmar);
 
+    Swal.fire({
+      title: '¿Seguro que quieres eliminar esta asesoria?',
+      text: 'Se eliminara todo lo relacionado a esta asesoria',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        Swal.fire(
+          'Asesoria eliminada',
+          'success'
+        )
+        this.db.collection('cursos').doc(id).delete().finally(() => {
+
+          window.location.reload()
+        })
+      }
+    })
+
+
+
+
+  }
 }
 @Component({
   selector: 'reportProfile',
@@ -150,9 +262,6 @@ export class reportProfile implements OnInit {
       fecha: ['']
 
     })
-
-
-
 
 
   }
@@ -251,6 +360,7 @@ export class editProfile implements OnInit {
   editProfile: boolean = false
   editBiog: boolean = true
   editcelular: boolean = true
+  mostrar: boolean = true
   isValid: boolean = false
   normal: 'normal'
   tipoCorreo: string
@@ -265,7 +375,8 @@ export class editProfile implements OnInit {
       contraseña: ['', Validators.minLength(8)],
       img: [''],
       bio: [''],
-      cel: ['']
+      cel: [''],
+      mostrarinfo: ['']
     })
 
   }
@@ -358,6 +469,18 @@ export class editProfile implements OnInit {
     })
 
   }
+  editInfo() {
+    var user = this.auth.auth.currentUser.uid
+    this.db.collection('usuarios').doc(user).update({
+      mostrarinfo: this.formUsuario.value.mostrarinfo
+    }
+    ).then(() => {
+      this.msg.msgSuccess('Exito', 'Se actualizo su preferencia')
+    }).catch((err) => {
+      console.log(err);
+
+    })
+  }
   //Se encarga de ver que cambio se van a realizar y llama a los metodos correspondientes
   editUser() {
     if (this.editImg) {
@@ -376,6 +499,9 @@ export class editProfile implements OnInit {
     }
     if (this.editcelular) {
       this.editCel()
+    }
+    if (this.mostrar) {
+      this.editInfo()
     }
   }
 
@@ -419,4 +545,154 @@ export class editProfile implements OnInit {
     })
   }
 
+}
+@Component({
+  selector: 'addImages',
+  templateUrl: 'addImages.html',
+
+})
+export class addImages implements OnInit {
+
+
+  cantidad: number = 1
+  tabs
+  value
+  constructor(
+    public dialogRef: MatDialogRef<addImages>,
+    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private storage: AngularFireStorage, private msg: MsgService, private router: Router, private ar: ActivatedRoute, private auth: AngularFireAuth) { }
+  ngOnInit(): void {
+
+    console.log(this.data.imagenes);
+
+    this.getTabs()
+
+
+
+  }
+  getTabs() {
+    if (this.data.imagenes == undefined || this.data.imagenes.length < 1) {
+      this.tabs = ['Imagen 1']
+    } else {
+      var n = 1;
+      this.tabs = new Array()
+      this.data.imagenes.forEach(element => {
+        this.tabs.push('Imagen ' + n)
+        n++
+      });
+    }
+  }
+  addTabs() {
+    var n = this.tabs.length + 1
+    this.tabs.push('Imagen ' + n)
+    console.log("new tab");
+
+  }
+  addImg(event, i) {
+    if (event.target.files.length > 0) {
+      let name = new Date().getTime().toString()
+      let file = event.target.files[0]
+      let type = file.name.toString().substring(file.name.toString().lastIndexOf('.'))
+      let imgpath = 'evidencia/' + name + type;
+      const ref = this.storage.ref(imgpath);
+      const task = ref.put(file)
+      task.then((obj) => {
+        ref.getDownloadURL().subscribe((url) => {
+          this.data.imagenes[i] = url
+          console.log(this.data.imagenes[0]);
+
+        })
+      })
+    }
+  }
+}
+@Component({
+  selector: 'material',
+  templateUrl: 'material.html',
+
+})
+export class material implements OnInit {
+  vista = 'opcion'
+  txtGit = ' '
+  formEnlaceGit: FormGroup
+  formEnlaceOD: FormGroup
+  formEnlaceGD: FormGroup
+  isVisibleGit: boolean = true;
+  isVisibleGD: boolean = true;
+  isVisibleOD: boolean = true;
+  constructor(
+    public dialogRef: MatDialogRef<material>,
+    @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private storage: AngularFireStorage, private msg: MsgService, private fb: FormBuilder) { }
+  ngOnInit(): void {
+    this.formEnlaceGit = this.fb.group({
+      enlace: ['']
+    })
+    this.formEnlaceOD = this.fb.group({
+      enlace: ['']
+    })
+    this.formEnlaceGD = this.fb.group({
+      enlace: ['']
+    })
+
+    if (this.data.github != undefined) {
+      console.log("here");
+
+      this.isVisibleGit = false;
+      this.formEnlaceGit.get('enlace').setValue(this.data.github)
+    }
+    if (this.data.odrive != undefined) {
+      this.isVisibleOD = false
+
+      this.formEnlaceOD.get('enlace').setValue(this.data.odrive)
+    }
+    if (this.data.gdrive != undefined) {
+      this.isVisibleGD = false
+      this.formEnlaceGD.get('enlace').setValue(this.data.gdrive)
+    }
+
+  }
+  guardarGit() {
+    console.log(this.data);
+
+    if (this.formEnlaceGit.value.enlace.startsWith('https://github.com/')) {
+      this.db.collection('cursos').doc(this.data.id).update({
+        github: this.formEnlaceGit.value.enlace
+      }).finally(() => {
+        this.msg.msgSuccess('Exito', 'Material actualizado correctamente')
+      })
+
+    } else {
+      this.msg.msgWarning('Error', 'Enlace no valido')
+    }
+
+  }
+  guardarOD() {
+
+    if (this.formEnlaceOD.value.enlace.startsWith('https://onedrive.live.com/')) {
+      this.db.collection('cursos').doc(this.data.id).update({
+        odrive: this.formEnlaceGit.value.enlace
+      }).finally(() => {
+        this.msg.msgSuccess('Exito', 'Material actualizado correctamente')
+      })
+
+
+    } else {
+      this.msg.msgWarning('Error', 'Enlace no valido')
+    }
+
+  }
+  guardarGD() {
+
+    if (this.formEnlaceGD.value.enlace.startsWith('https://drive.google.com/')) {
+      this.db.collection('cursos').doc(this.data.id).update({
+        gdrive: this.formEnlaceGit.value.enlace
+      }).finally(() => {
+        this.msg.msgSuccess('Exito', 'Material actualizado correctamente')
+      })
+
+
+    } else {
+      this.msg.msgWarning('Error', 'Enlace no valido')
+    }
+
+  }
 }

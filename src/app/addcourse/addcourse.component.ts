@@ -8,8 +8,10 @@ import { Usuario } from 'src/models/usuario';
 import { ActivatedRoute } from '@angular/router';
 import { Categoria } from 'src/models/categoria';
 import { Nivel } from 'src/models/nivel';
-import { COMMA} from '@angular/cdk/keycodes';
+import { COMMA } from '@angular/cdk/keycodes';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
+import { addImages } from '../profile/profile.component';
 @Component({
   selector: 'app-addcourse',
   templateUrl: './addcourse.component.html',
@@ -17,6 +19,7 @@ import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 })
 export class AddcourseComponent implements OnInit {
   categoria: Categoria
+  imagenes:Array<string>=new Array()
   categorias: Array<Categoria> = new Array()
   categoriasUsadas: Array<Categoria> = new Array()
   nivel: Nivel
@@ -27,14 +30,15 @@ export class AddcourseComponent implements OnInit {
   etiquetas: String[] = [];
   disabled: boolean;
   @ViewChild('chipList') chipList: MatChipList;
-  constructor(private db: AngularFirestore, private fb: FormBuilder, private storage: AngularFireStorage, private msg: MsgService, private auth: AngularFireAuth, private activeRoute: ActivatedRoute) { }
-  
+  constructor( public dialog: MatDialog,private db: AngularFirestore, private fb: FormBuilder, private storage: AngularFireStorage, private msg: MsgService, private auth: AngularFireAuth, private activeRoute: ActivatedRoute) { }
+
   ngOnInit(): void {
     this.formCursos = this.fb.group({
       tarifa: ['', Validators.required],
       categoria: ['', Validators.required],
       nivel: ['', Validators.required],
-      etiquetas: this.fb.array(this.etiquetas,this.validateArrayNotEmpty)
+      etiquetas: this.fb.array(this.etiquetas, this.validateArrayNotEmpty),
+      evidencia:['']
     })
 
     this.formCursos.get('etiquetas').statusChanges.subscribe(
@@ -45,19 +49,7 @@ export class AddcourseComponent implements OnInit {
     this.getCategories()
     this.getNiveles()
   }
-  //Este método es para obtener el nombre del formcontrol, necesario para validar
-  initName(name: string): FormControl {
-    return this.fb.control(name);
-  }
-  //método para validar que matchiplist no esté vacio
-  validateArrayNotEmpty(c: FormControl) {
-    if(c.value && c.value.length === 0) {
-      return {
-        validateArrayNotEmpty: { valid: false }
-      };
-    }
-    return null;
-  }
+
 
   //Obtiene el usuario 
   getUser() {
@@ -71,7 +63,7 @@ export class AddcourseComponent implements OnInit {
     })
   }
 
-//Obtiene el total de categorias suprimiendo las que ya tiene curso
+  //Obtiene el total de categorias suprimiendo las que ya tiene curso
   getCategories() {
     this.db.collection('categorias').get().subscribe((res) => {
       res.docs.forEach((item) => {
@@ -88,7 +80,7 @@ export class AddcourseComponent implements OnInit {
     })
   }
 
-//Obtiene los niveles academicos 
+  //Obtiene los niveles academicos 
   getNiveles() {
     this.db.collection('niveles').get().subscribe((res) => {
       res.docs.forEach((item) => {
@@ -96,24 +88,11 @@ export class AddcourseComponent implements OnInit {
         n.id = item.id;
         this.niveles.push(n);
       })
-      this.niveles.sort((a,b)=>(a.orden >b.orden)? 1:-1)
+      this.niveles.sort((a, b) => (a.orden > b.orden) ? 1 : -1)
 
     })
   }
-
-  //Agrega el curso en la base de datos
- setCourse() {
-    this.formCursos.value.user = this.usuario;
-    if (this.formCursos.value.tarifa <= 2000) {
-      this.db.collection('cursos').add(this.formCursos.value).then(() => {
-        this.msg.msgSuccess('Guardado', 'Curso guardado correctamente')
-      })
-    } else {
-      this.msg.msgError('Error', 'la tarifa maxima es 2000')
-
-    }
-  }
-//Obtiene las categorias en las que el Instructor tiene curso
+  //Obtiene las categorias en las que el Instructor tiene curso
   getMyCategories() {
     this.db.collection('cursos').get().subscribe((res) => {
       res.docs.forEach((item) => {
@@ -126,43 +105,87 @@ export class AddcourseComponent implements OnInit {
     })
   }
 
+  //Agrega el curso en la base de datos
+  setCourse() {
+    this.formCursos.value.user = this.usuario;
+    this.formCursos.value.evidencia = this.imagenes;
+    if (this.formCursos.value.tarifa <= 2000) {
+      this.db.collection('cursos').add(this.formCursos.value).then(() => {
+        this.msg.msgSuccess('Guardado', 'Curso guardado correctamente')
+      })
+    } else {
+      this.msg.msgError('Error', 'la tarifa maxima es 2000')
+
+    }
+  }
+
   //añade etiquetas a la lista
   addTag(event: MatChipInputEvent, form: FormGroup): void {
     const input = event.input;
     const value = event.value;
-     
-    //Añade la etiqueta
-      
-      if((value||'').trim()) {
-        this.etiquetas.push(value.trim());
-        const control = <FormArray>form.get('etiquetas');
-        control.push(this.initName(value.trim()));
-      }
-  
-    //Reinicia el input
-      if(input){
-        input.value='';  
-      }
 
-      if(this.etiquetas.length>=5){
-        this.disabled = true;
-        this.msg.msgSuccess('Límite de etiquetas', 'Ya has insertado cinco etiquetas, si quieres insertar otra debes remover alguna antes.')
-      }
-    
+    //Añade la etiqueta
+
+    if ((value || '').trim()) {
+      this.etiquetas.push(value.trim());
+      const control = <FormArray>form.get('etiquetas');
+      control.push(this.initName(value.trim()));
+    }
+
+    //Reinicia el input
+    if (input) {
+      input.value = '';
+    }
+
+    if (this.etiquetas.length >= 5) {
+      this.disabled = true;
+      this.msg.msgSuccess('Límite de etiquetas', 'Ya has insertado cinco etiquetas, si quieres insertar otra debes remover alguna antes.')
+    }
+
 
   }
 
   //Remueve etiquetas de la ista
   removeTag(tag: String, form): void {
     const index = this.etiquetas.indexOf(tag);
-    
-    if(index>=0){
-      this.etiquetas.splice(index,1);
+
+    if (index >= 0) {
+      this.etiquetas.splice(index, 1);
       form.get('etiquetas').removeAt(index);
     }
-    if(this.etiquetas.length<5){
-      this.disabled=false;
+    if (this.etiquetas.length < 5) {
+      this.disabled = false;
     }
   }
+  //Este método es para obtener el nombre del formcontrol, necesario para validar
+  initName(name: string): FormControl {
+    return this.fb.control(name);
+  }
+  //método para validar que matchiplist no esté vacio
+  validateArrayNotEmpty(c: FormControl) {
+    if (c.value && c.value.length === 0) {
+      return {
+        validateArrayNotEmpty: { valid: false }
+      };
+    }
+    return null;
+  }
+  //Abrir Dialogis
+  openImages() {
+    const dialogRef3 = this.dialog.open(addImages, {
+      width: '500px',
+      height: '500px',
+       data:{
+         imagenes:this.imagenes,
+         tipoUsuario:'instructor'
+       }   
 
+    });
+     dialogRef3.afterClosed().subscribe(res=>{
+       this.imagenes=res
+       console.log(this.imagenes);
+       
+     })
+      
+  }
 }

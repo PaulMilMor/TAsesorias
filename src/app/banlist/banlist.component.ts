@@ -21,11 +21,11 @@ getBaneados(){
       let fecha=new Date();
       let b=item.data()
       b.id=item.id
-      b.fechaInicio=new Date((item.data().fechaInicio)*1000)
+      b.fechaInicio=new Date((item.data().fechaInicio.seconds)*1000)
   
    if(b.fechaFinal!='Indefinidamente'){
-    b.fechaFinal=new Date((item.data().fechaFinal)*1000)
-    b.fechaFinal.setFullYear(2020)
+    b.fechaFinal=new Date((item.data().fechaFinal.seconds)*1000)
+
     var diff = Math.floor(b.fechaFinal.getTime() - fecha.getTime());
     var day = 1000 * 60 * 60 * 24;
 
