@@ -1,5 +1,5 @@
-import { Component,OnInit } from '@angular/core';
-import { AngularFireAuth} from '@angular/fire/auth'
+import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth'
 import { User } from 'firebase';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Usuario } from 'src/models/usuario';
@@ -11,23 +11,23 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'TusAsesorias';
-  alumno='alumno';
-  instructor='instructor'
+  alumno = 'alumno';
+  instructor = 'instructor'
   administrador = 'administrador'
-  user:User
-  usuario:Usuario
+  user: User
+  usuario: Usuario
   url: string
-constructor(private auth:AngularFireAuth, private db:AngularFirestore, private router:Router){
-  this.auth.user.subscribe((user)=>{
-    this.user=user;
-    this.url = this.router.url;
-    router.events.subscribe((val) => {
+  constructor(private auth: AngularFireAuth, private db: AngularFirestore, private router: Router) {
+    this.auth.user.subscribe((user) => {
+      this.user = user;
       this.url = this.router.url;
-    });
-  })
-}
-ngOnInit(): void {
+      router.events.subscribe((val) => {
+        this.url = this.router.url;
+      });
+    })
+  }
+  ngOnInit(): void {
 
-    }
+  }
 
 }

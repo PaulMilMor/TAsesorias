@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
     this.getCourses();
     this.getTeachers();
     this.getNewTeachers();
+    this.getCursosBaneados();
     console.log("lenght " + this.cursos.length);
   }
   //Función para obtener todos los cursos
@@ -67,7 +68,7 @@ export class HomeComponent implements OnInit {
                 }
               }*/
               this.cursosValorados.sort((a, b) => (a.evaluaciones < b.evaluaciones) ? 1 : -1)
-              
+              this.getCursosBaneados();
           }
           
         })
@@ -84,13 +85,14 @@ export class HomeComponent implements OnInit {
                   this.cursosCertificados.pop();
                 }
               }
+              this.getCursosBaneados();
               
             }
           })
         })
 
         this.cursos.push(c);
-
+        this.getCursosBaneados();
         console.log(c);
       })
     })
@@ -126,6 +128,7 @@ export class HomeComponent implements OnInit {
           if(t.totalEstudiantes>=1){
             this.instructoresSolicitados.push(t);
             this.instructoresSolicitados.sort((a,b)=> (a.totalEstudiantes < b.totalEstudiantes) ? 1 : -1);
+            this.getCursosBaneados();
           }
           this.db.collection('evaluaciones').get().subscribe((res2) => {
             var nEval = new Array<any>();
@@ -145,6 +148,7 @@ export class HomeComponent implements OnInit {
               console.log("faro 6");
               this.instructoresValorados.push(t);
               this.instructoresValorados.sort((a, b) => (a.evaluaciones < b.evaluaciones) ? 1 : -1)
+              this.getCursosBaneados();
             }
           })
           
@@ -173,6 +177,7 @@ export class HomeComponent implements OnInit {
         }
         if(this.instructoresSolicitados.length>10){
           this.instructoresSolicitados.splice(11,(this.instructoresSolicitados.length-10));
+          this.getCursosBaneados();
         }
       })
     })
@@ -205,6 +210,7 @@ export class HomeComponent implements OnInit {
             this.instructoresNuevos.pop();
           }
           this.instructoresNuevos.sort((a, b) => (a.fecha < b.fecha) ? 1 : -1)
+          this.getCursosBaneados();
 
         }
       })
@@ -221,6 +227,40 @@ export class HomeComponent implements OnInit {
           console.log(this.isValid)
         } else {
           console.log("no existe");
+        }
+      })
+    })
+  }
+
+  getCursosBaneados(){
+    this.db.collection('baneados').get().subscribe((res)=>{
+      res.docs.forEach((item)=>{
+        let b = item.data()
+        b.id=item.id
+        for(let curso of this.cursosCertificados){
+          if(b.id==curso.user.uid){
+            this.cursosCertificados.splice(this.cursosCertificados.indexOf(curso),1)
+          }
+        }
+        for(let curso of this.cursosValorados){
+          if(b.id==curso.user.uid){
+            this.cursosValorados.splice(this.cursosValorados.indexOf(curso),1)
+          }
+        }
+        for(let instructor of this.instructoresNuevos){
+          if(b.id==instructor.uid){
+            this.instructoresNuevos.splice(this.instructoresNuevos.indexOf(instructor),1)
+          }
+        }
+        for(let instructor of this.instructoresSolicitados){
+          if(b.id==instructor.uid){
+            this.instructoresSolicitados.splice(this.instructoresSolicitados.indexOf(instructor),1)
+          }
+        }
+        for(let instructor of this.instructoresValorados){
+          if(b.id==instructor.uid){
+            this.instructoresValorados.splice(this.instructoresValorados.indexOf(instructor),1)
+          }
         }
       })
     })

@@ -17,4 +17,5 @@ export class Usuario {
     totalEstudiantes: number;
     cel: string
     mostrarinfo:string
+    count: number
 }

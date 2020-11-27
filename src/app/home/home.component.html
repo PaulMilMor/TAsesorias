@@ -20,10 +20,10 @@
         <div style="margin-left: auto; margin-right: auto; width:75%">
             <h1>Cursos Mejor Valorados.</h1>
         </div>
-        <div class="row" style="width:75%; margin-right:auto; margin-left:auto;">
+        <div fxLayout="row" fxLayoutAlign="space-between" style="width:75%; margin-right:auto; margin-left:auto;">
             <div style="display:block" *ngFor='let curso of cursosValorados'>
                 <div>
-                    <div class="card" style="min-width: 250px; margin-right: 85px;">
+                    <div class="card" style="min-width: 250px;">
                         <img class="card-img-top imgMaestro" [src]="curso.user.img">
                         <mat-card class="card-body">
                             <mat-card-content>
@@ -37,11 +37,12 @@
 
                             </mat-card-content>
                             <mat-card-actions>
-                                <button class="btn btn-primary" title="Ver perfil de este instructor" [routerLink]="['/perfil', curso.user.uid ]">
+                                <button class="btn btn-primary" title="Ver perfil de este instructor"
+                                    [routerLink]="['/perfil', curso.user.uid ]">
                                     Ver Perfil
                                 </button>
                                 <button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
-                                    [routerLink]="['/agendar', curso.id ]"title="Agendar curso">
+                                    [routerLink]="['/agendar', curso.id ]" title="Agendar curso">
                                     Ver Curso
                                 </button>
 
@@ -113,10 +114,10 @@
         <div style="margin-left: auto; margin-right: auto; width:75%">
             <h1>Cursos certificados.</h1>
         </div>
-        <div class="row" style="width:75%; margin-right:auto; margin-left:auto;">
+        <div fxLayout="row" fxLayoutAlign="space-between" style="width:75%; margin-right:auto; margin-left:auto;">
             <div style="display:block" *ngFor='let curso of cursosCertificados'>
                 <div>
-                    <div class="card" style="min-width: 250px; margin-right: 85px;">
+                    <div class="card" style="min-width: 250px; ">
                         <img class="card-img-top imgMaestro" [src]="curso.user.img">
                         <mat-card class="card-body">
                             <mat-card-content>
@@ -206,10 +207,10 @@
         <div style="margin-left: auto; margin-right: auto; width:75%;">
             <h1>Instructores Mejor Valorados.</h1>
         </div>
-        <div class="row" style="width:75%; margin-right:auto; margin-left:auto">
+        <div fxLayout="row" fxLayoutAlign="space-between" style="width:75%; margin-right:auto; margin-left:auto;">
             <div style="display:block" *ngFor='let instructor of instructoresValorados'>
                 <div>
-                    <div class="card" style="min-width: 250px; margin-right: 85px;">
+                    <div class="card" style="min-width: 250px;">
                         <img class="card-img-top imgMaestro" [src]="instructor.img">
                         <mat-card class="card-body">
                             <mat-card-content>
@@ -288,10 +289,10 @@
         <div style="margin-left: auto; margin-right: auto; width:75%;">
             <h1>Instructores Más Solicitados.</h1>
         </div>
-        <div class="row" style="width:75%; margin-right:auto; margin-left:auto">
+        <div fxLayout="row" fxLayoutAlign="space-between" style="width:75%; margin-right:auto; margin-left:auto;">
             <div style="display:block" *ngFor='let instructor of instructoresSolicitados'>
                 <div>
-                    <div class="card" style="min-width: 250px; margin-right: 85px;">
+                    <div class="card" style="min-width: 250px;">
                         <img class="card-img-top imgMaestro" [src]="instructor.img">
                         <mat-card class="card-body">
                             <mat-card-content>
@@ -370,7 +371,7 @@
         <div style="margin-left: auto; margin-right: auto;">
             <h1>Nuevos Instructores.</h1>
         </div>
-        <div class="row" style="width:75%; margin-right:auto; margin-left:auto">
+        <div fxLayout="row" fxLayoutAlign="space-between" style="width:75%; margin-right:auto; margin-left:auto;">
             <div style="display:block" *ngFor='let instructor of instructoresNuevos'>
                 <div>
                     <div class="card" style="min-width: 250px">

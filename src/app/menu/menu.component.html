@@ -45,20 +45,23 @@
 </mat-grid-list-->
 
 <div class="container" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlexFill fxFill style="height: 100%"> 
-    <div class="barra" fxFlex="50%" fxFlex.sm fxFlex.xs fxFill>
-        <div style="margin:auto; display:block; width:75%; margin-top:20%;margin-bottom: 10%;">
-            <div class="title">Tus Asesorías</div>
+    <div class="barra" fxFlex="45%" fxLayout="column" fxLayoutGap="50px" fxFlex.sm fxFlex.xs fxFill>
+            <div class="title" fxLayout="row" fxFlex="45%" fxLayoutAlign="center end">
+                <span>Tus Asesorías</span>
+            </div>
+            <div class="bullet" fxFlex>
+                <h2><mat-icon style="margin-right: 20px;">school</mat-icon><strong> Toma cursos personalizados</strong></h2>
             
-            <div class="bullet"><mat-icon style="margin-right: 20px;">school</mat-icon><strong> Toma cursos personalizados</strong></div>
+                <h2><mat-icon style="margin-right: 20px;">book</mat-icon><strong> Comparte tus conocimientos</strong></h2>
+                
+                <h2><mat-icon style="margin-right: 20px;">group</mat-icon><strong> Conéctate con la comunidad</strong></h2>
             
-            <div class="bullet"><mat-icon style="margin-right: 20px;">book</mat-icon><strong> Comparte tus conocimientos</strong></div>
+            </div>
             
-            <div class="bullet"><mat-icon style="margin-right: 20px;">group</mat-icon><strong> Conéctate con la comunidad</strong></div>
         
-        </div>
             
     </div>
-    <div class="menu" fxFlex="50%" fxFlex.sm fxFlex.xs fxFill>
+    <div class="menu" fxFlex="55%" fxFlex.sm fxFlex.xs fxFill>
         <div *ngIf="opcion==2" style="width:75%; margin:auto; margin-top:30%; margin-bottom:10%">
             <app-login></app-login>
             <div style="margin:auto; margin-top:5%; width:75%; text-align: center;">
