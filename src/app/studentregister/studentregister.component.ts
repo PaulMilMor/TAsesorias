@@ -8,6 +8,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
 import { MsgService } from 'src/services/msg.service';
 import { Usuario } from 'src/models/usuario';
+import { Certificacion } from 'src/models/certificacion';
 
 declare var paypal;
 @Component({
@@ -19,6 +20,7 @@ export class StudentregisterComponent implements OnInit {
   currentRate = 5;
   cursos: Curso[] = new Array<Curso>()
   curso: Curso;
+  certificado = false;
   breakpoint;
 
 
@@ -27,12 +29,27 @@ export class StudentregisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurso();
-
+    this.getCertificados();
     this.formSesiones = this.fb.group({
       sesiones: ['0']
     })
 
     this.breakpoint = (window.innerWidth <= 900) ? 1 : 2;
+  }
+
+  //obtiene el certificado de la materia, si la hay
+  getCertificados() {
+    this.db.collection('certificados').get().subscribe((res) => {
+      res.docs.forEach((item) => {
+        var certificado = item.data() as Certificacion
+        console.log(certificado);
+        if (certificado.user.uid == this.curso.user.uid 
+            && certificado.status == "aprobado"
+            && certificado.categoria.nombre==this.curso.categoria.nombre) {
+          this.certificado=true;
+        }
+      })
+    })
   }
   //Obtiene los datos del curso solicitado
   getCurso() {
@@ -529,12 +546,21 @@ export class dialogStudent implements OnInit {
         if (h.id == this.data.curso.user.uid) {
 
           this.clunes = h.lunes;
+          this.clunes.sort()
           this.cmartes = h.martes;
+          this.cmartes.sort()
           this.cmiercoles = h.miercoles;
+          this.cmiercoles.sort()
           this.cjueves = h.jueves;
+          this.cjueves.sort()
           this.cviernes = h.viernes;
+          this.cviernes.sort()
           this.csabado = h.sabado;
+          this.csabado.sort()
           this.cdomingo = h.domingo;
+          this.cdomingo.sort()
+          this.cdomingo.sort((a,b)=>a.length>b.length ? 1:-1)
+          
         }
       })
     })
@@ -566,7 +592,7 @@ if (this.data.sesiones==0){
   //let t = this.getTeacher(this.data.curso.user.uid);
    
   date.setUTCHours(0,0,0,0)
-  console.log(this.asesorias)
+  //console.log(this.asesorias)
   //para identificar la asesoria se le suma el id del usuario con la id  del curso
    this.db.collection('asesorias').doc(user.uid+'@'+this.data.curso.id).set({
 
@@ -575,23 +601,42 @@ if (this.data.sesiones==0){
    }).finally(()=>{
      console.log("Guardado exitoso");
      this.msg.msgSuccess('Registrado', 'Asesorías registradas exitosamente');
-     this.router.navigate(['/'])
+     this.router.navigate(['/inicio'])
+     this.dialogRef.close();
    }).catch((err)=>{
      console.log(err);
      this.msg.msgError('Error',err);
      
    })
    let students = {};
-  students["" +date.getTime()]=0;
+ //students["" +date.getTime()]=0;
   /*  console.log("THIS");
    console.log(this.maestro);
    */
+ // students=this.maestro.estudiantes;
+  console.log(students);
+  //students["" +date.getTime()]=0;
+  console.log("again");
+  console.log(students);
+  let exists = false;
   for(let estudiante in this.maestro.estudiantes ){
+    console.log(estudiante);
+    console.log(date.getTime());
+    console.log(this.maestro.estudiantes);
     if(estudiante==""+date.getTime()){
-      students[""+date.getTime()] = this.maestro.estudiantes[estudiante];
+      /*console.log("ENTRO");
+      students[""+date.getTime()] = this.maestro.estudiantes[""+date.getTime()];
+    console.log(students);*/
+      exists= true;
     }
   }
+  if(exists){
+    students=this.maestro.estudiantes;
+  } else {
+    students[""+date.getTime()]=0;
+  }
   students[""+date.getTime()]++;
+  console.log(students)
   /*students[""+date.getTime()]=t.estudiantes[""+date.getTime()];
    students[""+date.getTime()]++;*/
    //this.data.curso.user.estudiantes[""+date]=1;
@@ -610,17 +655,55 @@ if (this.data.sesiones==0){
   }
 //Muestra la semana correspondiente
   getWeek() {
-    let today = new Date();
-    let todayDate = today.getDate();
-    let todayMonth = today.getMonth();
-    let todayYear = today.getFullYear();
+    /*let today = new Date();
+    today.getDay()*/
+    let start = new Date();
     let weekend = new Date();
-    weekend.setDate(todayDate + 6);
+    switch(start.getDay()){
+      case 0: {
+        start.setDate(start.getDate()-6);
+        break;
+      }
+      case 1: {
+        weekend.setDate(weekend.getDate()+6);
+        break;
+      }
+      case 2: {
+        start.setDate(start.getDate()-1);
+        weekend.setDate(weekend.getDate()+5);
+        break;
+      }
+      case 3: {
+        start.setDate(start.getDate()-2);
+        weekend.setDate(weekend.getDate()+4);
+        break;
+      }
+      case 4: {
+        start.setDate(start.getDate()-3);
+        weekend.setDate(weekend.getDate()+3);
+        break;
+      }
+      case 5: {
+        start.setDate(start.getDate()-4);
+        weekend.setDate(weekend.getDate()+2);
+        break;
+      }
+      case 6: {
+        start.setDate(start.getDate()-5);
+        weekend.setDate(weekend.getDate()+1);
+        break;
+      }
+    }
+    let startDate = start.getDate();
+    let startMonth = start.getMonth();
+    let startYear = start.getFullYear();
+    /*let weekend = new Date();
+    weekend.setDate(todayDate + 6);*/
     let weekendDate = weekend.getDate();
     let weekendMonth = weekend.getMonth();
     let weekendYear = weekend.getFullYear();
 
-    return ("Semana del " + todayDate + "/" + (todayMonth + 1) + "/" + todayYear + " al " +
+    return ("Semana del " + startDate + "/" + (startMonth + 1) + "/" + startYear + " al " +
       weekendDate + "/" + (weekendMonth + 1) + "/" + weekendYear);
   }
 

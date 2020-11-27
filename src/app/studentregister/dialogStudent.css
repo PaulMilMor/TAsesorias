@@ -13,11 +13,17 @@ mat-grid-tile {
 .active {
     color: white;
     background-color: #f44336;
+    margin-left:auto;
+    margin-right:auto;
+    width:70px;
 }
 
 .inactive {
     color: #f44336;
     background-color: white;
+    margin-left:auto;
+    margin-right:auto;
+    width:70px;
 }
 
 mat-list {

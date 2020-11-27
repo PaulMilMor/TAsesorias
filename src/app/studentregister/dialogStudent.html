@@ -1,4 +1,182 @@
 <div>{{titulo}}</div>
+<div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
+  <div fxFlex="80%" fxLayout="row" fxLayoutAlign="space-around">
+    <div fxFlex fxLayout="column" *ngIf="dia<=1" fxLayoutAlign=" center">
+      <div style="text-align: center;"> <h2>Lunes</h2></div>
+      <mat-divider></mat-divider>
+      <span *ngFor="let item of clunes;let i=index">
+        <span *ngIf="dia==1">
+          <div *ngIf="hora<=convertir(item)">
+            <button mat-stroked-button color="warn" (click)="horaClick(item,1,'lunes',i)"
+              [ngClass]="{'active' : this.tlunes[i], 'inactive' : !this.tlunes[i]}">
+              {{item}}
+            </button>
+          </div>
+        </span>
+        <span *ngIf="dia!=1">
+          <div>
+            <button mat-stroked-button color="warn" (click)="horaClick(item,1,'lunes',i)"
+              [ngClass]="{'active' : this.tlunes[i], 'inactive' : !this.tlunes[i]}">
+              {{item}}
+            </button>
+          </div>
+        </span>
+      </span>      
+    </div>
+    <div fxFlex fxLayout="column" *ngIf="dia<=2" fxLayoutAlign=" center">
+      <div style="text-align: center;"> <h2>Martes</h2></div>
+      <mat-divider></mat-divider>
+      <span *ngFor="let item of cmartes;let i=index">
+        <span *ngIf="dia==2">
+          <div *ngIf="hora<=convertir(item)">
+            <button mat-stroked-button color="warn" (click)="horaClick(item,2,'martes',i)"
+              [ngClass]="{'active' : this.tmartes[i], 'inactive' : !this.tmartes[i]}">
+              {{item}}
+            </button>
+          </div>
+        </span>
+        <span *ngIf="dia!=2">
+          <div>
+            <button mat-stroked-button color="warn" (click)="horaClick(item,2,'martes',i)"
+              [ngClass]="{'active' : this.tmartes[i], 'inactive' : !this.tmartes[i]}">
+              {{item}}
+            </button>
+          </div>
+        </span>
+      </span>
+    </div>
+    <div fxFlex fxLayout="column" *ngIf="dia<=3" fxLayoutAlign=" center">
+      <div style="text-align: center;"> <h2>Miércoles</h2></div>
+      <mat-divider></mat-divider>
+      <span *ngFor="let item of cmiercoles;let i=index">
+        <span *ngIf="dia==3">
+          <div *ngIf="hora<=convertir(item)">
+            <button mat-stroked-button color="warn" (click)="horaClick(item,3,'miercoles',i)"
+              [ngClass]="{'active' : this.tmiercoles[i], 'inactive' : !this.tmiercoles[i]}">
+              {{item}}
+            </button>
+          </div>
+        </span>
+        <span *ngIf="dia!=3">
+          <div>
+            <button mat-stroked-button color="warn" (click)="horaClick(item,3,'miercoles',i)"
+              [ngClass]="{'active' : this.tmiercoles[i], 'inactive' : !this.tmiercoles[i]}">
+              {{item}}
+            </button>
+          </div>
+        </span>
+      </span>
+    </div>
+    <div fxFlex fxLayout="column" *ngIf="dia<=4" fxLayoutAlign=" center">
+      <div style="text-align: center;"> <h2>Jueves</h2></div>
+      <mat-divider></mat-divider>
+      <span *ngFor="let item of cjueves;let i=index">
+        <span *ngIf="dia==4">
+          <div *ngIf="hora<=convertir(item)">
+            <button mat-stroked-button color="warn" (click)="horaClick(item,4,'jueves',i)"
+              [ngClass]="{'active' : this.tjueves[i], 'inactive' : !this.tjueves[i]}">
+              {{item}}
+            </button>
+          </div>
+        </span>
+        <span *ngIf="dia!=4">
+          <div>
+            <button mat-stroked-button color="warn" (click)="horaClick(item,4,'jueves',i)"
+              [ngClass]="{'active' : this.tjueves[i], 'inactive' : !this.tjueves[i]}">
+              {{item}}
+            </button>
+          </div>
+        </span>
+      </span>
+    </div>
+    <div fxFlex fxLayout="column" *ngIf="dia<=5" fxLayoutAlign=" center">
+      <div style="text-align: center;"> <h2>Viernes</h2></div>
+      <mat-divider></mat-divider>
+      <span *ngFor="let item of cviernes;let i=index">
+        <span *ngIf="dia==5">
+          <div *ngIf="hora<=convertir(item)">
+            <button mat-stroked-button color="warn" (click)="horaClick(item,5,'viernes',i)"
+              [ngClass]="{'active' : this.tviernes[i], 'inactive' : !this.tviernes[i]}">
+              {{item}}
+            </button>
+          </div>
+        </span>
+        <span *ngIf="dia!=5">
+          <div>
+            <button mat-stroked-button color="warn" (click)="horaClick(item,5,'viernes',i)"
+              [ngClass]="{'active' : this.tviernes[i], 'inactive' : !this.tviernes[i]}">
+              {{item}}
+            </button>
+          </div>
+        </span>
+      </span>
+    </div>
+    <div fxFlex fxLayout="column" *ngIf="dia<=6" fxLayoutAlign=" center">
+      
+        <div style="text-align: center;"> <h2>Sábado</h2></div>
+        <mat-divider></mat-divider>
+        <span *ngFor="let item of csabado;let i=index">
+          <span *ngIf="dia==6">
+            <div *ngIf="hora<=convertir(item)">
+              <button mat-stroked-button color="warn" (click)="horaClick(item,6,'sabado',i)"
+                [ngClass]="{'active' : this.tsabado[i], 'inactive' : !this.tsabado[i]}">
+                {{item}}
+              </button>
+            </div>
+          </span>
+          <span *ngIf="dia!=6">
+            <div>
+              <button mat-stroked-button color="warn" (click)="horaClick(item,6,'sabado',i)"
+                [ngClass]="{'active' : this.tsabado[i], 'inactive' : !this.tsabado[i]}">
+                {{item}}
+              </button>
+            </div>
+          </span>
+        </span>
+  
+      
+    </div>
+    <div  fxFlex fxLayout="column" *ngIf="dia>=0" fxLayoutAlign=" center">
+      
+        <div style="text-align: center;"><h2>Domingo</h2></div>
+        <mat-divider></mat-divider>
+        <span *ngFor="let item of cdomingo;let i=index">
+          <span *ngIf="dia==0">
+            <div *ngIf="hora<=convertir(item)">
+  
+              <button mat-stroked-button color="warn" (click)="horaClick(item,7,'domingo',i)"
+                [ngClass]="{'active' : this.tdomingo[i], 'inactive' : !this.tdomingo[i]}">
+                {{item}}
+              </button>
+            </div>
+          </span>
+          <span *ngIf="dia!=0">
+            <div>
+  
+              <button mat-stroked-button color="warn" (click)="horaClick(item,7,'domingo',i)"
+                [ngClass]="{'active' : this.tdomingo[i], 'inactive' : !this.tdomingo[i]}">
+                {{item}}
+              </button>
+            </div>
+          </span>
+  
+        </span>
+  
+    </div>
+  </div>
+  <div fxFlex fxLayout="column">
+    <div>
+      <h4>Clases Faltanes <span class="badge badge-secondary">{{data.sesiones}}</span></h4>
+    </div>
+
+    <div #paypal></div>
+
+  </div>
+</div>
+
+
+
+<!--div>{{titulo}}</div>
 <mat-grid-list cols="8" rowHeight="1:2">
   <mat-grid-tile *ngIf="dia<=1">
 
@@ -203,4 +381,4 @@
     </mat-list>
 
   </mat-grid-tile>
-</mat-grid-list>
+</mat-grid-list-->

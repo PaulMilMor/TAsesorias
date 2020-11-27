@@ -1,4 +1,48 @@
-<div class="register">
+<div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="5%" style="width:75%; margin-left: auto; margin-right:auto;">
+  
+  <div fxFlex fxLayout="column">
+    <div class="w-100">
+      <h1>INSCRÍBETE</h1>
+      <h3>Completa el siguiente formulario</h3>
+      <form action="" [formGroup]="formSesiones">
+        <mat-form-field appearance="fill" class="button">
+          <mat-label>Cantidad de sesiones</mat-label>
+          <input matInput type="number" min="1" max="5" oninput="validity.valid||(value='1');"
+            formControlName="sesiones">
+        </mat-form-field>
+        <br>
+        <button mat-flat-button color="accent" (click)="openDialog()" class="button">Seleccionar Sesiones</button>
+      </form>
+
+    </div>
+  </div>
+  <div fxFlex="40%" fxLayout="column">
+    <div class="w-100">
+        <h1>{{curso.categoria.nombre}}<mat-icon *ngIf="this.certificado" style="color:#17a2b8;">
+          verified_user</mat-icon></h1>
+        <mat-chip-list aria-label="Etiquetas">
+          Etiquetas:
+          <mat-chip *ngFor="let etiqueta of curso.etiquetas">{{etiqueta}}</mat-chip>
+
+        </mat-chip-list>
+        <h3>
+          <img class="profile-img" [src]="curso.user.img" 
+        alt="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
+        {{curso.user.nombre}}
+      </h3>
+      <h3>Nivel: {{curso.nivel.nombre}}</h3>
+      
+      
+      
+      <!-- <h5 >{{curso.categoria.nombre}} </h5> -->
+      <h3>{{curso.tarifa | currency}} </h3>
+      <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5 style="font-size: 3rem"></ngb-rating>
+      <!-- <h4>Logros</h4> -->
+      <!-- <button mat-raised-button color="primary" class="button select" (click)="pagar()">Siguiente</button> -->
+    </div>
+  </div>
+</div>
+<!--div class="register">
   <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)">
 
     <mat-grid-tile>
@@ -20,17 +64,21 @@
     </mat-grid-tile>
     <mat-grid-tile>
       <div class="w-100">
-        <img [src]="curso.user.img" width="200" height="200" class="rounded"
+        <div #pic class="profile-img" (window:resize)="0"
+          [ngStyle]="{'height.px':pic.offsetWidth}">
+          <img [src]="curso.user.img" 
           alt="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
 
+        </div>
+        
         <h5>{{curso.user.nombre}} </h5>
         <!-- <h5 >{{curso.categoria.nombre}} </h5> -->
-        <h5>{{curso.tarifa | currency}} </h5>
+        <!--h5>{{curso.tarifa | currency}} </h5>
         <ngb-rating [(rate)]="curso.evaluaciones" [readonly]="true" [max]=5 style="font-size: 3rem"></ngb-rating>
         <!-- <h4>Logros</h4> -->
         <!-- <button mat-raised-button color="primary" class="button select" (click)="pagar()">Siguiente</button> -->
-      </div>
+      <!--/div>
 
     </mat-grid-tile>
   </mat-grid-list>
-</div>
+</div-->
