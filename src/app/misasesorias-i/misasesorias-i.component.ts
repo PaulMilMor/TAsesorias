@@ -141,7 +141,7 @@ console.log(this.fechaActual);
       switch (sort.active) {
         case 'categoria': return compare(a.categoria, b.categoria, isAsc);
         case 'alumno': return compare(a.alumno, b.alumno, isAsc);
-
+        case 'fecha': return compare(a.fecha, b.fecha, isAsc);
     
         default: return 0;
       }
@@ -149,7 +149,7 @@ console.log(this.fechaActual);
   }
   }
   
-  function compare(a: number | string, b: number | string, isAsc: boolean) {
+  function compare(a: number | string | Date, b: number | string | Date, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
   
