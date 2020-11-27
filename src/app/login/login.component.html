@@ -23,8 +23,8 @@
             </mat-error>
         </mat-form-field>
         <div class="container">
-            <button mat-flat-button (click)="logIn()" class="button" style="font-size: 17px; background-color: #e85f5c; color: white;">Iniciar Sesión</button>
-            <button mat-flat-button (click)="authService.GoogleAuth()" class="button" style="font-size: 17px;"><img
+            <button [routerLink]="this.route" mat-flat-button (click)="logIn()" class="button" title="Iniciar sesión" style="font-size: 17px; background-color: #e85f5c; color: white;">Iniciar Sesión</button>
+            <button [routerLink]="this.route" mat-flat-button (click)="logIn2()"class="button" title="Iniciar sesión con Google"style="font-size: 17px;"><img
                     src="https://img.icons8.com/color/23/000000/google-logo.png" />
                 Ingresar con Google
             </button>

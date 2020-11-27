@@ -6,12 +6,12 @@
       <img [src]="usuario.img">
       <br>
     </div>
-    <button class="reportbtn" mat-raised-button color="accent" *ngIf="usuarios.tipoUsuario==alumno"
-      (click)="openDialog()">Reportar
-      <mat-icon>Repor</mat-icon>
+    <button class="reportbtn" title="Reportar instructor" mat-raised-button color="accent"
+      *ngIf="usuarios.tipoUsuario==alumno" (click)="openDialog()">Reportar
+      <mat-icon>flag</mat-icon>
     </button>
-    <button class="reportbtn" mat-raised-button color="accent" *ngIf="usuarios.tipoUsuario==instructor"
-      (click)="openDialog()">Editar
+    <button class="reportbtn" title="Editar perfil" mat-raised-button color="accent"
+      *ngIf="usuarios.tipoUsuario==instructor" (click)="openDialog()">Editar
       <mat-icon>edit</mat-icon>
     </button>
   </div>
@@ -34,8 +34,10 @@
   <div fxFlex="30%" fxFlex.sm fxFlex.xs>
     <div *ngIf="usuarios.tipoUsuario==instructor">
 
-      <h4>Correo electrónico: {{usuario.correo}}</h4>
-      <h4>Teléfono: {{usuario.cel}}</h4>
+      <h4>Correo electronico: {{usuario.correo}}</h4>
+      <h4>Telefono: {{usuario.cel}}</h4>
+      <h4>Visitas a mi perfil: {{usuario.count}}</h4>
+
     </div>
     <div *ngIf="usuarios.tipoUsuario==alumno">
 
@@ -71,9 +73,9 @@
                 </mat-card-title>
               </div>
               <div class=col align="end">
-                <button (click)="eliminarAsesoria(c.id)" class="deletebtn" mat-raised-button color="accent"
-                  *ngIf="usuarios.tipoUsuario==instructor" align="end">
-                  <mat-icon>delete</mat-icon>
+                <button (click)="eliminarAsesoria(c.id)" class="deletebtn" title="Eliminar asesoria" mat-raised-button
+                  color="accent" *ngIf="usuarios.tipoUsuario==instructor" align="end">
+                  <mat-icon>delete_forever</mat-icon>
                 </button>
               </div>
             </mat-list-item>
@@ -97,7 +99,8 @@
                   </h3>
                 </div>
                 <div class=col align="end">
-                  <button mat-flat-button color="primary" *ngIf="usuarios.tipoUsuario=='instructor'"
+                  <button mat-flat-button color="primary" title="Añadir material al curso"
+                    *ngIf="usuarios.tipoUsuario=='instructor'"
                     (click)="openMaterial(c.id,c.gdrive,c.odrive,c.github)">Añadir material <mat-icon>
                       collections_bookmark
                     </mat-icon></button>
@@ -109,8 +112,9 @@
                   <h3><strong>Nivel académico: </strong>{{c.nivel.nombre}}</h3>
                 </div>
                 <div class=col align="end">
-                  <button mat-flat-button color="primary" *ngIf="usuarios.tipoUsuario=='instructor'"
-                    (click)="openImages(c.evidencia, c.id)">Modificar imagenes <mat-icon>add_photo_alternate
+                  <button mat-flat-button color="primary" title="Modificar imagenes del curso"
+                    *ngIf="usuarios.tipoUsuario=='instructor'" (click)="openImages(c.evidencia, c.id)">Modificar
+                    imagenes <mat-icon>add_photo_alternate
                     </mat-icon></button>
                 </div>
               </mat-list-item>
@@ -127,7 +131,7 @@
 
 
 
-              <button mat-flat-button color="primary" *ngIf="usuarios.tipoUsuario==alumno"
+              <button mat-flat-button color="primary" title="Agendar asesoria" *ngIf="usuarios.tipoUsuario==alumno"
                 [routerLink]="['/agendar', c.id ]">Agendar <mat-icon>add
                 </mat-icon></button>
             </mat-card-actions>

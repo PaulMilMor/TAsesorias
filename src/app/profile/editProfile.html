@@ -12,7 +12,7 @@
      
   
   
-      <button color="primary" (click)="editImg=!editImg"
+      <button color="primary" (click)="editImg=!editImg" title="Cambiar imagen de perfil"
         style=" background-color: rgb(77, 65, 61); margin-bottom: 21px; width: 50px; height: 40px;"
         class="btn btn-info btn-block" type="submit"><i class="material-icons">camera_enhance</i></button>
       <input formControlName="img" (change)="addImg($event)" type="file" class="form-control-file" *ngIf="editImg">
@@ -31,11 +31,11 @@
       placeholder="Telefono" name="tel" formControlName="cel">
     </div>
     <div class="form-group">
-      <input type="radio" id="si"  class="form-control mb-4" name="mostrar" formControlName="mostrarinfo" value='true'>
+      <input type="radio" id="si"  title="Mostrar información a los alumnos" class="form-control mb-4" name="mostrar" formControlName="mostrarinfo" value='true'>
       <label for='true'>Mostrar información</label>
-      <input type="radio" id="no"  class="form-control mb-4" name="mostrar" formControlName="mostrarinfo" value='false'>
+      <input type="radio" id="no"  title="No publicar información a los alumnos" class="form-control mb-4" name="mostrar" formControlName="mostrarinfo" value='false'>
       <label for='false'>No publicar información</label>
     </div>
-      <button class="mt-5" (click)="editUser()" class="btn btn-info btn-block" type="submit">GUARDAR CAMBIOS</button>
+      <button class="mt-5" (click)="editUser()" title="Guardar cambios"class="btn btn-info btn-block" type="submit">GUARDAR CAMBIOS</button>
     </form>
 

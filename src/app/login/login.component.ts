@@ -60,5 +60,40 @@ export class LoginComponent implements OnInit {
       })
 
    }
+   logIn2() {
+      this.authService.GoogleAuth().then((Usuario)=> {
+         //this.route='/inicio';
+         this.router.navigate(['/inicio']);
+         this.msg.msgSuccess('Exito', 'Bienvenido de nuevo')
+
+      }).catch((error) => {
+         this.route="#";
+         switch (error.code) {
+            case 'auth/user-not-found': {
+               this.msg.msgError('Error', 'No se ha encontrado el usuario');
+               break;
+            }
+            case 'auth/invalid-email': {
+               this.msg.msgError('Error', 'El correo es inválido');
+               break;
+            }
+            case 'auth/wrong-password': {
+               this.msg.msgError('Error', 'Contraseña incorrecta');
+               break;
+            }
+            default: {
+               this.msg.msgError('Error', 'Se encontró el error: ' + error.code + 'por favor contacta a soporte');
+               break;
+            }
+         }
+
+      })
+
+         //this.route='/inicio';
+         /*this.router.navigate(['/inicio']);
+         this.msg.msgSuccess('Exito', 'Bienvenido de nuevo')*/
+         
+
+   }
 }
 

@@ -37,11 +37,11 @@
 
                             </mat-card-content>
                             <mat-card-actions>
-                                <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
+                                <button class="btn btn-primary" title="Ver perfil de este instructor" [routerLink]="['/perfil', curso.user.uid ]">
                                     Ver Perfil
                                 </button>
                                 <button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
-                                    [routerLink]="['/agendar', curso.id ]">
+                                    [routerLink]="['/agendar', curso.id ]"title="Agendar curso">
                                     Ver Curso
                                 </button>
 
