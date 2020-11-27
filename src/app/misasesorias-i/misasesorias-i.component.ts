@@ -21,7 +21,7 @@ fechaActual:Date=new Date()
 
   ngOnInit(): void {
 this.getAsesorias();
-
+//this.corregirDatos()
 this.sortedData=this.datos
 console.log(this.sortedData);
 
@@ -54,7 +54,20 @@ console.log(this.fechaActual);
                        let u=item3.data() as Usuario
                        a.alumno=u.nombre
                      }).finally(()=>{
-                      this.corregirDatos(a)
+                          a.dias.forEach((item)=>{
+                          let fecha=new Date((item.fecha.seconds)*1000)
+       fecha.setHours(parseInt( item.hora.split(':')[0]))
+        fecha.setMinutes(0)
+        fecha.setSeconds(0)
+      
+                            this.datos.push({
+                              alumno:a.alumno,
+                              categoria:a.categoria,
+                              fecha:fecha
+                              
+                            })
+                          })
+                     
                      })
                   
                      
@@ -67,49 +80,53 @@ console.log(this.fechaActual);
      })
    })
     
-   
+ 
   }
-  corregirDatos(value:asesoria){
-
+  corregirDatos(){
+ console.log(this.asesorias);
+ 
       let a:datos={
     
         alumno:'patata ',
         categoria:' ',
         fecha:' '
       }
-    console.log("value"+value);
-    console.log(value);
-    a.categoria=value.categoria
-    a.alumno=value.alumno
-      value.dias.forEach((item2)=>{
+
+    this.asesorias.forEach((item)=>{
+      item.dias.forEach((item2)=>{
+        item2.fecha=new Date((item2.fecha.seconds)*1000)
+         item2.fecha.setHours(item2.hora.split(':')[0])
+         item2.fecha.setMinutes(0)
+         item2.fecha.setSeconds(0)
+        a.fecha=item2
+        a.categoria=item.categoria
+     a.alumno=item.alumno
+ 
       
-       a.fecha=this.corregirFechas(item2)
-     console.log("ITEM");
-     console.log(item2);
-     console.log("VALOR Fehca");
-     console.log(item2.fecha);
-     
-     
-     
-       
-       this.datos.push(a)
-      })
-    console.log("DATOS");
-    
-  console.log(this.datos);
+      console.log(item2);
+      
+      
+        
+        this.datos.push(a)
+       })
+   
+      
+    })
+ 
+      
   
   }
-  corregirFechas(value):any{
-   console.log(value);
+  // corregirFechas(value):any{
+  //  console.log(value);
    
     
-        value.fecha=new Date((value.fecha.seconds)*1000)
-        value.fecha.setHours(value.hora.split(':')[0])
-        value.fecha.setMinutes(0)
-        value.fecha.setSeconds(0)
+  //       value.fecha=new Date((value.fecha.seconds)*1000)
+  //       value.fecha.setHours(value.hora.split(':')[0])
+  //       value.fecha.setMinutes(0)
+  //       value.fecha.setSeconds(0)
     
-    return value
-  }
+  //   return value
+  // }
   sortData(sort: Sort) {
     console.log(sort);
     
