@@ -4,9 +4,16 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.144);
     border-radius: 0;
     height: 59px;
+    
 }
 
-
+@media (max-width: 767px) {
+    .navbar-collapse
+      {
+          width: 100%;
+          background-color: #dd5f31fa;;
+      }
+  }
 *:before, *:after{
     content: normal !important;
 }

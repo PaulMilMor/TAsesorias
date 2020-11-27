@@ -34,14 +34,14 @@
   <div fxFlex="30%" fxFlex.sm fxFlex.xs>
     <div *ngIf="usuarios.tipoUsuario==instructor">
 
-      <h4>Correo electronico: {{usuario.correo}}</h4>
-      <h4>Telefono: {{usuario.cel}}</h4>
+      <h4>Correo electrónico: {{usuario.correo}}</h4>
+      <h4>Teléfono: {{usuario.cel}}</h4>
     </div>
     <div *ngIf="usuarios.tipoUsuario==alumno">
 
       <div *ngIf="usuarios.mostrarinfo=='true'">
-        <h4>Correo electronico: {{usuario.correo}}</h4>
-        <h4>Telefono: {{usuario.cel}}</h4>
+        <h4>Correo electrónico: {{usuario.correo}}</h4>
+        <h4>Teléfono: {{usuario.cel}}</h4>
       </div>
     </div>
     <h2><Strong>Certificaciones.</Strong></h2>

@@ -213,8 +213,8 @@ export class ProfileComponent implements OnInit {
     //this.msg.msgAlerta('¿Seguro que quieres eliminar esta asesoria?','Se eliminara todo lo relacionado a esta asesoria',this.confirmar);
 
     Swal.fire({
-      title: '¿Seguro que quieres eliminar esta asesoria?',
-      text: 'Se eliminara todo lo relacionado a esta asesoria',
+      title: '¿Seguro que quieres eliminar esta asesoría?',
+      text: 'Se eliminará todo lo relacionado a esta asesoría',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -224,7 +224,7 @@ export class ProfileComponent implements OnInit {
       if (result.isConfirmed) {
 
         Swal.fire(
-          'Asesoria eliminada',
+          'Asesoría eliminada',
           'success'
         )
         this.db.collection('cursos').doc(id).delete().finally(() => {
@@ -292,12 +292,12 @@ export class reportProfile implements OnInit {
           maestro: this.data.maestro
         })
       }
-      this.msg.msgSuccess('Exito', 'Reporte creado correctamente')
+      this.msg.msgSuccess('Éxito', 'Reporte creado correctamente')
 
       this.dialogRef.close();
     }).catch((err) => {
       console.log(err)
-      this.msg.msgError('Error', 'Algo salio mal')
+      this.msg.msgError('Error', 'Algo salió mal')
     })
 
   }
@@ -447,7 +447,7 @@ export class editProfile implements OnInit {
       bio: this.formUsuario.value.bio
     }
     ).then(() => {
-      this.msg.msgSuccess('Exito', 'Biografia actualizada correctamente')
+      this.msg.msgSuccess('Exito', 'Biografía actualizada correctamente')
     }).catch((err) => {
       console.log(err);
 
@@ -461,7 +461,7 @@ export class editProfile implements OnInit {
       cel: this.formUsuario.value.cel
     }
     ).then(() => {
-      this.msg.msgSuccess('Exito', 'Telefono actualizado correctamente')
+      this.msg.msgSuccess('Exito', 'Teléfono actualizado correctamente')
     }).catch((err) => {
       console.log(err);
 
@@ -475,7 +475,7 @@ export class editProfile implements OnInit {
       mostrarinfo: this.formUsuario.value.mostrarinfo
     }
     ).then(() => {
-      this.msg.msgSuccess('Exito', 'Se actualizo su preferencia')
+      this.msg.msgSuccess('Éxito', 'Se actualizó su preferencia')
     }).catch((err) => {
       console.log(err);
 
