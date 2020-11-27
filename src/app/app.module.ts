@@ -45,7 +45,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatChipsModule } from '@angular/material/chips';
 import { CalificarComponent } from './calificar/calificar.component';
 import { MatIconModule } from '@angular/material/icon';
-import { ProfileComponent, reportProfile,editProfile, addImages, material } from './profile/profile.component';
+import { ProfileComponent, reportProfile, editProfile, addImages, material } from './profile/profile.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBadgeModule } from '@angular/material/badge';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
@@ -54,14 +54,16 @@ import { CertificacionesComponent, feedback } from './certificaciones/certificac
 import { CertificacionesinstructorComponent, dialogNewcertificacion, feedbackInstructor } from './certificacionesinstructor/certificacionesinstructor.component';
 import { HomeComponent } from './home/home.component';
 import { MatPaginator } from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
+
+import { MatSortModule } from '@angular/material/sort';
 //import { CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 import { AdminreportComponent, dialogBan } from './adminreport/adminreport.component';
 import { BanlistComponent } from './banlist/banlist.component';
 import { MisasesoriasComponent } from './misasesorias/misasesorias.component';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MisasesoriasIComponent } from './misasesorias-i/misasesorias-i.component';
 //import { dialogNewcertificacion,CertificacionesinstructorComponent } from './certificacionesinstructor/certificacionesinstructor.component';
 
 @NgModule({
@@ -94,10 +96,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     AdminreportComponent,
     dialogBan,
     BanlistComponent,
-    MisasesoriasComponent, 
+    MisasesoriasComponent,
     addImages,
     material,
-   
+    MisasesoriasIComponent
   ],
   imports: [
     BrowserModule,
@@ -136,8 +138,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     CarouselModule.forRoot(),
     MatDividerModule,
     LayoutModule,
-    MatSidenavModule
-    
+    MatSidenavModule,
+
+
+    MatSortModule
 
   ],
   entryComponents: [

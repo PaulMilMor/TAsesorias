@@ -238,7 +238,7 @@
       <mat-divider></mat-divider>
       <span *ngFor="let item of cmiercoles;let i=index">
         <span *ngIf="dia==3">
-          <mat-list-item *ngIf="hora<=convertir(item)">
+          <mat-list-item *ngIf="hora+2<=convertir(item)">
             <button mat-stroked-button color="warn" (click)="horaClick(item,3,'miercoles',i)"
               [ngClass]="{'active' : this.tmiercoles[i], 'inactive' : !this.tmiercoles[i]}">
               {{item}}
