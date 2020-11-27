@@ -10,7 +10,8 @@
 @media (max-width: 767px) {
     .navbar-collapse
       {
-          background-color: rgb(255, 82, 62);;
+          width: 100%;
+          background-color: #dd5f31fa;;
       }
   }
 *:before, *:after{

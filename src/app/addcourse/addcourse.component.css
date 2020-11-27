@@ -2,12 +2,12 @@
 
 .main-div{
     height: 100vh;
-    display: flex;
+    display: flexbox;
     
- margin-top: 1px;
+ margin-top: 50px;
 }
 mat-form-field {
-margin-top: 40px;
+margin-top: 4px;
 margin-left: 40px;
     width: 321px;
   }
@@ -21,7 +21,7 @@ h2 {
   font-size: 30px;
   font-family: 'Reem Kufi', sans-serif;
   text-align: center;
-  margin-top: 39px;
+  margin-top: 31px;
 }
 
 form{
@@ -32,7 +32,7 @@ form{
 }
 
 .validated {
-  background-color: #17a2b8; 
+  background-color: rgb(248, 104, 88); 
   color: white;
 }
 

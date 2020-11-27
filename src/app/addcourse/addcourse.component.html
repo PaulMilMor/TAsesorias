@@ -1,12 +1,14 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div>
-
-  <form [formGroup]="formCursos" style=" height: 445px; width: 400px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); background:white;">
+  
+  <form [formGroup]="formCursos" style=" height: 800px; width: 400px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); background:white;">
     <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
 
-    <h2>CREAR ASESORIA</h2>
+    <h2 style="font-size: 14px; color: white; margin-bottom: -17px;">CREAR ASESORIA</h2>
+    <h2 style="margin-bottom: 27px;">CREAR ASESORÍA</h2>
     <mat-form-field appearance="fill">
+     
       <mat-label>Categoria</mat-label>
       <mat-select formControlName="categoria">
         <mat-option value="option" *ngFor="let c of categorias" [value]="c">{{c.nombre}}</mat-option>
@@ -36,16 +38,17 @@
       <mat-error>Introduce al menos 1 etiqueta.</mat-error>
     </mat-form-field>
     <br>
-  <button mat-stroked-button (click)="openImages()">Añadir Evidencia</button>
     <mat-form-field appearance="fill" style="margin-top: 9px;">
       <mat-label>Tarifa</mat-label>
       <input matInput formControlName="tarifa" type="number" min="0" max="2000" oninput="validity.valid||(value='0');">
       <mat-error>Introduce un valor entre 0 y 2000.</mat-error>
     </mat-form-field>
-    <h4 style="margin-left: 41px; font-size: 13px;">*Tarifa máxima de $2000.00 MXN por hora</h4>
+    <h4 style="margin-left: 41px; font-size: 13px;margin-top: -17px;">*Tarifa máxima de $2000.00 MXN por hora.</h4>
     <br>
+    <button mat-stroked-button (click)="openImages()" style="margin-top: -51px; margin-left: 41px;">Añadir Evidencia</button>
+    <h4 style=" font-size: 13px; margin-left: 41px; margin-right: 27px;">*Comparte imagenes que ayuden a evidenciar tus habilidades en la materia.</h4>
     <button mat-raised-button (click)="setCourse()" [disabled]="formCursos.invalid" class="validated"
-      style="font-size: 17px; margin-top: 1px; margin-left: 127px; width: 150px; ">PUBLICAR</button>
+      style="font-size: 17px; margin-top: 17px; margin-left: 127px; width: 150px; ">PUBLICAR</button>
   </form>
 
 
