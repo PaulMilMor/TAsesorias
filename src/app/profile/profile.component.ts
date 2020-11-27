@@ -84,7 +84,7 @@ export class ProfileComponent implements OnInit {
     })
   }
   openDialog(): void {
-    if (this.usuario.tipoUsuario == this.alumno) {
+    if (this.usuarios.tipoUsuario == this.alumno) {
       const dialogRef = this.dialog.open(reportProfile, {
         width: '500px',
         height: '250px',
@@ -95,7 +95,7 @@ export class ProfileComponent implements OnInit {
         }
       });
     }
-    if (this.usuario.tipoUsuario == this.instructor) {
+    if (this.usuarios.tipoUsuario == this.instructor) {
       const dialogRef2 = this.dialog.open(editProfile, {
         width: '500px',
         height: '500px',
