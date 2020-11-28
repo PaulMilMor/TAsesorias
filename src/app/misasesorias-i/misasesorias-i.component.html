@@ -19,7 +19,7 @@
                     <td>{{item.categoria}}</td>
                     <td>{{item.alumno}}</td>
                     <td>{{item.fecha | date:"dd/MM/yy h:mm a"}}</td>
-                    <td *ngIf="item.fecha.getDate()==fechaActual.getDate() && item.fecha.getMonth()==fechaActual.getMonth() && item.fecha.getHours()==fechaActual.getHours()"><button mat-flat-button color="accent" [routerLink]="['/zoom']">Hay clases</button></td>
+                    <td *ngIf="item.fecha.getDate()==fechaActual.getDate() && item.fecha.getMonth()==fechaActual.getMonth() && item.fecha.getHours()==fechaActual.getHours()"><button mat-flat-button color="accent" [routerLink]="['/zoom']">Crear reunion</button></td>
            
             </tr>
           
