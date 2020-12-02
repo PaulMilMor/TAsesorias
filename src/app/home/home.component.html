@@ -1,10 +1,16 @@
-<div>
+<div *ngIf="usuario.tipoUsuario=='easteregg'">
+    <p align="center">
+        <iframe width="1080" height="720" frameBorder="0" [src]="safeURL" allowfullscreen autoplay=1></iframe>
+    </p>
+</div>
+
+<div *ngIf="usuario.tipoUsuario!='easteregg'">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap" rel="stylesheet">
     <h1 class="tusasesorias">BIENVENIDO A TUS ASESORíAS</h1>
 
 </div>
-<div class="start">
+<div class="start" *ngIf="usuario.tipoUsuario!='easteregg'">
     TusAsesorias es un sitio web que se encarga de otorgar una plataforma educativa a individuos con experiencia o
     habilidades en determinadas áreas, dispuestos a generar ingresos a cambio de su pedagogía.
     <br><br>
@@ -12,15 +18,15 @@
     su preferencia.
 </div>
 
-<div *ngIf="usuario.tipoUsuario=='alumno'">
+<div *ngIf="usuario.tipoUsuario=='alumno'" (window:resize)="onResize($event)">
     <!--Cursos Valorados-->
     <!--Si hay menos de 4 cursos no se abre el carrusel-->
-    <div *ngIf='this.cursosValorados.length>0 && this.cursosValorados.length<=3'
+    <div *ngIf='this.cursosValorados.length>0 && this.cursosValorados.length<=breakpoint'
         style="margin-top: 50px; margin-bottom: 50px;">
         <div style="margin-left: auto; margin-right: auto; width:75%">
             <h1>Cursos Mejor Valorados.</h1>
         </div>
-        <div fxLayout="row" fxLayoutAlign="space-between" style="width:75%; margin-right:auto; margin-left:auto;">
+        <div fxLayout="row" fxLayoutAlign="space-around" style="width:75%; margin-right:auto; margin-left:auto;">
             <div style="display:block" *ngFor='let curso of cursosValorados'>
                 <div>
                     <div class="card" style="min-width: 250px;">
@@ -56,7 +62,7 @@
     </div>
     <!--Cursos Valorados-->
     <!--Si hay más de 3 cursos se abre el carrusel-->
-    <div *ngIf='this.cursosValorados.length>3' style="margin-top: 50px; margin-bottom: 50px;">
+    <div *ngIf='this.cursosValorados.length>breakpoint' style="margin-top: 50px; margin-bottom: 50px;">
         <div style="margin-left: auto; margin-right: auto; width:75%;">
             <h1>Cursos Mejor Valorados.</h1>
         </div>
@@ -64,7 +70,7 @@
 
 
             <div class="row" style="width:100%">
-                <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset"
+                <carousel [itemsPerSlide]="breakpoint" [singleSlideOffset]="singleSlideOffset"
                     [showIndicators]="false" style="width:100%">
                     <slide *ngFor="let curso of cursosValorados" class="mx-auto">
                         <div class="carousel-item" style="display:block; width:75%">
@@ -109,12 +115,12 @@
 
     <!--Cursos Certificados-->
     <!--Si hay menos de 4 cursos no se abre el carrusel-->
-    <div *ngIf='this.cursosCertificados.length>0 && this.cursosCertificados.length<=3'
+    <div *ngIf='this.cursosCertificados.length>0 && this.cursosCertificados.length<=breakpoint'
         style="margin-top: 50px; margin-bottom: 50px;">
         <div style="margin-left: auto; margin-right: auto; width:75%">
             <h1>Cursos certificados.</h1>
         </div>
-        <div fxLayout="row" fxLayoutAlign="space-between" style="width:75%; margin-right:auto; margin-left:auto;">
+        <div fxLayout="row" fxLayoutAlign="space-around" style="width:75%; margin-right:auto; margin-left:auto;">
             <div style="display:block" *ngFor='let curso of cursosCertificados'>
                 <div>
                     <div class="card" style="min-width: 250px; ">
@@ -149,7 +155,7 @@
     </div>
     <!--Cursos Certificados-->
     <!--Si hay más de 3 cursos se abre el carrusel-->
-    <div *ngIf='this.cursosCertificados.length>3' style="margin-top: 50px; margin-bottom: 50px;">
+    <div *ngIf='this.cursosCertificados.length>breakpoint' style="margin-top: 50px; margin-bottom: 50px;">
         <div style="margin-left: auto; margin-right: auto; width:75%;">
             <h1>Cursos Certificados.</h1>
         </div>
@@ -157,7 +163,7 @@
 
 
             <div class="row" style="width:100%">
-                <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset"
+                <carousel [itemsPerSlide]="breakpoint" [singleSlideOffset]="singleSlideOffset"
                     [showIndicators]="false" style="width:100%">
                     <slide *ngFor="let curso of cursosCertificados" class="mx-auto">
                         <div class="carousel-item" style="display:block; width:75%">
@@ -202,12 +208,12 @@
 
     <!--Instructores valorados-->
     <!--Si hay menos de 4 instructores no entra al carrusel-->
-    <div *ngIf='this.instructoresValorados.length>0 && this.instructoresValorados.length<=3'
+    <div *ngIf='this.instructoresValorados.length>0 && this.instructoresValorados.length<=breakpoint'
         style="margin-top: 50px; margin-bottom: 50px;">
         <div style="margin-left: auto; margin-right: auto; width:75%;">
             <h1>Instructores Mejor Valorados.</h1>
         </div>
-        <div fxLayout="row" fxLayoutAlign="space-between" style="width:75%; margin-right:auto; margin-left:auto;">
+        <div fxLayout="row" fxLayoutAlign="space-around" style="width:75%; margin-right:auto; margin-left:auto;">
             <div style="display:block" *ngFor='let instructor of instructoresValorados'>
                 <div>
                     <div class="card" style="min-width: 250px;">
@@ -235,7 +241,7 @@
     </div>
     <!--Instructores valorados-->
     <!--Si hay 4 o más instructores no entra al carrusel-->
-    <div *ngIf='this.instructoresValorados.length>3' style="margin-top: 50px; margin-bottom: 50px;">
+    <div *ngIf='this.instructoresValorados.length>breakpoint' style="margin-top: 50px; margin-bottom: 50px;">
         <div style="margin-left: auto; margin-right: auto; width:75%;">
             <h1>Instructores Mejor Valorados.</h1>
         </div>
@@ -243,7 +249,7 @@
 
 
             <div class="row" style="width:100%">
-                <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset"
+                <carousel [itemsPerSlide]="breakpoint" [singleSlideOffset]="singleSlideOffset"
                     [showIndicators]="false" style="width:100%">
                     <slide *ngFor="let instructor of instructoresValorados" class="mx-auto">
                         <div class="carousel-item" style="display:block; width:75%">
@@ -284,12 +290,12 @@
 
     <!--Instructores solicitados-->
     <!--Si hay menos de 4 instructores no entra al carrusel-->
-    <div *ngIf='this.instructoresSolicitados.length>0 && this.instructoresSolicitados.length<=3'
+    <div *ngIf='this.instructoresSolicitados.length>0 && this.instructoresSolicitados.length<=breakpoint'
         style="margin-top: 50px; margin-bottom: 50px;">
         <div style="margin-left: auto; margin-right: auto; width:75%;">
             <h1>Instructores Más Solicitados.</h1>
         </div>
-        <div fxLayout="row" fxLayoutAlign="space-between" style="width:75%; margin-right:auto; margin-left:auto;">
+        <div fxLayout="row" fxLayoutAlign="space-around" style="width:75%; margin-right:auto; margin-left:auto;">
             <div style="display:block" *ngFor='let instructor of instructoresSolicitados'>
                 <div>
                     <div class="card" style="min-width: 250px;">
@@ -317,7 +323,7 @@
     </div>
     <!--Instructores solicitados-->
     <!--Si hay 4 o más instructores no entra al carrusel-->
-    <div *ngIf='this.instructoresSolicitados.length>3' style="margin-top: 50px; margin-bottom: 50px;">
+    <div *ngIf='this.instructoresSolicitados.length>breakpoint' style="margin-top: 50px; margin-bottom: 50px;">
         <div style="margin-left: auto; margin-right: auto; width:75%;">
             <h1>Instructores Más Solicitados.</h1>
         </div>
@@ -325,7 +331,7 @@
 
 
             <div class="row" style="width:100%">
-                <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset"
+                <carousel [itemsPerSlide]="breakpoint" [singleSlideOffset]="singleSlideOffset"
                     [showIndicators]="false" style="width:100%">
                     <slide *ngFor="let instructor of instructoresSolicitados" class="mx-auto">
                         <div class="carousel-item" style="display:block; width:75%">
@@ -366,12 +372,12 @@
 
     <!--Instructores nuevos-->
     <!--Si hay menos de 4 instructores no entra al carrusel-->
-    <div *ngIf='this.instructoresNuevos.length>0 && this.instructoresNuevos.length<=3'
-        style="margin-top: 50px; margin-bottom: 50px; width:75%;">
-        <div style="margin-left: auto; margin-right: auto;">
+    <div *ngIf='this.instructoresNuevos.length>0 && this.instructoresNuevos.length<=breakpoint'
+        style="margin-top: 50px; margin-bottom: 50px; ">
+        <div style="margin-left: auto; margin-right: auto; width:75%;">
             <h1>Nuevos Instructores.</h1>
         </div>
-        <div fxLayout="row" fxLayoutAlign="space-between" style="width:75%; margin-right:auto; margin-left:auto;">
+        <div fxLayout="row" fxLayoutAlign="space-around" style="width:75%; margin-right:auto; margin-left:auto;">
             <div style="display:block" *ngFor='let instructor of instructoresNuevos'>
                 <div>
                     <div class="card" style="min-width: 250px">
@@ -397,7 +403,7 @@
     </div>
     <!--Instructores nuevos-->
     <!--Si hay 4 o más instructores no entra al carrusel-->
-    <div *ngIf='this.instructoresNuevos.length>3' style="margin-top: 50px; margin-bottom: 50px;">
+    <div *ngIf='this.instructoresNuevos.length>breakpoint' style="margin-top: 50px; margin-bottom: 50px;">
         <div style="margin-left: auto; margin-right: auto; width:75%;">
             <h1>Nuevos Instructores.</h1>
         </div>
@@ -405,7 +411,7 @@
 
 
             <div class="row" style="width:100%">
-                <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset"
+                <carousel [itemsPerSlide]="breakpoint" [singleSlideOffset]="singleSlideOffset"
                     [showIndicators]="false" style="width:100%">
                     <slide *ngFor="let instructor of instructoresNuevos" class="mx-auto">
                         <div class="carousel-item" style="display:block; width:75%">

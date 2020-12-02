@@ -50,9 +50,9 @@
          <input formControlName="img" (change)="addImg($event)" accept="image/*" type="file" class="form-control-file">
          <div class="container">
             <button mat-flat-button [disabled]="formUsuario.invalid" class="button" style="margin-right: 5px;"
-               (click)="addUser()" color="warn" style="font-size: 17px; background-color: #DD6031;">Registrarse</button>
+               (click)="addUser()" color="warn" style="font-size: 17px; background-color: #DD6031;" [routerLink]="['/inicio']">Registrarse</button>
             <button mat-flat-button class="button" (click)="authService.GoogleRegister(this.tipoU)" color="white"
-               style="font-size: 17px; border-style: solid; border-color: #DD6031;"><img src="https://img.icons8.com/color/22/000000/google-logo.png" /> Registrarse
+               style="font-size: 17px; border-style: solid; border-color: #DD6031;" [routerLink]="['/inicio']"><img src="https://img.icons8.com/color/22/000000/google-logo.png" /> Registrarse
                con Google</button>
          </div>
          <br> <br> <br><br> <br> <br>

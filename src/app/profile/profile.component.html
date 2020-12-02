@@ -1,4 +1,4 @@
-<div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center"
+<div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center"
   fxLayoutGap="10px" style="margin-top: 20px;">
   <div fxFlex="30%" fxFlex.sm fxFlex.xs>
     <div #pic class="profile-img" style="margin-left: auto; margin-right:auto;" (window:resize)="0"
@@ -29,7 +29,7 @@
   </div>
 </div>
 
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center"
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center"
   fxLayoutGap="10px">
   <div fxFlex="30%" fxFlex.sm fxFlex.xs>
     <div *ngIf="usuarios.tipoUsuario==instructor">

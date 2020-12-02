@@ -3,6 +3,7 @@ import { Curso } from 'src/models/curso';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Usuario } from 'src/models/usuario';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -18,22 +19,49 @@ export class HomeComponent implements OnInit {
   instructoresNuevos: Usuario[] = new Array<Usuario>()
   usuario: Usuario
   isValid: boolean = false
-
+  safeURL: SafeResourceUrl;
   itemsPerSlide = 3;
   singleSlideOffset = true;
   noWrap = true;
-
+  breakpoint: number;
   
-  constructor(private db: AngularFirestore, private auth: AngularFireAuth) { }
-
+  constructor(public sanitizer: DomSanitizer, private db: AngularFirestore, private auth: AngularFireAuth) { }
+  
   ngOnInit(): void {
+    this.safeURL = this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/BH7r55AJmgY");
+  
     this.getUser()
     this.getCourses();
     this.getTeachers();
     this.getNewTeachers();
     this.getCursosBaneados();
     console.log("lenght " + this.cursos.length);
+    if(window.innerWidth <1100){
+      this.breakpoint = 2
+    }
+    else if(window.innerWidth <1500 && window.innerWidth>=1100){
+      this.breakpoint = 3
+    }
+    else if(window.innerWidth >1500){
+      this.breakpoint = 4
+    }
+
+    
+
   }
+
+  onResize(event) {
+    if(event.target.innerWidth <1100){
+      this.breakpoint = 2
+    }
+    else if(event.target.innerWidth <1500 && event.target.innerWidth>=1100){
+      this.breakpoint = 3
+    }
+    else if(event.target.innerWidth >1500){
+      this.breakpoint = 4
+    }
+  }
+
   //Función para obtener todos los cursos
   getCourses() {
 
@@ -194,7 +222,7 @@ export class HomeComponent implements OnInit {
 
           
 
-          console.log("What ")
+          console.log("What " + t.nombre + t.apellido)
           this.instructoresNuevos.push(t);
           let today = new Date();
           let insDate = t.fecha.toDate();
