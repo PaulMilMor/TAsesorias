@@ -3,15 +3,13 @@
         fxLayoutGap="10px" style="margin-top: 50px; border:#bb2205 solid 1px;border-radius: 10px"
         *ngFor="let item of this.misAsesorias">
         <div fxFlex="33%" fxFlex.sm fxFlex.xs>
-            <div class="profile-img" style="margin-left: auto; margin-right:auto; margin-top: 5px;">
-                <img [src]="item.curso.user.img">
-                <br>
-
+            <div>
+                <img style="padding-top: 9px;" class="card-img-top imgMaestro" [src]="item.curso.user.img">
             </div>
-            <h2><strong>{{item.curso.user.nombre}}</strong></h2>
-            <h3>{{item.curso.categoria.nombre}}</h3>
+            <h2 style="padding-left: 37px; padding-top: 11px;"><strong>{{item.curso.user.nombre}}</strong></h2>
+            <h3 style="padding-left: 37px;">{{item.curso.categoria.nombre}}</h3>
         </div>
-        <div fxFlex="50%">
+        <div fxFlex="47%">
 
             <table class="table" style="width: 150px;">
                 <thead>
