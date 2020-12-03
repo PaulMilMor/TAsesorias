@@ -65,6 +65,7 @@ export class ProfileComponent implements OnInit {
       this.usuario = res.data() as Usuario
       console.log("USUARIO");
       console.log(this.usuario)
+      console.log(this.usuario.mostrarinfo)
       this.getEstudiantes();
     })
   }
