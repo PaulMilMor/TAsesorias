@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Usuario } from 'src/models/usuario';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { firestore } from 'firebase/app';
 
 @Component({
   selector: 'app-home',
@@ -47,6 +48,15 @@ export class HomeComponent implements OnInit {
     }
 
     
+
+  }
+
+  countVisitors(id: string) {
+
+    const increment = firestore.FieldValue.increment(1);
+    const storyRef = this.db.collection('usuarios').doc(id);
+
+    storyRef.update({ count: increment })
 
   }
 

@@ -518,6 +518,9 @@ export class editProfile implements OnInit {
           console.log(this.usuario.img)
           this.tipoCorreo = u.correo.split('@')[1]
           console.log(this.tipoCorreo);
+          console.log("UUUUUUUUUUUUUUUUUUUUUUUUUUUU")
+          console.log(this.usuario)
+          console.log(this.usuario.count)
           this.formUsuario.get('bio').setValue(this.usuario.bio)
           this.formUsuario.get('cel').setValue(this.usuario.cel)
         }

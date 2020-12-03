@@ -44,7 +44,7 @@
                             </mat-card-content>
                             <mat-card-actions>
                                 <button class="btn btn-primary" title="Ver perfil de este instructor"
-                                    [routerLink]="['/perfil', curso.user.uid ]">
+                                    [routerLink]="['/perfil', curso.user.uid ]" (click)="countVisitors(curso.user.uid)">
                                     Ver Perfil
                                 </button>
                                 <button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
@@ -89,7 +89,7 @@
 
                                         </mat-card-content>
                                         <mat-card-actions>
-                                            <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
+                                            <button (click)="countVisitors(curso.user.uid)" class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
                                                 Ver Perfil
                                             </button>
                                             <button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
@@ -137,7 +137,7 @@
 
                             </mat-card-content>
                             <mat-card-actions>
-                                <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
+                                <button (click)="countVisitors(curso.user.uid)" class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
                                     Ver Perfil
                                 </button>
                                 <button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
@@ -182,7 +182,7 @@
 
                                         </mat-card-content>
                                         <mat-card-actions>
-                                            <button class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
+                                            <button (click)="countVisitors(curso.user.uid)" class="btn btn-primary" [routerLink]="['/perfil', curso.user.uid ]">
                                                 Ver Perfil
                                             </button>
                                             <button *ngIf="usuario.tipoUsuario=='alumno'" class="btn btn-primary"
@@ -229,7 +229,7 @@
 
                             </mat-card-content>
                             <mat-card-actions>
-                                <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
+                                <button (click)="countVisitors(instructor.uid)" class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
                                     Ver Perfil
                                 </button>
                             </mat-card-actions>
@@ -269,7 +269,7 @@
 
                                         </mat-card-content>
                                         <mat-card-actions>
-                                            <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
+                                            <button (click)="countVisitors(instructor.uid)" class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
                                                 Ver Perfil
                                             </button>
                                         </mat-card-actions>
@@ -311,7 +311,7 @@
 
                             </mat-card-content>
                             <mat-card-actions>
-                                <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
+                                <button (click)="countVisitors(instructor.uid)" class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
                                     Ver Perfil
                                 </button>
                             </mat-card-actions>
@@ -351,7 +351,7 @@
 
                                         </mat-card-content>
                                         <mat-card-actions>
-                                            <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
+                                            <button (click)="countVisitors(instructor.uid)" class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
                                                 Ver Perfil
                                             </button>
                                         </mat-card-actions>
@@ -391,7 +391,7 @@
 
                             </mat-card-content>
                             <mat-card-actions>
-                                <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
+                                <button (click)="countVisitors(instructor.uid)" class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
                                     Ver Perfil
                                 </button>
                             </mat-card-actions>
@@ -427,7 +427,7 @@
 
                                         </mat-card-content>
                                         <mat-card-actions>
-                                            <button class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
+                                            <button (click)="countVisitors(instructor.uid)" class="btn btn-primary" [routerLink]="['/perfil', instructor.uid ]">
                                                 Ver Perfil
                                             </button>
                                         </mat-card-actions>
