@@ -44,10 +44,10 @@
     </mat-grid-tile>
 </mat-grid-list-->
 
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlexFill fxFill style="height: 100%"> 
-    <div class="barra" fxFlex="45%" fxLayout="column" fxLayoutGap="50px" fxFlex.sm fxFlex.xs fxFill>
+<div  fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlexFill fxFill style="height: 100%" (window:resize)="onResize($event)"> 
+    <div [class]="breakpoint" fxFlex="45%" fxLayout="column" fxLayoutGap="50px" fxFlex.sm="60%" fxFlex.xs="60%" fxFill>
             <div class="title" fxLayout="row" fxFlex="45%" fxLayoutAlign="center end">
-                <span>Tus Asesorías</span>
+                <span><br><br>Tus Asesorías</span>
             </div>
             <div class="bullet" fxFlex>
                 <h2><mat-icon style="margin-right: 20px;">school</mat-icon><strong> Toma cursos personalizados</strong></h2>

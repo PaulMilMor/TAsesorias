@@ -1,2 +1,15 @@
-<button mat-flat-button color="primary" (click)="banHammer()">  15 Dias</button> <br>
-<button mat-flat-button color="primary" style="margin-top: 5px;" (click)="banHammerU()">Indefinidamente</button>
+<div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="20px" style="height: 100%; text-align:center" >
+    <div fxFlex="25%">
+        <h1>Suspender Instructor</h1>
+    </div>
+    <div fxFlex="25%">
+        <h3>¿Por cuánto tiempo desea suspender?</h3>
+    </div>
+    <div fxFlex="20%" fxLayout="row" fxLayoutAlign="space-around">
+        <button mat-flat-button color="primary" style="width: 40%;" (click)="banHammer()">  15 Dias</button>
+        <button mat-flat-button color="primary" style="width: 40%;" (click)="banHammerU()">Indefinidamente</button>
+    </div>
+    <div fxFlex>
+        <button mat-flat-button color="warn" (click)="cancel()" style="width: 60%; margin-left:auto; margin-right: auto;">Cancelar</button>
+    </div>
+</div>

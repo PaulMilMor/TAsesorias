@@ -8252,12 +8252,40 @@ class HeaderComponent {
     }
     isBanned() {
         this.db.collection('baneados').get().subscribe((res) => {
-            res.docs.forEach(item => {
-                if (item.id == this.auth.auth.currentUser.uid)
-                    this.msg.msgWarning('Suspendido', 'Estas suspendido ');
-            });
-        });
-    }
+          res.docs.forEach(item => {
+            if (item.id == this.auth.auth.currentUser.uid){
+              let u = item.data();
+              let tipo = u.tipoSuspensión;
+              let fecha = u.fechaFinal;
+              console.log("tomorrow");
+              
+              let msg = "";
+              if(tipo=="Manual"){
+                msg = "Fuiste suspendido por el administrador "
+              }
+              else{
+                msg = "Fuiste suspendido por acumular muchos reportes "
+              }
+              if(fecha=="Indefinidamente"){
+                msg = msg + "hasta que el administrador lo considere apropiado."
+              }
+              else{
+                let new_fecha = fecha.toDate();
+                console.log(new_fecha);
+                msg = msg + "hasta el " + new_fecha.getDate() + "/" + (new_fecha.getMonth()+1) + "/" + new_fecha.getFullYear();
+              }
+    
+              msg = msg + ". Estar suspendido significa que los estudiantes no podrán encontrar tus cursos en la búsqueda ni en el menú de destacados"
+              msg = msg + " pero debes seguir atendiendo a los estudiantes que ya se hayan inscrito. Si tienes dudas contacta dudas.tusasesorias@gmail.com"
+    
+    
+              this.msg.msgWarning('Suspendido', msg)
+            }
+              
+          })
+    
+        })
+      }
     getCourses() {
         this.db.collection('cursos').get().subscribe((res) => {
             res.docs.forEach((item) => {

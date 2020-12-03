@@ -11,7 +11,7 @@ export class MenuComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.breakpoint = (window.innerWidth <= 850) ? 1 : 2;
+    this.breakpoint = (window.innerWidth < 992) ? "barra-small" : "barra-normal";
   }
 
   change(n: number) {
@@ -19,7 +19,7 @@ export class MenuComponent implements OnInit {
   }
 
   onResize(event) {
-    this.breakpoint = (event.target.innerWidth <= 850) ? 1 : 2;
+    this.breakpoint = (event.target.innerWidth < 992) ? "barra-small" : "barra-normal";
   }
 
 }
