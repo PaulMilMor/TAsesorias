@@ -34,7 +34,7 @@
 
 
       <li class="nav-item">
-        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='alumno'"
+        <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='alumno'|| usuario.tipoUsuario=='instructor' "
           [routerLink]="['/misasesorias']" routerLinkActive="router-link-active"
           style="font-size: 17px; margin-left: 34px;">Mis Asesorías</a>
       </li>
@@ -42,7 +42,7 @@
       <li class="nav-item">
         <a [routerLinkActive]="['active']" class="nav-link" *ngIf="usuario.tipoUsuario=='instructor'"
           [routerLink]="['/agregar-clase']" routerLinkActive="router-link-active" title="Crear asesorias"
-          style="font-size: 17px; margin-left: 34px;">Asesorías</a>
+          style="font-size: 17px; margin-left: 34px;">Crear asesorías</a>
       </li>
 
 

@@ -78,7 +78,7 @@ export class dialogNewcertificacion implements OnInit {
     this.getCategories()
     this.getMyCategories()
     this.formCertificacion = this.fb.group({
-      descripcion: [''],
+      descripcion: ['', Validators.required],
       categoria: [''],
       docref: ['', Validators.required],
       user: [''],
@@ -109,7 +109,7 @@ export class dialogNewcertificacion implements OnInit {
     this.formCertificacion.value.user = this.usuario
     this.db.collection('certificados').add(this.formCertificacion.value).finally(() => {
       this.msg.msgSuccess('Exito', 'Certificado agregado correctamente')
-      window.location.reload();
+     location.reload();
     }).catch((err) => {
 
       console.log(err);
