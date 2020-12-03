@@ -108,8 +108,10 @@ export class dialogNewcertificacion implements OnInit {
     this.formCertificacion.value.status = "pendiente"
     this.formCertificacion.value.user = this.usuario
     this.db.collection('certificados').add(this.formCertificacion.value).finally(() => {
-      this.msg.msgSuccess('Exito', 'Certificado agregado correctamente')
-     location.reload();
+     this.msg.msgSuccess('Exito', 'Certificado agregado correctamente')
+      location.reload();
+    //this.router.navigate(['/']);
+    //this.router.navigate(['/certificacionesinstructor']);
     }).catch((err) => {
 
       console.log(err);
