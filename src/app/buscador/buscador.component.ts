@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Usuario } from 'src/models/usuario';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -18,6 +18,7 @@ import { firestore } from 'firebase/app';
   styleUrls: ['./buscador.component.css']
 })
 export class BuscadorComponent implements OnInit {
+  renderer: Renderer2;
   formBusqueda: FormGroup;
   filter: ''
   banList: Array<any> = new Array()
@@ -32,9 +33,18 @@ export class BuscadorComponent implements OnInit {
   usuario: Usuario
   isValid: boolean = false
   isCollapsed: boolean = false;
+  @ViewChild('searchinput', {static: false}) inputEl:ElementRef;
+
+  ngAfterViewInit() {
+    setTimeout(() => this.inputEl.nativeElement.focus());
+  }
+  
   constructor(private db: AngularFirestore, private fb: FormBuilder, private auth: AngularFireAuth) { }
 
   ngOnInit(): void {
+
+   
+
     this.cursos.length = 0;
     this.categorias.length = 0;
 

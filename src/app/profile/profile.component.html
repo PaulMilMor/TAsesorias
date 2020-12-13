@@ -16,15 +16,35 @@
     </button>
   </div>
   <div fxFlex>
-    <h1><strong>{{usuario.nombre}}</strong></h1>
-    <h4> {{usuario.bio}} </h4>
-    <div *ngIf="usuarios.tipoUsuario==alumno || usuarios.tipoUsuario==administrador">
-      <h5>Este instructor ha tenido {{usuario.totalEstudiantes}} estudiantes en los últimos 30 días</h5>
+    <div style="width:90%; margin-left: auto; margin-right: auto;  margin-top: 10px; margin-bottom: 10px;">
+      <h1><strong>{{usuario.nombre}}</strong></h1>
+      <h4> {{usuario.bio}} </h4>
+      <div *ngIf="usuarios.tipoUsuario==alumno || usuarios.tipoUsuario==administrador">
+        <div *ngIf="usuario.totalEstudiantes>=2">
+          <h5>Este instructor ha tenido {{usuario.totalEstudiantes}} estudiantes en los últimos 30 días</h5>
+        </div>
+        <div *ngIf="usuario.totalEstudiantes==1">
+          <h5>Este instructor ha tenido 1 estudiante en los últimos 30 días</h5>
+        </div>
+        <div *ngIf="usuario.totalEstudiantes==0">
+          <h5>Este instructor no ha tenido estudiantes en los últimos 30 días</h5>
+        </div>
+      </div>
+      <div *ngIf="usuarios.tipoUsuario==instructor">
+        <div *ngIf="usuario.totalEstudiantes>=2">
+          <h5>Has tenido {{usuario.totalEstudiantes}} estudiantes en los últimos 30 días</h5>
+        </div>
+        <div *ngIf="usuario.totalEstudiantes==1">
+          <h5>Has tenido solamente 1 estudiante en los últimos 30 días</h5>
+        </div>
+        <div *ngIf="usuario.totalEstudiantes==0">
+          <h5>No has tenido estudiantes en los últimos 30 días</h5>
+        </div>
+        
+      </div>
+    
     </div>
-    <div *ngIf="usuarios.tipoUsuario==instructor">
-      <h5>Has tenido {{usuario.totalEstudiantes}} estudiantes en los últimos 30 días</h5>
-    </div>
-
+    
 
   </div>
 </div>
@@ -32,38 +52,43 @@
 <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center"
   fxLayoutGap="10px">
   <div fxFlex="30%" fxFlex.sm fxFlex.xs>
-    <div *ngIf="usuarios.tipoUsuario==instructor">
+    <div *ngIf="usuarios.tipoUsuario==instructor" style="width:90%; margin-left: auto; margin-right: auto;  margin-top: 10px; margin-bottom: 10px;">
 
       <h4>Correo electronico: {{usuario.correo}}</h4>
       <h4>Telefono: {{usuario.cel}}</h4>
       <h4>Visitas a mi perfil: {{usuario.count}}</h4>
 
     </div>
-    <div *ngIf="usuarios.tipoUsuario==alumno">
+    <div *ngIf="usuarios.tipoUsuario==alumno" style="width:90%; margin-left: auto; margin-right: auto;  margin-top: 10px; margin-bottom: 10px;">
 
       <div *ngIf="usuario.mostrarinfo=='true'">
         <h4>Correo electrónico: {{usuario.correo}}</h4>
         <h4>Teléfono: {{usuario.cel}}</h4>
       </div>
     </div>
-    <h2><Strong>Certificaciones.</Strong></h2>
-    <div *ngIf="this.certificados.length>0">
-      <div *ngFor="let c of certificados">
-        <h4>{{c.descripcion}}<mat-icon style="color:#17a2b8;">verified_user</mat-icon>
-        </h4>
+     <div style="width:90%; margin-left: auto; margin-right: auto;  margin-top: 10px; margin-bottom: 10px;">
+      <h2><Strong>Certificaciones.</Strong></h2>
+      <div *ngIf="this.certificados.length>0">
+        <div *ngFor="let c of certificados">
+          <h4>{{c.descripcion}}<mat-icon style="color:#17a2b8;">verified_user</mat-icon>
+          </h4>
+        </div>
       </div>
-    </div>
-    <div *ngIf="this.certificados.length==0">
-      <h4>Este instructor no está certificado.</h4>
-    </div>
+      <div *ngIf="this.certificados.length==0">
+        <h4>Este instructor no está certificado.</h4>
+      </div>
+     </div>
+    
   </div>
   <div fxFlex>
-    <h2><Strong>Asesorías.</Strong></h2>
-
+    <div style="width:90%; margin-left: auto; margin-right: auto; margin-top: 10px; margin-bottom: 10px;">
+      <h2><Strong>Asesorías.</Strong></h2>
+    </div>
+    
 
     <mat-list role="list" class="list">
 
-      <div *ngFor="let c of cursos"  style="width:100%">
+      <div *ngFor="let c of cursos"  style="width:90%; margin-left: auto; margin-right: auto; margin-top: 10px; margin-bottom: 10px;">
         <mat-list-item role="listitem" class="list" style="width:100%">
           <mat-card class="card-course" style="width:100%">
             <mat-list-item>
@@ -72,10 +97,10 @@
                     verified_user</mat-icon>
                 </mat-card-title>
               </div>
-              <div class=col align="end">
+              <div class=col align="right">
                 <button (click)="eliminarAsesoria(c.id)" class="deletebtn" title="Eliminar asesoria" mat-raised-button
-                  color="accent" *ngIf="usuarios.tipoUsuario==instructor" align="end">
-                  <mat-icon>delete_forever</mat-icon>
+                  *ngIf="usuarios.tipoUsuario==instructor" align="end" style="background-color:transparent;">
+                  <mat-icon color="accent">delete_forever</mat-icon>
                 </button>
               </div>
             </mat-list-item>
@@ -83,12 +108,15 @@
             <mat-card-content>
 
               <mat-list-item>
-                <h3>
-                  <strong>Tarifa por
-                    hora:</strong>
-
-                  {{c.tarifa |currency}}
-                </h3>
+                <div class=col align="start">
+                  <h3>
+                    <strong>Tarifa por
+                      hora:</strong>
+  
+                    {{c.tarifa |currency}}
+                  </h3>
+                </div>
+                
               </mat-list-item>
               <mat-list-item>
                 <div class=col align="start">
@@ -119,11 +147,15 @@
                 </div>
               </mat-list-item>
               <mat-list-item>
-                <mat-chip-list aria-label="Etiquetas">
-                  <h3><strong>Etiquetas: </strong></h3>
-                  <mat-chip *ngFor="let etiqueta of c.etiquetas">{{etiqueta}}</mat-chip>
-
-                </mat-chip-list>
+                <div class=col align="start">
+                  <mat-chip-list aria-label="Etiquetas">
+                  
+                    <h3><strong>Etiquetas: </strong></h3>
+                    <mat-chip *ngFor="let etiqueta of c.etiquetas">{{etiqueta}}</mat-chip>
+  
+                  </mat-chip-list>
+                </div>
+                
 
               </mat-list-item>
             </mat-card-content>

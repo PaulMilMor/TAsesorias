@@ -6,8 +6,8 @@
 </div>
 <div class="searcher" style="text-align: center;">
 
-    <input [(ngModel)]="filter" name="filter" class="form-control" type="text"
-        placeholder=" Escribe nombre de instructor o etiqueta" style="width: 500px;" autofocus>
+    <input #searchinput [(ngModel)]="filter" name="filter" class="form-control" type="text"
+        placeholder=" Escribe nombre de instructor o etiqueta" style="width: 500px;" class.mat-elevation-z2>
 
     <button mat-flat-button class="mt-5" class="btn btn-info btn-block" title="Filtrar por categorias"
         style="width: 187px; text-align: center; height: 6vh;" (click)="filtrarCategoria=!filtrarCategoria"><i
