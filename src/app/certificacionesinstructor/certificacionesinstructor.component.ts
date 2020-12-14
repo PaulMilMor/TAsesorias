@@ -9,6 +9,7 @@ import { Categoria } from 'src/models/categoria';
 import { Usuario } from 'src/models/usuario';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Certificacion } from 'src/models/certificacion';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-certificacionesinstructor',
   templateUrl: './certificacionesinstructor.component.html',
@@ -67,6 +68,7 @@ export class dialogNewcertificacion implements OnInit {
   categoriasUsadas: Array<Categoria> = new Array()
   usuario: Usuario
   formCertificacion: FormGroup
+  status:string='pendiente'
 
   constructor(public dialogRef: MatDialogRef<dialogNewcertificacion>,
     @Inject(MAT_DIALOG_DATA) public data: any, private db: AngularFirestore, private msg: MsgService, private storage: AngularFireStorage, private auth: AngularFireAuth, private router: Router, private fb: FormBuilder) { }
@@ -100,7 +102,10 @@ export class dialogNewcertificacion implements OnInit {
       task.then((obj) => {
         ref.getDownloadURL().subscribe((url) => {
           this.formCertificacion.value.docref = url;
+
         })
+      }).finally(()=>{
+         this.status='guardado'
       })
     }
   }
@@ -158,6 +163,7 @@ export class dialogNewcertificacion implements OnInit {
     })
   }
   cambiar() {
+   
     var pdrs = document.getElementById('file-upload').localName;
     document.getElementById('info').innerHTML = pdrs;
   }

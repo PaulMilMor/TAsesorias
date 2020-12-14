@@ -4,6 +4,7 @@ import { User } from 'firebase';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Usuario } from 'src/models/usuario';
 import { Router, NavigationEnd } from '@angular/router';
+import { UserService } from 'src/services/user.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -25,9 +26,10 @@ export class AppComponent implements OnInit {
         this.url = this.router.url;
       });
     })
+  
   }
   ngOnInit(): void {
-
+  
   }
 
 }

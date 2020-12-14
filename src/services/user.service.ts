@@ -24,4 +24,9 @@ export class UserService {
    })
   
   }
+
+public get getU() : Usuario {
+  return this.usuario
+}
+
 }

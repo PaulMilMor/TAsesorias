@@ -226,7 +226,7 @@ export class ProfileComponent implements OnInit {
 
         Swal.fire(
           'Asesoría eliminada',
-          'success'
+          'La asesoría fue elimniada correctamente'
         )
         this.db.collection('cursos').doc(id).delete().finally(() => {
 

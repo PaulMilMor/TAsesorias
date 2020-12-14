@@ -16,15 +16,16 @@
     
             <!--<button class="btn btn-danger"style="width:300px; height:50px;">Añadir PDF</button>-->
             <!--<input formControlName="img" (change)="addImg($event)" type="file" class="form-control-file">-->
-            <label for="file-upload" title="Añadir PDF"class="subir">
+            <label for="file-upload" title="Añadir PDF"class="subir"  *ngIf="status=='pendiente'">
                 <i class="fas fa-cloud-upload-alt"></i> Añadir PDF
             </label>
-            <input id="file-upload" onchange='cambiar()' type="file" accept="application/pdf" style='display: none;'
+            
+            <input id="file-upload" (click)="status='carga'" onchange='cambiar()' type="file" accept="application/pdf" style='display: none;'
                 (change)="addDoc($event)" class="form-control-file" />
             <div id="info"></div>
-    
-            <div class="envio">
-                <button type="submit" title="Enviar certificación" [disabled]="formCertificacion.value.docref=='' && formCertificacion.value.descripcion==''" (click)="save()">Enviar</button>
+        <div *ngIf="status=='carga'"><mat-spinner></mat-spinner></div>
+            <div class="envio" *ngIf="status=='guardado'">
+                <button type="submit" title="Enviar certificación" [disabled]="formCertificacion.value.descripcion==''" (click)="save()">Enviar</button>
                 <!--<button class="btn btn-primary"style="width:300px; height:50px;">Enviar</button>-->
             </div>
 
