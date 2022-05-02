@@ -1,113 +1,37 @@
-# Zoom Web SDK Sample Angular
+# Tus Asesorias
 
-This repo is an [Angular](https://angular.io/) app generated via the [Angular CLI](https://cli.angular.io/) that uses the [Zoom Web SDK](https://marketplace.zoom.us/docs/sdk/native-sdks/web) to start and join Zoom meetings and webinars.
+Tus Asesorías es una aplicación web que sirve como plataforma de aprendizaje en línea. 
+En el sitio web, se permite a instructores crear cursos en línea sobre sus temas preferidos. Los estudiantes toman cursos para mejorar sus habilidades en determinados temas, y los instructores pueden participar e interactuar con los estudiantes a través de reuniones en línea por medio de Zoom, teniendo la posibilidad de poder cargar archivos PDF, audio o ZIP, como complemento del material de sus cursos.
 
-## Installation
+Objetivos generales de la plataforma:
 
-To get started, clone the repo:
+o	Ayudar a los estudiantes a sobrellevar el proceso de clases en línea.<br>
+o	Desempeñarse como mecanismo de adaptación a la nueva normalidad.<br>
+o	Exponer una nueva perspectiva sobre la educación interactiva.<br>
+o	Ofrecer a profesionistas una herramienta mediante la cual puedan instruir su conocimiento y recibir una compensación económica a partir de ello.
 
-`$ git clone https://github.com/zoom/websdk-sample-angular.git`
+<br>
 
-## Setup
+SCREENSHOTS:
 
-1. Once cloned, navigate to the `websdk-sample-angular` directory:
+<br>
 
-   `$ cd websdk-sample-angular`
+![Screenshot 2021-12-07 220303 (1)](https://user-images.githubusercontent.com/45349730/145152502-413e9c32-a942-48ce-91ec-e621f9343841.png)
 
-1. Then install the dependencies:
+<br>
 
-   `$ npm install`
+![Screenshot 2021-12-07 220327 (1)](https://user-images.githubusercontent.com/45349730/145152564-6e074bbc-4b56-4a30-a0ef-b18b4779817c.png)
 
-1. Open the `websdk-sample-angular` directory in your code editor.
+<br>
 
-1. Open the `src/app/app.component.ts` file, and enter values for the variables:
+![Untitled Design  (1)](https://user-images.githubusercontent.com/45349730/145152614-61cc9eb8-d71b-4ab1-889b-f6033c99d4ba.png)
 
-   | Variable                   | Description |
-   | -----------------------|-------------|
-   | signatureEndpoint          | Required, the endpoint url that returns a signature. [Get a signature endpoint here.](https://github.com/zoom/websdk-sample-signature-node.js) |
-   | apiKey                   | Required, your Zoom JWT App API Key. [You can get yours here](https://marketplace.zoom.us/develop/create). |
-   | meetingNumber                   | The Zoom Meeting / webinar number. |
-   | role                   | Required, 0 to join the meeting / webinar, 1 to start the meeting. |
-   | leaveUrl                   | Required, the url the user is taken to once the meeting is over. |
-   | userName                   | Required, A name for the user joining / starting the meeting / webinar. |
-   | userEmail                   | Optional, the user joining / starting the meeting / webinar. |
-   | passWord                   | Optional, meeting password. Leave as empty string if the meeting does not require a password. |
+<br>
 
-   Example:
+![Screenshot 2021-12-07 220724 (1)](https://user-images.githubusercontent.com/45349730/145152648-ce6e1c8e-fc28-4727-a5fc-41867fb22868.png)
 
-   ```js
-   signatureEndpoint = 'http://localhost:4000'
-   apiKey = 'xu3asdfaJPaA_RJW2-9l5_HAaLA'
-   meetingNumber = 123456789
-   role = 0
-   leaveUrl = 'http://localhost:4200'
-   userName = 'Angular'
-   userEmail = ''
-   password = ''
-   ```
+<br>
 
-1. Save `app.component.ts`.
+![Screenshot 2021-12-07 220524 (1)](https://user-images.githubusercontent.com/45349730/145152679-c245d5a7-555c-415f-be9c-3e2ce04df92e.png)
 
-1. Run the app:
-
-   `$ ng serve --open`
-
-<!-- Deploy signature or run locally -->
-
-<!-- Deploy the signature generator to Heroku:
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/zoom/websdk-sample-signature-node.js) -->
-
-## Usage
-
-1. Navigate to http://localhost:4200.
-
-   ![Zoom Angular Web SDK](https://s3.amazonaws.com/user-content.stoplight.io/19808/1583789057929)
-
-1. Click "Join Meeting" to join the meeting number specified in `src/app/app.component.ts`.
-
-   ![Zoom Angular Web SDK](https://s3.amazonaws.com/user-content.stoplight.io/19808/1583789069218)
-
-## Deployment
-
-The Angular Sample App can be easily deployed to [GitHub Pages](#github-pages), or [another static web hosting service](#other-static-web-hosting), like an AWS S3 bucket.
-
-### GitHub Pages
-
-1. Create a repo on [GitHub](https://github.com).
-
-1. Add the remote to your project:
-
-   `$ git remote add origin GITHUB_URL/GITHUB_USERNAME/GITHUB_REPO_NAME.git`
-
-1. Open the `angular.json` file and on line 48 replace `/` with your GitHub repo name surrounded by slashes like this: `/GITHUB_REPO_NAME/`.
-
-1. Build your project:
-
-   `$ ng build --prod`
-
-1. Git add, commit, and push your project:
-
-   `$ git add -A`
-
-   `$ git commit -m "deploying to github"`
-
-   `$ git push origin master`
-
-1. On GitHub, in your repo, navigate to the "settings" page, scroll down to the "GitHub Pages" section, and choose the "master branch /docs folder" for the source.
-
-1. Now your project will be deployed to https://GITHUB_USERNAME.github.io/GITHUB_REPO_NAME.
-
-### Other Static Web Hosting
-
-1. Build your project:
-
-   `$ ng build --prod`
-
-1. Deploy the complied `/docs` directory to a static web hosting service, like an AWS S3 bucket.
-
-## Need Support?
-
-The first place to look for help is on our [Developer Forum](https://devforum.zoom.us/), where Zoom Marketplace Developers can ask questions for public answers.
-
-If you can’t find the answer in the Developer Forum or your request requires sensitive information to be relayed, please email us at developersupport@zoom.us.
+<br>
